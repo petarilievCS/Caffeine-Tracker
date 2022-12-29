@@ -60,14 +60,38 @@
 			children = (
 				E6996C5A295E0A5E00E35FC1 /* AppDelegate.swift */,
 				E6996C5C295E0A5E00E35FC1 /* SceneDelegate.swift */,
-				E6996C5E295E0A5E00E35FC1 /* ViewController.swift */,
-				E6996C60295E0A5E00E35FC1 /* Main.storyboard */,
+				E6996C73295E0A7F00E35FC1 /* Model */,
+				E6996C71295E0A6E00E35FC1 /* Controllers */,
+				E6996C72295E0A7800E35FC1 /* Views */,
 				E6996C66295E0A6100E35FC1 /* Assets.xcassets */,
 				E6996C68295E0A6100E35FC1 /* LaunchScreen.storyboard */,
 				E6996C6B295E0A6100E35FC1 /* Info.plist */,
-				E6996C63295E0A5E00E35FC1 /* Caffeine_Tracker.xcdatamodeld */,
 			);
 			path = "Caffeine Tracker";
+			sourceTree = "<group>";
+		};
+		E6996C71295E0A6E00E35FC1 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				E6996C5E295E0A5E00E35FC1 /* ViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		E6996C72295E0A7800E35FC1 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				E6996C60295E0A5E00E35FC1 /* Main.storyboard */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		E6996C73295E0A7F00E35FC1 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E6996C63295E0A5E00E35FC1 /* Caffeine_Tracker.xcdatamodeld */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
