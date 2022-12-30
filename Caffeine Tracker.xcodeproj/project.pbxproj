@@ -9,23 +9,29 @@
 /* Begin PBXBuildFile section */
 		E6996C5B295E0A5E00E35FC1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6996C5A295E0A5E00E35FC1 /* AppDelegate.swift */; };
 		E6996C5D295E0A5E00E35FC1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6996C5C295E0A5E00E35FC1 /* SceneDelegate.swift */; };
-		E6996C5F295E0A5E00E35FC1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6996C5E295E0A5E00E35FC1 /* ViewController.swift */; };
+		E6996C5F295E0A5E00E35FC1 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6996C5E295E0A5E00E35FC1 /* DashboardViewController.swift */; };
 		E6996C62295E0A5E00E35FC1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E6996C60295E0A5E00E35FC1 /* Main.storyboard */; };
 		E6996C65295E0A5E00E35FC1 /* Caffeine_Tracker.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E6996C63295E0A5E00E35FC1 /* Caffeine_Tracker.xcdatamodeld */; };
 		E6996C67295E0A6100E35FC1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E6996C66295E0A6100E35FC1 /* Assets.xcassets */; };
 		E6996C6A295E0A6100E35FC1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E6996C68295E0A6100E35FC1 /* LaunchScreen.storyboard */; };
+		E6996C75295E0B3E00E35FC1 /* K.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6996C74295E0B3E00E35FC1 /* K.swift */; };
+		E6996C77295E0BA700E35FC1 /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6996C76295E0BA700E35FC1 /* AddViewController.swift */; };
+		E6996C79295E0BE600E35FC1 /* CaffeineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6996C78295E0BE600E35FC1 /* CaffeineViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		E6996C57295E0A5E00E35FC1 /* Caffeine Tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Caffeine Tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6996C5A295E0A5E00E35FC1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E6996C5C295E0A5E00E35FC1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		E6996C5E295E0A5E00E35FC1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		E6996C5E295E0A5E00E35FC1 /* DashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
 		E6996C61295E0A5E00E35FC1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E6996C64295E0A5E00E35FC1 /* Caffeine_Tracker.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Caffeine_Tracker.xcdatamodel; sourceTree = "<group>"; };
 		E6996C66295E0A6100E35FC1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E6996C69295E0A6100E35FC1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E6996C6B295E0A6100E35FC1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E6996C74295E0B3E00E35FC1 /* K.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = K.swift; sourceTree = "<group>"; };
+		E6996C76295E0BA700E35FC1 /* AddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
+		E6996C78295E0BE600E35FC1 /* CaffeineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaffeineViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +72,7 @@
 				E6996C66295E0A6100E35FC1 /* Assets.xcassets */,
 				E6996C68295E0A6100E35FC1 /* LaunchScreen.storyboard */,
 				E6996C6B295E0A6100E35FC1 /* Info.plist */,
+				E6996C74295E0B3E00E35FC1 /* K.swift */,
 			);
 			path = "Caffeine Tracker";
 			sourceTree = "<group>";
@@ -73,7 +80,9 @@
 		E6996C71295E0A6E00E35FC1 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				E6996C5E295E0A5E00E35FC1 /* ViewController.swift */,
+				E6996C5E295E0A5E00E35FC1 /* DashboardViewController.swift */,
+				E6996C76295E0BA700E35FC1 /* AddViewController.swift */,
+				E6996C78295E0BE600E35FC1 /* CaffeineViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -165,7 +174,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E6996C5F295E0A5E00E35FC1 /* ViewController.swift in Sources */,
+				E6996C77295E0BA700E35FC1 /* AddViewController.swift in Sources */,
+				E6996C5F295E0A5E00E35FC1 /* DashboardViewController.swift in Sources */,
+				E6996C79295E0BE600E35FC1 /* CaffeineViewController.swift in Sources */,
+				E6996C75295E0B3E00E35FC1 /* K.swift in Sources */,
 				E6996C65295E0A5E00E35FC1 /* Caffeine_Tracker.xcdatamodeld in Sources */,
 				E6996C5B295E0A5E00E35FC1 /* AppDelegate.swift in Sources */,
 				E6996C5D295E0A5E00E35FC1 /* SceneDelegate.swift in Sources */,
@@ -323,6 +335,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -351,6 +364,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
