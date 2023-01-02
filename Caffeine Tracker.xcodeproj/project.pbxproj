@@ -17,6 +17,8 @@
 		E6996C75295E0B3E00E35FC1 /* K.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6996C74295E0B3E00E35FC1 /* K.swift */; };
 		E6996C77295E0BA700E35FC1 /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6996C76295E0BA700E35FC1 /* AddViewController.swift */; };
 		E6996C79295E0BE600E35FC1 /* CaffeineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6996C78295E0BE600E35FC1 /* CaffeineViewController.swift */; };
+		E6B7DA87295F5185008F8CD1 /* CaffeineCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B7DA85295F5185008F8CD1 /* CaffeineCell.swift */; };
+		E6B7DA88295F5185008F8CD1 /* CaffeineCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6B7DA86295F5185008F8CD1 /* CaffeineCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +34,8 @@
 		E6996C74295E0B3E00E35FC1 /* K.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = K.swift; sourceTree = "<group>"; };
 		E6996C76295E0BA700E35FC1 /* AddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
 		E6996C78295E0BE600E35FC1 /* CaffeineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaffeineViewController.swift; sourceTree = "<group>"; };
+		E6B7DA85295F5185008F8CD1 /* CaffeineCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaffeineCell.swift; sourceTree = "<group>"; };
+		E6B7DA86295F5185008F8CD1 /* CaffeineCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CaffeineCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +95,8 @@
 			isa = PBXGroup;
 			children = (
 				E6996C60295E0A5E00E35FC1 /* Main.storyboard */,
+				E6B7DA85295F5185008F8CD1 /* CaffeineCell.swift */,
+				E6B7DA86295F5185008F8CD1 /* CaffeineCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -162,6 +168,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E6996C6A295E0A6100E35FC1 /* LaunchScreen.storyboard in Resources */,
+				E6B7DA88295F5185008F8CD1 /* CaffeineCell.xib in Resources */,
 				E6996C67295E0A6100E35FC1 /* Assets.xcassets in Resources */,
 				E6996C62295E0A5E00E35FC1 /* Main.storyboard in Resources */,
 			);
@@ -175,6 +182,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E6996C77295E0BA700E35FC1 /* AddViewController.swift in Sources */,
+				E6B7DA87295F5185008F8CD1 /* CaffeineCell.swift in Sources */,
 				E6996C5F295E0A5E00E35FC1 /* DashboardViewController.swift in Sources */,
 				E6996C79295E0BE600E35FC1 /* CaffeineViewController.swift in Sources */,
 				E6996C75295E0B3E00E35FC1 /* K.swift in Sources */,

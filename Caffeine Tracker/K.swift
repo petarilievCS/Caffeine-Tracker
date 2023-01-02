@@ -8,5 +8,5 @@
 import Foundation
 
 struct K {
-    
+    static let caffeineCellIdentifier = "CaffeineCell"
 }
