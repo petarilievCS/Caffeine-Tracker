@@ -170,20 +170,92 @@
             </objects>
             <point key="canvasLocation" x="2837.4045801526718" y="-2.1126760563380285"/>
         </scene>
-        <!--Add View Controller-->
+        <!--Add Drink-->
         <scene sceneID="q13-Fr-NAp">
             <objects>
-                <viewController id="XZt-mF-DiK" customClass="AddViewController" customModule="Caffeine_Tracker" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Add Drink" id="XZt-mF-DiK" customClass="AddViewController" customModule="Caffeine_Tracker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="bHd-Ra-Oit">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="783"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ehZ-CI-Yb9">
+                                <rect key="frame" x="0.0" y="108" width="393" height="675"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B2e-Lc-cES" userLabel="Content View">
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="675"/>
+                                        <subviews>
+                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="ayp-sp-AoD">
+                                                <rect key="frame" x="15" y="15" width="363" height="206"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="206" id="7X8-sK-9CR"/>
+                                                </constraints>
+                                                <prototypes>
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DrinkNameCell" id="gUl-Ov-Lb7" customClass="DrinkNameCell" customModule="Caffeine_Tracker">
+                                                        <rect key="frame" x="0.0" y="50" width="363" height="43.666667938232422"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gUl-Ov-Lb7" id="GOh-lq-8ep">
+                                                            <rect key="frame" x="0.0" y="0.0" width="363" height="43.666667938232422"/>
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                        </tableViewCellContentView>
+                                                    </tableViewCell>
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="IconCell" id="gsA-S8-VtF" customClass="IconCell" customModule="Caffeine_Tracker">
+                                                        <rect key="frame" x="0.0" y="93.666667938232422" width="363" height="43.666667938232422"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gsA-S8-VtF" id="KDY-c2-p3T">
+                                                            <rect key="frame" x="0.0" y="0.0" width="363" height="43.666667938232422"/>
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                        </tableViewCellContentView>
+                                                    </tableViewCell>
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="NumberCell" id="3hD-fQ-yr8" customClass="IconCell" customModule="Caffeine_Tracker">
+                                                        <rect key="frame" x="0.0" y="137.33333587646484" width="363" height="43.666667938232422"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="3hD-fQ-yr8" id="mPO-4p-0Uf">
+                                                            <rect key="frame" x="0.0" y="0.0" width="363" height="43.666667938232422"/>
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                        </tableViewCellContentView>
+                                                    </tableViewCell>
+                                                </prototypes>
+                                            </tableView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="675" id="1eC-y5-g8V"/>
+                                            <constraint firstAttribute="trailing" secondItem="ayp-sp-AoD" secondAttribute="trailing" constant="15" id="F19-Oz-LQ3"/>
+                                            <constraint firstItem="ayp-sp-AoD" firstAttribute="top" secondItem="B2e-Lc-cES" secondAttribute="top" constant="15" id="sdf-Xc-5wh"/>
+                                            <constraint firstItem="ayp-sp-AoD" firstAttribute="leading" secondItem="B2e-Lc-cES" secondAttribute="leading" constant="15" id="usI-T4-kwE"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="B2e-Lc-cES" secondAttribute="trailing" id="6Ga-SX-qbn"/>
+                                    <constraint firstItem="B2e-Lc-cES" firstAttribute="leading" secondItem="ehZ-CI-Yb9" secondAttribute="leading" id="DIu-un-BpN"/>
+                                    <constraint firstItem="B2e-Lc-cES" firstAttribute="top" secondItem="ehZ-CI-Yb9" secondAttribute="top" id="E9g-3R-Iyc"/>
+                                    <constraint firstAttribute="bottom" secondItem="B2e-Lc-cES" secondAttribute="bottom" id="sL4-sO-G5n"/>
+                                    <constraint firstItem="B2e-Lc-cES" firstAttribute="centerX" secondItem="ehZ-CI-Yb9" secondAttribute="centerX" id="scZ-xO-aKu"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="bMq-em-lm4"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="ehZ-CI-Yb9" firstAttribute="trailing" secondItem="bMq-em-lm4" secondAttribute="trailing" id="4xD-TC-KkX"/>
+                            <constraint firstItem="ehZ-CI-Yb9" firstAttribute="bottom" secondItem="bMq-em-lm4" secondAttribute="bottom" id="Aap-Hg-enk"/>
+                            <constraint firstItem="ehZ-CI-Yb9" firstAttribute="leading" secondItem="bMq-em-lm4" secondAttribute="leading" id="DgY-rJ-J4w"/>
+                            <constraint firstItem="ehZ-CI-Yb9" firstAttribute="top" secondItem="bMq-em-lm4" secondAttribute="top" id="blN-Vi-hu0"/>
+                        </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="Add Drink" id="PAE-c5-CeV">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="b9K-mr-acL"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="gCp-zH-PZI"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="tableView" destination="ayp-sp-AoD" id="Fd0-UV-SqF"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ydx-hx-s2u" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3636" y="687"/>
+            <point key="canvasLocation" x="4562.5954198473282" y="686.61971830985919"/>
         </scene>
         <!--Caffeine Drinks-->
         <scene sceneID="IS5-DG-HWS">
@@ -217,7 +289,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Caffeine Drinks" largeTitleDisplayMode="always" id="png-mN-eZa">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="FPU-Qr-Vo5"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="FPU-Qr-Vo5">
+                            <connections>
+                                <segue destination="kNi-I8-IM8" kind="presentation" id="evo-HO-N2m"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cg3-wD-t4z" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -280,6 +356,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="umd-V1-SLP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="983.96946564885491" y="342.25352112676057"/>
+        </scene>
+        <!--Add Drink-->
+        <scene sceneID="Yjt-S4-DPi">
+            <objects>
+                <navigationController title="Add Drink" automaticallyAdjustsScrollViewInsets="NO" id="kNi-I8-IM8" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="tJ7-NM-xSC">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="108"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="XZt-mF-DiK" kind="relationship" relationship="rootViewController" id="rRz-Xu-kKq"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Gms-SO-4V1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3635.8778625954196" y="686.61971830985919"/>
         </scene>
     </scenes>
     <resources>

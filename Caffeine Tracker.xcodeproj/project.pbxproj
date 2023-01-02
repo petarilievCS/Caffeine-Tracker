@@ -17,6 +17,12 @@
 		E6996C75295E0B3E00E35FC1 /* K.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6996C74295E0B3E00E35FC1 /* K.swift */; };
 		E6996C77295E0BA700E35FC1 /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6996C76295E0BA700E35FC1 /* AddViewController.swift */; };
 		E6996C79295E0BE600E35FC1 /* CaffeineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6996C78295E0BE600E35FC1 /* CaffeineViewController.swift */; };
+		E69E027D2962E05000F4C142 /* DrinkNameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E69E027B2962E05000F4C142 /* DrinkNameCell.swift */; };
+		E69E027E2962E05000F4C142 /* DrinkNameCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E69E027C2962E05000F4C142 /* DrinkNameCell.xib */; };
+		E69E02812963058900F4C142 /* IconCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E69E027F2963058900F4C142 /* IconCell.swift */; };
+		E69E02822963058900F4C142 /* IconCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E69E02802963058900F4C142 /* IconCell.xib */; };
+		E69E0285296309CA00F4C142 /* NumberCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E69E0283296309CA00F4C142 /* NumberCell.swift */; };
+		E69E0286296309CA00F4C142 /* NumberCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E69E0284296309CA00F4C142 /* NumberCell.xib */; };
 		E6B7DA87295F5185008F8CD1 /* CaffeineCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B7DA85295F5185008F8CD1 /* CaffeineCell.swift */; };
 		E6B7DA88295F5185008F8CD1 /* CaffeineCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6B7DA86295F5185008F8CD1 /* CaffeineCell.xib */; };
 /* End PBXBuildFile section */
@@ -34,6 +40,12 @@
 		E6996C74295E0B3E00E35FC1 /* K.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = K.swift; sourceTree = "<group>"; };
 		E6996C76295E0BA700E35FC1 /* AddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
 		E6996C78295E0BE600E35FC1 /* CaffeineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaffeineViewController.swift; sourceTree = "<group>"; };
+		E69E027B2962E05000F4C142 /* DrinkNameCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkNameCell.swift; sourceTree = "<group>"; };
+		E69E027C2962E05000F4C142 /* DrinkNameCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DrinkNameCell.xib; sourceTree = "<group>"; };
+		E69E027F2963058900F4C142 /* IconCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconCell.swift; sourceTree = "<group>"; };
+		E69E02802963058900F4C142 /* IconCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IconCell.xib; sourceTree = "<group>"; };
+		E69E0283296309CA00F4C142 /* NumberCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberCell.swift; sourceTree = "<group>"; };
+		E69E0284296309CA00F4C142 /* NumberCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NumberCell.xib; sourceTree = "<group>"; };
 		E6B7DA85295F5185008F8CD1 /* CaffeineCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaffeineCell.swift; sourceTree = "<group>"; };
 		E6B7DA86295F5185008F8CD1 /* CaffeineCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CaffeineCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -97,6 +109,12 @@
 				E6996C60295E0A5E00E35FC1 /* Main.storyboard */,
 				E6B7DA85295F5185008F8CD1 /* CaffeineCell.swift */,
 				E6B7DA86295F5185008F8CD1 /* CaffeineCell.xib */,
+				E69E027B2962E05000F4C142 /* DrinkNameCell.swift */,
+				E69E027C2962E05000F4C142 /* DrinkNameCell.xib */,
+				E69E027F2963058900F4C142 /* IconCell.swift */,
+				E69E02802963058900F4C142 /* IconCell.xib */,
+				E69E0283296309CA00F4C142 /* NumberCell.swift */,
+				E69E0284296309CA00F4C142 /* NumberCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -167,7 +185,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E69E02822963058900F4C142 /* IconCell.xib in Resources */,
 				E6996C6A295E0A6100E35FC1 /* LaunchScreen.storyboard in Resources */,
+				E69E027E2962E05000F4C142 /* DrinkNameCell.xib in Resources */,
+				E69E0286296309CA00F4C142 /* NumberCell.xib in Resources */,
 				E6B7DA88295F5185008F8CD1 /* CaffeineCell.xib in Resources */,
 				E6996C67295E0A6100E35FC1 /* Assets.xcassets in Resources */,
 				E6996C62295E0A5E00E35FC1 /* Main.storyboard in Resources */,
@@ -181,11 +202,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E69E0285296309CA00F4C142 /* NumberCell.swift in Sources */,
 				E6996C77295E0BA700E35FC1 /* AddViewController.swift in Sources */,
 				E6B7DA87295F5185008F8CD1 /* CaffeineCell.swift in Sources */,
 				E6996C5F295E0A5E00E35FC1 /* DashboardViewController.swift in Sources */,
+				E69E027D2962E05000F4C142 /* DrinkNameCell.swift in Sources */,
 				E6996C79295E0BE600E35FC1 /* CaffeineViewController.swift in Sources */,
 				E6996C75295E0B3E00E35FC1 /* K.swift in Sources */,
+				E69E02812963058900F4C142 /* IconCell.swift in Sources */,
 				E6996C65295E0A5E00E35FC1 /* Caffeine_Tracker.xcdatamodeld in Sources */,
 				E6996C5B295E0A5E00E35FC1 /* AppDelegate.swift in Sources */,
 				E6996C5D295E0A5E00E35FC1 /* SceneDelegate.swift in Sources */,
