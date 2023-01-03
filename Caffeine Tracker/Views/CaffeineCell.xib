@@ -50,6 +50,11 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="caffeineLabel" destination="mhy-Br-vrb" id="Se3-dO-cv7"/>
+                <outlet property="icon" destination="wBq-be-s6C" id="q4o-DW-UNh"/>
+                <outlet property="nameLabel" destination="85q-4e-N7q" id="Dfo-CM-xea"/>
+            </connections>
             <point key="canvasLocation" x="-24.427480916030532" y="28.87323943661972"/>
         </tableViewCell>
     </objects>

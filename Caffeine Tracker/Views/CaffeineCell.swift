@@ -9,6 +9,10 @@ import UIKit
 
 class CaffeineCell: UITableViewCell {
 
+    @IBOutlet weak var icon: UIImageView!
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var caffeineLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

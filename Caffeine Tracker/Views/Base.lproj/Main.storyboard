@@ -247,8 +247,16 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Add Drink" id="PAE-c5-CeV">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="b9K-mr-acL"/>
-                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="gCp-zH-PZI"/>
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="b9K-mr-acL">
+                            <connections>
+                                <action selector="cancelClicked:" destination="XZt-mF-DiK" id="7bX-A4-wHA"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="gCp-zH-PZI">
+                            <connections>
+                                <action selector="doneClicked:" destination="XZt-mF-DiK" id="4jC-wY-PJD"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="ayp-sp-AoD" id="Fd0-UV-SqF"/>
