@@ -47,6 +47,7 @@ class AddViewController: UIViewController {
             newDrink.icon = "Icon.png"
             newDrink.caffeine = Int64(caffeineAmount)!
             newDrink.serving = Int64(servingAmount)!
+            newDrink.caffeineOz = calculateCaffeinePerOz(newDrink.caffeine, newDrink.serving)
             
             loadDrinks()
             drinkArray.append(newDrink)
@@ -71,6 +72,11 @@ class AddViewController: UIViewController {
         animation.fromValue = NSValue(cgPoint: CGPoint(x: viewToShake.center.x - 10, y: viewToShake.center.y))
         animation.toValue = NSValue(cgPoint: CGPoint(x: viewToShake.center.x + 10, y: viewToShake.center.y))
         viewToShake.layer.add(animation, forKey: "position")
+    }
+    
+    // Calculates how much caffeine per oz a drink contains
+    func calculateCaffeinePerOz(_ caffeineAmount: Int64, _ servingSize: Int64) -> Int64 {
+        return caffeineAmount / servingSize
     }
     
     // MARK: - CoreData methods
