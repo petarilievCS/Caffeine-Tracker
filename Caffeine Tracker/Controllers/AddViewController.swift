@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import AudioToolbox
 import CoreData
 
 class AddViewController: UIViewController {
@@ -40,20 +41,36 @@ class AddViewController: UIViewController {
         let caffeineAmount = caffeineCell.textField.text!
         let servingAmount = servingCell.textField.text!
         
-        let newDrink = Drink(context: self.context)
-        newDrink.name = name
-        newDrink.icon = "Icon.png"
-        newDrink.caffeine = Int64(caffeineAmount)!
-        newDrink.serving = Int64(servingAmount)!
-        
-        loadDrinks()
-        drinkArray.append(newDrink)
-        saveDrinks()
-        dismiss(animated: true, completion: nil)
+        if (!name.isEmpty && !caffeineAmount.isEmpty && !servingAmount.isEmpty) {
+            let newDrink = Drink(context: self.context)
+            newDrink.name = name
+            newDrink.icon = "Icon.png"
+            newDrink.caffeine = Int64(caffeineAmount)!
+            newDrink.serving = Int64(servingAmount)!
+            
+            loadDrinks()
+            drinkArray.append(newDrink)
+            saveDrinks()
+            dismiss(animated: true, completion: nil)
+        } else {
+            AudioServicesPlaySystemSound(1519)
+            shake(tableView)
+        }
     }
     
     @IBAction func cancelClicked(_ sender: UIBarButtonItem) {
         dismiss(animated: true, completion: nil)
+    }
+    
+    // Creates a basic shake animation for the text fields
+    func shake(_ viewToShake: UIView) {
+        let animation = CABasicAnimation(keyPath: "position")
+        animation.duration = 0.07
+        animation.repeatCount = 4
+        animation.autoreverses = true
+        animation.fromValue = NSValue(cgPoint: CGPoint(x: viewToShake.center.x - 10, y: viewToShake.center.y))
+        animation.toValue = NSValue(cgPoint: CGPoint(x: viewToShake.center.x + 10, y: viewToShake.center.y))
+        viewToShake.layer.add(animation, forKey: "position")
     }
     
     // MARK: - CoreData methods
