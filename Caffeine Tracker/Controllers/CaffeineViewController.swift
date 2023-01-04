@@ -17,6 +17,7 @@ class CaffeineViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.delegate = self
         searchBar.delegate = self
         loadDrinks()
         tableView.register(UINib(nibName: K.caffeineCellIdentifier, bundle: nil), forCellReuseIdentifier: K.caffeineCellIdentifier)
@@ -28,10 +29,6 @@ class CaffeineViewController: UITableViewController {
         // Refresh functionality
         refreshControl = UIRefreshControl()
         refreshControl!.addTarget(self, action: #selector(loadDrinksC), for: .valueChanged)
-        
-        // Remove keyboard when tapping
-        let tap = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
-        view.addGestureRecognizer(tap)
 
     }
     
@@ -64,6 +61,31 @@ class CaffeineViewController: UITableViewController {
         cell.caffeineLabel.text = "\(String(currentDrink.caffeine)) MG"
         print(currentDrink.caffeineOz)
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print(indexPath.row)
+        performSegue(withIdentifier: K.drinksToAddSegue, sender: self)
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == K.drinksToAddSegue {
+            
+            let navigationController = segue.destination as! UINavigationController
+            let destinationVC = navigationController.viewControllers[0] as! AddViewController
+            
+            if let selectedIndex = tableView.indexPathForSelectedRow {
+                destinationVC.navigationItem.title = "Edit Drink"
+                let selectedDrink = drinkArray[selectedIndex.row]
+                destinationVC.drinkName = selectedDrink.name
+                destinationVC.drinkCaffeine = String(selectedDrink.caffeine)
+                destinationVC.drinkServing = String(selectedDrink.serving)
+                destinationVC.selectedIndex = tableView.indexPathForSelectedRow?.row
+            } else {
+                destinationVC.navigationItem.title = "Add Drink"
+            }
+        }
     }
     
     // MARK: - Core Data methods
@@ -113,4 +135,5 @@ extension CaffeineViewController: UISearchBarDelegate {
             }
         }
     }
+    
 }

@@ -283,7 +283,7 @@
                             </connections>
                         </searchBar>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="Q5n-Yq-FKR">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="gray" indentationWidth="10" reuseIdentifier="CaffeineCell" id="Q5n-Yq-FKR">
                                 <rect key="frame" x="0.0" y="94" width="393" height="43.666667938232422"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Q5n-Yq-FKR" id="Y4a-cu-wms">
@@ -301,7 +301,7 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="FPU-Qr-Vo5">
                             <color key="tintColor" name="Light Blue"/>
                             <connections>
-                                <segue destination="kNi-I8-IM8" kind="presentation" id="evo-HO-N2m"/>
+                                <segue destination="kNi-I8-IM8" kind="presentation" identifier="drinksToAdd" id="evo-HO-N2m"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

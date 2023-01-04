@@ -16,6 +16,14 @@ class AddViewController: UIViewController {
     var drinkArray = [Drink]()
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
+    var drinkName: String?
+    var drinkCaffeine: String?
+    var drinkServing: String?
+    var selectedIndex: Int?
+    var editVC: Bool {
+        return navigationItem.title == "Edit Drink"
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -42,15 +50,23 @@ class AddViewController: UIViewController {
         let servingAmount = servingCell.textField.text!
         
         if (!name.isEmpty && !caffeineAmount.isEmpty && !servingAmount.isEmpty) {
-            let newDrink = Drink(context: self.context)
-            newDrink.name = name
-            newDrink.icon = "Icon.png"
-            newDrink.caffeine = Int64(caffeineAmount)!
-            newDrink.serving = Int64(servingAmount)!
-            newDrink.caffeineOz = calculateCaffeinePerOz(newDrink.caffeine, newDrink.serving)
-            
+
             loadDrinks()
-            drinkArray.append(newDrink)
+            if !editVC {
+                let newDrink = Drink(context: self.context)
+                newDrink.name = name
+                newDrink.icon = "Icon.png"
+                newDrink.caffeine = Int64(caffeineAmount)!
+                newDrink.serving = Int64(servingAmount)!
+                newDrink.caffeineOz = calculateCaffeinePerOz(newDrink.caffeine, newDrink.serving)
+                drinkArray.append(newDrink)
+            } else {
+                drinkArray[selectedIndex!].name = name
+                drinkArray[selectedIndex!].caffeine = Int64(caffeineAmount)!
+                drinkArray[selectedIndex!].serving = Int64(servingAmount)!
+                drinkArray[selectedIndex!].caffeineOz = calculateCaffeinePerOz(Int64(caffeineAmount)!, Int64(servingAmount)!)
+            }
+        
             saveDrinks()
             dismiss(animated: true, completion: nil)
         } else {
@@ -110,15 +126,26 @@ extension AddViewController: UITableViewDelegate, UITableViewDataSource {
         
         switch indexPath.row {
         case 0:
-            return tableView.dequeueReusableCell(withIdentifier: K.drinkNameCellIdentifier, for: indexPath) as! DrinkNameCell
+            let nameCell = tableView.dequeueReusableCell(withIdentifier: K.drinkNameCellIdentifier, for: indexPath) as! DrinkNameCell
+            if editVC {
+                nameCell.textField.text = drinkName
+            }
+            return nameCell
         case 1:
             return tableView.dequeueReusableCell(withIdentifier: K.iconCellIdentifier, for: indexPath) as! IconCell
         case 2:
-            return tableView.dequeueReusableCell(withIdentifier: K.numberCellIdentifier, for: indexPath) as! NumberCell
+            let caffeineCell = tableView.dequeueReusableCell(withIdentifier: K.numberCellIdentifier, for: indexPath) as! NumberCell
+            if editVC {
+                caffeineCell.textField.text = drinkCaffeine
+            }
+            return caffeineCell
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: K.numberCellIdentifier, for: indexPath) as! NumberCell
             cell.titleLabel.text = "Serving Size (fl oz)"
             cell.textField.placeholder = "4"
+            if editVC {
+                cell.textField.text = drinkServing
+            }
             return cell
         }
     }

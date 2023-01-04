@@ -27,7 +27,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <color key="textColor" systemColor="systemGrayColor"/>
                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                        <textInputTraits key="textInputTraits"/>
+                        <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                     </textField>
                 </subviews>
                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
