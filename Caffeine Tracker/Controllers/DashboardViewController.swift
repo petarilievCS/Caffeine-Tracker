@@ -30,6 +30,9 @@ class DashboardViewController: UIViewController {
         drinkButton.layer.cornerRadius = 15.0
     }
 
+    @IBAction func drinkButtonPressed(_ sender: UIButton) {
+    
+    }
     
 
 }

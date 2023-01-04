@@ -92,7 +92,7 @@ class AddViewController: UIViewController {
         // Change color
         deleteView.backgroundColor = .systemGray4
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: {
-            UIView.animate(withDuration: 0.15) {
+            UIView.animate(withDuration: 0.1) {
                 self.deleteView.backgroundColor =  .systemBackground
             }
         })

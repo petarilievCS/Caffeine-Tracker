@@ -146,6 +146,10 @@
                                 <buttonConfiguration key="configuration" style="plain" title="Drink Caffeine">
                                     <fontDescription key="titleFontDescription" type="system" weight="semibold" pointSize="22"/>
                                 </buttonConfiguration>
+                                <connections>
+                                    <action selector="drinkButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ge5-ls-Wy1"/>
+                                    <segue destination="CKl-VJ-Fd9" kind="presentation" id="eVE-Jm-vEA"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -163,13 +167,57 @@
                     <connections>
                         <outlet property="currentAmluntView" destination="lHL-xC-6fN" id="TzI-cV-Vc3"/>
                         <outlet property="dailyIntakeView" destination="J7h-BS-Rdo" id="ufb-gZ-cA8"/>
-                        <outlet property="drinkButton" destination="U90-Vj-kMa" id="NNU-sE-qzy"/>
+                        <outlet property="drinkButton" destination="U90-Vj-kMa" id="Ojo-bY-ctM"/>
                         <outlet property="scrollView" destination="VAs-1h-3cf" id="5K5-KS-hfT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2837.4045801526718" y="-2.1126760563380285"/>
+        </scene>
+        <!--Drink View Controller-->
+        <scene sceneID="cg5-5v-NXy">
+            <objects>
+                <tableViewController id="0Al-ES-PXb" customClass="DrinkViewController" customModule="Caffeine_Tracker" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="rYJ-jO-a95">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="783"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" id="X4E-bc-vWX">
+                            <rect key="frame" x="0.0" y="0.0" width="393" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </searchBar>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="Bdk-RN-FSb">
+                                <rect key="frame" x="0.0" y="94" width="393" height="43.666667938232422"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Bdk-RN-FSb" id="6hX-h3-FrE">
+                                    <rect key="frame" x="0.0" y="0.0" width="393" height="43.666667938232422"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="0Al-ES-PXb" id="9zH-gb-bUj"/>
+                            <outlet property="delegate" destination="0Al-ES-PXb" id="0MO-Ar-wjr"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="Yqf-IZ-Tnb">
+                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="Dhf-7e-hXg">
+                            <connections>
+                                <action selector="cancelButtonPressed:" destination="0Al-ES-PXb" id="ank-5I-AjG"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="newSearchBar" destination="X4E-bc-vWX" id="NIS-zS-zUA"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="g54-50-To3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4982.4427480916029" y="-2.1126760563380285"/>
         </scene>
         <!--Add Drink-->
         <scene sceneID="q13-Fr-NAp">
@@ -422,6 +470,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gms-SO-4V1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3635.8778625954196" y="686.61971830985919"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="fHt-W8-GGf">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="CKl-VJ-Fd9" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="HhL-YA-0GD">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="56"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="0Al-ES-PXb" kind="relationship" relationship="rootViewController" id="fh6-cN-Rc6"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BDm-cR-ZV5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4055.7251908396943" y="-2.1126760563380285"/>
         </scene>
     </scenes>
     <color key="tintColor" name="Light Blue"/>
