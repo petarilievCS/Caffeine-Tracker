@@ -218,11 +218,37 @@
                                                     </tableViewCell>
                                                 </prototypes>
                                             </tableView>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="90q-cz-9za" userLabel="DeleteView">
+                                                <rect key="frame" x="15" y="241" width="363" height="50"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="taP-Ji-jjl">
+                                                        <rect key="frame" x="5" y="6" width="353" height="38"/>
+                                                        <color key="tintColor" name="Red"/>
+                                                        <buttonConfiguration key="configuration" style="plain" title="Remove Drink">
+                                                            <fontDescription key="titleFontDescription" type="system" pointSize="20"/>
+                                                        </buttonConfiguration>
+                                                        <connections>
+                                                            <action selector="removeClicked:" destination="XZt-mF-DiK" eventType="touchUpInside" id="iYA-Ib-K1B"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstItem="taP-Ji-jjl" firstAttribute="centerY" secondItem="90q-cz-9za" secondAttribute="centerY" id="6o9-7X-0v9"/>
+                                                    <constraint firstAttribute="height" constant="50" id="Ha0-IF-MD0"/>
+                                                    <constraint firstItem="taP-Ji-jjl" firstAttribute="leading" secondItem="90q-cz-9za" secondAttribute="leading" constant="5" id="nAx-1Y-6e8"/>
+                                                    <constraint firstAttribute="trailing" secondItem="taP-Ji-jjl" secondAttribute="trailing" constant="5" id="w2L-tv-aUY"/>
+                                                </constraints>
+                                            </view>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="675" id="1eC-y5-g8V"/>
+                                            <constraint firstItem="90q-cz-9za" firstAttribute="top" secondItem="ayp-sp-AoD" secondAttribute="bottom" constant="20" id="CNE-fG-81S"/>
                                             <constraint firstAttribute="trailing" secondItem="ayp-sp-AoD" secondAttribute="trailing" constant="15" id="F19-Oz-LQ3"/>
+                                            <constraint firstAttribute="trailing" secondItem="90q-cz-9za" secondAttribute="trailing" constant="15" id="H1O-1x-9ze"/>
+                                            <constraint firstItem="90q-cz-9za" firstAttribute="leading" secondItem="B2e-Lc-cES" secondAttribute="leading" constant="15" id="gjv-u1-8wV"/>
+                                            <constraint firstAttribute="trailing" secondItem="90q-cz-9za" secondAttribute="trailing" constant="15" id="rbY-he-G8F"/>
                                             <constraint firstItem="ayp-sp-AoD" firstAttribute="top" secondItem="B2e-Lc-cES" secondAttribute="top" constant="15" id="sdf-Xc-5wh"/>
                                             <constraint firstItem="ayp-sp-AoD" firstAttribute="leading" secondItem="B2e-Lc-cES" secondAttribute="leading" constant="15" id="usI-T4-kwE"/>
                                         </constraints>
@@ -259,6 +285,8 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="deleteButton" destination="taP-Ji-jjl" id="QW5-cs-So6"/>
+                        <outlet property="deleteView" destination="90q-cz-9za" id="EJ3-gs-pXg"/>
                         <outlet property="tableView" destination="ayp-sp-AoD" id="Fd0-UV-SqF"/>
                     </connections>
                 </viewController>
@@ -408,6 +436,9 @@
         </namedColor>
         <namedColor name="Light Blue">
             <color red="0.27058823529411763" green="0.66666666666666663" blue="0.94901960784313721" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Red">
+            <color red="0.92156862745098034" green="0.23137254901960785" blue="0.35294117647058826" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="labelColor">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

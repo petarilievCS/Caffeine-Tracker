@@ -12,6 +12,8 @@ import CoreData
 class AddViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var deleteView: UIView!
+    @IBOutlet weak var deleteButton: UIButton!
     
     var drinkArray = [Drink]()
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
@@ -35,6 +37,12 @@ class AddViewController: UIViewController {
         
         // Customize view
         tableView.layer.cornerRadius = 15.0
+        deleteView.layer.cornerRadius = 15.0
+        deleteButton.layer.borderWidth = 0.0
+        deleteButton.contentHorizontalAlignment = .left
+        
+        // Hide delete view if adding
+        deleteView.isHidden = !editVC
     }
     
     @IBAction func doneClicked(_ sender: UIBarButtonItem) {
@@ -77,6 +85,31 @@ class AddViewController: UIViewController {
     
     @IBAction func cancelClicked(_ sender: UIBarButtonItem) {
         dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func removeClicked(_ sender: UIButton) {
+        
+        // Change color
+        deleteView.backgroundColor = .systemGray4
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: {
+            UIView.animate(withDuration: 0.15) {
+                self.deleteView.backgroundColor =  .systemBackground
+            }
+        })
+        
+        // Present alert to ask user if they want to delete for sure
+        let alert = UIAlertController(title: "", message: "Are you sure you want to remove the drink?", preferredStyle: .alert)
+        let yesAction = UIAlertAction(title: "Yes", style: .default) { action in
+            self.loadDrinks()
+            self.context.delete(self.drinkArray[self.selectedIndex!])
+            self.drinkArray.remove(at: self.selectedIndex!)
+            self.saveDrinks()
+            self.dismiss(animated: true, completion: nil)
+        }
+        let noAction = UIAlertAction(title: "No", style:. default)
+        alert.addAction(noAction)
+        alert.addAction(yesAction)
+        present(alert, animated: true)
     }
     
     // Creates a basic shake animation for the text fields
