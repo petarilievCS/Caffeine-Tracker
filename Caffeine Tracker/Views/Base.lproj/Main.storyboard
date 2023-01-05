@@ -213,6 +213,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="newSearchBar" destination="X4E-bc-vWX" id="NIS-zS-zUA"/>
+                        <segue destination="AN5-qq-dST" kind="presentation" identifier="drinksToAmount" animates="NO" id="ICv-EN-GUn"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g54-50-To3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -489,6 +490,65 @@
             </objects>
             <point key="canvasLocation" x="4055.7251908396943" y="-2.1126760563380285"/>
         </scene>
+        <!--Adjust View Controller-->
+        <scene sceneID="Sva-Op-7gy">
+            <objects>
+                <viewController id="AN5-qq-dST" customClass="AdjustViewController" customModule="Caffeine_Tracker" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="pz3-Mt-VEb">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="783"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="u8q-bK-IeQ">
+                                <rect key="frame" x="77" y="360.66666666666669" width="239" height="62"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="clF-fj-8H6">
+                                        <rect key="frame" x="0.0" y="0.0" width="41.666666666666664" height="62"/>
+                                        <color key="backgroundColor" systemColor="systemGray4Color"/>
+                                        <color key="tintColor" systemColor="secondaryLabelColor"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="-">
+                                            <fontDescription key="titleFontDescription" type="system" pointSize="40"/>
+                                        </buttonConfiguration>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" 16 fl oz " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2BO-3R-dTn">
+                                        <rect key="frame" x="46.666666666666671" y="0.0" width="138.66666666666663" height="62"/>
+                                        <color key="backgroundColor" systemColor="systemGray5Color"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qPY-mP-WAA">
+                                        <rect key="frame" x="190.33333333333331" y="0.0" width="48.666666666666657" height="62"/>
+                                        <color key="backgroundColor" systemColor="systemGray4Color"/>
+                                        <color key="tintColor" systemColor="secondaryLabelColor"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="+">
+                                            <fontDescription key="titleFontDescription" type="system" pointSize="40"/>
+                                        </buttonConfiguration>
+                                    </button>
+                                </subviews>
+                                <color key="tintColor" systemColor="labelColor"/>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="bvZ-zl-rXq"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="u8q-bK-IeQ" firstAttribute="centerY" secondItem="pz3-Mt-VEb" secondAttribute="centerY" id="MLQ-CO-yXh"/>
+                            <constraint firstItem="u8q-bK-IeQ" firstAttribute="centerX" secondItem="pz3-Mt-VEb" secondAttribute="centerX" id="Tgr-Nl-B2R"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="amountLabel" destination="2BO-3R-dTn" id="KPX-Wu-XA4"/>
+                        <outlet property="minusButton" destination="clF-fj-8H6" id="vwO-ZI-qhh"/>
+                        <outlet property="plusButton" destination="qPY-mP-WAA" id="bxx-zL-xuR"/>
+                        <outlet property="stackView" destination="u8q-bK-IeQ" id="TsM-Zo-r26"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6zx-zP-hA5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5792" y="-2"/>
+        </scene>
     </scenes>
     <color key="tintColor" name="Light Blue"/>
     <resources>
@@ -509,8 +569,17 @@
         <systemColor name="labelColor">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
+        <systemColor name="secondaryLabelColor">
+            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray4Color">
+            <color red="0.81960784313725488" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemGray5Color">
+            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray6Color">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

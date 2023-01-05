@@ -22,6 +22,7 @@ class DrinkViewController: CaffeineViewController {
             tableView.cellForRow(at: IndexPath(row: index, section: 0))?.accessoryType = .none
         }
         tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
+        performSegue(withIdentifier: K.drinksToAmountSegue, sender: self)
     }
 
     @IBAction func cancelButtonPressed(_ sender: UIBarButtonItem) {
@@ -30,5 +31,11 @@ class DrinkViewController: CaffeineViewController {
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         tableView.cellForRow(at: indexPath)?.contentView.superview?.backgroundColor = .white
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let destinationVC = segue.destination
+        destinationVC.modalPresentationStyle = .overCurrentContext
+        
     }
 }

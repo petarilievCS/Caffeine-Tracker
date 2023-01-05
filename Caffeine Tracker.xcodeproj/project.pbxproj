@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E679DCAA2966C662005CBB6C /* TinyConstraints in Frameworks */ = {isa = PBXBuildFile; productRef = E679DCA92966C662005CBB6C /* TinyConstraints */; };
 		E6996C5B295E0A5E00E35FC1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6996C5A295E0A5E00E35FC1 /* AppDelegate.swift */; };
 		E6996C5D295E0A5E00E35FC1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6996C5C295E0A5E00E35FC1 /* SceneDelegate.swift */; };
 		E6996C5F295E0A5E00E35FC1 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6996C5E295E0A5E00E35FC1 /* DashboardViewController.swift */; };
@@ -24,6 +25,8 @@
 		E69E0285296309CA00F4C142 /* NumberCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E69E0283296309CA00F4C142 /* NumberCell.swift */; };
 		E69E0286296309CA00F4C142 /* NumberCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E69E0284296309CA00F4C142 /* NumberCell.xib */; };
 		E69FA856296575C90025EEBA /* DrinkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E69FA855296575C90025EEBA /* DrinkViewController.swift */; };
+		E69FA8582965B2D40025EEBA /* AdjustViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E69FA8572965B2D40025EEBA /* AdjustViewController.swift */; };
+		E69FA85A2966BC9C0025EEBA /* Copy.rtf in Resources */ = {isa = PBXBuildFile; fileRef = E69FA8592966BC9C0025EEBA /* Copy.rtf */; };
 		E6B7DA87295F5185008F8CD1 /* CaffeineCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B7DA85295F5185008F8CD1 /* CaffeineCell.swift */; };
 		E6B7DA88295F5185008F8CD1 /* CaffeineCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6B7DA86295F5185008F8CD1 /* CaffeineCell.xib */; };
 /* End PBXBuildFile section */
@@ -48,6 +51,8 @@
 		E69E0283296309CA00F4C142 /* NumberCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberCell.swift; sourceTree = "<group>"; };
 		E69E0284296309CA00F4C142 /* NumberCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NumberCell.xib; sourceTree = "<group>"; };
 		E69FA855296575C90025EEBA /* DrinkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkViewController.swift; sourceTree = "<group>"; };
+		E69FA8572965B2D40025EEBA /* AdjustViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdjustViewController.swift; sourceTree = "<group>"; };
+		E69FA8592966BC9C0025EEBA /* Copy.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Copy.rtf; sourceTree = "<group>"; };
 		E6B7DA85295F5185008F8CD1 /* CaffeineCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaffeineCell.swift; sourceTree = "<group>"; };
 		E6B7DA86295F5185008F8CD1 /* CaffeineCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CaffeineCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -57,6 +62,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E679DCAA2966C662005CBB6C /* TinyConstraints in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -102,6 +108,8 @@
 				E6996C76295E0BA700E35FC1 /* AddViewController.swift */,
 				E6996C78295E0BE600E35FC1 /* CaffeineViewController.swift */,
 				E69FA855296575C90025EEBA /* DrinkViewController.swift */,
+				E69FA8572965B2D40025EEBA /* AdjustViewController.swift */,
+				E69FA8592966BC9C0025EEBA /* Copy.rtf */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -146,6 +154,9 @@
 			dependencies = (
 			);
 			name = "Caffeine Tracker";
+			packageProductDependencies = (
+				E679DCA92966C662005CBB6C /* TinyConstraints */,
+			);
 			productName = "Caffeine Tracker";
 			productReference = E6996C57295E0A5E00E35FC1 /* Caffeine Tracker.app */;
 			productType = "com.apple.product-type.application";
@@ -174,6 +185,9 @@
 				Base,
 			);
 			mainGroup = E6996C4E295E0A5E00E35FC1;
+			packageReferences = (
+				E679DCA82966C662005CBB6C /* XCRemoteSwiftPackageReference "TinyConstraints" */,
+			);
 			productRefGroup = E6996C58295E0A5E00E35FC1 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -193,6 +207,7 @@
 				E69E027E2962E05000F4C142 /* DrinkNameCell.xib in Resources */,
 				E69E0286296309CA00F4C142 /* NumberCell.xib in Resources */,
 				E6B7DA88295F5185008F8CD1 /* CaffeineCell.xib in Resources */,
+				E69FA85A2966BC9C0025EEBA /* Copy.rtf in Resources */,
 				E6996C67295E0A6100E35FC1 /* Assets.xcassets in Resources */,
 				E6996C62295E0A5E00E35FC1 /* Main.storyboard in Resources */,
 			);
@@ -212,6 +227,7 @@
 				E6996C5F295E0A5E00E35FC1 /* DashboardViewController.swift in Sources */,
 				E69E027D2962E05000F4C142 /* DrinkNameCell.swift in Sources */,
 				E6996C79295E0BE600E35FC1 /* CaffeineViewController.swift in Sources */,
+				E69FA8582965B2D40025EEBA /* AdjustViewController.swift in Sources */,
 				E6996C75295E0B3E00E35FC1 /* K.swift in Sources */,
 				E69E02812963058900F4C142 /* IconCell.swift in Sources */,
 				E6996C65295E0A5E00E35FC1 /* Caffeine_Tracker.xcdatamodeld in Sources */,
@@ -436,6 +452,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		E679DCA82966C662005CBB6C /* XCRemoteSwiftPackageReference "TinyConstraints" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/roberthein/TinyConstraints.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		E679DCA92966C662005CBB6C /* TinyConstraints */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E679DCA82966C662005CBB6C /* XCRemoteSwiftPackageReference "TinyConstraints" */;
+			productName = TinyConstraints;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		E6996C63295E0A5E00E35FC1 /* Caffeine_Tracker.xcdatamodeld */ = {
