@@ -34,8 +34,10 @@ class DrinkViewController: CaffeineViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let destinationVC = segue.destination
+        let destinationVC = segue.destination as! AdjustViewController
         destinationVC.modalPresentationStyle = .overCurrentContext
-        
+        let selectedDrink = drinkArray[tableView.indexPathForSelectedRow!.row]
+        destinationVC.currentAmount = selectedDrink.serving
+        destinationVC.currentDrink = drinkArray[tableView.indexPathForSelectedRow!.row]
     }
 }

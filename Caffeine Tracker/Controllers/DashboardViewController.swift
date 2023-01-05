@@ -20,6 +20,7 @@ class DashboardViewController: UIViewController {
         // Customize scroll view
         scrollView.showsVerticalScrollIndicator = false
         
+        
         // Customize navigation bar
         tabBarController?.navigationController?.navigationBar.prefersLargeTitles = true
         tabBarController?.navigationController?.navigationBar.isTranslucent = true

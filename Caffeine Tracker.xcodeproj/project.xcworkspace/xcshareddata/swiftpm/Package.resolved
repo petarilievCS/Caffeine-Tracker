@@ -1,6 +1,15 @@
 {
   "pins" : [
     {
+      "identity" : "efcountinglabel",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/EFPrefix/EFCountingLabel.git",
+      "state" : {
+        "branch" : "master",
+        "revision" : "f6a47114c5024c2d1faa5b614ee6e1cb971cb35b"
+      }
+    },
+    {
       "identity" : "tinyconstraints",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/roberthein/TinyConstraints.git",

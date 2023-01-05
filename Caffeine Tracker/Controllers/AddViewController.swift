@@ -124,8 +124,8 @@ class AddViewController: UIViewController {
     }
     
     // Calculates how much caffeine per oz a drink contains
-    func calculateCaffeinePerOz(_ caffeineAmount: Int64, _ servingSize: Int64) -> Int64 {
-        return caffeineAmount / servingSize
+    func calculateCaffeinePerOz(_ caffeineAmount: Int64, _ servingSize: Int64) -> Double {
+        return Double(caffeineAmount) / Double(servingSize)
     }
     
     // MARK: - CoreData methods

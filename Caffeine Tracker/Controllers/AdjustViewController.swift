@@ -7,15 +7,19 @@
 
 import UIKit
 import TinyConstraints
+import EFCountingLabel
 
 class AdjustViewController: UIViewController {
-    
-    @IBOutlet weak var stackView: UIStackView!
+
     @IBOutlet weak var minusButton: UIButton!
     @IBOutlet weak var plusButton: UIButton!
     @IBOutlet weak var amountLabel: UILabel!
+    @IBOutlet weak var contentView: UIView!
+    @IBOutlet weak var addDrinkButton: UIButton!
+    @IBOutlet weak var caffeineLabel: EFCountingLabel!
     
-    var currentAmount: Int = 16
+    var currentAmount: Int64 = 16
+    var currentDrink: Drink? = nil 
     
     // Constants
     let defaultHeight: CGFloat = 300
@@ -54,7 +58,9 @@ class AdjustViewController: UIViewController {
         setupPanGesture()
         
         // Customize label
-        amountLabel.text = " \(currentAmount) fl oz "
+        amountLabel.text = "\(currentAmount) fl oz"
+        caffeineLabel.text = "\(currentDrink!.caffeine)"
+        addDrinkButton.layer.cornerRadius = 15.0
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -71,8 +77,10 @@ class AdjustViewController: UIViewController {
         // 4. Add subviews
         view.addSubview(dimmedView)
         setupStackView()
-        containerView.addSubview(stackView)
-        stackView.center(in: containerView)
+        containerView.addSubview(contentView)
+        contentView.heightToSuperview()
+        contentView.widthToSuperview()
+        contentView.center(in: containerView)
         view.addSubview(containerView)
         dimmedView.translatesAutoresizingMaskIntoConstraints = false
         containerView.translatesAutoresizingMaskIntoConstraints = false
@@ -205,6 +213,38 @@ class AdjustViewController: UIViewController {
         }
         // Save current height
         currentContainerHeight = height
+    }
+    
+    // MARK: - Actions
+    
+    @IBAction func plusButtonPressed(_ sender: UIButton) {
+        if currentAmount < 99 {
+            currentAmount += 1
+            updateAmount()
+            updateCaffeine()
+        }
+    }
+    
+    @IBAction func minusButtonPressed(_ sender: UIButton) {
+        if currentAmount > 0 {
+            currentAmount -= 1
+            updateAmount()
+            updateCaffeine()
+        }
+    }
+    
+    @IBAction func addDrinkButtonPressed(_ sender: UIButton) {
+        
+    }
+    
+    func updateAmount() {
+        amountLabel.text = "\(currentAmount) fl oz"
+    }
+    
+    func updateCaffeine() {
+        let newCaffeine = CGFloat(Double(currentAmount) * currentDrink!.caffeineOz)
+
+        caffeineLabel.countFrom(CGFloat(Int(caffeineLabel.text!)!), to: newCaffeine, withDuration: 0.25)
     }
     
 }
