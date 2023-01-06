@@ -22,4 +22,5 @@ struct K {
     static let dailyAmount = "dailyAmount"
     static let metablosimAmount = "metabolismAmount"
     static let numberOfDrinks = "numberOfDrinks"
+    static let lastRefreshed = "lastRefreshed"
 }

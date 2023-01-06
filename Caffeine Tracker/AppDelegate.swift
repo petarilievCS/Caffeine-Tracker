@@ -11,10 +11,18 @@ import CoreData
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
+    let defaults = UserDefaults.standard
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        if let defaults.value(forKey: K.lastRefreshed) {
+            
+        } else {
+            let currentDate = Date()
+            let currentDay = Calendar.current.component([.day, .month, .year], from: currentDate)
+            defaults.set(currentDay, forKey: K.lastRefreshed)
+        }
+        
         return true
     }
 
