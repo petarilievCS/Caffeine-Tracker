@@ -36,7 +36,7 @@ class CaffeineViewController: UITableViewController {
         view.endEditing(true)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         loadDrinks()
     }
     
@@ -74,6 +74,7 @@ class CaffeineViewController: UITableViewController {
             
             let navigationController = segue.destination as! UINavigationController
             let destinationVC = navigationController.viewControllers[0] as! AddViewController
+            destinationVC.caffeineVC = self
             
             if let selectedIndex = tableView.indexPathForSelectedRow {
                 destinationVC.navigationItem.title = "Edit Drink"

@@ -248,7 +248,7 @@ class AdjustViewController: UIViewController {
         metabolismAmount += amountToAdd
         defaults.set(metabolismAmount, forKey: K.metablosimAmount)
         
-        dismiss(animated: true)
+        self.animateDismissView()
     }
     
     func updateAmount() {

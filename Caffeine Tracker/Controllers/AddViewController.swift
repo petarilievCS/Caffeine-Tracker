@@ -17,6 +17,7 @@ class AddViewController: UIViewController {
     
     var drinkArray = [Drink]()
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    var caffeineVC: CaffeineViewController? = nil
     
     var drinkName: String?
     var drinkCaffeine: String?
@@ -43,6 +44,10 @@ class AddViewController: UIViewController {
         
         // Hide delete view if adding
         deleteView.isHidden = !editVC
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        caffeineVC?.viewDidAppear(true)
     }
     
     @IBAction func doneClicked(_ sender: UIBarButtonItem) {
