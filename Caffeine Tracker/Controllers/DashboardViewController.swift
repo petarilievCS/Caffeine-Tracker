@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import MKRingProgressView
 
 class DashboardViewController: UIViewController {
 
@@ -16,7 +17,8 @@ class DashboardViewController: UIViewController {
     @IBOutlet weak var dailyAmountLabel: UILabel!
     @IBOutlet weak var drinkNumberLabel: UILabel!
     @IBOutlet weak var metabolismAmountLabel: UILabel!
-    @IBOutlet weak var circleView: UIImageView!
+    @IBOutlet weak var ringView: UIView!
+    let ringProgressView = RingProgressView(frame: CGRect(x: 0, y: 0, width: 120, height: 120))
     
     let defaults = UserDefaults.standard
     
@@ -36,14 +38,38 @@ class DashboardViewController: UIViewController {
         currentAmluntView.layer.cornerRadius = 15.0
         drinkButton.layer.cornerRadius = 15.0
         
+        setupRingProgressView()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         updateInfo()
+        updateProgressView()
     }
 
     @IBAction func drinkButtonPressed(_ sender: UIButton) {
     
+    }
+    
+    // Creates ring progress view
+    func setupRingProgressView() {
+        ringProgressView.startColor = UIColor(named: "Green")!
+        ringProgressView.endColor = UIColor(named: "Red")!
+        ringProgressView.ringWidth = 25
+        ringProgressView.progress = getProgress()
+        ringView.addSubview(ringProgressView)
+    }
+    
+    // Gets the current percentage of the allowed daily caffeine amount that the user has logged in
+    func getProgress() -> Double {
+        let consumedCaffeine = defaults.integer(forKey: K.dailyAmount)
+        return Double(consumedCaffeine) / 400.0
+    }
+    
+    // Updates the ring progress view
+    func updateProgressView() {
+        UIView.animate(withDuration: 0.5) {
+            self.ringProgressView.progress = self.getProgress()
+        }
     }
     
     func updateInfo() {
@@ -56,7 +82,7 @@ class DashboardViewController: UIViewController {
         // Change color if caffeine consumpton too high
         if dailyAmount > 400 {
             dailyAmountLabel.textColor = UIColor(named: "Red")
-            circleView.tintColor = UIColor(named: "Red")
+            // TODO: Change color
         }
     }
 }

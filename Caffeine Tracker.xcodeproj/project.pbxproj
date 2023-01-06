@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		E679DCAA2966C662005CBB6C /* TinyConstraints in Frameworks */ = {isa = PBXBuildFile; productRef = E679DCA92966C662005CBB6C /* TinyConstraints */; };
 		E679DCAD2966E794005CBB6C /* EFCountingLabel in Frameworks */ = {isa = PBXBuildFile; productRef = E679DCAC2966E794005CBB6C /* EFCountingLabel */; };
+		E679DCB329688B3D005CBB6C /* MKRingProgressView in Frameworks */ = {isa = PBXBuildFile; productRef = E679DCB229688B3D005CBB6C /* MKRingProgressView */; };
 		E6996C5B295E0A5E00E35FC1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6996C5A295E0A5E00E35FC1 /* AppDelegate.swift */; };
 		E6996C5D295E0A5E00E35FC1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6996C5C295E0A5E00E35FC1 /* SceneDelegate.swift */; };
 		E6996C5F295E0A5E00E35FC1 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6996C5E295E0A5E00E35FC1 /* DashboardViewController.swift */; };
@@ -64,6 +65,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E679DCAA2966C662005CBB6C /* TinyConstraints in Frameworks */,
+				E679DCB329688B3D005CBB6C /* MKRingProgressView in Frameworks */,
 				E679DCAD2966E794005CBB6C /* EFCountingLabel in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -159,6 +161,7 @@
 			packageProductDependencies = (
 				E679DCA92966C662005CBB6C /* TinyConstraints */,
 				E679DCAC2966E794005CBB6C /* EFCountingLabel */,
+				E679DCB229688B3D005CBB6C /* MKRingProgressView */,
 			);
 			productName = "Caffeine Tracker";
 			productReference = E6996C57295E0A5E00E35FC1 /* Caffeine Tracker.app */;
@@ -191,6 +194,7 @@
 			packageReferences = (
 				E679DCA82966C662005CBB6C /* XCRemoteSwiftPackageReference "TinyConstraints" */,
 				E679DCAB2966E794005CBB6C /* XCRemoteSwiftPackageReference "EFCountingLabel" */,
+				E679DCB129688B3D005CBB6C /* XCRemoteSwiftPackageReference "MKRingProgressView" */,
 			);
 			productRefGroup = E6996C58295E0A5E00E35FC1 /* Products */;
 			projectDirPath = "";
@@ -474,6 +478,14 @@
 				kind = branch;
 			};
 		};
+		E679DCB129688B3D005CBB6C /* XCRemoteSwiftPackageReference "MKRingProgressView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/maxkonovalov/MKRingProgressView.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.3.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -486,6 +498,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E679DCAB2966E794005CBB6C /* XCRemoteSwiftPackageReference "EFCountingLabel" */;
 			productName = EFCountingLabel;
+		};
+		E679DCB229688B3D005CBB6C /* MKRingProgressView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E679DCB129688B3D005CBB6C /* XCRemoteSwiftPackageReference "MKRingProgressView" */;
+			productName = MKRingProgressView;
 		};
 /* End XCSwiftPackageProductDependency section */
 

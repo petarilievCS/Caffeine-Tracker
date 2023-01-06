@@ -58,11 +58,14 @@
                                                         <color key="textColor" systemColor="systemGrayColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="lJt-ab-2IZ">
-                                                        <rect key="frame" x="217" y="17" width="124" height="120"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        <color key="tintColor" name="Green"/>
-                                                    </imageView>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="96L-KT-HeC" userLabel="RingView">
+                                                        <rect key="frame" x="228" y="17.666666666666686" width="120" height="120"/>
+                                                        <color key="backgroundColor" systemColor="systemGray6Color"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="120" id="Xg6-50-64u"/>
+                                                            <constraint firstAttribute="width" constant="120" id="prM-Pz-wEe"/>
+                                                        </constraints>
+                                                    </view>
                                                 </subviews>
                                                 <color key="backgroundColor" systemColor="systemGray6Color"/>
                                                 <constraints>
@@ -73,8 +76,10 @@
                                                     <constraint firstItem="WGJ-pm-SY1" firstAttribute="top" secondItem="J7h-BS-Rdo" secondAttribute="top" constant="15" id="Rsm-3U-SOV"/>
                                                     <constraint firstItem="LzU-Fk-BLt" firstAttribute="leading" secondItem="J7h-BS-Rdo" secondAttribute="leading" constant="15" id="XF1-y0-vBO"/>
                                                     <constraint firstItem="tKO-mi-372" firstAttribute="top" secondItem="WGJ-pm-SY1" secondAttribute="bottom" constant="1" id="XfZ-Yq-lfx"/>
+                                                    <constraint firstItem="96L-KT-HeC" firstAttribute="centerY" secondItem="J7h-BS-Rdo" secondAttribute="centerY" id="frf-cg-fR2"/>
                                                     <constraint firstItem="z6e-33-qJR" firstAttribute="top" secondItem="LzU-Fk-BLt" secondAttribute="bottom" constant="1" id="iep-R1-ntq"/>
                                                     <constraint firstItem="tKO-mi-372" firstAttribute="leading" secondItem="J7h-BS-Rdo" secondAttribute="leading" constant="15" id="oMI-Ru-NWV"/>
+                                                    <constraint firstAttribute="trailing" secondItem="96L-KT-HeC" secondAttribute="trailing" constant="15" id="pIM-wg-P04"/>
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current Amount" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rx9-dM-EZV">
@@ -165,13 +170,13 @@
                     </view>
                     <navigationItem key="navigationItem" title="Dashbaord" id="Ig9-FR-cAB"/>
                     <connections>
-                        <outlet property="circleView" destination="lJt-ab-2IZ" id="nQQ-DJ-Pya"/>
                         <outlet property="currentAmluntView" destination="lHL-xC-6fN" id="TzI-cV-Vc3"/>
                         <outlet property="dailyAmountLabel" destination="tKO-mi-372" id="PMG-EL-KwI"/>
                         <outlet property="dailyIntakeView" destination="J7h-BS-Rdo" id="ufb-gZ-cA8"/>
                         <outlet property="drinkButton" destination="U90-Vj-kMa" id="Ojo-bY-ctM"/>
                         <outlet property="drinkNumberLabel" destination="z6e-33-qJR" id="JKR-SI-rJY"/>
                         <outlet property="metabolismAmountLabel" destination="h5R-aS-HBW" id="wbk-L8-hmh"/>
+                        <outlet property="ringView" destination="96L-KT-HeC" id="oMB-eU-mgO"/>
                         <outlet property="scrollView" destination="VAs-1h-3cf" id="5K5-KS-hfT"/>
                     </connections>
                 </viewController>
