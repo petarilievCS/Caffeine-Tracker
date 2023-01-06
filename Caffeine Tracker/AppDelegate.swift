@@ -15,12 +15,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        if let defaults.value(forKey: K.lastRefreshed) {
-            
+        let currentDate = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "YY/MM/dd"
+        let currentDateString = dateFormatter.string(from: currentDate)
+        
+        if let lastRefreshedDate = defaults.value(forKey: K.lastRefreshed) as? String {
+            // Check wether variables need to be updated
+            if lastRefreshedDate != currentDateString {
+                defaults.set(currentDateString, forKey: K.lastRefreshed)
+                defaults.set(0, forKey: K.dailyAmount)
+                defaults.set(0, forKey: K.metablosimAmount)
+                defaults.set(0, forKey: K.numberOfDrinks)
+            }
         } else {
-            let currentDate = Date()
-            let currentDay = Calendar.current.component([.day, .month, .year], from: currentDate)
-            defaults.set(currentDay, forKey: K.lastRefreshed)
+            defaults.set(currentDateString, forKey: K.lastRefreshed)
         }
         
         return true
