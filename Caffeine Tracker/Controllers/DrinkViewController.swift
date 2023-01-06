@@ -11,9 +11,15 @@ class DrinkViewController: CaffeineViewController {
     
     @IBOutlet weak var newSearchBar: UISearchBar!
     
+    var dashboardVC: DashboardViewController? = nil
+    
     override func viewDidLoad() {
         self.searchBar = newSearchBar
         super.viewDidLoad()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        dashboardVC?.viewDidAppear(true)
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -26,6 +32,7 @@ class DrinkViewController: CaffeineViewController {
     }
 
     @IBAction func cancelButtonPressed(_ sender: UIBarButtonItem) {
+        // dashboardVC?.viewDidAppear(true)
         dismiss(animated: true, completion: nil)
     }
     
@@ -41,3 +48,5 @@ class DrinkViewController: CaffeineViewController {
         destinationVC.currentDrink = drinkArray[tableView.indexPathForSelectedRow!.row]
     }
 }
+
+

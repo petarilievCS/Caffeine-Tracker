@@ -153,7 +153,6 @@
                                 </buttonConfiguration>
                                 <connections>
                                     <action selector="drinkButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ge5-ls-Wy1"/>
-                                    <segue destination="CKl-VJ-Fd9" kind="presentation" id="eVE-Jm-vEA"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -178,6 +177,7 @@
                         <outlet property="metabolismAmountLabel" destination="h5R-aS-HBW" id="wbk-L8-hmh"/>
                         <outlet property="ringView" destination="96L-KT-HeC" id="oMB-eU-mgO"/>
                         <outlet property="scrollView" destination="VAs-1h-3cf" id="5K5-KS-hfT"/>
+                        <segue destination="CKl-VJ-Fd9" kind="presentation" identifier="dashboardToDrinks" id="AOa-R6-VZ4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

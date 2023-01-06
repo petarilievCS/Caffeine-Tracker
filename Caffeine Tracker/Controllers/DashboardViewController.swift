@@ -47,7 +47,13 @@ class DashboardViewController: UIViewController {
     }
 
     @IBAction func drinkButtonPressed(_ sender: UIButton) {
+        performSegue(withIdentifier: K.dashboardToDrinksSegue, sender: self)
+    }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let destinationNC = segue.destination as! UINavigationController
+        let destinationVC = destinationNC.topViewController as! DrinkViewController
+        destinationVC.dashboardVC = self
     }
     
     // Creates ring progress view
