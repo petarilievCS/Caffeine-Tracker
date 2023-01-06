@@ -8,6 +8,8 @@
 import Foundation
 
 struct K {
+    
+    // Identifiers
     static let caffeineCellIdentifier = "CaffeineCell"
     static let addDrinkCellIdentifier = "AddDrinkCell"
     static let drinkNameCellIdentifier = "DrinkNameCell"
@@ -15,4 +17,9 @@ struct K {
     static let numberCellIdentifier = "NumberCell"
     static let drinksToAddSegue = "drinksToAdd"
     static let drinksToAmountSegue = "drinksToAmount"
+    
+    // UserDefaults names
+    static let dailyAmount = "dailyAmount"
+    static let metablosimAmount = "metabolismAmount"
+    static let numberOfDrinks = "numberOfDrinks"
 }

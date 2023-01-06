@@ -165,9 +165,13 @@
                     </view>
                     <navigationItem key="navigationItem" title="Dashbaord" id="Ig9-FR-cAB"/>
                     <connections>
+                        <outlet property="circleView" destination="lJt-ab-2IZ" id="nQQ-DJ-Pya"/>
                         <outlet property="currentAmluntView" destination="lHL-xC-6fN" id="TzI-cV-Vc3"/>
+                        <outlet property="dailyAmountLabel" destination="tKO-mi-372" id="PMG-EL-KwI"/>
                         <outlet property="dailyIntakeView" destination="J7h-BS-Rdo" id="ufb-gZ-cA8"/>
                         <outlet property="drinkButton" destination="U90-Vj-kMa" id="Ojo-bY-ctM"/>
+                        <outlet property="drinkNumberLabel" destination="z6e-33-qJR" id="JKR-SI-rJY"/>
+                        <outlet property="metabolismAmountLabel" destination="h5R-aS-HBW" id="wbk-L8-hmh"/>
                         <outlet property="scrollView" destination="VAs-1h-3cf" id="5K5-KS-hfT"/>
                     </connections>
                 </viewController>

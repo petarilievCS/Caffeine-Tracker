@@ -19,7 +19,8 @@ class AdjustViewController: UIViewController {
     @IBOutlet weak var caffeineLabel: EFCountingLabel!
     
     var currentAmount: Int64 = 16
-    var currentDrink: Drink? = nil 
+    var currentDrink: Drink? = nil
+    let defaults = UserDefaults.standard
     
     // Constants
     let defaultHeight: CGFloat = 300
@@ -233,8 +234,21 @@ class AdjustViewController: UIViewController {
         }
     }
     
+    // Log drink as consumed (update number of drinks, daily amount and amount in metabolism)
     @IBAction func addDrinkButtonPressed(_ sender: UIButton) {
+        let amountToAdd = Int(caffeineLabel.text!)!
+        let consumedAmount = defaults.integer(forKey: K.dailyAmount)
+        defaults.set(consumedAmount + Int(amountToAdd), forKey: K.dailyAmount)
         
+        var numberOfDrinks = defaults.integer(forKey: K.numberOfDrinks)
+        numberOfDrinks += 1
+        defaults.set(numberOfDrinks, forKey: K.numberOfDrinks)
+        
+        var metabolismAmount = defaults.integer(forKey: K.metablosimAmount)
+        metabolismAmount += amountToAdd
+        defaults.set(metabolismAmount, forKey: K.metablosimAmount)
+        
+        dismiss(animated: true)
     }
     
     func updateAmount() {
@@ -243,7 +257,6 @@ class AdjustViewController: UIViewController {
     
     func updateCaffeine() {
         let newCaffeine = CGFloat(Double(currentAmount) * currentDrink!.caffeineOz)
-
         caffeineLabel.countFrom(CGFloat(Int(caffeineLabel.text!)!), to: newCaffeine, withDuration: 0.25)
     }
     
