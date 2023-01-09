@@ -9,9 +9,10 @@ import UIKit
 import MKRingProgressView
 import SwipeCellKit
 import AudioToolbox
+import TinyConstraints
 
 class DashboardViewController: UIViewController {
-
+    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var dailyIntakeView: UIView!
     @IBOutlet weak var scrollView: UIScrollView!
@@ -37,7 +38,6 @@ class DashboardViewController: UIViewController {
         // Customize scroll view
         scrollView.showsVerticalScrollIndicator = false
         
-        
         // Customize navigation bar
         tabBarController?.navigationController?.navigationBar.prefersLargeTitles = true
         tabBarController?.navigationController?.navigationBar.isTranslucent = true
@@ -55,10 +55,20 @@ class DashboardViewController: UIViewController {
         updateInfo()
         updateProgressView()
         loadConsumedDrinks()
+        updateConstraints()
     }
-
+    
+    // Setup table view height
+    func updateConstraints() {
+        for constraint in tableView.constraints {
+            if constraint.identifier == "tableViewHeight" {
+                constraint.constant = CGFloat(consumedDrinksArray.count) * 44.0
+            }
+        }
+    }
+    
     @IBAction func drinkButtonPressed(_ sender: UIButton) {
-        AudioServicesPlaySystemSound(1519)
+        UIImpactFeedbackGenerator(style: .light).impactOccurred()
         performSegue(withIdentifier: K.dashboardToDrinksSegue, sender: self)
     }
     
@@ -149,16 +159,25 @@ extension DashboardViewController: UITableViewDelegate, UITableViewDataSource {
         cell.delegate = self
         let consumedDrink = consumedDrinksArray[indexPath.row]
         cell.textLabel?.text = consumedDrink.name
-        cell.imageView?.image = UIImage(systemName: "cup.and.saucer.fill")
+        
+        cell.imageView?.image = UIImage(named: "coffee.png")
+        
         cell.detailTextLabel?.text = "\(consumedDrink.caffeine) mg"
         return cell
+    }
+    
+    func imageWithImage(image: UIImage, scaledToSize newSize: CGSize) -> UIImage {
+        
+        UIGraphicsBeginImageContext(newSize)
+        image.draw(in: CGRect(x: 0 ,y: 0 ,width: newSize.width ,height: newSize.height))
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return newImage!.withRenderingMode(.alwaysOriginal)
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
     }
-    
-    
 }
 
 // MARK: - Swipe Table View methods
@@ -175,6 +194,7 @@ extension DashboardViewController: SwipeTableViewCellDelegate {
             self.saveConsumedDrinks()
             self.updateInfo()
             self.updateProgressView()
+            self.updateConstraints()
             tableView.reloadData()
         }
         
