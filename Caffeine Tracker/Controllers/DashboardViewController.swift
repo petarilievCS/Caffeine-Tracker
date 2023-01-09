@@ -10,6 +10,7 @@ import MKRingProgressView
 
 class DashboardViewController: UIViewController {
 
+    @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var dailyIntakeView: UIView!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var currentAmluntView: UIView!
@@ -21,9 +22,14 @@ class DashboardViewController: UIViewController {
     let ringProgressView = RingProgressView(frame: CGRect(x: 0, y: 0, width: 120, height: 120))
     
     let defaults = UserDefaults.standard
+    var consumedDrinksArray = [ConsumedDrink]()
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        loadConsumedDrinks()
+        tableView.delegate = self
+        tableView.dataSource = self
         
         // Customize scroll view
         scrollView.showsVerticalScrollIndicator = false
@@ -37,6 +43,7 @@ class DashboardViewController: UIViewController {
         dailyIntakeView.layer.cornerRadius = 15.0
         currentAmluntView.layer.cornerRadius = 15.0
         drinkButton.layer.cornerRadius = 15.0
+        tableView.layer.cornerRadius = 15.0
         
         setupRingProgressView()
     }
@@ -44,6 +51,7 @@ class DashboardViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         updateInfo()
         updateProgressView()
+        loadConsumedDrinks()
     }
 
     @IBAction func drinkButtonPressed(_ sender: UIButton) {
@@ -91,5 +99,49 @@ class DashboardViewController: UIViewController {
             // TODO: Change color
         }
     }
+    
+    // MARK: - Core Data methods
+    
+    func saveConsumedDrinks() {
+        do {
+            try self.context.save()
+        } catch {
+            print("Error while saving context")
+        }
+    }
+    
+    func loadConsumedDrinks() {
+        do {
+            consumedDrinksArray = try context.fetch(ConsumedDrink.fetchRequest())
+        } catch {
+            print("Error while loading data")
+        }
+        tableView.reloadData()
+    }
 }
 
+// MARK: - Table View methods
+
+extension DashboardViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return consumedDrinksArray.count
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: K.consumedDrinkCellIdentifier, for: indexPath)
+        let consumedDrink = consumedDrinksArray[indexPath.row]
+        cell.textLabel?.text = consumedDrink.name
+        cell.imageView?.image = UIImage(systemName: "cup.and.saucer.fill")
+        cell.detailTextLabel?.text = "\(consumedDrink.caffeine) MG"
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+}

@@ -18,6 +18,9 @@ class AdjustViewController: UIViewController {
     @IBOutlet weak var addDrinkButton: UIButton!
     @IBOutlet weak var caffeineLabel: EFCountingLabel!
     
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    var consumedDrinksArray = [ConsumedDrink]()
+    
     var currentAmount: Int64 = 16
     var currentDrink: Drink? = nil
     let defaults = UserDefaults.standard
@@ -248,7 +251,20 @@ class AdjustViewController: UIViewController {
         metabolismAmount += amountToAdd
         defaults.set(metabolismAmount, forKey: K.metablosimAmount)
         
+        addConsumedDrink(with: amountToAdd)
         self.animateDismissView()
+    }
+    
+    // Adds consumed drink to CoreData database
+    func addConsumedDrink(with caffeineAmount: Int) {
+        loadConsumedDrinks()
+        let consumedDrink = ConsumedDrink(context: self.context)
+        consumedDrink.name = currentDrink!.name
+        consumedDrink.icon = currentDrink!.icon
+        consumedDrink.caffeine = Int64(caffeineAmount)
+        consumedDrink.timeConsumed = Date.now
+        consumedDrinksArray.append(consumedDrink)
+        saveConsumedDrinks()
     }
     
     func updateAmount() {
@@ -258,6 +274,24 @@ class AdjustViewController: UIViewController {
     func updateCaffeine() {
         let newCaffeine = CGFloat(Double(currentAmount) * currentDrink!.caffeineOz)
         caffeineLabel.countFrom(CGFloat(Int(caffeineLabel.text!)!), to: newCaffeine, withDuration: 0.25)
+    }
+    
+    // MARK: - Core Data methods
+    
+    func saveConsumedDrinks() {
+        do {
+            try self.context.save()
+        } catch {
+            print("Error while saving context")
+        }
+    }
+    
+    func loadConsumedDrinks() {
+        do {
+            consumedDrinksArray = try context.fetch(ConsumedDrink.fetchRequest())
+        } catch {
+            print("Error while loading data")
+        }
     }
     
 }

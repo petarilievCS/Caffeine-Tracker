@@ -18,6 +18,7 @@ struct K {
     static let drinksToAddSegue = "drinksToAdd"
     static let drinksToAmountSegue = "drinksToAmount"
     static let dashboardToDrinksSegue = "dashboardToDrinks"
+    static let consumedDrinkCellIdentifier = "consumedDrinkCell"
     
     // UserDefaults names
     static let dailyAmount = "dailyAmount"

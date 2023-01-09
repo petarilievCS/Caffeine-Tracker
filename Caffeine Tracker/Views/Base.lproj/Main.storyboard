@@ -3,6 +3,7 @@
     <device id="retina6_12" orientation="portrait" appearance="dark"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -114,17 +115,66 @@
                                                     <constraint firstAttribute="height" constant="80" id="y5f-Fm-2o1"/>
                                                 </constraints>
                                             </view>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Drinks Consumed Today" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w0d-JL-tvH">
+                                                <rect key="frame" x="15" y="361.33333333333337" width="271" height="29"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="bVX-vl-BPD">
+                                                <rect key="frame" x="15" y="400.33333333333337" width="363" height="198.66666666666663"/>
+                                                <color key="backgroundColor" systemColor="systemGray6Color"/>
+                                                <color key="sectionIndexBackgroundColor" systemColor="systemBackgroundColor"/>
+                                                <prototypes>
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="consumedDrinkCell" textLabel="22q-qL-X90" detailTextLabel="i6T-sE-vUw" imageView="W7J-QN-BR6" style="IBUITableViewCellStyleValue1" id="3Qt-Sv-zJv">
+                                                        <rect key="frame" x="0.0" y="50" width="363" height="47.666667938232422"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="3Qt-Sv-zJv" id="cCn-BR-Oiq">
+                                                            <rect key="frame" x="0.0" y="0.0" width="363" height="47.666667938232422"/>
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                            <subviews>
+                                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="22q-qL-X90">
+                                                                    <rect key="frame" x="63.333333333333329" y="12" width="37.666666666666664" height="24"/>
+                                                                    <autoresizingMask key="autoresizingMask"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                                    <nil key="textColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="W7J-QN-BR6">
+                                                                    <rect key="frame" x="15.666666666666668" y="11.666666666666666" width="32.666666666666664" height="24.333333333333332"/>
+                                                                    <autoresizingMask key="autoresizingMask"/>
+                                                                    <imageReference key="image" image="cup.and.saucer.fill" catalog="system" symbolScale="large"/>
+                                                                </imageView>
+                                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="i6T-sE-vUw">
+                                                                    <rect key="frame" x="290" y="12" width="53" height="24"/>
+                                                                    <autoresizingMask key="autoresizingMask"/>
+                                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                                                    <nil key="textColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                            </subviews>
+                                                        </tableViewCellContentView>
+                                                        <color key="backgroundColor" systemColor="systemGray6Color"/>
+                                                    </tableViewCell>
+                                                </prototypes>
+                                            </tableView>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="lHL-xC-6fN" secondAttribute="trailing" constant="15" id="2ap-GX-gka"/>
                                             <constraint firstItem="J7h-BS-Rdo" firstAttribute="leading" secondItem="npV-L6-oD2" secondAttribute="leading" constant="15" id="FNB-f1-dKE"/>
                                             <constraint firstAttribute="trailing" secondItem="J7h-BS-Rdo" secondAttribute="trailing" constant="15" id="GbK-eq-iWB"/>
+                                            <constraint firstAttribute="bottom" secondItem="bVX-vl-BPD" secondAttribute="bottom" constant="150" id="R5d-9y-AXB"/>
+                                            <constraint firstItem="bVX-vl-BPD" firstAttribute="top" secondItem="w0d-JL-tvH" secondAttribute="bottom" constant="10" id="ZrM-oW-iz0"/>
+                                            <constraint firstItem="bVX-vl-BPD" firstAttribute="leading" secondItem="npV-L6-oD2" secondAttribute="leading" constant="15" id="cIa-zL-KfU"/>
                                             <constraint firstAttribute="height" constant="749" id="emV-35-WOZ"/>
+                                            <constraint firstItem="w0d-JL-tvH" firstAttribute="leading" secondItem="npV-L6-oD2" secondAttribute="leading" constant="15" id="esv-CT-Qm6"/>
                                             <constraint firstItem="rx9-dM-EZV" firstAttribute="top" secondItem="J7h-BS-Rdo" secondAttribute="bottom" constant="20" id="gcJ-Sg-LDh"/>
                                             <constraint firstItem="lHL-xC-6fN" firstAttribute="leading" secondItem="npV-L6-oD2" secondAttribute="leading" constant="15" id="k8P-rl-Pas"/>
                                             <constraint firstItem="0fG-ci-Ik3" firstAttribute="top" secondItem="npV-L6-oD2" secondAttribute="top" constant="10" id="lhq-nD-dEe"/>
                                             <constraint firstItem="rx9-dM-EZV" firstAttribute="leading" secondItem="npV-L6-oD2" secondAttribute="leading" constant="15" id="mWW-R6-IN7"/>
+                                            <constraint firstAttribute="trailing" secondItem="bVX-vl-BPD" secondAttribute="trailing" constant="15" id="pnJ-kU-HAo"/>
+                                            <constraint firstItem="w0d-JL-tvH" firstAttribute="top" secondItem="lHL-xC-6fN" secondAttribute="bottom" constant="20" id="qZs-x5-prV"/>
                                             <constraint firstItem="0fG-ci-Ik3" firstAttribute="leading" secondItem="npV-L6-oD2" secondAttribute="leading" constant="15" id="qed-FG-lQ3"/>
                                             <constraint firstItem="J7h-BS-Rdo" firstAttribute="top" secondItem="0fG-ci-Ik3" secondAttribute="bottom" constant="10" id="rAx-Pt-Z2f"/>
                                             <constraint firstItem="lHL-xC-6fN" firstAttribute="top" secondItem="rx9-dM-EZV" secondAttribute="bottom" constant="10" id="toG-nf-ytT"/>
@@ -177,6 +227,7 @@
                         <outlet property="metabolismAmountLabel" destination="h5R-aS-HBW" id="wbk-L8-hmh"/>
                         <outlet property="ringView" destination="96L-KT-HeC" id="oMB-eU-mgO"/>
                         <outlet property="scrollView" destination="VAs-1h-3cf" id="5K5-KS-hfT"/>
+                        <outlet property="tableView" destination="bVX-vl-BPD" id="cjE-FX-l4b"/>
                         <segue destination="CKl-VJ-Fd9" kind="presentation" identifier="dashboardToDrinks" id="AOa-R6-VZ4"/>
                     </connections>
                 </viewController>

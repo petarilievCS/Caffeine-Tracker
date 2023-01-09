@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E611E986296C0BFA00592296 /* MetabolismCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E611E985296C0BFA00592296 /* MetabolismCalculator.swift */; };
 		E679DCAA2966C662005CBB6C /* TinyConstraints in Frameworks */ = {isa = PBXBuildFile; productRef = E679DCA92966C662005CBB6C /* TinyConstraints */; };
 		E679DCAD2966E794005CBB6C /* EFCountingLabel in Frameworks */ = {isa = PBXBuildFile; productRef = E679DCAC2966E794005CBB6C /* EFCountingLabel */; };
 		E679DCB329688B3D005CBB6C /* MKRingProgressView in Frameworks */ = {isa = PBXBuildFile; productRef = E679DCB229688B3D005CBB6C /* MKRingProgressView */; };
@@ -34,6 +35,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E611E985296C0BFA00592296 /* MetabolismCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetabolismCalculator.swift; sourceTree = "<group>"; };
 		E6996C57295E0A5E00E35FC1 /* Caffeine Tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Caffeine Tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6996C5A295E0A5E00E35FC1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E6996C5C295E0A5E00E35FC1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -138,6 +140,7 @@
 			isa = PBXGroup;
 			children = (
 				E6996C63295E0A5E00E35FC1 /* Caffeine_Tracker.xcdatamodeld */,
+				E611E985296C0BFA00592296 /* MetabolismCalculator.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -238,6 +241,7 @@
 				E69FA8582965B2D40025EEBA /* AdjustViewController.swift in Sources */,
 				E6996C75295E0B3E00E35FC1 /* K.swift in Sources */,
 				E69E02812963058900F4C142 /* IconCell.swift in Sources */,
+				E611E986296C0BFA00592296 /* MetabolismCalculator.swift in Sources */,
 				E6996C65295E0A5E00E35FC1 /* Caffeine_Tracker.xcdatamodeld in Sources */,
 				E6996C5B295E0A5E00E35FC1 /* AppDelegate.swift in Sources */,
 				E6996C5D295E0A5E00E35FC1 /* SceneDelegate.swift in Sources */,
