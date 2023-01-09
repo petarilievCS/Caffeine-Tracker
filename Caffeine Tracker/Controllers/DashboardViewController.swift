@@ -7,6 +7,8 @@
 
 import UIKit
 import MKRingProgressView
+import SwipeCellKit
+import AudioToolbox
 
 class DashboardViewController: UIViewController {
 
@@ -19,11 +21,12 @@ class DashboardViewController: UIViewController {
     @IBOutlet weak var drinkNumberLabel: UILabel!
     @IBOutlet weak var metabolismAmountLabel: UILabel!
     @IBOutlet weak var ringView: UIView!
-    let ringProgressView = RingProgressView(frame: CGRect(x: 0, y: 0, width: 120, height: 120))
+    let ringProgressView = RingProgressView(frame: CGRect(x: 0, y: 0, width: 110, height: 110))
     
     let defaults = UserDefaults.standard
     var consumedDrinksArray = [ConsumedDrink]()
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    var metabolismCalculator = MetabolismCalculator()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,6 +58,7 @@ class DashboardViewController: UIViewController {
     }
 
     @IBAction func drinkButtonPressed(_ sender: UIButton) {
+        AudioServicesPlaySystemSound(1519)
         performSegue(withIdentifier: K.dashboardToDrinksSegue, sender: self)
     }
     
@@ -75,7 +79,7 @@ class DashboardViewController: UIViewController {
     
     // Gets the current percentage of the allowed daily caffeine amount that the user has logged in
     func getProgress() -> Double {
-        let consumedCaffeine = defaults.integer(forKey: K.dailyAmount)
+        let consumedCaffeine = metabolismCalculator.calculateTotalAmount()
         return Double(consumedCaffeine) / 400.0
     }
     
@@ -87,11 +91,11 @@ class DashboardViewController: UIViewController {
     }
     
     func updateInfo() {
-        let dailyAmount = defaults.integer(forKey: K.dailyAmount)
+        let dailyAmount = metabolismCalculator.calculateTotalAmount()
         
-        dailyAmountLabel.text = "\(dailyAmount)/400 MG"
-        drinkNumberLabel.text = String(defaults.integer(forKey: K.numberOfDrinks))
-        metabolismAmountLabel.text = "\(defaults.integer(forKey: K.metablosimAmount)) MG"
+        dailyAmountLabel.text = "\(dailyAmount)/400 mg"
+        drinkNumberLabel.text = String(metabolismCalculator.getNumberOfDrinks())
+        metabolismAmountLabel.text = "\(metabolismCalculator.calculateMetabolismAmount()) mg"
         
         // Change color if caffeine consumpton too high
         if dailyAmount > 400 {
@@ -118,6 +122,14 @@ class DashboardViewController: UIViewController {
         }
         tableView.reloadData()
     }
+    
+    func getDailyTotal() -> Int {
+        return metabolismCalculator.calculateTotalAmount()
+    }
+    
+    func getDailyDrinks() -> Int {
+        return metabolismCalculator.getNumberOfDrinks()
+    }
 }
 
 // MARK: - Table View methods
@@ -133,15 +145,43 @@ extension DashboardViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: K.consumedDrinkCellIdentifier, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: K.consumedDrinkCellIdentifier, for: indexPath) as! SwipeTableViewCell
+        cell.delegate = self
         let consumedDrink = consumedDrinksArray[indexPath.row]
         cell.textLabel?.text = consumedDrink.name
         cell.imageView?.image = UIImage(systemName: "cup.and.saucer.fill")
-        cell.detailTextLabel?.text = "\(consumedDrink.caffeine) MG"
+        cell.detailTextLabel?.text = "\(consumedDrink.caffeine) mg"
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
     }
+    
+    
+}
+
+// MARK: - Swipe Table View methods
+
+extension DashboardViewController: SwipeTableViewCellDelegate {
+    
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeCellKit.SwipeActionsOrientation) -> [SwipeCellKit.SwipeAction]? {
+        guard orientation == .right else { return nil }
+        
+        let deleteAction = SwipeAction(style: .destructive, title: "Delete") { action, indexPath in
+            self.loadConsumedDrinks()
+            self.context.delete(self.consumedDrinksArray[indexPath.row])
+            self.consumedDrinksArray.remove(at: indexPath.row)
+            self.saveConsumedDrinks()
+            self.updateInfo()
+            self.updateProgressView()
+            tableView.reloadData()
+        }
+        
+        // customize the action appearance
+        deleteAction.image = UIImage(named: "delete-icon")
+        
+        return [deleteAction]
+    }
+    
 }

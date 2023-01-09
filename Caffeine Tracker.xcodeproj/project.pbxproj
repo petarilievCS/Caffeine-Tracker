@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		E611E986296C0BFA00592296 /* MetabolismCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E611E985296C0BFA00592296 /* MetabolismCalculator.swift */; };
+		E611E989296C1F3E00592296 /* SwipeCellKit in Frameworks */ = {isa = PBXBuildFile; productRef = E611E988296C1F3E00592296 /* SwipeCellKit */; };
 		E679DCAA2966C662005CBB6C /* TinyConstraints in Frameworks */ = {isa = PBXBuildFile; productRef = E679DCA92966C662005CBB6C /* TinyConstraints */; };
 		E679DCAD2966E794005CBB6C /* EFCountingLabel in Frameworks */ = {isa = PBXBuildFile; productRef = E679DCAC2966E794005CBB6C /* EFCountingLabel */; };
 		E679DCB329688B3D005CBB6C /* MKRingProgressView in Frameworks */ = {isa = PBXBuildFile; productRef = E679DCB229688B3D005CBB6C /* MKRingProgressView */; };
@@ -66,6 +67,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E611E989296C1F3E00592296 /* SwipeCellKit in Frameworks */,
 				E679DCAA2966C662005CBB6C /* TinyConstraints in Frameworks */,
 				E679DCB329688B3D005CBB6C /* MKRingProgressView in Frameworks */,
 				E679DCAD2966E794005CBB6C /* EFCountingLabel in Frameworks */,
@@ -165,6 +167,7 @@
 				E679DCA92966C662005CBB6C /* TinyConstraints */,
 				E679DCAC2966E794005CBB6C /* EFCountingLabel */,
 				E679DCB229688B3D005CBB6C /* MKRingProgressView */,
+				E611E988296C1F3E00592296 /* SwipeCellKit */,
 			);
 			productName = "Caffeine Tracker";
 			productReference = E6996C57295E0A5E00E35FC1 /* Caffeine Tracker.app */;
@@ -198,6 +201,7 @@
 				E679DCA82966C662005CBB6C /* XCRemoteSwiftPackageReference "TinyConstraints" */,
 				E679DCAB2966E794005CBB6C /* XCRemoteSwiftPackageReference "EFCountingLabel" */,
 				E679DCB129688B3D005CBB6C /* XCRemoteSwiftPackageReference "MKRingProgressView" */,
+				E611E987296C1F3E00592296 /* XCRemoteSwiftPackageReference "SwipeCellKit" */,
 			);
 			productRefGroup = E6996C58295E0A5E00E35FC1 /* Products */;
 			projectDirPath = "";
@@ -466,6 +470,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		E611E987296C1F3E00592296 /* XCRemoteSwiftPackageReference "SwipeCellKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwipeCellKit/SwipeCellKit";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		E679DCA82966C662005CBB6C /* XCRemoteSwiftPackageReference "TinyConstraints" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/roberthein/TinyConstraints.git";
@@ -493,6 +505,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		E611E988296C1F3E00592296 /* SwipeCellKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E611E987296C1F3E00592296 /* XCRemoteSwiftPackageReference "SwipeCellKit" */;
+			productName = SwipeCellKit;
+		};
 		E679DCA92966C662005CBB6C /* TinyConstraints */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = E679DCA82966C662005CBB6C /* XCRemoteSwiftPackageReference "TinyConstraints" */;

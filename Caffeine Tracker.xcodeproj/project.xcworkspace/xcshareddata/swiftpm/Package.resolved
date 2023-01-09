@@ -19,6 +19,15 @@
       }
     },
     {
+      "identity" : "swipecellkit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SwipeCellKit/SwipeCellKit",
+      "state" : {
+        "branch" : "master",
+        "revision" : "7219cad3098637176ace311510d11467dbfb9bb0"
+      }
+    },
+    {
       "identity" : "tinyconstraints",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/roberthein/TinyConstraints.git",
