@@ -62,7 +62,7 @@ class DashboardViewController: UIViewController {
     func updateConstraints() {
         for constraint in tableView.constraints {
             if constraint.identifier == "tableViewHeight" {
-                constraint.constant = CGFloat(consumedDrinksArray.count) * 44.0
+                constraint.constant = CGFloat(consumedDrinksArray.count) * 50.0
             }
         }
     }
@@ -160,8 +160,12 @@ extension DashboardViewController: UITableViewDelegate, UITableViewDataSource {
         let consumedDrink = consumedDrinksArray[indexPath.row]
         cell.textLabel?.text = consumedDrink.name
         
-        cell.imageView?.image = UIImage(named: "coffee.png")
         
+        // var newImageView : UIImageView = UIImageView(frame: CGRectMake(0, 0, 30, 30))
+        cell.imageView?.frame.size.width = 10.0
+        cell.imageView?.frame.size.height = 10.0
+        cell.imageView?.image = UIImage(named: "coffee.svg")!
+         
         cell.detailTextLabel?.text = "\(consumedDrink.caffeine) mg"
         return cell
     }
@@ -177,6 +181,10 @@ extension DashboardViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 50.0
     }
 }
 
