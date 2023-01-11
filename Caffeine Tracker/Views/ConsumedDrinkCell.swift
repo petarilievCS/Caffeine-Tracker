@@ -1,18 +1,17 @@
 //
-//  TableViewCell.swift
+//  ConsumedDrinkCell.swift
 //  Caffeine Tracker
 //
-//  Created by Petar Iliev on 30.12.22.
+//  Created by Petar Iliev on 11.1.23.
 //
 
 import UIKit
-import SwipeCellKit
 
-class CaffeineCell: UITableViewCell {
-
+class ConsumedDrinkCell: UITableViewCell {
+    
+    @IBOutlet weak var title: UILabel!
+    @IBOutlet weak var detail: UILabel!
     @IBOutlet weak var icon: UIImageView!
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var caffeineLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -20,7 +19,7 @@ class CaffeineCell: UITableViewCell {
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
-        // super.setSelected(selected, animated: animated)
+        super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
     }

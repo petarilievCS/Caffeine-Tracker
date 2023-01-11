@@ -22,6 +22,7 @@ class DashboardViewController: UIViewController {
     @IBOutlet weak var drinkNumberLabel: UILabel!
     @IBOutlet weak var metabolismAmountLabel: UILabel!
     @IBOutlet weak var ringView: UIView!
+    @IBOutlet weak var drinksLabel: UILabel!
     let ringProgressView = RingProgressView(frame: CGRect(x: 0, y: 0, width: 110, height: 110))
     
     let defaults = UserDefaults.standard
@@ -32,8 +33,10 @@ class DashboardViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         loadConsumedDrinks()
+        tableView.register(UINib(nibName: K.consumedDrinkCellIdentifier, bundle: nil), forCellReuseIdentifier: K.consumedDrinkCellIdentifier)
         tableView.delegate = self
         tableView.dataSource = self
+        
         
         // Customize scroll view
         scrollView.showsVerticalScrollIndicator = false
@@ -60,9 +63,10 @@ class DashboardViewController: UIViewController {
     
     // Setup table view height
     func updateConstraints() {
+        drinksLabel.isHidden = consumedDrinksArray.isEmpty
         for constraint in tableView.constraints {
             if constraint.identifier == "tableViewHeight" {
-                constraint.constant = CGFloat(consumedDrinksArray.count) * 50.0
+                constraint.constant = CGFloat(consumedDrinksArray.count) * 44.0
             }
         }
     }
@@ -155,18 +159,29 @@ extension DashboardViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: K.consumedDrinkCellIdentifier, for: indexPath) as! SwipeTableViewCell
-        cell.delegate = self
+        let cell = tableView.dequeueReusableCell(withIdentifier: K.consumedDrinkCellIdentifier, for: indexPath) as! ConsumedDrinkCell
+        // let swipeCell = cell as! SwipeTableViewCell
+        // cell.delegate = self
         let consumedDrink = consumedDrinksArray[indexPath.row]
-        cell.textLabel?.text = consumedDrink.name
+        cell.title.text = consumedDrink.name
         
+        // Testing
+        switch indexPath.row {
+        case 0:
+            cell.icon.image = UIImage(named: "coffee.png")
+        case 1:
+            cell.icon.image = UIImage(named: "can.png")
+        case 2:
+            cell.icon.image = UIImage(named: "coffee-cup.png")
+        case 3:
+            cell.icon.image = UIImage(named: "chocolate-bar.png")
+        case 4:
+            cell.icon.image = UIImage(named: "coke.png")
+        default:
+            cell.icon.image = UIImage(named: "drugs.png")
+        }
         
-        // var newImageView : UIImageView = UIImageView(frame: CGRectMake(0, 0, 30, 30))
-        cell.imageView?.frame.size.width = 10.0
-        cell.imageView?.frame.size.height = 10.0
-        cell.imageView?.image = UIImage(named: "coffee.svg")!
-         
-        cell.detailTextLabel?.text = "\(consumedDrink.caffeine) mg"
+        cell.detail.text = "\(consumedDrink.caffeine) mg"
         return cell
     }
     
@@ -184,7 +199,7 @@ extension DashboardViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 50.0
+        return 44.0
     }
 }
 
