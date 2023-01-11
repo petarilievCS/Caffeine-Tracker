@@ -20,6 +20,7 @@ class AdjustViewController: UIViewController {
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var consumedDrinksArray = [ConsumedDrink]()
+    var drinksVC: DrinkViewController? = nil
     
     var currentAmount: Int64 = 16
     var currentDrink: Drink? = nil
@@ -253,6 +254,10 @@ class AdjustViewController: UIViewController {
         
         addConsumedDrink(with: amountToAdd)
         self.animateDismissView()
+        drinksVC!.deselectRows()
+        
+        // Play vibration
+        UIImpactFeedbackGenerator(style: .medium).impactOccurred()
     }
     
     // Adds consumed drink to CoreData database

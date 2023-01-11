@@ -23,6 +23,7 @@ class DashboardViewController: UIViewController {
     @IBOutlet weak var metabolismAmountLabel: UILabel!
     @IBOutlet weak var ringView: UIView!
     @IBOutlet weak var drinksLabel: UILabel!
+    @IBOutlet weak var contentView: UIView!
     let ringProgressView = RingProgressView(frame: CGRect(x: 0, y: 0, width: 110, height: 110))
     
     let defaults = UserDefaults.standard
@@ -67,6 +68,18 @@ class DashboardViewController: UIViewController {
         for constraint in tableView.constraints {
             if constraint.identifier == "tableViewHeight" {
                 constraint.constant = CGFloat(consumedDrinksArray.count) * 44.0
+            }
+        }
+        
+        // Expand scroll view
+        let extraCells = consumedDrinksArray.count - 3
+        for constraint in contentView.constraints {
+            if constraint.identifier == "contentViewHeight" {
+                if extraCells > 0 {
+                    constraint.constant = constraint.constant + (CGFloat(extraCells) * 44.0)
+                } else {
+                    constraint.constant = 675.0
+                }
             }
         }
     }
@@ -161,7 +174,7 @@ extension DashboardViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: K.consumedDrinkCellIdentifier, for: indexPath) as! ConsumedDrinkCell
         // let swipeCell = cell as! SwipeTableViewCell
-        // cell.delegate = self
+        cell.delegate = self
         let consumedDrink = consumedDrinksArray[indexPath.row]
         cell.title.text = consumedDrink.name
         
@@ -219,6 +232,7 @@ extension DashboardViewController: SwipeTableViewCellDelegate {
             self.updateProgressView()
             self.updateConstraints()
             tableView.reloadData()
+            self.updateConstraints()
         }
         
         // customize the action appearance

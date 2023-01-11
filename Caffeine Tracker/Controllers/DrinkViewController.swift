@@ -30,9 +30,14 @@ class DrinkViewController: CaffeineViewController {
         tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
         performSegue(withIdentifier: K.drinksToAmountSegue, sender: self)
     }
+    
+    func deselectRows() {
+        for i in 0...drinkArray.count {
+            tableView.cellForRow(at: IndexPath(row: i, section: 0))?.accessoryType = .none
+        }
+    }
 
     @IBAction func cancelButtonPressed(_ sender: UIBarButtonItem) {
-        // dashboardVC?.viewDidAppear(true)
         dismiss(animated: true, completion: nil)
     }
     
@@ -42,6 +47,7 @@ class DrinkViewController: CaffeineViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destinationVC = segue.destination as! AdjustViewController
+        destinationVC.drinksVC = self
         destinationVC.modalPresentationStyle = .overCurrentContext
         let selectedDrink = drinkArray[tableView.indexPathForSelectedRow!.row]
         destinationVC.currentAmount = selectedDrink.serving

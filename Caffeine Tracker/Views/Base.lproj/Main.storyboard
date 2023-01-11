@@ -18,10 +18,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VAs-1h-3cf">
-                                <rect key="frame" x="0.0" y="103" width="393" height="749"/>
+                                <rect key="frame" x="0.0" y="155" width="393" height="697"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="npV-L6-oD2" userLabel="ContentView">
-                                        <rect key="frame" x="0.0" y="0.0" width="393" height="749"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="675"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Today" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0fG-ci-Ik3">
                                                 <rect key="frame" x="15" y="10.000000000000002" width="67.333333333333329" height="28.666666666666671"/>
@@ -159,7 +159,7 @@
                                             <constraint firstAttribute="trailing" secondItem="J7h-BS-Rdo" secondAttribute="trailing" constant="15" id="GbK-eq-iWB"/>
                                             <constraint firstItem="bVX-vl-BPD" firstAttribute="top" secondItem="w0d-JL-tvH" secondAttribute="bottom" constant="10" id="ZrM-oW-iz0"/>
                                             <constraint firstItem="bVX-vl-BPD" firstAttribute="leading" secondItem="npV-L6-oD2" secondAttribute="leading" constant="15" id="cIa-zL-KfU"/>
-                                            <constraint firstAttribute="height" constant="749" id="emV-35-WOZ"/>
+                                            <constraint firstAttribute="height" constant="675" identifier="contentViewHeight" id="emV-35-WOZ"/>
                                             <constraint firstItem="w0d-JL-tvH" firstAttribute="leading" secondItem="npV-L6-oD2" secondAttribute="leading" constant="15" id="esv-CT-Qm6"/>
                                             <constraint firstItem="rx9-dM-EZV" firstAttribute="top" secondItem="J7h-BS-Rdo" secondAttribute="bottom" constant="30" id="gcJ-Sg-LDh"/>
                                             <constraint firstItem="lHL-xC-6fN" firstAttribute="leading" secondItem="npV-L6-oD2" secondAttribute="leading" constant="15" id="k8P-rl-Pas"/>
@@ -211,6 +211,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Dashbaord" id="Ig9-FR-cAB"/>
                     <connections>
+                        <outlet property="contentView" destination="npV-L6-oD2" id="5mL-Qh-c0h"/>
                         <outlet property="currentAmluntView" destination="lHL-xC-6fN" id="TzI-cV-Vc3"/>
                         <outlet property="dailyAmountLabel" destination="tKO-mi-372" id="PMG-EL-KwI"/>
                         <outlet property="dailyIntakeView" destination="J7h-BS-Rdo" id="ufb-gZ-cA8"/>
@@ -258,7 +259,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="Yqf-IZ-Tnb">
-                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="Dhf-7e-hXg">
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="Dhf-7e-hXg">
                             <connections>
                                 <action selector="cancelButtonPressed:" destination="0Al-ES-PXb" id="ank-5I-AjG"/>
                             </connections>
@@ -496,6 +497,9 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="tintColor" name="AccentColor"/>
                         <color key="selectedImageTintColor" name="Light Blue"/>
+                        <tabBarAppearance key="scrollEdgeAppearance">
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </tabBarAppearance>
                     </tabBar>
                     <connections>
                         <segue destination="gS4-Hy-90X" kind="relationship" relationship="viewControllers" id="bUd-Fn-qih"/>
