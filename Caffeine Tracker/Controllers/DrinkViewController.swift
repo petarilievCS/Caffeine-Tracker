@@ -25,7 +25,7 @@ class DrinkViewController: CaffeineViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // Deselct all rows
         for index in 0..<tableView.numberOfRows(inSection: 0) {
-            tableView.cellForRow(at: IndexPath(row: index, section: 0))?.accessoryType = .none
+            tableView.cellForRow(at: IndexPath(row: index, section: 0))?.accessoryType = .disclosureIndicator
         }
         tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
         performSegue(withIdentifier: K.drinksToAmountSegue, sender: self)
@@ -33,7 +33,7 @@ class DrinkViewController: CaffeineViewController {
     
     func deselectRows() {
         for i in 0...drinkArray.count {
-            tableView.cellForRow(at: IndexPath(row: i, section: 0))?.accessoryType = .none
+            tableView.cellForRow(at: IndexPath(row: i, section: 0))?.accessoryType = .disclosureIndicator
         }
     }
 

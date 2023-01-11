@@ -57,6 +57,22 @@ class CaffeineViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: K.caffeineCellIdentifier, for: indexPath) as! CaffeineCell
         let currentDrink = drinkArray[indexPath.row]
+        
+        switch indexPath.row {
+        case 0:
+            cell.icon.image = UIImage(named: "coffee.png")
+        case 1:
+            cell.icon.image = UIImage(named: "can.png")
+        case 2:
+            cell.icon.image = UIImage(named: "coffee-cup.png")
+        case 3:
+            cell.icon.image = UIImage(named: "chocolate-bar.png")
+        case 4:
+            cell.icon.image = UIImage(named: "coke.png")
+        default:
+            cell.icon.image = UIImage(named: "drugs.png")
+        }
+        
         cell.nameLabel.text = currentDrink.name
         cell.caffeineLabel.text = "\(String(currentDrink.caffeine)) MG"
         print(currentDrink.caffeineOz)

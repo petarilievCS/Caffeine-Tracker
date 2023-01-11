@@ -74,6 +74,10 @@ class AdjustViewController: UIViewController {
         animatePresentContainer()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        drinksVC!.deselectRows()
+    }
+    
     func setupView() {
         view.backgroundColor = .clear
     }
@@ -254,7 +258,6 @@ class AdjustViewController: UIViewController {
         
         addConsumedDrink(with: amountToAdd)
         self.animateDismissView()
-        drinksVC!.deselectRows()
         
         // Play vibration
         UIImpactFeedbackGenerator(style: .medium).impactOccurred()
