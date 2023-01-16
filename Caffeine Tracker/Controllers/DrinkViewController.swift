@@ -28,6 +28,7 @@ class DrinkViewController: CaffeineViewController {
             tableView.cellForRow(at: IndexPath(row: index, section: 0))?.accessoryType = .disclosureIndicator
         }
         tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
+        tableView.cellForRow(at: indexPath)?.accessoryView?.backgroundColor = .systemBackground
         performSegue(withIdentifier: K.drinksToAmountSegue, sender: self)
     }
     
