@@ -9,6 +9,8 @@ import UIKit
 
 class IconCell: UITableViewCell {
     
+    @IBOutlet weak var iconLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
     }

@@ -17,34 +17,38 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="56"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Icon" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PHu-4Q-fEH">
-                        <rect key="frame" x="15" y="16" width="38" height="24"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Type" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PHu-4Q-fEH">
+                        <rect key="frame" x="15" y="16" width="43" height="24"/>
                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cup.and.saucer.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="mi7-AN-Ufe">
-                        <rect key="frame" x="265" y="9" width="40" height="38"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="40" id="WUJ-jG-pEB"/>
-                            <constraint firstAttribute="height" constant="40" id="rtR-Cw-E6D"/>
-                        </constraints>
-                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Coffee" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fag-Zd-g5V">
+                        <rect key="frame" x="246" y="16" width="59" height="24"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                        <color key="textColor" systemColor="secondaryLabelColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                 <constraints>
-                    <constraint firstItem="mi7-AN-Ufe" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="5GV-gC-H9l"/>
-                    <constraint firstAttribute="trailing" secondItem="mi7-AN-Ufe" secondAttribute="trailing" constant="15" id="Hqy-4O-IL9"/>
+                    <constraint firstItem="Fag-Zd-g5V" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="6Kx-sA-L4D"/>
                     <constraint firstItem="PHu-4Q-fEH" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="TqR-XO-4hm"/>
                     <constraint firstItem="PHu-4Q-fEH" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="bbw-UN-qpH"/>
+                    <constraint firstAttribute="trailing" secondItem="Fag-Zd-g5V" secondAttribute="trailing" constant="15" id="dZp-Rw-GJS"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="iconLabel" destination="Fag-Zd-g5V" id="KpK-dh-qmZ"/>
+            </connections>
             <point key="canvasLocation" x="-24.427480916030532" y="23.943661971830988"/>
         </tableViewCell>
     </objects>
     <resources>
-        <image name="cup.and.saucer.fill" catalog="system" width="128" height="91"/>
+        <systemColor name="secondaryLabelColor">
+            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

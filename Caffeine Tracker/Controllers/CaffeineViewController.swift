@@ -75,7 +75,7 @@ class CaffeineViewController: UITableViewController {
         
         cell.nameLabel.text = currentDrink.name
         cell.caffeineLabel.text = "\(String(currentDrink.caffeine)) MG"
-        print(currentDrink.caffeineOz)
+        cell.icon.image = UIImage(named: currentDrink.icon ?? "coffee.png") ?? UIImage(systemName: "coffee.png")
         return cell
     }
     

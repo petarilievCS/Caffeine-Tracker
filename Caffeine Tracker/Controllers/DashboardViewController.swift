@@ -76,7 +76,7 @@ class DashboardViewController: UIViewController {
         for constraint in contentView.constraints {
             if constraint.identifier == "contentViewHeight" {
                 if extraCells > 0 {
-                    constraint.constant = constraint.constant + (CGFloat(extraCells) * 44.0)
+                    constraint.constant = 675.0 + (CGFloat(extraCells) * 44.0)
                 } else {
                     constraint.constant = 675.0
                 }
@@ -177,23 +177,7 @@ extension DashboardViewController: UITableViewDelegate, UITableViewDataSource {
         cell.delegate = self
         let consumedDrink = consumedDrinksArray[indexPath.row]
         cell.title.text = consumedDrink.name
-        
-        // Testing
-        switch indexPath.row {
-        case 0:
-            cell.icon.image = UIImage(named: "coffee.png")
-        case 1:
-            cell.icon.image = UIImage(named: "can.png")
-        case 2:
-            cell.icon.image = UIImage(named: "coffee-cup.png")
-        case 3:
-            cell.icon.image = UIImage(named: "chocolate-bar.png")
-        case 4:
-            cell.icon.image = UIImage(named: "coke.png")
-        default:
-            cell.icon.image = UIImage(named: "drugs.png")
-        }
-        
+        cell.icon.image = UIImage(named: consumedDrink.icon!)
         cell.detail.text = "\(consumedDrink.caffeine) mg"
         return cell
     }
