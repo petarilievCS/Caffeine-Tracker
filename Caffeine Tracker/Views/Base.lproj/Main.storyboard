@@ -448,7 +448,7 @@
         <scene sceneID="CDA-nM-obW">
             <objects>
                 <navigationController title="Dashboard" automaticallyAdjustsScrollViewInsets="NO" id="gS4-Hy-90X" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Dashboard" image="circle" catalog="system" selectedImage="circle" id="xLQ-un-IfG">
+                    <tabBarItem key="tabBarItem" title="Dashboard" image="house.fill" catalog="system" selectedImage="house.fill" id="xLQ-un-IfG">
                         <color key="badgeColor" name="Light Blue"/>
                     </tabBarItem>
                     <toolbarItems/>
@@ -670,8 +670,8 @@
     </scenes>
     <color key="tintColor" name="Light Blue"/>
     <resources>
-        <image name="circle" catalog="system" width="128" height="123"/>
         <image name="cup.and.saucer.fill" catalog="system" width="128" height="91"/>
+        <image name="house.fill" catalog="system" width="128" height="104"/>
         <namedColor name="AccentColor">
             <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

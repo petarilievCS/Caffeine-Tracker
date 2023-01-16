@@ -173,7 +173,6 @@ extension DashboardViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: K.consumedDrinkCellIdentifier, for: indexPath) as! ConsumedDrinkCell
-        // let swipeCell = cell as! SwipeTableViewCell
         cell.delegate = self
         let consumedDrink = consumedDrinksArray[indexPath.row]
         cell.title.text = consumedDrink.name
