@@ -61,7 +61,7 @@ struct MetabolismCalculator {
             let dateConsumed = consumedDrink.timeConsumed!
             
             if dateFormatter.string(from: today) == dateFormatter.string(from: dateConsumed) {
-                var amountFromDrink = Double(consumedDrink.caffeine)
+                let amountFromDrink = Double(consumedDrink.caffeine)
                 totalAmount += Int(amountFromDrink)
             }
         }
