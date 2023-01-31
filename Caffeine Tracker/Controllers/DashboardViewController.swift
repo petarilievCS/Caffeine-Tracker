@@ -47,10 +47,10 @@ class DashboardViewController: UIViewController {
         tabBarController?.navigationController?.navigationBar.isTranslucent = true
         
         // Customize views
-        dailyIntakeView.layer.cornerRadius = 15.0
-        currentAmluntView.layer.cornerRadius = 15.0
-        drinkButton.layer.cornerRadius = 15.0
-        tableView.layer.cornerRadius = 15.0
+        dailyIntakeView.layer.cornerRadius = K.defaultCornerRadius
+        currentAmluntView.layer.cornerRadius = K.defaultCornerRadius
+        drinkButton.layer.cornerRadius = K.defaultCornerRadius
+        tableView.layer.cornerRadius = K.defaultCornerRadius
         
         setupRingProgressView()
     }

@@ -25,4 +25,7 @@ struct K {
     static let metablosimAmount = "metabolismAmount"
     static let numberOfDrinks = "numberOfDrinks"
     static let lastRefreshed = "lastRefreshed"
+    
+    // UI constants
+    static let defaultCornerRadius = 15.0
 }
