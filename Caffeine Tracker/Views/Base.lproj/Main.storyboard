@@ -71,12 +71,20 @@
                                                             </stackView>
                                                         </subviews>
                                                     </stackView>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hPi-y1-Rol">
+                                                        <rect key="frame" x="20" y="100.00000000000003" width="328" height="224.99999999999997"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                    </view>
                                                 </subviews>
                                                 <color key="backgroundColor" systemColor="systemGray6Color"/>
                                                 <constraints>
                                                     <constraint firstItem="yPP-7e-KHp" firstAttribute="top" secondItem="pq7-f5-7r0" secondAttribute="top" constant="20" id="1HW-lu-MBW"/>
                                                     <constraint firstItem="yPP-7e-KHp" firstAttribute="leading" secondItem="pq7-f5-7r0" secondAttribute="leading" constant="15" id="4Fb-xe-8CT"/>
+                                                    <constraint firstAttribute="bottom" secondItem="hPi-y1-Rol" secondAttribute="bottom" constant="25" id="Cua-OE-j5E"/>
+                                                    <constraint firstAttribute="trailing" secondItem="hPi-y1-Rol" secondAttribute="trailing" constant="20" id="IyM-SN-Kpg"/>
+                                                    <constraint firstItem="hPi-y1-Rol" firstAttribute="top" secondItem="yPP-7e-KHp" secondAttribute="bottom" constant="25" id="KHc-D6-I10"/>
                                                     <constraint firstAttribute="height" constant="350" id="M4b-kJ-Jxd"/>
+                                                    <constraint firstItem="hPi-y1-Rol" firstAttribute="leading" secondItem="pq7-f5-7r0" secondAttribute="leading" constant="20" id="yga-4J-9cu"/>
                                                 </constraints>
                                             </view>
                                         </subviews>
@@ -112,6 +120,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Charts" id="uFo-nq-Hh4"/>
                     <connections>
+                        <outlet property="chartView" destination="hPi-y1-Rol" id="yq8-2D-wTA"/>
                         <outlet property="reportView" destination="pq7-f5-7r0" id="VXQ-9E-jQO"/>
                     </connections>
                 </viewController>

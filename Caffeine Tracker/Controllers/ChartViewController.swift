@@ -12,73 +12,110 @@ import Charts
 class ChartViewController: UIViewController {
     
     @IBOutlet weak var reportView: UIView!
+    @IBOutlet weak var chartView: UIView!
     
     var child = UIHostingController(rootView: BarChart())
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // UI Customization
         reportView.layer.cornerRadius = K.defaultCornerRadius
-        child.view.translatesAutoresizingMaskIntoConstraints = false
-        child.view.frame = reportView.bounds
-        reportView.addSubview(child.view)
-        // reportView.addChild(child)
-
+        
+        // Add SwiftUI Chart
+        let hostingController = UIHostingController(rootView: BarChart())
+        // hostingController.view.translatesAutoresizingMaskIntoConstraints = false
+        addChild(hostingController)
+        chartView.addSubview(hostingController.view)
+        hostingController.didMove(toParent: self)
+        
+        hostingController.view.backgroundColor = .systemGray6
+        // hostingController.view.translatesAutoresizingMaskIntoConstraints = false
+        hostingController.view.frame = chartView.bounds
+//        NSLayoutConstraint.activate([hostingController.view.leadingAnchor.constraint(equalTo: chartView.leadingAnchor),
+//                                     hostingController.view.trailingAnchor.constraint(equalTo: chartView.trailingAnchor),
+//                                     hostingController.view.topAnchor.constraint(equalTo: chartView.topAnchor),
+//                                     hostingController.view.bottomAnchor.constraint(equalTo: chartView.bottomAnchor)])
+        
     }
     
+    // Chart view
+    struct BarChart: View {
+        
+        // Data source for chart
+        var chartData: [ChartEntry] = [
+            .init(day: "Tue", caffeineAmount: 200),
+            .init(day: "Mon", caffeineAmount: 250),
+            .init(day: "Sun", caffeineAmount: 130),
+            .init(day: "Sat", caffeineAmount: 300),
+            .init(day: "Fru", caffeineAmount: 450),
+            .init(day: "Thu", caffeineAmount: 50),
+            .init(day: "Wed", caffeineAmount: 89)
+        ]
+        
+        var body: some View {
+            Chart {
+                RuleMark(y: .value("Limit", 400))
+                    .foregroundStyle(Color.red)
+                    .lineStyle(StrokeStyle(lineWidth: 1, dash: [5]))
+                
+                ForEach(chartData) { datum in
+                    BarMark(
+                        x: .value("Day", datum.day),
+                        y: .value("Caffeine", datum.caffeineAmount)
+                    )
+                }
+            }
+            .chartXAxis {
+                AxisMarks(values: chartData.map { $0.day }) { day in
+                    AxisValueLabel()
+                }
+            }
+        }
+    }
 }
 
 // Entry in chart
 struct ChartEntry: Identifiable {
-    var day: Date
+    var day: String
     var caffeineAmount: Int
     var id = UUID()
 }
 
-// Chart view
-struct BarChart: View {
+extension Date {
+    var startOfDay: Date {
+        return Calendar.current.startOfDay(for: self)
+    }
+
+    var endOfDay: Date {
+        var components = DateComponents()
+        components.day = 1
+        components.second = -1
+        return Calendar.current.date(byAdding: components, to: startOfDay)!
+    }
     
-    // Data source for chart
-    var chartData: [ChartEntry] = [
-        .init(day: Date.now, caffeineAmount: 140),
-        .init(day: Calendar.current.date(byAdding: .day, value: -1, to: .now)! , caffeineAmount: 250),
-        .init(day: Calendar.current.date(byAdding: .day, value: -2, to: .now)!, caffeineAmount: 130),
-        .init(day: Calendar.current.date(byAdding: .day, value: -3, to: .now)!, caffeineAmount: 300),
-        .init(day: Calendar.current.date(byAdding: .day, value: -4, to: .now)!, caffeineAmount: 450),
-        .init(day: Calendar.current.date(byAdding: .day, value: -5, to: .now)!, caffeineAmount: 50),
-        .init(day: Calendar.current.date(byAdding: .day, value: -6, to: .now)!, caffeineAmount: 89)]
+    var startOfWeek: Date {
+        Calendar.current.dateComponents([.calendar, .yearForWeekOfYear, .weekOfYear], from: self).date!
+    }
     
-    var body: some View {
-        Chart {
-            BarMark(
-                x: .value("Day", Calendar.current.component(.weekday, from: chartData[0].day)),
-                y: .value("Amount", chartData[0].caffeineAmount)
-            )
-            BarMark(
-                x: .value("Day", Calendar.current.component(.weekday, from: chartData[1].day)),
-                y: .value("Amount", chartData[1].caffeineAmount)
-            )
-            BarMark(
-                x: .value("Day", Calendar.current.component(.weekday, from: chartData[2].day)),
-                y: .value("Amount", chartData[2].caffeineAmount)
-            )
-            BarMark(
-                x: .value("Day", Calendar.current.component(.weekday, from: chartData[3].day)),
-                y: .value("Amount", chartData[3].caffeineAmount)
-            )
-            BarMark(
-                x: .value("Day", Calendar.current.component(.weekday, from: chartData[4].day)),
-                y: .value("Amount", chartData[4].caffeineAmount)
-            )
-            BarMark(
-                x: .value("Day", Calendar.current.component(.weekday, from: chartData[5].day)),
-                y: .value("Amount", chartData[5].caffeineAmount)
-            )
-            BarMark(
-                x: .value("Day", Calendar.current.component(.weekday, from: chartData[6].day)),
-                y: .value("Amount", chartData[6].caffeineAmount)
-            )
-        }
+    var endOfWeek: Date {
+        var components = DateComponents()
+        components.weekOfYear = 1
+        components.second = -1
+        return Calendar.current.date(byAdding: components, to: startOfWeek)!
+    }
+    
+    var startOfMonth: Date {
+        let components = Calendar.current.dateComponents([.year, .month], from: startOfDay)
+        return Calendar.current.date(from: components)!
+    }
+
+    var endOfMonth: Date {
+        var components = DateComponents()
+        components.month = 1
+        components.second = -1
+        return Calendar.current.date(byAdding: components, to: startOfMonth)!
     }
 }
+
 
