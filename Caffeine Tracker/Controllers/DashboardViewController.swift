@@ -26,7 +26,6 @@ class DashboardViewController: UIViewController {
     @IBOutlet weak var contentView: UIView!
     let ringProgressView = RingProgressView(frame: CGRect(x: 0, y: 0, width: 110, height: 110))
     
-    let defaults = UserDefaults.standard
     var consumedDrinksArray = [ConsumedDrink]()
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var metabolismCalculator = MetabolismCalculator()
@@ -123,7 +122,6 @@ class DashboardViewController: UIViewController {
         dailyAmountLabel.text = "\(dailyAmount)/400 mg"
         drinkNumberLabel.text = String(metabolismCalculator.getNumberOfDrinks())
         metabolismAmountLabel.text = "\(metabolismCalculator.calculateMetabolismAmount()) mg"
-        
         // Change color if caffeine consumpton too high
         if dailyAmount > 400 {
             dailyAmountLabel.textColor = UIColor(named: "Red")

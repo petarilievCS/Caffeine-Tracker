@@ -24,19 +24,11 @@ class ChartViewController: UIViewController {
         
         // Add SwiftUI Chart
         let hostingController = UIHostingController(rootView: BarChart())
-        // hostingController.view.translatesAutoresizingMaskIntoConstraints = false
         addChild(hostingController)
         chartView.addSubview(hostingController.view)
         hostingController.didMove(toParent: self)
-        
         hostingController.view.backgroundColor = .systemGray6
-        // hostingController.view.translatesAutoresizingMaskIntoConstraints = false
         hostingController.view.frame = chartView.bounds
-//        NSLayoutConstraint.activate([hostingController.view.leadingAnchor.constraint(equalTo: chartView.leadingAnchor),
-//                                     hostingController.view.trailingAnchor.constraint(equalTo: chartView.trailingAnchor),
-//                                     hostingController.view.topAnchor.constraint(equalTo: chartView.topAnchor),
-//                                     hostingController.view.bottomAnchor.constraint(equalTo: chartView.bottomAnchor)])
-        
     }
     
     // Chart view

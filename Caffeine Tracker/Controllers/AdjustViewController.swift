@@ -24,7 +24,6 @@ class AdjustViewController: UIViewController {
     
     var currentAmount: Int64 = 16
     var currentDrink: Drink? = nil
-    let defaults = UserDefaults.standard
     
     // Constants
     let defaultHeight: CGFloat = 300
@@ -245,17 +244,6 @@ class AdjustViewController: UIViewController {
     // Log drink as consumed (update number of drinks, daily amount and amount in metabolism)
     @IBAction func addDrinkButtonPressed(_ sender: UIButton) {
         let amountToAdd = Int(caffeineLabel.text!)!
-        let consumedAmount = defaults.integer(forKey: K.dailyAmount)
-        defaults.set(consumedAmount + Int(amountToAdd), forKey: K.dailyAmount)
-        
-        var numberOfDrinks = defaults.integer(forKey: K.numberOfDrinks)
-        numberOfDrinks += 1
-        defaults.set(numberOfDrinks, forKey: K.numberOfDrinks)
-        
-        var metabolismAmount = defaults.integer(forKey: K.metablosimAmount)
-        metabolismAmount += amountToAdd
-        defaults.set(metabolismAmount, forKey: K.metablosimAmount)
-        
         addConsumedDrink(with: amountToAdd)
         self.animateDismissView()
         
@@ -270,6 +258,7 @@ class AdjustViewController: UIViewController {
         consumedDrink.name = currentDrink!.name
         consumedDrink.icon = currentDrink!.icon
         consumedDrink.caffeine = Int64(caffeineAmount)
+        consumedDrink.initialAmount = Int64(caffeineAmount)
         consumedDrink.timeConsumed = Date.now
         consumedDrinksArray.append(consumedDrink)
         saveConsumedDrinks()

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		E604881929896A3700B25167 /* ChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E604881829896A3700B25167 /* ChartViewController.swift */; };
+		E604881B298B42F800B25167 /* DataBaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E604881A298B42F800B25167 /* DataBaseManager.swift */; };
 		E611E986296C0BFA00592296 /* MetabolismCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E611E985296C0BFA00592296 /* MetabolismCalculator.swift */; };
 		E611E989296C1F3E00592296 /* SwipeCellKit in Frameworks */ = {isa = PBXBuildFile; productRef = E611E988296C1F3E00592296 /* SwipeCellKit */; };
 		E611E990296ED16300592296 /* ConsumedDrinkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E611E98E296ED16300592296 /* ConsumedDrinkCell.swift */; };
@@ -39,6 +40,7 @@
 
 /* Begin PBXFileReference section */
 		E604881829896A3700B25167 /* ChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewController.swift; sourceTree = "<group>"; };
+		E604881A298B42F800B25167 /* DataBaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseManager.swift; sourceTree = "<group>"; };
 		E611E985296C0BFA00592296 /* MetabolismCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetabolismCalculator.swift; sourceTree = "<group>"; };
 		E611E98E296ED16300592296 /* ConsumedDrinkCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsumedDrinkCell.swift; sourceTree = "<group>"; };
 		E611E98F296ED16300592296 /* ConsumedDrinkCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConsumedDrinkCell.xib; sourceTree = "<group>"; };
@@ -149,6 +151,7 @@
 			children = (
 				E6996C63295E0A5E00E35FC1 /* Caffeine_Tracker.xcdatamodeld */,
 				E611E985296C0BFA00592296 /* MetabolismCalculator.swift */,
+				E604881A298B42F800B25167 /* DataBaseManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -247,6 +250,7 @@
 				E6B7DA87295F5185008F8CD1 /* CaffeineCell.swift in Sources */,
 				E69FA856296575C90025EEBA /* DrinkViewController.swift in Sources */,
 				E604881929896A3700B25167 /* ChartViewController.swift in Sources */,
+				E604881B298B42F800B25167 /* DataBaseManager.swift in Sources */,
 				E6996C5F295E0A5E00E35FC1 /* DashboardViewController.swift in Sources */,
 				E69E027D2962E05000F4C142 /* DrinkNameCell.swift in Sources */,
 				E6996C79295E0BE600E35FC1 /* CaffeineViewController.swift in Sources */,
