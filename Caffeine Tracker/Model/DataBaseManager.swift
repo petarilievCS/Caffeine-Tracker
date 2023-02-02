@@ -17,6 +17,38 @@ struct DataBaseManager {
     var consumedDrinksArray: [ConsumedDrink] = []
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
+    // Returns the amount "days" ago
+    mutating func getAmountDaysAgo(_ days: Int) -> Int {
+        loadConsumedDrinks()
+        let current: Date = .now
+        let calendar: Calendar = Calendar.current
+        let daysAgo: Date = calendar.date(byAdding: .day, value: -days, to: current)!
+        var result: Int = 0
+        
+        for consumedDrink in consumedDrinksArray {
+            if calendar.isDate(consumedDrink.timeConsumed!, inSameDayAs: daysAgo) {
+                result += Int(consumedDrink.initialAmount)
+            }
+        }
+        return result
+    }
+    
+    //  Returns average caffeine intake in the past 7 days
+    mutating func getWeekAverage() -> Double {
+        return Double(getTotalAmount()) / 7.0
+    }
+    
+    // Returns total amount of caffeine taken in the past 7 days
+    mutating func getWeeklyTotal() -> Double {
+        clearDrinks()
+        loadConsumedDrinks()
+        var totalAmount: Double = 0.0
+        for consumedDrink in consumedDrinksArray {
+            totalAmount += Double(consumedDrink.initialAmount)
+        }
+        return totalAmount / 1000.0
+    }
+    
     // Returns total number of drinks consumed today
     mutating func getNumberOfDrinks() -> Int {
         return getTodayDrinks().count

@@ -13,8 +13,10 @@ class ChartViewController: UIViewController {
     
     @IBOutlet weak var reportView: UIView!
     @IBOutlet weak var chartView: UIView!
+    @IBOutlet weak var averageIntakeLabel: UILabel!
+    @IBOutlet weak var totalntakeLabel: UILabel!
     
-    var child = UIHostingController(rootView: BarChart())
+    var databaseManager: DataBaseManager = DataBaseManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,8 +24,14 @@ class ChartViewController: UIViewController {
         // UI Customization
         reportView.layer.cornerRadius = K.defaultCornerRadius
         
+        // Data source for chart
+        var chartData: [ChartEntry] = []
+        for i in 0...6 {
+            chartData.append(.init(day: String(i), caffeineAmount: databaseManager.getAmountDaysAgo(i)))
+        }
+        
         // Add SwiftUI Chart
-        let hostingController = UIHostingController(rootView: BarChart())
+        let hostingController = UIHostingController(rootView: BarChart(chartData: chartData))
         addChild(hostingController)
         chartView.addSubview(hostingController.view)
         hostingController.didMove(toParent: self)
@@ -31,19 +39,16 @@ class ChartViewController: UIViewController {
         hostingController.view.frame = chartView.bounds
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        averageIntakeLabel.text = String(format: "%d mg", Int(databaseManager.getWeekAverage()))
+        totalntakeLabel.text = String(format: "%.2f g", databaseManager.getWeeklyTotal())
+    }
+    
     // Chart view
     struct BarChart: View {
         
-        // Data source for chart
-        var chartData: [ChartEntry] = [
-            .init(day: "Tue", caffeineAmount: 200),
-            .init(day: "Mon", caffeineAmount: 250),
-            .init(day: "Sun", caffeineAmount: 130),
-            .init(day: "Sat", caffeineAmount: 300),
-            .init(day: "Fru", caffeineAmount: 450),
-            .init(day: "Thu", caffeineAmount: 50),
-            .init(day: "Wed", caffeineAmount: 89)
-        ]
+        let databaseManager: DataBaseManager = DataBaseManager()
+        var chartData: [ChartEntry]
         
         var body: some View {
             Chart {

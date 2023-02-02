@@ -120,8 +120,10 @@
                     </view>
                     <navigationItem key="navigationItem" title="Charts" id="uFo-nq-Hh4"/>
                     <connections>
+                        <outlet property="averageIntakeLabel" destination="2d2-5y-UEm" id="ZLZ-nW-v5P"/>
                         <outlet property="chartView" destination="hPi-y1-Rol" id="yq8-2D-wTA"/>
                         <outlet property="reportView" destination="pq7-f5-7r0" id="VXQ-9E-jQO"/>
+                        <outlet property="totalntakeLabel" destination="Rhj-Td-TbU" id="omy-Y1-NGT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2SD-mJ-mCt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
