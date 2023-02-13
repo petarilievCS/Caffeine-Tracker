@@ -89,7 +89,11 @@ struct DataBaseManager {
             // Update amount for each hour of difference
             if differenceInHours > 0 {
                 let newAmount: Double = amount * (declinePerHour * Double(differenceInHours))
-                consumedDrink.caffeine = Int64(newAmount)
+                print(newAmount)
+                if newAmount < Double(Int64.max) {
+                    consumedDrink.caffeine = Int64(newAmount)
+                }
+                
             }
         }
         saveConsumedDrinks()

@@ -17,6 +17,7 @@ class ChartViewController: UIViewController {
     @IBOutlet weak var totalntakeLabel: UILabel!
     
     var databaseManager: DataBaseManager = DataBaseManager()
+    var hostingController = UIHostingController(rootView: BarChart(chartData: []))
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,7 +32,7 @@ class ChartViewController: UIViewController {
         }
         
         // Add SwiftUI Chart
-        let hostingController = UIHostingController(rootView: BarChart(chartData: chartData))
+        hostingController = UIHostingController(rootView: BarChart(chartData: chartData))
         addChild(hostingController)
         chartView.addSubview(hostingController.view)
         hostingController.didMove(toParent: self)
@@ -42,6 +43,12 @@ class ChartViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         averageIntakeLabel.text = String(format: "%d mg", Int(databaseManager.getWeekAverage()))
         totalntakeLabel.text = String(format: "%.2f g", databaseManager.getWeeklyTotal())
+        
+        var chartData: [ChartEntry] = []
+        for i in 0...6 {
+            chartData.append(.init(day: String(i), caffeineAmount: databaseManager.getAmountDaysAgo(i)))
+        }
+        hostingController.rootView.chartData = chartData
     }
     
     // Chart view
