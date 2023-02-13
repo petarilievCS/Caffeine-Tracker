@@ -158,6 +158,17 @@ struct DataBaseManager {
         return false
     }
     
+    // Returns the day of the week for x days ago
+    func dayOfTheWeek(for x: Int) -> String {
+        let today: Date = .now
+        let calendar: Calendar = Calendar.current
+        let dateToReturn: Date = calendar.date(byAdding: .day, value: -x, to: today)!
+        let formatter = DateFormatter()
+        let weekdayName = formatter.weekdaySymbols[calendar.component(.weekday, from: dateToReturn) - 1]
+        let symbol = weekdayName.dropLast(weekdayName.count - 3)
+        return String(symbol)
+    }
+    
     // MARK: - CoreData methods
     
     // Load all consumed drinks
@@ -177,5 +188,6 @@ struct DataBaseManager {
             print("Error while saving context")
         }
     }
+
     
 }

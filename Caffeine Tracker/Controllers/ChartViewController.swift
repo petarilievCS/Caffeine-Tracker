@@ -27,8 +27,8 @@ class ChartViewController: UIViewController {
         
         // Data source for chart
         var chartData: [ChartEntry] = []
-        for i in 0...6 {
-            chartData.append(.init(day: String(i), caffeineAmount: databaseManager.getAmountDaysAgo(i)))
+        for i in (0...6).reversed() {
+            chartData.append(.init(day: databaseManager.dayOfTheWeek(for: i), caffeineAmount: databaseManager.getAmountDaysAgo(i)))
         }
         
         // Add SwiftUI Chart
@@ -45,8 +45,8 @@ class ChartViewController: UIViewController {
         totalntakeLabel.text = String(format: "%.2f g", databaseManager.getWeeklyTotal())
         
         var chartData: [ChartEntry] = []
-        for i in 0...6 {
-            chartData.append(.init(day: String(i), caffeineAmount: databaseManager.getAmountDaysAgo(i)))
+        for i in (0...6).reversed() {
+            chartData.append(.init(day: databaseManager.dayOfTheWeek(for: i), caffeineAmount: databaseManager.getAmountDaysAgo(i)))
         }
         hostingController.rootView.chartData = chartData
     }

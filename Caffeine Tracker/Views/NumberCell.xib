@@ -29,7 +29,7 @@
                         <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                     </textField>
                 </subviews>
-                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
                 <constraints>
                     <constraint firstItem="1lm-0c-lep" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="45j-bN-78B"/>
                     <constraint firstItem="6pq-8Y-J5F" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="6JQ-AR-ghs"/>
@@ -46,8 +46,8 @@
         </tableViewCell>
     </objects>
     <resources>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        <systemColor name="secondarySystemBackgroundColor">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

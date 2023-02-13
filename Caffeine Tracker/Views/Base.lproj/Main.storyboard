@@ -264,7 +264,7 @@
                                                         <rect key="frame" x="0.0" y="50" width="363" height="43.666667938232422"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="3Qt-Sv-zJv" id="cCn-BR-Oiq">
-                                                            <rect key="frame" x="0.0" y="0.0" width="363" height="43.666667938232422"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="570" height="43.666667938232422"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                         </tableViewCellContentView>
                                                         <color key="backgroundColor" systemColor="systemGray6Color"/>
@@ -410,7 +410,7 @@
                                         <subviews>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="ayp-sp-AoD">
                                                 <rect key="frame" x="15" y="15" width="363" height="206"/>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <color key="backgroundColor" systemColor="secondarySystemGroupedBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="206" id="7X8-sK-9CR"/>
                                                 </constraints>
@@ -438,6 +438,7 @@
                                                             <rect key="frame" x="0.0" y="0.0" width="363" height="43.666667938232422"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                         </tableViewCellContentView>
+                                                        <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
                                                     </tableViewCell>
                                                 </prototypes>
                                             </tableView>
@@ -455,7 +456,7 @@
                                                         </connections>
                                                     </button>
                                                 </subviews>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <color key="backgroundColor" systemColor="secondarySystemGroupedBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstItem="taP-Ji-jjl" firstAttribute="centerY" secondItem="90q-cz-9za" secondAttribute="centerY" id="6o9-7X-0v9"/>
                                                     <constraint firstAttribute="height" constant="50" id="Ha0-IF-MD0"/>
@@ -464,7 +465,7 @@
                                                 </constraints>
                                             </view>
                                         </subviews>
-                                        <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="675" id="1eC-y5-g8V"/>
                                             <constraint firstItem="90q-cz-9za" firstAttribute="top" secondItem="ayp-sp-AoD" secondAttribute="bottom" constant="20" id="CNE-fG-81S"/>
@@ -477,6 +478,7 @@
                                         </constraints>
                                     </view>
                                 </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="B2e-Lc-cES" secondAttribute="trailing" id="6Ga-SX-qbn"/>
                                     <constraint firstItem="B2e-Lc-cES" firstAttribute="leading" secondItem="ehZ-CI-Yb9" secondAttribute="leading" id="DIu-un-BpN"/>
@@ -552,7 +554,7 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="FPU-Qr-Vo5">
                             <color key="tintColor" name="Light Blue"/>
                             <connections>
-                                <segue destination="kNi-I8-IM8" kind="presentation" identifier="drinksToAdd" id="evo-HO-N2m"/>
+                                <segue destination="kNi-I8-IM8" kind="presentation" identifier="drinksToAdd" modalPresentationStyle="automatic" id="evo-HO-N2m"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -639,7 +641,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="tJ7-NM-xSC">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="108"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" systemColor="secondarySystemGroupedBackgroundColor"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
