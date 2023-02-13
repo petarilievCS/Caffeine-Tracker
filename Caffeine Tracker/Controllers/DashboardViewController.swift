@@ -36,7 +36,7 @@ class DashboardViewController: UIViewController {
         tableView.register(UINib(nibName: K.consumedDrinkCellIdentifier, bundle: nil), forCellReuseIdentifier: K.consumedDrinkCellIdentifier)
         tableView.delegate = self
         tableView.dataSource = self
-        
+        UNUserNotificationCenter.current().delegate = self
         
         // Customize scroll view
         scrollView.showsVerticalScrollIndicator = false
@@ -119,13 +119,33 @@ class DashboardViewController: UIViewController {
     func updateInfo() {
         let dailyAmount = metabolismCalculator.calculateTotalAmount()
         
+        
         dailyAmountLabel.text = "\(dailyAmount)/400 mg"
+        
+        // Send notification if caffeine intake is too high and notification hasn't been sent already today
+        if dailyAmount > 400 && UserDefaults.standard.bool(forKey: K.notificationPermission) && !UserDefaults.standard.bool(forKey: K.amountNotificationSent) {
+            // Notification content
+            let notificationConent: UNMutableNotificationContent = UNMutableNotificationContent()
+            notificationConent.title = "Caffeine Up"
+            notificationConent.body = "You have consumed more caffeine than your daily limit today!"
+            
+            // Notification trigger
+            let fiveMinutesAfter = Calendar.current.date(byAdding: .minute, value: 15, to: .now)
+            let dateComponent = Calendar.current.dateComponents([.year,.month,.day,.hour,.minute,.second], from: fiveMinutesAfter!)
+            let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponent, repeats: false)
+            
+            UNUserNotificationCenter.current().add(UNNotificationRequest(identifier: K.aboveLimitNotifiicationIdentifier, content: notificationConent, trigger: trigger))
+            UserDefaults.standard.set(true, forKey: K.amountNotificationSent)
+        }
+        
         drinkNumberLabel.text = String(metabolismCalculator.getNumberOfDrinks())
         metabolismAmountLabel.text = "\(metabolismCalculator.calculateMetabolismAmount()) mg"
         // Change color if caffeine consumpton too high
         if dailyAmount > 400 {
             dailyAmountLabel.textColor = UIColor(named: "Red")
             // TODO: Change color
+        } else {
+            dailyAmountLabel.textColor = UIColor(named: "Green")
         }
     }
     
@@ -222,4 +242,15 @@ extension DashboardViewController: SwipeTableViewCellDelegate {
         return [deleteAction]
     }
     
+}
+
+// MARK: - Notification Delegate methods
+
+extension DashboardViewController: UNUserNotificationCenterDelegate {
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                willPresent notification: UNNotification,
+                                withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+         completionHandler([.sound, .alert])
+    }
 }

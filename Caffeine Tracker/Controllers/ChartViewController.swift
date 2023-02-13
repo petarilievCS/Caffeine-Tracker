@@ -75,6 +75,45 @@ class ChartViewController: UIViewController {
                     AxisValueLabel()
                 }
             }
+            .chartOverlay { proxy in
+                GeometryReader { geometry in
+                    Rectangle().fill(.clear).contentShape(Rectangle())
+//                        .gesture(
+//                            DragGesture()
+//                                .onChanged { value in
+//                                    // Convert the gesture location to the coordiante space of the plot area.
+//                                    let origin = geometry[proxy.plotAreaFrame].origin
+//                                    let location = CGPoint(
+//                                        x: value.location.x - origin.x,
+//                                        y: value.location.y - origin.y
+//                                    )
+//                                    // Get the x (date) and y (price) value from the location.
+//                                    let (day, caffeine) = proxy.value(at: location, as: (String, Int).self)!
+//                                    print("Location: \(day), \(caffeine)")
+//                                }
+//                        )
+                        .onTapGesture { value in
+                            let origin = geometry[proxy.plotAreaFrame].origin
+//                            let location = CGPoint(
+//                                x: value.location.x - origin.x,
+//                                y: value.location.y - origin.y
+//                            )
+                            // Get the x (date) and y (price) value from the location.
+                            let (day, caffeine) = proxy.value(at: value, as: (String, Int).self)!
+                            let caffeineAmount = findChartAmount(for: day)
+                            print(caffeineAmount)
+                        }
+                }
+            }
+        }
+        
+        func findChartAmount(for day: String) -> Int {
+            for i in 0..<chartData.count {
+                if chartData[i].day == day {
+                    return chartData[i].caffeineAmount
+                }
+            }
+            return 0
         }
     }
 }

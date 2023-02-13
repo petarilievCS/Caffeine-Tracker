@@ -13,6 +13,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
+        // Request authorization for notifications
+        let center = UNUserNotificationCenter.current()
+        center.requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
+            if let error = error {
+                print("Notifications disabled")
+            }
+            if granted {
+                UserDefaults.standard.set(true, forKey: K.notificationPermission)
+            }
+        }
+        
+        // Randomly give permission to send notification again
+        if Int.random(in: 0...20) == 15 {
+            UserDefaults.standard.set(false, forKey: K.amountNotificationSent)
+        }
+        
         return true
     }
 

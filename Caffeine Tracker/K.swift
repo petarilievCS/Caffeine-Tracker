@@ -19,12 +19,15 @@ struct K {
     static let drinksToAmountSegue = "drinksToAmount"
     static let dashboardToDrinksSegue = "dashboardToDrinks"
     static let consumedDrinkCellIdentifier = "ConsumedDrinkCell"
+    static let aboveLimitNotifiicationIdentifier = "aboveLimitNotification"
     
     // UserDefaults names
     static let dailyAmount = "dailyAmount"
     static let metablosimAmount = "metabolismAmount"
     static let numberOfDrinks = "numberOfDrinks"
     static let lastRefreshed = "lastRefreshed"
+    static let amountNotificationSent = "amountNotificationSent"
+    static let notificationPermission = "notificationPermission"
     
     // UI constants
     static let defaultCornerRadius = 15.0
