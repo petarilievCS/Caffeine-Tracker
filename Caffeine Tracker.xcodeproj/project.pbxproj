@@ -16,6 +16,11 @@
 		E679DCAA2966C662005CBB6C /* TinyConstraints in Frameworks */ = {isa = PBXBuildFile; productRef = E679DCA92966C662005CBB6C /* TinyConstraints */; };
 		E679DCAD2966E794005CBB6C /* EFCountingLabel in Frameworks */ = {isa = PBXBuildFile; productRef = E679DCAC2966E794005CBB6C /* EFCountingLabel */; };
 		E679DCB329688B3D005CBB6C /* MKRingProgressView in Frameworks */ = {isa = PBXBuildFile; productRef = E679DCB229688B3D005CBB6C /* MKRingProgressView */; };
+		E6907DC4299AABDD00AE005B /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6907DC3299AABDD00AE005B /* SettingsViewController.swift */; };
+		E6907DC7299AB11D00AE005B /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6907DC5299AB11D00AE005B /* SettingsCell.swift */; };
+		E6907DC8299AB11D00AE005B /* SettingsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6907DC6299AB11D00AE005B /* SettingsCell.xib */; };
+		E6907DCB299AE12800AE005B /* RegularSettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6907DC9299AE12800AE005B /* RegularSettingsCell.swift */; };
+		E6907DCC299AE12800AE005B /* RegularSettingsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6907DCA299AE12800AE005B /* RegularSettingsCell.xib */; };
 		E6996C5B295E0A5E00E35FC1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6996C5A295E0A5E00E35FC1 /* AppDelegate.swift */; };
 		E6996C5D295E0A5E00E35FC1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6996C5C295E0A5E00E35FC1 /* SceneDelegate.swift */; };
 		E6996C5F295E0A5E00E35FC1 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6996C5E295E0A5E00E35FC1 /* DashboardViewController.swift */; };
@@ -44,6 +49,11 @@
 		E611E985296C0BFA00592296 /* MetabolismCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetabolismCalculator.swift; sourceTree = "<group>"; };
 		E611E98E296ED16300592296 /* ConsumedDrinkCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsumedDrinkCell.swift; sourceTree = "<group>"; };
 		E611E98F296ED16300592296 /* ConsumedDrinkCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConsumedDrinkCell.xib; sourceTree = "<group>"; };
+		E6907DC3299AABDD00AE005B /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		E6907DC5299AB11D00AE005B /* SettingsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCell.swift; sourceTree = "<group>"; };
+		E6907DC6299AB11D00AE005B /* SettingsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsCell.xib; sourceTree = "<group>"; };
+		E6907DC9299AE12800AE005B /* RegularSettingsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegularSettingsCell.swift; sourceTree = "<group>"; };
+		E6907DCA299AE12800AE005B /* RegularSettingsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RegularSettingsCell.xib; sourceTree = "<group>"; };
 		E6996C57295E0A5E00E35FC1 /* Caffeine Tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Caffeine Tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6996C5A295E0A5E00E35FC1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E6996C5C295E0A5E00E35FC1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -124,6 +134,7 @@
 				E69FA855296575C90025EEBA /* DrinkViewController.swift */,
 				E69FA8572965B2D40025EEBA /* AdjustViewController.swift */,
 				E604881829896A3700B25167 /* ChartViewController.swift */,
+				E6907DC3299AABDD00AE005B /* SettingsViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -142,6 +153,10 @@
 				E69E0284296309CA00F4C142 /* NumberCell.xib */,
 				E611E98E296ED16300592296 /* ConsumedDrinkCell.swift */,
 				E611E98F296ED16300592296 /* ConsumedDrinkCell.xib */,
+				E6907DC5299AB11D00AE005B /* SettingsCell.swift */,
+				E6907DC6299AB11D00AE005B /* SettingsCell.xib */,
+				E6907DC9299AE12800AE005B /* RegularSettingsCell.swift */,
+				E6907DCA299AE12800AE005B /* RegularSettingsCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -230,6 +245,8 @@
 				E6996C6A295E0A6100E35FC1 /* LaunchScreen.storyboard in Resources */,
 				E69E027E2962E05000F4C142 /* DrinkNameCell.xib in Resources */,
 				E69E0286296309CA00F4C142 /* NumberCell.xib in Resources */,
+				E6907DC8299AB11D00AE005B /* SettingsCell.xib in Resources */,
+				E6907DCC299AE12800AE005B /* RegularSettingsCell.xib in Resources */,
 				E611E991296ED16300592296 /* ConsumedDrinkCell.xib in Resources */,
 				E6B7DA88295F5185008F8CD1 /* CaffeineCell.xib in Resources */,
 				E6996C67295E0A6100E35FC1 /* Assets.xcassets in Resources */,
@@ -257,10 +274,13 @@
 				E69FA8582965B2D40025EEBA /* AdjustViewController.swift in Sources */,
 				E6996C75295E0B3E00E35FC1 /* K.swift in Sources */,
 				E69E02812963058900F4C142 /* IconCell.swift in Sources */,
+				E6907DC7299AB11D00AE005B /* SettingsCell.swift in Sources */,
 				E611E986296C0BFA00592296 /* MetabolismCalculator.swift in Sources */,
+				E6907DCB299AE12800AE005B /* RegularSettingsCell.swift in Sources */,
 				E6996C65295E0A5E00E35FC1 /* Caffeine_Tracker.xcdatamodeld in Sources */,
 				E6996C5B295E0A5E00E35FC1 /* AppDelegate.swift in Sources */,
 				E6996C5D295E0A5E00E35FC1 /* SceneDelegate.swift in Sources */,
+				E6907DC4299AABDD00AE005B /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

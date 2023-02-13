@@ -79,18 +79,17 @@ struct DataBaseManager {
         
         for i in 0..<consumedDrinksArray.count {
             let consumedDrink: ConsumedDrink = consumedDrinksArray[i]
-            let amount: Double = Double(consumedDrink.caffeine)
+            let amount: Int64 = consumedDrink.initialAmount
             let now: Date = .now
             let consumptionTime: Date = consumedDrink.timeConsumed!
             
             let differenceInSeconds: Double = now.timeIntervalSince1970 - consumptionTime.timeIntervalSince1970
             let differenceInHours: Int = Int(differenceInSeconds) / secondsPerHour
-            print("difference in hours: \(differenceInHours)")
+
             // Update amount for each hour of difference
             if differenceInHours > 0 {
-                let newAmount: Double = amount * (declinePerHour * Double(differenceInHours))
-                print(newAmount)
-                if newAmount < Double(Int64.max) {
+                let newAmount: Int64 = Int64(Double(amount) * pow(declinePerHour, Double(differenceInHours)))
+                if newAmount < Int64.max {
                     consumedDrink.caffeine = Int64(newAmount)
                 }
                 

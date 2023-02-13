@@ -20,18 +20,14 @@ struct MetabolismCalculator {
     
     // Returns the amount of caffeine in the metabolism right now
     mutating func calculateMetabolismAmount() -> Int {
-        print("calculateMetabolismAmount() called")
         consumedDrinksArray = databaseManager.getTodayDrinks()
-        print(consumedDrinksArray)
         databaseManager.updateMetabolismAmounts()
         var metabolismAmount = 0
         
         for consumeDrink in consumedDrinksArray {
-            print("Adding: \(consumeDrink.caffeine)")
             metabolismAmount += Int(consumeDrink.caffeine)
         }
         
-        print("Returing: \(metabolismAmount)")
         return metabolismAmount
     }
     

@@ -106,7 +106,7 @@ class DashboardViewController: UIViewController {
     // Gets the current percentage of the allowed daily caffeine amount that the user has logged in
     func getProgress() -> Double {
         let consumedCaffeine = metabolismCalculator.calculateTotalAmount()
-        return Double(consumedCaffeine) / 400.0
+        return Double(consumedCaffeine) / Double(UserDefaults.standard.integer(forKey: K.dailyLimit))
     }
     
     // Updates the ring progress view
@@ -120,10 +120,10 @@ class DashboardViewController: UIViewController {
         let dailyAmount = metabolismCalculator.calculateTotalAmount()
         
         
-        dailyAmountLabel.text = "\(dailyAmount)/400 mg"
+        dailyAmountLabel.text = "\(dailyAmount)/\(UserDefaults.standard.integer(forKey: K.dailyLimit)) mg"
         
         // Send notification if caffeine intake is too high and notification hasn't been sent already today
-        if dailyAmount > 400 && UserDefaults.standard.bool(forKey: K.notificationPermission) && !UserDefaults.standard.bool(forKey: K.amountNotificationSent) {
+        if dailyAmount > UserDefaults.standard.integer(forKey: K.dailyLimit) && UserDefaults.standard.bool(forKey: K.notificationPermission) && !UserDefaults.standard.bool(forKey: K.amountNotificationSent) {
             // Notification content
             let notificationConent: UNMutableNotificationContent = UNMutableNotificationContent()
             notificationConent.title = "Caffeine Up"
@@ -141,7 +141,7 @@ class DashboardViewController: UIViewController {
         drinkNumberLabel.text = String(metabolismCalculator.getNumberOfDrinks())
         metabolismAmountLabel.text = "\(metabolismCalculator.calculateMetabolismAmount()) mg"
         // Change color if caffeine consumpton too high
-        if dailyAmount > 400 {
+        if dailyAmount > UserDefaults.standard.integer(forKey: K.dailyLimit) {
             dailyAmountLabel.textColor = UIColor(named: "Red")
             // TODO: Change color
         } else {
@@ -195,7 +195,7 @@ extension DashboardViewController: UITableViewDelegate, UITableViewDataSource {
         let consumedDrink = consumedDrinksArray[indexPath.row]
         cell.title.text = consumedDrink.name
         cell.icon.image = UIImage(named: consumedDrink.icon!)
-        cell.detail.text = "\(consumedDrink.caffeine) mg"
+        cell.detail.text = "\(consumedDrink.initialAmount) mg"
         return cell
     }
     

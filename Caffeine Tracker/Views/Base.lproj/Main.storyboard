@@ -264,7 +264,7 @@
                                                         <rect key="frame" x="0.0" y="50" width="363" height="43.666667938232422"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="3Qt-Sv-zJv" id="cCn-BR-Oiq">
-                                                            <rect key="frame" x="0.0" y="0.0" width="570" height="43.666667938232422"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="363" height="43.666667938232422"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                         </tableViewCellContentView>
                                                         <color key="backgroundColor" systemColor="systemGray6Color"/>
@@ -566,6 +566,85 @@
             </objects>
             <point key="canvasLocation" x="2837.4045801526718" y="686.61971830985919"/>
         </scene>
+        <!--Settings-->
+        <scene sceneID="tDP-Vk-rw2">
+            <objects>
+                <viewController id="KOC-pH-7cL" customClass="SettingsViewController" customModule="Caffeine_Tracker" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="vyd-rN-T3z">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u7w-TY-e5u">
+                                <rect key="frame" x="0.0" y="155" width="393" height="697"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kNz-Om-tcR">
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="697"/>
+                                        <subviews>
+                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="J16-SQ-ujL">
+                                                <rect key="frame" x="15" y="15" width="363" height="110"/>
+                                                <color key="backgroundColor" systemColor="secondarySystemGroupedBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="110" id="iej-TJ-KkN"/>
+                                                </constraints>
+                                                <prototypes>
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SettingsCell" id="3DP-hQ-msu" customClass="SettingsCell" customModule="Caffeine_Tracker" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="50" width="363" height="43.666667938232422"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="3DP-hQ-msu" id="nfP-Xb-9Ov">
+                                                            <rect key="frame" x="0.0" y="0.0" width="332.66666666666669" height="43.666667938232422"/>
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                        </tableViewCellContentView>
+                                                        <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
+                                                    </tableViewCell>
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RegularSettingsCell" id="pmR-SP-gWV" customClass="SettingsCell" customModule="Caffeine_Tracker" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="93.666667938232422" width="363" height="43.666667938232422"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="pmR-SP-gWV" id="FTV-sM-NBn">
+                                                            <rect key="frame" x="0.0" y="0.0" width="332.66666666666669" height="43.666667938232422"/>
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                        </tableViewCellContentView>
+                                                        <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
+                                                    </tableViewCell>
+                                                </prototypes>
+                                            </tableView>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="J16-SQ-ujL" secondAttribute="trailing" constant="15" id="3In-YM-73P"/>
+                                            <constraint firstItem="J16-SQ-ujL" firstAttribute="leading" secondItem="kNz-Om-tcR" secondAttribute="leading" constant="15" id="Ts0-Y0-lai"/>
+                                            <constraint firstItem="J16-SQ-ujL" firstAttribute="top" secondItem="kNz-Om-tcR" secondAttribute="top" constant="15" id="r11-tf-qwJ"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="kNz-Om-tcR" firstAttribute="top" secondItem="u7w-TY-e5u" secondAttribute="top" id="38a-au-Ksr"/>
+                                    <constraint firstItem="kNz-Om-tcR" firstAttribute="centerX" secondItem="u7w-TY-e5u" secondAttribute="centerX" id="6Uo-RK-a7b"/>
+                                    <constraint firstAttribute="trailing" secondItem="kNz-Om-tcR" secondAttribute="trailing" id="Jn7-BV-HKs"/>
+                                    <constraint firstAttribute="bottom" secondItem="kNz-Om-tcR" secondAttribute="bottom" id="OnS-tV-auK"/>
+                                    <constraint firstItem="kNz-Om-tcR" firstAttribute="centerY" secondItem="u7w-TY-e5u" secondAttribute="centerY" id="Zi2-0v-HwD"/>
+                                    <constraint firstItem="kNz-Om-tcR" firstAttribute="leading" secondItem="u7w-TY-e5u" secondAttribute="leading" id="yZD-fe-H6s"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="s8K-Zx-UhS"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="u7w-TY-e5u" firstAttribute="leading" secondItem="s8K-Zx-UhS" secondAttribute="leading" id="2oW-fb-YF4"/>
+                            <constraint firstItem="u7w-TY-e5u" firstAttribute="top" secondItem="s8K-Zx-UhS" secondAttribute="top" id="3gP-JF-mhD"/>
+                            <constraint firstItem="u7w-TY-e5u" firstAttribute="trailing" secondItem="s8K-Zx-UhS" secondAttribute="trailing" id="7JT-0C-hUu"/>
+                            <constraint firstAttribute="bottom" secondItem="u7w-TY-e5u" secondAttribute="bottom" id="M8O-sp-PW1"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Settings" id="Bqc-YP-Wc3"/>
+                    <connections>
+                        <outlet property="tableView" destination="J16-SQ-ujL" id="yaC-P7-5gw"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="omj-pt-Zq0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2835.8778625954196" y="1381.6901408450706"/>
+        </scene>
         <!--Dashboard-->
         <scene sceneID="CDA-nM-obW">
             <objects>
@@ -627,6 +706,7 @@
                         <segue destination="gS4-Hy-90X" kind="relationship" relationship="viewControllers" id="bUd-Fn-qih"/>
                         <segue destination="1he-H0-ZBb" kind="relationship" relationship="viewControllers" id="iTS-d1-Vws"/>
                         <segue destination="aqR-fh-e8f" kind="relationship" relationship="viewControllers" id="oKD-zm-nTF"/>
+                        <segue destination="JNh-Va-2Zd" kind="relationship" relationship="viewControllers" id="VAP-m7-YkQ"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="umd-V1-SLP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -811,11 +891,31 @@
             </objects>
             <point key="canvasLocation" x="1911" y="-689"/>
         </scene>
+        <!--Settings-->
+        <scene sceneID="cXv-6R-FrE">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="JNh-Va-2Zd" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Settings" image="gearshape.fill" catalog="system" selectedImage="gearshape.fill" id="uGc-OC-nmA"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="jlk-sQ-sIl">
+                        <rect key="frame" x="0.0" y="59" width="393" height="96"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="KOC-pH-7cL" kind="relationship" relationship="rootViewController" id="o1f-u6-2i2"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0lW-Lo-FZs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1911" y="1382"/>
+        </scene>
     </scenes>
     <color key="tintColor" name="Light Blue"/>
     <resources>
         <image name="chart.bar.xaxis" catalog="system" width="128" height="99"/>
         <image name="cup.and.saucer.fill" catalog="system" width="128" height="91"/>
+        <image name="gearshape.fill" catalog="system" width="128" height="123"/>
         <image name="house.fill" catalog="system" width="128" height="104"/>
         <namedColor name="AccentColor">
             <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

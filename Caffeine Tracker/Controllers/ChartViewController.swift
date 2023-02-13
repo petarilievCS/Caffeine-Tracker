@@ -59,7 +59,7 @@ class ChartViewController: UIViewController {
         
         var body: some View {
             Chart {
-                RuleMark(y: .value("Limit", 400))
+                RuleMark(y: .value("Limit", UserDefaults.standard.integer(forKey: K.dailyLimit)))
                     .foregroundStyle(Color.red)
                     .lineStyle(StrokeStyle(lineWidth: 1, dash: [5]))
                 
@@ -75,36 +75,35 @@ class ChartViewController: UIViewController {
                     AxisValueLabel()
                 }
             }
-            .chartOverlay { proxy in
-                GeometryReader { geometry in
-                    Rectangle().fill(.clear).contentShape(Rectangle())
-//                        .gesture(
-//                            DragGesture()
-//                                .onChanged { value in
-//                                    // Convert the gesture location to the coordiante space of the plot area.
-//                                    let origin = geometry[proxy.plotAreaFrame].origin
-//                                    let location = CGPoint(
-//                                        x: value.location.x - origin.x,
-//                                        y: value.location.y - origin.y
-//                                    )
-//                                    // Get the x (date) and y (price) value from the location.
-//                                    let (day, caffeine) = proxy.value(at: location, as: (String, Int).self)!
-//                                    print("Location: \(day), \(caffeine)")
-//                                }
-//                        )
-                        .onTapGesture { value in
-                            let origin = geometry[proxy.plotAreaFrame].origin
-//                            let location = CGPoint(
-//                                x: value.location.x - origin.x,
-//                                y: value.location.y - origin.y
-//                            )
-                            // Get the x (date) and y (price) value from the location.
-                            let (day, caffeine) = proxy.value(at: value, as: (String, Int).self)!
-                            let caffeineAmount = findChartAmount(for: day)
-                            print(caffeineAmount)
-                        }
-                }
-            }
+//            .chartOverlay { proxy in
+//                GeometryReader { geometry in
+//                    Rectangle().fill(.clear).contentShape(Rectangle())
+////                        .gesture(
+////                            DragGesture()
+////                                .onChanged { value in
+////                                    // Convert the gesture location to the coordiante space of the plot area.
+////                                    let origin = geometry[proxy.plotAreaFrame].origin
+////                                    let location = CGPoint(
+////                                        x: value.location.x - origin.x,
+////                                        y: value.location.y - origin.y
+////                                    )
+////                                    // Get the x (date) and y (price) value from the location.
+////                                    let (day, caffeine) = proxy.value(at: location, as: (String, Int).self)!
+////                                    print("Location: \(day), \(caffeine)")
+////                                }
+////                        )
+//                        .onTapGesture { value in
+//                            let origin = geometry[proxy.plotAreaFrame].origin
+////                            let location = CGPoint(
+////                                x: value.location.x - origin.x,
+////                                y: value.location.y - origin.y
+////                            )
+//                            // Get the x (date) and y (price) value from the location.
+//                            let (day, caffeine) = proxy.value(at: value, as: (String, Int).self)!
+//                            let caffeineAmount = findChartAmount(for: day)
+//                        }
+//                }
+//            }
         }
         
         func findChartAmount(for day: String) -> Int {

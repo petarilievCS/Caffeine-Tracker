@@ -80,7 +80,6 @@ class CaffeineViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(indexPath.row)
         performSegue(withIdentifier: K.drinksToAddSegue, sender: self)
         tableView.deselectRow(at: indexPath, animated: true)
     }
