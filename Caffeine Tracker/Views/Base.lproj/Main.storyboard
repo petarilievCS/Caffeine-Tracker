@@ -573,10 +573,10 @@
                                         <rect key="frame" x="0.0" y="0.0" width="393" height="697"/>
                                         <subviews>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="J16-SQ-ujL">
-                                                <rect key="frame" x="15" y="15" width="363" height="110"/>
+                                                <rect key="frame" x="15" y="15" width="363" height="385"/>
                                                 <color key="backgroundColor" systemColor="secondarySystemGroupedBackgroundColor"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="110" id="iej-TJ-KkN"/>
+                                                    <constraint firstAttribute="height" constant="385" id="iej-TJ-KkN"/>
                                                 </constraints>
                                                 <prototypes>
                                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SettingsCell" id="3DP-hQ-msu" customClass="SettingsCell" customModule="Caffeine_Tracker" customModuleProvider="target">
@@ -597,14 +597,47 @@
                                                         </tableViewCellContentView>
                                                         <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
                                                     </tableViewCell>
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="VersionSettingsCell" textLabel="aZN-Pp-rnJ" detailTextLabel="tNT-X2-I5M" style="IBUITableViewCellStyleValue1" id="519-Yy-NvS">
+                                                        <rect key="frame" x="0.0" y="137.33333587646484" width="363" height="47.666667938232422"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="519-Yy-NvS" id="J13-Ln-GqA">
+                                                            <rect key="frame" x="0.0" y="0.0" width="332.66666666666669" height="47.666667938232422"/>
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                            <subviews>
+                                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Version" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="aZN-Pp-rnJ">
+                                                                    <rect key="frame" x="20" y="12" width="65.333333333333329" height="24"/>
+                                                                    <autoresizingMask key="autoresizingMask"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                                    <nil key="textColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="1.1.0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="tNT-X2-I5M">
+                                                                    <rect key="frame" x="287" y="12" width="37.666666666666664" height="24"/>
+                                                                    <autoresizingMask key="autoresizingMask"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                                    <color key="textColor" systemColor="secondaryLabelColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                            </subviews>
+                                                        </tableViewCellContentView>
+                                                        <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
+                                                    </tableViewCell>
                                                 </prototypes>
                                             </tableView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Copyright @ 2022 Petar Iliev" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gDI-rE-PG7">
+                                                <rect key="frame" x="71.666666666666671" y="658" width="249.66666666666663" height="24"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                <color key="textColor" systemColor="secondaryLabelColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="J16-SQ-ujL" secondAttribute="trailing" constant="15" id="3In-YM-73P"/>
+                                            <constraint firstAttribute="bottom" secondItem="gDI-rE-PG7" secondAttribute="bottom" constant="15" id="5Nb-H2-wQz"/>
                                             <constraint firstItem="J16-SQ-ujL" firstAttribute="leading" secondItem="kNz-Om-tcR" secondAttribute="leading" constant="15" id="Ts0-Y0-lai"/>
                                             <constraint firstItem="J16-SQ-ujL" firstAttribute="top" secondItem="kNz-Om-tcR" secondAttribute="top" constant="15" id="r11-tf-qwJ"/>
+                                            <constraint firstItem="gDI-rE-PG7" firstAttribute="centerX" secondItem="kNz-Om-tcR" secondAttribute="centerX" id="skt-sd-GEb"/>
                                         </constraints>
                                     </view>
                                 </subviews>
