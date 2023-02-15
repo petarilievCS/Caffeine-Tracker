@@ -35,7 +35,7 @@ struct DataBaseManager {
     
     //  Returns average caffeine intake in the past 7 days
     mutating func getWeekAverage() -> Double {
-        return Double(getTotalAmount()) / 7.0
+        return Double(getWeeklyTotal() * 1000.0) / 7.0
     }
     
     // Returns total amount of caffeine taken in the past 7 days

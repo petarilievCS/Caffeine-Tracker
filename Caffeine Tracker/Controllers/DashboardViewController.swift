@@ -29,6 +29,7 @@ class DashboardViewController: UIViewController {
     var consumedDrinksArray = [ConsumedDrink]()
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var metabolismCalculator = MetabolismCalculator()
+    var dataBaseManager = DataBaseManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -160,11 +161,7 @@ class DashboardViewController: UIViewController {
     }
     
     func loadConsumedDrinks() {
-        do {
-            consumedDrinksArray = try context.fetch(ConsumedDrink.fetchRequest())
-        } catch {
-            print("Error while loading data")
-        }
+        consumedDrinksArray = dataBaseManager.getTodayDrinks()
         tableView.reloadData()
     }
     
