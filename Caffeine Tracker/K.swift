@@ -22,6 +22,7 @@ struct K {
     static let aboveLimitNotifiicationIdentifier = "aboveLimitNotification"
     static let settingsCellIdentifier = "SettingsCell"
     static let regularSettingsCellIdentifier = "RegularSettingsCell"
+    static let versionSettingsCellIdentifier = "VersionSettingsCell"
     
     // UserDefaults names
     static let dailyAmount = "dailyAmount"
