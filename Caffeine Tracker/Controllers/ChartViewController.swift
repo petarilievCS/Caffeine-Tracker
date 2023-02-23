@@ -20,7 +20,7 @@ class ChartViewController: UIViewController {
     
     var databaseManager: DataBaseManager = DataBaseManager()
     var hostingController = UIHostingController(rootView: BarChart(chartData: []))
-    var pieChartHostingController = UIHostingController(rootView:  PieChartView(values: [1300, 500, 300], colors: [Color(UIColor(named: "Light Blue")!), Color(UIColor(named: "Green")!), Color(UIColor(named: "Red")!)], names: ["Coffee", "Energy Drink", "Soda"], backgroundColor: Color(.systemGray6), innerRadiusFraction: 0.6))
+    var pieChartHostingController = UIHostingController(rootView:  PieChartView(values: [1300, 500, 300], colors: [Color(UIColor(named: "Light Blue")!), Color(UIColor(named: "Green")!), Color(UIColor(named: "Red")!)], names: ["Coffee", "Energy Drink", "Soda"], totalAmount: 0.0, backgroundColor: Color(.systemGray6), innerRadiusFraction: 0.6))
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,21 +35,6 @@ class ChartViewController: UIViewController {
             chartData.append(.init(day: databaseManager.dayOfTheWeek(for: i), caffeineAmount: databaseManager.getAmountDaysAgo(i)))
         }
         
-        // Add SwiftUI Chart
-        hostingController = UIHostingController(rootView: BarChart(chartData: chartData))
-        addChild(hostingController)
-        chartView.addSubview(hostingController.view)
-        hostingController.didMove(toParent: self)
-        hostingController.view.backgroundColor = .systemGray6
-        hostingController.view.frame = chartView.bounds
-        
-        // Add SwiftUI Chart (pie chart)
-        pieChartHostingController = UIHostingController(rootView:  PieChartView(values: [1300, 500, 300], colors: [Color(UIColor(named: "Light Blue")!), Color(UIColor(named: "Green")!), Color(UIColor(named: "Red")!)], names: ["Coffee", "Energy Drink", "Soda"], backgroundColor: Color(.systemGray6), innerRadiusFraction: 0.6))
-        addChild(pieChartHostingController)
-        pieChartView.addSubview(pieChartHostingController.view)
-        pieChartHostingController.didMove(toParent: self)
-        pieChartHostingController.view.backgroundColor = .systemGray6
-        pieChartHostingController.view.frame = pieChartView.bounds
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -61,6 +46,29 @@ class ChartViewController: UIViewController {
             chartData.append(.init(day: databaseManager.dayOfTheWeek(for: i), caffeineAmount: databaseManager.getAmountDaysAgo(i)))
         }
         hostingController.rootView.chartData = chartData
+        
+        // Add SwiftUI Chart
+        hostingController = UIHostingController(rootView: BarChart(chartData: chartData))
+        addChild(hostingController)
+        chartView.addSubview(hostingController.view)
+        hostingController.didMove(toParent: self)
+        hostingController.view.backgroundColor = .systemGray6
+        hostingController.view.frame = chartView.bounds
+        
+        // Add SwiftUI Chart (pie chart)
+        initializePieChart()
+    }
+    
+    // Initializes PieChartView
+    func initializePieChart()  {
+        
+        let values = databaseManager.getDrinkTypeAmounts()
+        pieChartHostingController = UIHostingController(rootView:  PieChartView(values: values, colors: [Color(.systemBlue), Color(.systemRed), Color(.systemGreen), Color(.systemOrange), Color(.systemYellow), Color(.systemPurple), Color(.systemIndigo), Color(.systemCyan)], names: ["Coffee", "Esspresso", "Energy Drinks", "Sodas", "Supplements", "Chocolate", "Tea", "Other"], totalAmount: databaseManager.getWeeklyTotal(), backgroundColor: Color(.systemGray6), innerRadiusFraction: 0.65))
+        addChild(pieChartHostingController)
+        pieChartView.addSubview(pieChartHostingController.view)
+        pieChartHostingController.didMove(toParent: self)
+        pieChartHostingController.view.backgroundColor = .systemGray6
+        pieChartHostingController.view.frame = pieChartView.bounds
     }
     
     // Chart view
@@ -134,6 +142,7 @@ class ChartViewController: UIViewController {
                             y: geometry.size.height * 0.5 * CGFloat(1.0 - 0.78 * sin(self.midRadians))
                         )
                         .foregroundColor(Color.white)
+                        .font(.system(size: 17.0, weight: .medium))
                 }
             }
             .aspectRatio(1, contentMode: .fit)
@@ -151,6 +160,7 @@ class ChartViewController: UIViewController {
         public let values: [Double]
         public var colors: [Color]
         public let names: [String]
+        public let totalAmount: Double
         
         public var backgroundColor: Color
         public var innerRadiusFraction: CGFloat
@@ -162,7 +172,13 @@ class ChartViewController: UIViewController {
             
             for (i, value) in values.enumerated() {
                 let degrees: Double = value * 360 / sum
-                tempSlices.append(PieSliceData(startAngle: Angle(degrees: endDeg), endAngle: Angle(degrees: endDeg + degrees), text: String(format: "%.0f%%", value * 100 / sum), color: self.colors[i]))
+                
+                if value == 0.0 {
+                    tempSlices.append(PieSliceData(startAngle: Angle(degrees: endDeg), endAngle: Angle(degrees: endDeg + degrees), text: "", color: self.colors[i]))
+                } else {
+                    tempSlices.append(PieSliceData(startAngle: Angle(degrees: endDeg), endAngle: Angle(degrees: endDeg + degrees), text: "", color: self.colors[i]))
+                }
+                // String(format: "%.0f%%", value * 100 / sum)
                 endDeg += degrees
             }
             return tempSlices
@@ -183,27 +199,63 @@ class ChartViewController: UIViewController {
                         
                         VStack {
                             Text("Total")
-                                .font(.title)
-                                .foregroundColor(Color.gray)
-                            Text(String(values.reduce(0, +)))
-                                .font(.title)
+                                .font(.system(size: 17.0, weight: .medium))
+                                .foregroundColor(Color(UIColor.secondaryLabel))
+                            Text(String(Int(totalAmount * 1000)) + " mg")
+                                .font(.system(size: 28.0, weight: .semibold))
+                                .foregroundColor(Color(UIColor.label))
                         }
                     }
-                   
+                    PieChartRows(colors: self.colors, names: self.names, values: self.values.map { String($0) }, percents: self.values.map { String(format: "%.0f%%", $0 * 100 / self.values.reduce(0, +)) })
                 }
                 .background(self.backgroundColor)
                 .foregroundColor(Color.white)
             }
         }
     }
+    
+    struct PieChartRows: View {
+        var colors: [Color]
+        var names: [String]
+        var values: [String]
+        var percents: [String]
+        
+        var body: some View {
+            Spacer()
+            HStack {
+                VStack{
+                    ForEach(0..<(self.values.count / 2)) { i in
+                        HStack {
+                            RoundedRectangle(cornerRadius: 5.0)
+                                .fill(self.colors[i])
+                                .frame(width: 20, height: 20)
+                            Text(self.names[i])
+                                .font(.system(size: 17.0))
+                                .foregroundColor(Color(UIColor.secondaryLabel))
+                            Spacer()
 
-}
+                        }
+                    }
+                }
+                VStack{
+                    ForEach((self.values.count / 2)..<self.values.count) { i in
+                        HStack {
+                            RoundedRectangle(cornerRadius: 5.0)
+                                .fill(self.colors[i])
+                                .frame(width: 20, height: 20)
+                            Text(self.names[i])
+                                .font(.system(size: 17.0))
+                                .foregroundColor(Color(UIColor.secondaryLabel))
+                            Spacer()
 
-// Entry in chart
-struct ChartEntry: Identifiable {
-    var day: String
-    var caffeineAmount: Int
-    var id = UUID()
+                        }
+                    }
+                }
+            }
+            
+        }
+    }
+
 }
 
 extension Date {
