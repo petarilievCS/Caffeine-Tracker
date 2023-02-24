@@ -8,6 +8,7 @@
 import UIKit
 import SwiftUI
 import Charts
+import SwiftPieChart
 
 class ChartViewController: UIViewController {
     
@@ -17,7 +18,7 @@ class ChartViewController: UIViewController {
     @IBOutlet weak var averageIntakeLabel: UILabel!
     @IBOutlet weak var pieChartView: UIView!
     @IBOutlet weak var totalntakeLabel: UILabel!
-    
+
     var databaseManager: DataBaseManager = DataBaseManager()
     var hostingController = UIHostingController(rootView: BarChart(chartData: []))
     var pieChartHostingController = UIHostingController(rootView:  PieChartView(values: [1300, 500, 300], colors: [Color(UIColor(named: "Light Blue")!), Color(UIColor(named: "Green")!), Color(UIColor(named: "Red")!)], names: ["Coffee", "Energy Drink", "Soda"], totalAmount: 0.0, backgroundColor: Color(.systemGray6), innerRadiusFraction: 0.6))
@@ -35,6 +36,16 @@ class ChartViewController: UIViewController {
             chartData.append(.init(day: databaseManager.dayOfTheWeek(for: i), caffeineAmount: databaseManager.getAmountDaysAgo(i)))
         }
         
+        // Add SwiftUI Chart
+        hostingController = UIHostingController(rootView: BarChart(chartData: chartData))
+        addChild(hostingController)
+        chartView.addSubview(hostingController.view)
+        hostingController.didMove(toParent: self)
+        hostingController.view.backgroundColor = .systemGray6
+        hostingController.view.frame = chartView.bounds
+        
+        // Add SwiftUI Chart (pie chart)
+        initializePieChart()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -47,16 +58,10 @@ class ChartViewController: UIViewController {
         }
         hostingController.rootView.chartData = chartData
         
-        // Add SwiftUI Chart
-        hostingController = UIHostingController(rootView: BarChart(chartData: chartData))
-        addChild(hostingController)
-        chartView.addSubview(hostingController.view)
-        hostingController.didMove(toParent: self)
-        hostingController.view.backgroundColor = .systemGray6
-        hostingController.view.frame = chartView.bounds
-        
-        // Add SwiftUI Chart (pie chart)
-        initializePieChart()
+        let values = databaseManager.getDrinkTypeAmounts()
+        let totalAmount = databaseManager.getWeeklyTotal()
+        pieChartHostingController.rootView.values = values
+        pieChartHostingController.rootView.totalAmount = totalAmount
     }
     
     // Initializes PieChartView
@@ -157,10 +162,10 @@ class ChartViewController: UIViewController {
     }
     
     struct PieChartView: View {
-        public let values: [Double]
+        public var values: [Double]
         public var colors: [Color]
         public let names: [String]
-        public let totalAmount: Double
+        public var totalAmount: Double
         
         public var backgroundColor: Color
         public var innerRadiusFraction: CGFloat
