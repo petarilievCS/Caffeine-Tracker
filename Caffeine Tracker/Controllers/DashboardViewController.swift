@@ -97,8 +97,11 @@ class DashboardViewController: UIViewController {
     
     // Creates ring progress view
     func setupRingProgressView() {
-        ringProgressView.startColor = UIColor(named: "Green")!
-        ringProgressView.endColor = UIColor(named: "Red")!
+        
+        let currentDailyAmount = metabolismCalculator.calculateTotalAmount()
+        let dailyLimit = UserDefaults.standard.integer(forKey: K.dailyLimit)
+        ringProgressView.startColor = currentDailyAmount > dailyLimit ? UIColor(named: "Red")! : UIColor(named: "Green")!
+        ringProgressView.endColor = currentDailyAmount > dailyLimit ? UIColor(named: "Red")! : UIColor(named: "Green")!
         ringProgressView.ringWidth = 25
         ringProgressView.progress = getProgress()
         ringView.addSubview(ringProgressView)
@@ -112,8 +115,11 @@ class DashboardViewController: UIViewController {
     
     // Updates the ring progress view
     func updateProgressView() {
+        let progress = self.getProgress()
         UIView.animate(withDuration: 0.5) {
             self.ringProgressView.progress = self.getProgress()
+            self.ringProgressView.startColor = progress > 1.0 ? UIColor(named: "Red")! : UIColor(named: "Green")!
+            self.ringProgressView.endColor = progress > 1.0 ? UIColor(named: "Red")! : UIColor(named: "Green")!
         }
     }
     
