@@ -18,10 +18,15 @@ class ChartViewController: UIViewController {
     @IBOutlet weak var averageIntakeLabel: UILabel!
     @IBOutlet weak var pieChartView: UIView!
     @IBOutlet weak var totalntakeLabel: UILabel!
-
+    @IBOutlet weak var mostCommonDrinkLabel: UILabel!
+    @IBOutlet weak var totalDrinksLabel: UILabel!
+    
+    let names: [String] = ["Coffee", "Esspresso", "Energy Drinks", "Sodas", "Supplements", "Chocolate", "Tea", "Other"]
+    let colors: [Color] = [Color(.systemBlue), Color(.systemRed), Color(.systemGreen), Color(.systemOrange), Color(.systemYellow), Color(.systemPurple), Color(.systemIndigo), Color(.systemCyan)]
+    
     var databaseManager: DataBaseManager = DataBaseManager()
     var hostingController = UIHostingController(rootView: BarChart(chartData: []))
-    var pieChartHostingController = UIHostingController(rootView:  PieChartView(values: [1300, 500, 300], colors: [Color(UIColor(named: "Light Blue")!), Color(UIColor(named: "Green")!), Color(UIColor(named: "Red")!)], names: ["Coffee", "Energy Drink", "Soda"], totalAmount: 0.0, backgroundColor: Color(.systemGray6), innerRadiusFraction: 0.6))
+    var pieChartHostingController = UIHostingController(rootView:  PieChartView(values: [1300, 500, 300], colors: [Color(UIColor(named: "Light Blue")!), Color(UIColor(named: "Green")!), Color(UIColor(named: "Red")!)], names: ["Coffee", "Energy Drink", "Soda"], totalAmount: 0.0, backgroundColor: Color(.systemGray6), widthFraction: 0.75, innerRadiusFraction: 0.6))
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,16 +64,19 @@ class ChartViewController: UIViewController {
         hostingController.rootView.chartData = chartData
         
         let values = databaseManager.getDrinkTypeAmounts()
+        let maxIdx = values.firstIndex(of: values.max()!)
         let totalAmount = databaseManager.getWeeklyTotal()
         pieChartHostingController.rootView.values = values
         pieChartHostingController.rootView.totalAmount = totalAmount
+        mostCommonDrinkLabel.text = names[maxIdx!]
+        totalDrinksLabel.text = String(databaseManager.consumedDrinksArray.count)
     }
     
     // Initializes PieChartView
     func initializePieChart()  {
         
         let values = databaseManager.getDrinkTypeAmounts()
-        pieChartHostingController = UIHostingController(rootView:  PieChartView(values: values, colors: [Color(.systemBlue), Color(.systemRed), Color(.systemGreen), Color(.systemOrange), Color(.systemYellow), Color(.systemPurple), Color(.systemIndigo), Color(.systemCyan)], names: ["Coffee", "Esspresso", "Energy Drinks", "Sodas", "Supplements", "Chocolate", "Tea", "Other"], totalAmount: databaseManager.getWeeklyTotal(), backgroundColor: Color(.systemGray6), innerRadiusFraction: 0.65))
+        pieChartHostingController = UIHostingController(rootView:  PieChartView(values: values, colors: colors, names: names, totalAmount: databaseManager.getWeeklyTotal(), backgroundColor: Color(.systemGray6), widthFraction: 0.75, innerRadiusFraction: 0.65))
         addChild(pieChartHostingController)
         pieChartView.addSubview(pieChartHostingController.view)
         pieChartHostingController.didMove(toParent: self)
@@ -168,7 +176,10 @@ class ChartViewController: UIViewController {
         public var totalAmount: Double
         
         public var backgroundColor: Color
+        public var widthFraction: Double
         public var innerRadiusFraction: CGFloat
+        
+        @State private var activeIndex: Int = -1
         
         var slices: [PieSliceData] {
             let sum = values.reduce(0, +)
@@ -189,29 +200,70 @@ class ChartViewController: UIViewController {
             return tempSlices
         }
         
+        
+        public init(values: [Double], colors: [Color], names: [String], totalAmount: Double, backgroundColor: Color, widthFraction: Double, innerRadiusFraction: Double) {
+            self.values = values
+            self.names = names
+            self.colors = colors
+            self.totalAmount = totalAmount
+            self.backgroundColor = backgroundColor
+            self.widthFraction = widthFraction
+            self.innerRadiusFraction = innerRadiusFraction
+        }
+        
         var body: some View {
             GeometryReader { geometry in
                 VStack{
                     ZStack{
                         ForEach(0..<self.values.count){ i in
                             PieSliceView(pieSliceData: self.slices[i])
+                                .scaleEffect(self.activeIndex == i ? 1.05 : 1)
+                                .animation(Animation.spring())
                         }
                         .frame(width: geometry.size.width, height: geometry.size.width)
-                        
+                        .gesture(
+                            DragGesture(minimumDistance: 0)
+                                .onChanged { value in
+                                    let radius = 0.5 * geometry.size.width
+                                    let diff = CGPoint(x: value.location.x - radius, y: radius - value.location.y)
+                                    let dist = pow(pow(diff.x, 2.0) + pow(diff.y, 2.0), 0.5)
+                                    if (dist > radius || dist < radius * innerRadiusFraction) {
+                                        self.activeIndex = -1
+                                        return
+                                    }
+                                    var radians = Double(atan2(diff.x, diff.y))
+                                    if (radians < 0) {
+                                        radians = 2 * Double.pi + radians
+                                    }
+                                    
+                                    for (i, slice) in slices.enumerated() {
+                                        if (radians < slice.endAngle.radians) {
+                                            if self.activeIndex != i {
+                                                UIImpactFeedbackGenerator(style: .light).impactOccurred()
+                                            }
+                                            self.activeIndex = i
+                                            break
+                                        }
+                                    }
+                                }
+                                .onEnded { value in
+                                    self.activeIndex = -1
+                                }
+                        )
                         Circle()
                             .fill(self.backgroundColor)
                             .frame(width: geometry.size.width * innerRadiusFraction, height: geometry.size.width * innerRadiusFraction)
                         
                         VStack {
-                            Text("Total")
+                            Text(self.activeIndex == -1 ? "Total" : names[self.activeIndex])
                                 .font(.system(size: 17.0, weight: .medium))
                                 .foregroundColor(Color(UIColor.secondaryLabel))
-                            Text(String(Int(totalAmount * 1000)) + " mg")
+                            Text(self.activeIndex == -1 ? String(Int(totalAmount * 1000)) + " mg" : String(Int(self.values[activeIndex])) + " mg")
                                 .font(.system(size: 28.0, weight: .semibold))
                                 .foregroundColor(Color(UIColor.label))
                         }
                     }
-                    PieChartRows(colors: self.colors, names: self.names, values: self.values.map { String($0) }, percents: self.values.map { String(format: "%.0f%%", $0 * 100 / self.values.reduce(0, +)) })
+                    // PieChartRows(colors: self.colors, names: self.names, values: self.values.map { String($0) }, percents: self.values.map { String(format: "%.0f%%", $0 * 100 / self.values.reduce(0, +)) })
                 }
                 .background(self.backgroundColor)
                 .foregroundColor(Color.white)

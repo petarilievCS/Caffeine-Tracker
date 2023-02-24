@@ -21,7 +21,7 @@
                                 <rect key="frame" x="0.0" y="103" width="393" height="749"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SzI-gB-v6p" userLabel="ContentView">
-                                        <rect key="frame" x="0.0" y="0.0" width="393" height="1100"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="930"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Weekly Report" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="atb-of-Ecu">
                                                 <rect key="frame" x="15" y="10.000000000000002" width="163" height="28.666666666666671"/>
@@ -136,13 +136,13 @@
                                                         </subviews>
                                                     </stackView>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1C3-BO-RNV">
-                                                        <rect key="frame" x="20" y="105" width="323" height="480"/>
+                                                        <rect key="frame" x="20" y="105" width="323" height="330"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     </view>
                                                 </subviews>
                                                 <color key="backgroundColor" systemColor="systemGray6Color"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="610" id="7gD-b7-TXy"/>
+                                                    <constraint firstAttribute="height" constant="460" id="7gD-b7-TXy"/>
                                                     <constraint firstItem="1C3-BO-RNV" firstAttribute="top" secondItem="xl5-AV-j5n" secondAttribute="bottom" constant="30" id="C2J-Vw-44m"/>
                                                     <constraint firstAttribute="trailing" secondItem="1C3-BO-RNV" secondAttribute="trailing" constant="20" id="Drz-Tk-mQK"/>
                                                     <constraint firstItem="xl5-AV-j5n" firstAttribute="leading" secondItem="W9D-5q-sWt" secondAttribute="leading" constant="15" id="FeN-af-dTb"/>
@@ -161,7 +161,7 @@
                                             <constraint firstItem="atb-of-Ecu" firstAttribute="leading" secondItem="SzI-gB-v6p" secondAttribute="leading" constant="15" id="FTZ-YX-fs4"/>
                                             <constraint firstItem="W9D-5q-sWt" firstAttribute="top" secondItem="gIG-pT-VIv" secondAttribute="bottom" constant="10" id="HMv-7O-Ms3"/>
                                             <constraint firstItem="W9D-5q-sWt" firstAttribute="leading" secondItem="SzI-gB-v6p" secondAttribute="leading" constant="15" id="IZQ-iO-LH3"/>
-                                            <constraint firstAttribute="height" constant="1100" id="e6e-wK-vnw"/>
+                                            <constraint firstAttribute="height" constant="930" id="e6e-wK-vnw"/>
                                             <constraint firstAttribute="trailing" secondItem="pq7-f5-7r0" secondAttribute="trailing" constant="15" id="fz9-n4-SkY"/>
                                             <constraint firstItem="gIG-pT-VIv" firstAttribute="top" secondItem="pq7-f5-7r0" secondAttribute="bottom" constant="30" id="jR8-uX-zEz"/>
                                             <constraint firstItem="pq7-f5-7r0" firstAttribute="top" secondItem="atb-of-Ecu" secondAttribute="bottom" constant="10" id="r1l-OM-wP0"/>
@@ -192,8 +192,10 @@
                         <outlet property="averageIntakeLabel" destination="2d2-5y-UEm" id="ZLZ-nW-v5P"/>
                         <outlet property="chartView" destination="hPi-y1-Rol" id="yq8-2D-wTA"/>
                         <outlet property="commonDrinksView" destination="W9D-5q-sWt" id="qhR-Nv-31B"/>
+                        <outlet property="mostCommonDrinkLabel" destination="U0S-QW-z6m" id="VpI-Du-mzA"/>
                         <outlet property="pieChartView" destination="1C3-BO-RNV" id="JQS-WD-BxW"/>
                         <outlet property="reportView" destination="pq7-f5-7r0" id="VXQ-9E-jQO"/>
+                        <outlet property="totalDrinksLabel" destination="YAM-yU-CDr" id="fyF-0V-H5D"/>
                         <outlet property="totalntakeLabel" destination="Rhj-Td-TbU" id="omy-Y1-NGT"/>
                     </connections>
                 </viewController>
