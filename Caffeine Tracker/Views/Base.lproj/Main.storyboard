@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="enS-jr-Dsg">
-                                <rect key="frame" x="0.0" y="103" width="393" height="749"/>
+                                <rect key="frame" x="0.0" y="155" width="393" height="697"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SzI-gB-v6p" userLabel="ContentView">
                                         <rect key="frame" x="0.0" y="0.0" width="393" height="1100"/>
@@ -192,8 +192,10 @@
                         <outlet property="averageIntakeLabel" destination="2d2-5y-UEm" id="ZLZ-nW-v5P"/>
                         <outlet property="chartView" destination="hPi-y1-Rol" id="yq8-2D-wTA"/>
                         <outlet property="commonDrinksView" destination="W9D-5q-sWt" id="qhR-Nv-31B"/>
+                        <outlet property="mostCommonDrinkLabel" destination="U0S-QW-z6m" id="VpI-Du-mzA"/>
                         <outlet property="pieChartView" destination="1C3-BO-RNV" id="JQS-WD-BxW"/>
                         <outlet property="reportView" destination="pq7-f5-7r0" id="VXQ-9E-jQO"/>
+                        <outlet property="totalDrinksLabel" destination="YAM-yU-CDr" id="fyF-0V-H5D"/>
                         <outlet property="totalntakeLabel" destination="Rhj-Td-TbU" id="omy-Y1-NGT"/>
                     </connections>
                 </viewController>
@@ -329,7 +331,7 @@
                                                         <rect key="frame" x="0.0" y="50" width="363" height="43.666667938232422"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="3Qt-Sv-zJv" id="cCn-BR-Oiq">
-                                                            <rect key="frame" x="0.0" y="0.0" width="363" height="43.666667938232422"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="570" height="43.666667938232422"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                         </tableViewCellContentView>
                                                         <color key="backgroundColor" systemColor="systemGray6Color"/>
@@ -421,7 +423,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <searchBar key="tableHeaderView" contentMode="redraw" id="X4E-bc-vWX">
-                            <rect key="frame" x="0.0" y="0.0" width="393" height="44"/>
+                            <rect key="frame" x="0.0" y="0.0" width="186" height="44"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <textInputTraits key="textInputTraits"/>
                         </searchBar>
@@ -591,7 +593,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <searchBar key="tableHeaderView" contentMode="redraw" text="" id="asH-J9-t2F">
-                            <rect key="frame" x="0.0" y="0.0" width="393" height="44"/>
+                            <rect key="frame" x="0.0" y="0.0" width="186" height="44"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <textInputTraits key="textInputTraits"/>
                             <connections>
