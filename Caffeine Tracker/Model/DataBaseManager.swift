@@ -17,6 +17,34 @@ struct DataBaseManager {
     var consumedDrinksArray: [ConsumedDrink] = []
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
+    // Returns amounts of caffeine for each drink type in the past week
+    mutating func getDrinkTypeAmounts() -> [Double] {
+        clearDrinks()
+        loadConsumedDrinks()
+        var values: [Double] = Array(repeating: 0.0, count: 8)
+        for consumedDrink in consumedDrinksArray {
+            switch consumedDrink.icon {
+            case "coffee.png":
+                values[0] += Double(consumedDrink.initialAmount)
+            case "esspresso.png":
+                values[1] += Double(consumedDrink.initialAmount)
+            case "energy-drink.png":
+                values[2] += Double(consumedDrink.initialAmount)
+            case "soda.png":
+                values[3] += Double(consumedDrink.initialAmount)
+            case "supplement.png":
+                values[4] += Double(consumedDrink.initialAmount)
+            case "chocolate.png":
+                values[5] += Double(consumedDrink.initialAmount)
+            case "tea.png":
+                values[6] += Double(consumedDrink.initialAmount)
+            default:
+                values[7] += Double(consumedDrink.initialAmount)
+            }
+        }
+        return values
+    }
+    
     // Returns the amount "days" ago
     mutating func getAmountDaysAgo(_ days: Int) -> Int {
         loadConsumedDrinks()
@@ -189,4 +217,11 @@ struct DataBaseManager {
     }
 
     
+}
+
+// Entry in chart
+struct ChartEntry: Identifiable {
+    var day: String
+    var caffeineAmount: Int
+    var id = UUID()
 }

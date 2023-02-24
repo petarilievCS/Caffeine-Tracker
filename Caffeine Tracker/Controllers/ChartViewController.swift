@@ -8,22 +8,27 @@
 import UIKit
 import SwiftUI
 import Charts
+import SwiftPieChart
 
 class ChartViewController: UIViewController {
     
     @IBOutlet weak var reportView: UIView!
+    @IBOutlet weak var commonDrinksView: UIView!
     @IBOutlet weak var chartView: UIView!
     @IBOutlet weak var averageIntakeLabel: UILabel!
+    @IBOutlet weak var pieChartView: UIView!
     @IBOutlet weak var totalntakeLabel: UILabel!
-    
+
     var databaseManager: DataBaseManager = DataBaseManager()
     var hostingController = UIHostingController(rootView: BarChart(chartData: []))
+    var pieChartHostingController = UIHostingController(rootView:  PieChartView(values: [1300, 500, 300], colors: [Color(UIColor(named: "Light Blue")!), Color(UIColor(named: "Green")!), Color(UIColor(named: "Red")!)], names: ["Coffee", "Energy Drink", "Soda"], totalAmount: 0.0, backgroundColor: Color(.systemGray6), innerRadiusFraction: 0.6))
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // UI Customization
         reportView.layer.cornerRadius = K.defaultCornerRadius
+        commonDrinksView.layer.cornerRadius = K.defaultCornerRadius
         
         // Data source for chart
         var chartData: [ChartEntry] = []
@@ -38,6 +43,9 @@ class ChartViewController: UIViewController {
         hostingController.didMove(toParent: self)
         hostingController.view.backgroundColor = .systemGray6
         hostingController.view.frame = chartView.bounds
+        
+        // Add SwiftUI Chart (pie chart)
+        initializePieChart()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -49,6 +57,23 @@ class ChartViewController: UIViewController {
             chartData.append(.init(day: databaseManager.dayOfTheWeek(for: i), caffeineAmount: databaseManager.getAmountDaysAgo(i)))
         }
         hostingController.rootView.chartData = chartData
+        
+        let values = databaseManager.getDrinkTypeAmounts()
+        let totalAmount = databaseManager.getWeeklyTotal()
+        pieChartHostingController.rootView.values = values
+        pieChartHostingController.rootView.totalAmount = totalAmount
+    }
+    
+    // Initializes PieChartView
+    func initializePieChart()  {
+        
+        let values = databaseManager.getDrinkTypeAmounts()
+        pieChartHostingController = UIHostingController(rootView:  PieChartView(values: values, colors: [Color(.systemBlue), Color(.systemRed), Color(.systemGreen), Color(.systemOrange), Color(.systemYellow), Color(.systemPurple), Color(.systemIndigo), Color(.systemCyan)], names: ["Coffee", "Esspresso", "Energy Drinks", "Sodas", "Supplements", "Chocolate", "Tea", "Other"], totalAmount: databaseManager.getWeeklyTotal(), backgroundColor: Color(.systemGray6), innerRadiusFraction: 0.65))
+        addChild(pieChartHostingController)
+        pieChartView.addSubview(pieChartHostingController.view)
+        pieChartHostingController.didMove(toParent: self)
+        pieChartHostingController.view.backgroundColor = .systemGray6
+        pieChartHostingController.view.frame = pieChartView.bounds
     }
     
     // Chart view
@@ -75,35 +100,6 @@ class ChartViewController: UIViewController {
                     AxisValueLabel()
                 }
             }
-//            .chartOverlay { proxy in
-//                GeometryReader { geometry in
-//                    Rectangle().fill(.clear).contentShape(Rectangle())
-////                        .gesture(
-////                            DragGesture()
-////                                .onChanged { value in
-////                                    // Convert the gesture location to the coordiante space of the plot area.
-////                                    let origin = geometry[proxy.plotAreaFrame].origin
-////                                    let location = CGPoint(
-////                                        x: value.location.x - origin.x,
-////                                        y: value.location.y - origin.y
-////                                    )
-////                                    // Get the x (date) and y (price) value from the location.
-////                                    let (day, caffeine) = proxy.value(at: location, as: (String, Int).self)!
-////                                    print("Location: \(day), \(caffeine)")
-////                                }
-////                        )
-//                        .onTapGesture { value in
-//                            let origin = geometry[proxy.plotAreaFrame].origin
-////                            let location = CGPoint(
-////                                x: value.location.x - origin.x,
-////                                y: value.location.y - origin.y
-////                            )
-//                            // Get the x (date) and y (price) value from the location.
-//                            let (day, caffeine) = proxy.value(at: value, as: (String, Int).self)!
-//                            let caffeineAmount = findChartAmount(for: day)
-//                        }
-//                }
-//            }
         }
         
         func findChartAmount(for day: String) -> Int {
@@ -115,13 +111,156 @@ class ChartViewController: UIViewController {
             return 0
         }
     }
-}
+    
+    // Pie chart view
+    struct PieSliceView: View {
+        var pieSliceData: PieSliceData
+        
+        var midRadians: Double {
+            return Double.pi / 2.0 - (pieSliceData.startAngle + pieSliceData.endAngle).radians / 2.0
+        }
+        
+        var body: some View {
+            GeometryReader { geometry in
+                ZStack {
+                    Path { path in
+                        let width: CGFloat = min(geometry.size.width, geometry.size.height)
+                        let height = width
+                        
+                        let center = CGPoint(x: width * 0.5, y: height * 0.5)
+                        
+                        path.move(to: center)
+                        
+                        path.addArc(
+                            center: center,
+                            radius: width * 0.5,
+                            startAngle: Angle(degrees: -90.0) + pieSliceData.startAngle,
+                            endAngle: Angle(degrees: -90.0) + pieSliceData.endAngle,
+                            clockwise: false)
+                        
+                    }
+                    .fill(pieSliceData.color)
+                    
+                    Text(pieSliceData.text)
+                        .position(
+                            x: geometry.size.width * 0.5 * CGFloat(1.0 + 0.78 * cos(self.midRadians)),
+                            y: geometry.size.height * 0.5 * CGFloat(1.0 - 0.78 * sin(self.midRadians))
+                        )
+                        .foregroundColor(Color.white)
+                        .font(.system(size: 17.0, weight: .medium))
+                }
+            }
+            .aspectRatio(1, contentMode: .fit)
+        }
+    }
 
-// Entry in chart
-struct ChartEntry: Identifiable {
-    var day: String
-    var caffeineAmount: Int
-    var id = UUID()
+    struct PieSliceData {
+        var startAngle: Angle
+        var endAngle: Angle
+        var text: String
+        var color: Color
+    }
+    
+    struct PieChartView: View {
+        public var values: [Double]
+        public var colors: [Color]
+        public let names: [String]
+        public var totalAmount: Double
+        
+        public var backgroundColor: Color
+        public var innerRadiusFraction: CGFloat
+        
+        var slices: [PieSliceData] {
+            let sum = values.reduce(0, +)
+            var endDeg: Double = 0
+            var tempSlices: [PieSliceData] = []
+            
+            for (i, value) in values.enumerated() {
+                let degrees: Double = value * 360 / sum
+                
+                if value == 0.0 {
+                    tempSlices.append(PieSliceData(startAngle: Angle(degrees: endDeg), endAngle: Angle(degrees: endDeg + degrees), text: "", color: self.colors[i]))
+                } else {
+                    tempSlices.append(PieSliceData(startAngle: Angle(degrees: endDeg), endAngle: Angle(degrees: endDeg + degrees), text: "", color: self.colors[i]))
+                }
+                // String(format: "%.0f%%", value * 100 / sum)
+                endDeg += degrees
+            }
+            return tempSlices
+        }
+        
+        var body: some View {
+            GeometryReader { geometry in
+                VStack{
+                    ZStack{
+                        ForEach(0..<self.values.count){ i in
+                            PieSliceView(pieSliceData: self.slices[i])
+                        }
+                        .frame(width: geometry.size.width, height: geometry.size.width)
+                        
+                        Circle()
+                            .fill(self.backgroundColor)
+                            .frame(width: geometry.size.width * innerRadiusFraction, height: geometry.size.width * innerRadiusFraction)
+                        
+                        VStack {
+                            Text("Total")
+                                .font(.system(size: 17.0, weight: .medium))
+                                .foregroundColor(Color(UIColor.secondaryLabel))
+                            Text(String(Int(totalAmount * 1000)) + " mg")
+                                .font(.system(size: 28.0, weight: .semibold))
+                                .foregroundColor(Color(UIColor.label))
+                        }
+                    }
+                    PieChartRows(colors: self.colors, names: self.names, values: self.values.map { String($0) }, percents: self.values.map { String(format: "%.0f%%", $0 * 100 / self.values.reduce(0, +)) })
+                }
+                .background(self.backgroundColor)
+                .foregroundColor(Color.white)
+            }
+        }
+    }
+    
+    struct PieChartRows: View {
+        var colors: [Color]
+        var names: [String]
+        var values: [String]
+        var percents: [String]
+        
+        var body: some View {
+            Spacer()
+            HStack {
+                VStack{
+                    ForEach(0..<(self.values.count / 2)) { i in
+                        HStack {
+                            RoundedRectangle(cornerRadius: 5.0)
+                                .fill(self.colors[i])
+                                .frame(width: 20, height: 20)
+                            Text(self.names[i])
+                                .font(.system(size: 17.0))
+                                .foregroundColor(Color(UIColor.secondaryLabel))
+                            Spacer()
+
+                        }
+                    }
+                }
+                VStack{
+                    ForEach((self.values.count / 2)..<self.values.count) { i in
+                        HStack {
+                            RoundedRectangle(cornerRadius: 5.0)
+                                .fill(self.colors[i])
+                                .frame(width: 20, height: 20)
+                            Text(self.names[i])
+                                .font(.system(size: 17.0))
+                                .foregroundColor(Color(UIColor.secondaryLabel))
+                            Spacer()
+
+                        }
+                    }
+                }
+            }
+            
+        }
+    }
+
 }
 
 extension Date {

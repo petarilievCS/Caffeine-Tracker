@@ -18,10 +18,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="enS-jr-Dsg">
-                                <rect key="frame" x="0.0" y="155" width="393" height="697"/>
+                                <rect key="frame" x="0.0" y="103" width="393" height="749"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SzI-gB-v6p" userLabel="ContentView">
-                                        <rect key="frame" x="0.0" y="0.0" width="393" height="675"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="1100"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Weekly Report" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="atb-of-Ecu">
                                                 <rect key="frame" x="15" y="10.000000000000002" width="163" height="28.666666666666671"/>
@@ -30,7 +30,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pq7-f5-7r0">
-                                                <rect key="frame" x="15" y="48.666666666666657" width="368" height="350"/>
+                                                <rect key="frame" x="15" y="48.666666666666657" width="363" height="350"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="49" translatesAutoresizingMaskIntoConstraints="NO" id="yPP-7e-KHp">
                                                         <rect key="frame" x="15.000000000000014" y="20" width="229.33333333333337" height="55"/>
@@ -72,7 +72,7 @@
                                                         </subviews>
                                                     </stackView>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hPi-y1-Rol">
-                                                        <rect key="frame" x="20" y="100.00000000000003" width="328" height="224.99999999999997"/>
+                                                        <rect key="frame" x="20" y="100.00000000000003" width="323" height="224.99999999999997"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     </view>
                                                 </subviews>
@@ -87,14 +87,83 @@
                                                     <constraint firstItem="hPi-y1-Rol" firstAttribute="leading" secondItem="pq7-f5-7r0" secondAttribute="leading" constant="20" id="yga-4J-9cu"/>
                                                 </constraints>
                                             </view>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Common Drinks" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gIG-pT-VIv">
+                                                <rect key="frame" x="15" y="428.66666666666663" width="179" height="28.666666666666686"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="W9D-5q-sWt">
+                                                <rect key="frame" x="15" y="484" width="363" height="470"/>
+                                                <subviews>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="49" translatesAutoresizingMaskIntoConstraints="NO" id="xl5-AV-j5n">
+                                                        <rect key="frame" x="15" y="20" width="303.33333333333331" height="55"/>
+                                                        <subviews>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="f6a-M5-aie">
+                                                                <rect key="frame" x="0.0" y="0.0" width="162.33333333333334" height="55"/>
+                                                                <subviews>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Most Popular Drink" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1l5-Yr-y9E">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="149" height="20.333333333333332"/>
+                                                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                                                        <color key="textColor" systemColor="secondaryLabelColor"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Energy Drink" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U0S-QW-z6m">
+                                                                        <rect key="frame" x="0.0" y="21.333333333333254" width="162.33333333333334" height="33.666666666666657"/>
+                                                                        <color key="tintColor" systemColor="systemGreenColor"/>
+                                                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="28"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                </subviews>
+                                                            </stackView>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="jEj-Hy-arU">
+                                                                <rect key="frame" x="211.33333333333337" y="0.0" width="92" height="55"/>
+                                                                <subviews>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total Drinks" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OJ8-dx-aZp">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="92" height="20.333333333333332"/>
+                                                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                                                        <color key="textColor" systemColor="secondaryLabelColor"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="24" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YAM-yU-CDr">
+                                                                        <rect key="frame" x="0.0" y="21.333333333333254" width="34.666666666666664" height="33.666666666666657"/>
+                                                                        <color key="tintColor" systemColor="systemGreenColor"/>
+                                                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="28"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                </subviews>
+                                                            </stackView>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1C3-BO-RNV">
+                                                        <rect key="frame" x="20" y="105" width="323" height="480"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                    </view>
+                                                </subviews>
+                                                <color key="backgroundColor" systemColor="systemGray6Color"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="610" id="7gD-b7-TXy"/>
+                                                    <constraint firstItem="1C3-BO-RNV" firstAttribute="top" secondItem="xl5-AV-j5n" secondAttribute="bottom" constant="30" id="C2J-Vw-44m"/>
+                                                    <constraint firstAttribute="trailing" secondItem="1C3-BO-RNV" secondAttribute="trailing" constant="20" id="Drz-Tk-mQK"/>
+                                                    <constraint firstItem="xl5-AV-j5n" firstAttribute="leading" secondItem="W9D-5q-sWt" secondAttribute="leading" constant="15" id="FeN-af-dTb"/>
+                                                    <constraint firstItem="1C3-BO-RNV" firstAttribute="leading" secondItem="W9D-5q-sWt" secondAttribute="leading" constant="20" id="HXh-g4-inf"/>
+                                                    <constraint firstItem="xl5-AV-j5n" firstAttribute="top" secondItem="W9D-5q-sWt" secondAttribute="top" constant="20" id="QcT-i6-CSw"/>
+                                                    <constraint firstAttribute="bottom" secondItem="1C3-BO-RNV" secondAttribute="bottom" constant="25" id="WzP-yc-jDX"/>
+                                                </constraints>
+                                            </view>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
+                                            <constraint firstItem="gIG-pT-VIv" firstAttribute="leading" secondItem="SzI-gB-v6p" secondAttribute="leading" constant="15" id="08f-hf-mFz"/>
                                             <constraint firstItem="atb-of-Ecu" firstAttribute="top" secondItem="SzI-gB-v6p" secondAttribute="top" constant="10" id="1dp-Nr-tWE"/>
+                                            <constraint firstAttribute="trailing" secondItem="W9D-5q-sWt" secondAttribute="trailing" constant="15" id="3yr-ah-fAM"/>
                                             <constraint firstItem="pq7-f5-7r0" firstAttribute="leading" secondItem="SzI-gB-v6p" secondAttribute="leading" constant="15" id="FMQ-xz-zCp"/>
                                             <constraint firstItem="atb-of-Ecu" firstAttribute="leading" secondItem="SzI-gB-v6p" secondAttribute="leading" constant="15" id="FTZ-YX-fs4"/>
-                                            <constraint firstAttribute="height" constant="675" id="e6e-wK-vnw"/>
-                                            <constraint firstAttribute="trailing" secondItem="pq7-f5-7r0" secondAttribute="trailing" constant="10" id="fz9-n4-SkY"/>
+                                            <constraint firstItem="W9D-5q-sWt" firstAttribute="top" secondItem="gIG-pT-VIv" secondAttribute="bottom" constant="10" id="HMv-7O-Ms3"/>
+                                            <constraint firstItem="W9D-5q-sWt" firstAttribute="leading" secondItem="SzI-gB-v6p" secondAttribute="leading" constant="15" id="IZQ-iO-LH3"/>
+                                            <constraint firstAttribute="height" constant="1100" id="e6e-wK-vnw"/>
+                                            <constraint firstAttribute="trailing" secondItem="pq7-f5-7r0" secondAttribute="trailing" constant="15" id="fz9-n4-SkY"/>
+                                            <constraint firstItem="gIG-pT-VIv" firstAttribute="top" secondItem="pq7-f5-7r0" secondAttribute="bottom" constant="30" id="jR8-uX-zEz"/>
                                             <constraint firstItem="pq7-f5-7r0" firstAttribute="top" secondItem="atb-of-Ecu" secondAttribute="bottom" constant="10" id="r1l-OM-wP0"/>
                                         </constraints>
                                     </view>
@@ -122,6 +191,8 @@
                     <connections>
                         <outlet property="averageIntakeLabel" destination="2d2-5y-UEm" id="ZLZ-nW-v5P"/>
                         <outlet property="chartView" destination="hPi-y1-Rol" id="yq8-2D-wTA"/>
+                        <outlet property="commonDrinksView" destination="W9D-5q-sWt" id="qhR-Nv-31B"/>
+                        <outlet property="pieChartView" destination="1C3-BO-RNV" id="JQS-WD-BxW"/>
                         <outlet property="reportView" destination="pq7-f5-7r0" id="VXQ-9E-jQO"/>
                         <outlet property="totalntakeLabel" destination="Rhj-Td-TbU" id="omy-Y1-NGT"/>
                     </connections>
@@ -295,7 +366,7 @@
                             </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U90-Vj-kMa">
                                 <rect key="frame" x="101.66666666666669" y="689" width="190" height="60"/>
-                                <color key="backgroundColor" name="Green"/>
+                                <color key="backgroundColor" name="Light Blue"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="XVO-Aw-QZo"/>
                                     <constraint firstAttribute="width" constant="190" id="deX-1h-Kes"/>
@@ -946,13 +1017,13 @@
             <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Green">
-            <color red="0.12549019607843137" green="0.74901960784313726" blue="0.41960784313725491" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Light Blue">
-            <color red="0.27058823529411763" green="0.66666666666666663" blue="0.94901960784313721" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Red">
-            <color red="0.92156862745098034" green="0.23137254901960785" blue="0.35294117647058826" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="labelColor">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
