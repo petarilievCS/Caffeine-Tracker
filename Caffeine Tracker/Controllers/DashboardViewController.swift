@@ -56,6 +56,7 @@ class DashboardViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
+
         updateInfo()
         updateProgressView()
         loadConsumedDrinks()
@@ -90,9 +91,17 @@ class DashboardViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let destinationNC = segue.destination as! UINavigationController
-        let destinationVC = destinationNC.topViewController as! DrinkViewController
-        destinationVC.dashboardVC = self
+        if segue.identifier == K.dashboardToDrinkSegueIdentifier {
+            let destinationNC = segue.destination as! UINavigationController
+            let destinationVC = destinationNC.topViewController as! EditViewController
+            destinationVC.selectedRecord = consumedDrinksArray[tableView.indexPathForSelectedRow!.row]
+            print(destinationVC.selectedRecord!.name)
+        } else {
+            let destinationNC = segue.destination as! UINavigationController
+            let destinationVC = destinationNC.topViewController as! DrinkViewController
+            destinationVC.navigationItem.title = "Add Drink"
+            destinationVC.dashboardVC = self
+        }
     }
     
     // Creates ring progress view
@@ -212,12 +221,14 @@ extension DashboardViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.performSegue(withIdentifier: K.dashboardToDrinkSegueIdentifier, sender: self)
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 44.0
     }
+    
 }
 
 // MARK: - Swipe Table View methods

@@ -40,6 +40,7 @@
 		E69FA856296575C90025EEBA /* DrinkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E69FA855296575C90025EEBA /* DrinkViewController.swift */; };
 		E69FA8582965B2D40025EEBA /* AdjustViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E69FA8572965B2D40025EEBA /* AdjustViewController.swift */; };
 		E6B08A4F29A9061D00A95032 /* SwiftPieChart in Frameworks */ = {isa = PBXBuildFile; productRef = E6B08A4E29A9061D00A95032 /* SwiftPieChart */; };
+		E6B08A5129A92D1200A95032 /* EditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B08A5029A92D1200A95032 /* EditViewController.swift */; };
 		E6B7DA87295F5185008F8CD1 /* CaffeineCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B7DA85295F5185008F8CD1 /* CaffeineCell.swift */; };
 		E6B7DA88295F5185008F8CD1 /* CaffeineCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6B7DA86295F5185008F8CD1 /* CaffeineCell.xib */; };
 /* End PBXBuildFile section */
@@ -75,6 +76,7 @@
 		E69E0284296309CA00F4C142 /* NumberCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NumberCell.xib; sourceTree = "<group>"; };
 		E69FA855296575C90025EEBA /* DrinkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkViewController.swift; sourceTree = "<group>"; };
 		E69FA8572965B2D40025EEBA /* AdjustViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdjustViewController.swift; sourceTree = "<group>"; };
+		E6B08A5029A92D1200A95032 /* EditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditViewController.swift; sourceTree = "<group>"; };
 		E6B7DA85295F5185008F8CD1 /* CaffeineCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaffeineCell.swift; sourceTree = "<group>"; };
 		E6B7DA86295F5185008F8CD1 /* CaffeineCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CaffeineCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -137,6 +139,7 @@
 				E69FA8572965B2D40025EEBA /* AdjustViewController.swift */,
 				E604881829896A3700B25167 /* ChartViewController.swift */,
 				E6907DC3299AABDD00AE005B /* SettingsViewController.swift */,
+				E6B08A5029A92D1200A95032 /* EditViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -285,6 +288,7 @@
 				E6996C5B295E0A5E00E35FC1 /* AppDelegate.swift in Sources */,
 				E6996C5D295E0A5E00E35FC1 /* SceneDelegate.swift in Sources */,
 				E6907DC4299AABDD00AE005B /* SettingsViewController.swift in Sources */,
+				E6B08A5129A92D1200A95032 /* EditViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
