@@ -24,6 +24,9 @@ struct K {
     static let regularSettingsCellIdentifier = "RegularSettingsCell"
     static let versionSettingsCellIdentifier = "VersionSettingsCell"
     static let dashboardToDrinkSegueIdentifier = "dashboardToDrink"
+    static let drinkTypePopoverSegueIdentifier = "drinkTypePopoverSegue"
+    static let drinkTypePopoverIdentifier = "DrinkTypePopover"
+    static let dateCellIdentifier = "DateCell"
     
     // UserDefaults names
     static let dailyAmount = "dailyAmount"

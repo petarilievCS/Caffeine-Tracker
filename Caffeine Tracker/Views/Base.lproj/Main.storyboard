@@ -420,7 +420,7 @@
             <objects>
                 <tableViewController id="0Al-ES-PXb" customClass="DrinkViewController" customModule="Caffeine_Tracker" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="rYJ-jO-a95">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="783"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <searchBar key="tableHeaderView" contentMode="redraw" id="X4E-bc-vWX">
@@ -465,7 +465,7 @@
             <objects>
                 <viewController title="Add Drink" id="XZt-mF-DiK" customClass="AddViewController" customModule="Caffeine_Tracker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="bHd-Ra-Oit">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="783"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ehZ-CI-Yb9">
@@ -753,6 +753,7 @@
                     </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="ff3-Nd-aar">
+                        <rect key="frame" x="0.0" y="59" width="393" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -773,6 +774,7 @@
                     </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="kHH-1D-D9r">
+                        <rect key="frame" x="0.0" y="59" width="393" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -816,6 +818,7 @@
                 <navigationController title="Add Drink" automaticallyAdjustsScrollViewInsets="NO" id="kNi-I8-IM8" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="tJ7-NM-xSC">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="108"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </navigationBar>
@@ -834,6 +837,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="CKl-VJ-Fd9" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="HhL-YA-0GD">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="56"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -850,7 +854,7 @@
             <objects>
                 <viewController id="AN5-qq-dST" customClass="AdjustViewController" customModule="Caffeine_Tracker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="pz3-Mt-VEb">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="783"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ANz-In-Pg8" userLabel="contentView">
@@ -974,6 +978,7 @@
                     </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="U20-sD-se3">
+                        <rect key="frame" x="0.0" y="59" width="393" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -992,6 +997,7 @@
                     <tabBarItem key="tabBarItem" title="Settings" image="gearshape.fill" catalog="system" selectedImage="gearshape.fill" id="uGc-OC-nmA"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="jlk-sQ-sIl">
+                        <rect key="frame" x="0.0" y="59" width="393" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -1008,7 +1014,7 @@
             <objects>
                 <viewController title="Add Drink" id="T2k-39-hlo" customClass="EditViewController" customModule="Caffeine_Tracker" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5GG-FM-Vpm">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="783"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pk5-1d-FXW">
@@ -1018,10 +1024,10 @@
                                         <rect key="frame" x="0.0" y="0.0" width="393" height="675"/>
                                         <subviews>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="FrR-dT-Icc">
-                                                <rect key="frame" x="15" y="15" width="363" height="258"/>
+                                                <rect key="frame" x="15" y="15" width="363" height="215"/>
                                                 <color key="backgroundColor" systemColor="secondarySystemGroupedBackgroundColor"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="258" id="Xoo-aW-cov"/>
+                                                    <constraint firstAttribute="height" constant="215" id="Xoo-aW-cov"/>
                                                 </constraints>
                                                 <prototypes>
                                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DrinkNameCell" id="aEJ-FO-F7O" customClass="DrinkNameCell" customModule="Caffeine_Tracker">
@@ -1051,10 +1057,19 @@
                                                         </tableViewCellContentView>
                                                         <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
                                                     </tableViewCell>
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DateCell" id="Nmc-jX-NQp" customClass="NumberCell" customModule="Caffeine_Tracker" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="181.00000381469727" width="363" height="43.666667938232422"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Nmc-jX-NQp" id="Jcq-NZ-paf">
+                                                            <rect key="frame" x="0.0" y="0.0" width="363" height="43.666667938232422"/>
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                        </tableViewCellContentView>
+                                                        <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
+                                                    </tableViewCell>
                                                 </prototypes>
                                             </tableView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Lw-eX-UOx" userLabel="DeleteView">
-                                                <rect key="frame" x="15" y="293" width="363" height="50"/>
+                                                <rect key="frame" x="15" y="250" width="363" height="50"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dEQ-6X-CX1">
                                                         <rect key="frame" x="5" y="6" width="353" height="38"/>
@@ -1063,7 +1078,7 @@
                                                             <fontDescription key="titleFontDescription" type="system" pointSize="20"/>
                                                         </buttonConfiguration>
                                                         <connections>
-                                                            <action selector="removeClicked:" destination="T2k-39-hlo" eventType="touchUpInside" id="qMf-Wv-Peo"/>
+                                                            <action selector="removeButtonPressed:" destination="T2k-39-hlo" eventType="touchUpInside" id="WXN-Ly-94F"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -1111,12 +1126,12 @@
                     <navigationItem key="navigationItem" title="Edit Record" id="Ffn-6Q-Sd4">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="Typ-TQ-SJZ">
                             <connections>
-                                <action selector="cancelClicked:" destination="T2k-39-hlo" id="XPA-fB-bii"/>
+                                <action selector="cancelButtonPressed:" destination="T2k-39-hlo" id="6Gg-Wd-K0U"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="lnh-or-bOA">
                             <connections>
-                                <action selector="doneClicked:" destination="T2k-39-hlo" id="vZf-6C-09E"/>
+                                <action selector="doneButtonPressed:" destination="T2k-39-hlo" id="wuI-nu-Iyg"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -1135,6 +1150,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="cwt-mT-oqD" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="jXt-Rf-Yxj">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="108"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>

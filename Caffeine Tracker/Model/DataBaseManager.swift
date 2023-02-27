@@ -45,6 +45,21 @@ struct DataBaseManager {
         return values
     }
     
+    // Updates given record with given properties
+    mutating func updateRecord(_ record: ConsumedDrink, name: String, type: String, amount: Int64, time: Date) {
+        loadConsumedDrinks()
+        for i in 0..<consumedDrinksArray.count {
+            if consumedDrinksArray[i].id == record.id {
+                consumedDrinksArray[i].name = name
+                consumedDrinksArray[i].icon = type
+                consumedDrinksArray[i].initialAmount = amount
+                consumedDrinksArray[i].timeConsumed = time
+                updateMetabolismAmounts()
+                break
+            }
+        }
+    }
+    
     // Returns the amount "days" ago
     mutating func getAmountDaysAgo(_ days: Int) -> Int {
         loadConsumedDrinks()
@@ -214,6 +229,12 @@ struct DataBaseManager {
         } catch {
             print("Error while saving context")
         }
+    }
+    
+    // Removes given drink
+    mutating func removeDrink(_ drink: ConsumedDrink) {
+        loadConsumedDrinks()
+        self.context.delete(drink)
     }
 
     

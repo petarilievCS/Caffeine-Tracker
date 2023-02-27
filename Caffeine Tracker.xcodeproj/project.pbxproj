@@ -43,6 +43,9 @@
 		E6B08A5129A92D1200A95032 /* EditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B08A5029A92D1200A95032 /* EditViewController.swift */; };
 		E6B7DA87295F5185008F8CD1 /* CaffeineCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B7DA85295F5185008F8CD1 /* CaffeineCell.swift */; };
 		E6B7DA88295F5185008F8CD1 /* CaffeineCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6B7DA86295F5185008F8CD1 /* CaffeineCell.xib */; };
+		E6BA790029ACFE8C004FB910 /* DrinkPopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6BA78FF29ACFE8C004FB910 /* DrinkPopoverViewController.swift */; };
+		E6BA790329AD2780004FB910 /* DateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6BA790129AD2780004FB910 /* DateCell.swift */; };
+		E6BA790429AD2780004FB910 /* DateCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6BA790229AD2780004FB910 /* DateCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -79,6 +82,9 @@
 		E6B08A5029A92D1200A95032 /* EditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditViewController.swift; sourceTree = "<group>"; };
 		E6B7DA85295F5185008F8CD1 /* CaffeineCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaffeineCell.swift; sourceTree = "<group>"; };
 		E6B7DA86295F5185008F8CD1 /* CaffeineCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CaffeineCell.xib; sourceTree = "<group>"; };
+		E6BA78FF29ACFE8C004FB910 /* DrinkPopoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkPopoverViewController.swift; sourceTree = "<group>"; };
+		E6BA790129AD2780004FB910 /* DateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateCell.swift; sourceTree = "<group>"; };
+		E6BA790229AD2780004FB910 /* DateCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DateCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,6 +146,7 @@
 				E604881829896A3700B25167 /* ChartViewController.swift */,
 				E6907DC3299AABDD00AE005B /* SettingsViewController.swift */,
 				E6B08A5029A92D1200A95032 /* EditViewController.swift */,
+				E6BA78FE29ACFE6F004FB910 /* Popovers */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -162,6 +169,8 @@
 				E6907DC6299AB11D00AE005B /* SettingsCell.xib */,
 				E6907DC9299AE12800AE005B /* RegularSettingsCell.swift */,
 				E6907DCA299AE12800AE005B /* RegularSettingsCell.xib */,
+				E6BA790129AD2780004FB910 /* DateCell.swift */,
+				E6BA790229AD2780004FB910 /* DateCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -174,6 +183,14 @@
 				E604881A298B42F800B25167 /* DataBaseManager.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		E6BA78FE29ACFE6F004FB910 /* Popovers */ = {
+			isa = PBXGroup;
+			children = (
+				E6BA78FF29ACFE8C004FB910 /* DrinkPopoverViewController.swift */,
+			);
+			name = Popovers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -253,6 +270,7 @@
 				E69E027E2962E05000F4C142 /* DrinkNameCell.xib in Resources */,
 				E69E0286296309CA00F4C142 /* NumberCell.xib in Resources */,
 				E6907DC8299AB11D00AE005B /* SettingsCell.xib in Resources */,
+				E6BA790429AD2780004FB910 /* DateCell.xib in Resources */,
 				E6907DCC299AE12800AE005B /* RegularSettingsCell.xib in Resources */,
 				E611E991296ED16300592296 /* ConsumedDrinkCell.xib in Resources */,
 				E6B7DA88295F5185008F8CD1 /* CaffeineCell.xib in Resources */,
@@ -276,6 +294,8 @@
 				E604881929896A3700B25167 /* ChartViewController.swift in Sources */,
 				E604881B298B42F800B25167 /* DataBaseManager.swift in Sources */,
 				E6996C5F295E0A5E00E35FC1 /* DashboardViewController.swift in Sources */,
+				E6BA790329AD2780004FB910 /* DateCell.swift in Sources */,
+				E6BA790029ACFE8C004FB910 /* DrinkPopoverViewController.swift in Sources */,
 				E69E027D2962E05000F4C142 /* DrinkNameCell.swift in Sources */,
 				E6996C79295E0BE600E35FC1 /* CaffeineViewController.swift in Sources */,
 				E69FA8582965B2D40025EEBA /* AdjustViewController.swift in Sources */,

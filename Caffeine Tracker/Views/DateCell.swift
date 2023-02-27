@@ -1,24 +1,25 @@
 //
-//  TableViewCell.swift
+//  DateCell.swift
 //  Caffeine Tracker
 //
-//  Created by Petar Iliev on 2.1.23.
+//  Created by Petar Iliev on 27.2.23.
 //
 
 import UIKit
 
-class DrinkNameCell: UITableViewCell {
+class DateCell: UITableViewCell {
 
-    @IBOutlet weak var textField: UITextField!
+    @IBOutlet weak var datePicker: UIDatePicker!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        textField.textColor = .secondaryLabel
+        self.contentView.backgroundColor = .secondarySystemBackground
         // Initialization code
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
+
         // Configure the view for the selected state
     }
     

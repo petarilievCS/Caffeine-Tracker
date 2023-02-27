@@ -14,6 +14,7 @@ class NumberCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        textField.textColor = .secondaryLabel
         // Initialization code
     }
 

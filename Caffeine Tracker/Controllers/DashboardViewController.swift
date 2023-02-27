@@ -56,7 +56,6 @@ class DashboardViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-
         updateInfo()
         updateProgressView()
         loadConsumedDrinks()
@@ -95,7 +94,8 @@ class DashboardViewController: UIViewController {
             let destinationNC = segue.destination as! UINavigationController
             let destinationVC = destinationNC.topViewController as! EditViewController
             destinationVC.selectedRecord = consumedDrinksArray[tableView.indexPathForSelectedRow!.row]
-            print(destinationVC.selectedRecord!.name)
+            destinationVC.dashboardVC = self
+            destinationVC.indexPath = tableView.indexPathForSelectedRow!
         } else {
             let destinationNC = segue.destination as! UINavigationController
             let destinationVC = destinationNC.topViewController as! DrinkViewController
@@ -239,21 +239,25 @@ extension DashboardViewController: SwipeTableViewCellDelegate {
         guard orientation == .right else { return nil }
         
         let deleteAction = SwipeAction(style: .destructive, title: "Delete") { action, indexPath in
-            self.loadConsumedDrinks()
-            self.context.delete(self.consumedDrinksArray[indexPath.row])
-            self.consumedDrinksArray.remove(at: indexPath.row)
-            self.saveConsumedDrinks()
-            self.updateInfo()
-            self.updateProgressView()
-            self.updateConstraints()
-            tableView.reloadData()
-            self.updateConstraints()
+            self.removeDrink(at: indexPath)
         }
         
         // customize the action appearance
         deleteAction.image = UIImage(named: "delete-icon")
         
         return [deleteAction]
+    }
+    
+    func removeDrink(at indexPath: IndexPath) {
+        self.loadConsumedDrinks()
+        self.context.delete(self.consumedDrinksArray[indexPath.row])
+        self.consumedDrinksArray.remove(at: indexPath.row)
+        self.saveConsumedDrinks()
+        self.updateInfo()
+        self.updateProgressView()
+        self.updateConstraints()
+        tableView.reloadData()
+        self.updateConstraints()
     }
     
 }

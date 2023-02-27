@@ -214,28 +214,22 @@ extension AddViewController: UITableViewDelegate, UITableViewDataSource {
     
     // Present UIPickerView when user selects type of beverage
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let iconCell = self.tableView.cellForRow(at: IndexPath(row: 1, section: 0)) as! IconCell
         if indexPath.row == 1 {
-            let alert = UIAlertController(title: "Select Drink Type", message: "", preferredStyle: .alert)
-            let pickerView = UIPickerView(frame: CGRect(x: 0, y: -40, width: 200, height: 150))
+            let alert = UIAlertController(title: "Select Drink Type", message: "\n\n\n\n\n", preferredStyle: .alert)
+            alert.isModalInPopover = true
+            let pickerView = UIPickerView(frame: CGRect(x: 5, y: 20, width: 250, height: 140))
+            alert.view.addSubview(pickerView)
+            pickerView.delegate = self
+            pickerView.dataSource = self
             let action = UIAlertAction(title: "Done", style: .default) { action in
                 let selectedRow = pickerView.selectedRow(inComponent: 0)
                 let drinkType = self.drinkTypes[selectedRow]
-                let iconCell = self.tableView.cellForRow(at: IndexPath(row: 1, section: 0)) as! IconCell
                 iconCell.iconLabel.text = drinkType
             }
             alert.addAction(action)
-            alert.view.tintColor = UIColor(named: "Green")
-            
-            let viewController = UIViewController()
-            viewController.preferredContentSize = CGSize(width: 200, height: 150)
-            
-            pickerView.delegate = self
-            pickerView.dataSource = self
-            // pickerView.selectRow(currentCurrencyRow(), inComponent: 0, animated: false)
-            viewController.view.addSubview(pickerView)
-            alert.setValue(viewController, forKey: "contentViewController")
-            
             present(alert, animated: true)
+            pickerView.selectRow(drinkTypes.firstIndex(of: iconCell.iconLabel.text!)!, inComponent: 0, animated: false)
         }
     }
 }
