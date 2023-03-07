@@ -14,7 +14,7 @@ class EditViewController: UIViewController  {
     
     var selectedRecord: ConsumedDrink?
     var selectedDrink: String?
-    let drinkTypes: [String] = ["Esspresso", "Coffee", "Soda", "Energy Drink", "Chocolate", "Supplement", "Tea"]
+    let drinkTypes: [String] = ["Espresso", "Hot Coffee", "Cold Coffee", "Canned Coffee", "Soft Drink", "Energy Drink", "Energy Shot", "Chocolate", "Supplement", "Tea", "Iced Tea"]
     var databaseManager: DataBaseManager = DataBaseManager()
     var dashboardVC: DashboardViewController?
     var indexPath: IndexPath?

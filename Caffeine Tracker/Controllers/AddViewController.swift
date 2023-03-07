@@ -18,7 +18,7 @@ class AddViewController: UIViewController {
     var drinkArray = [Drink]()
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var caffeineVC: CaffeineViewController? = nil
-    let drinkTypes: [String] = ["Esspresso", "Coffee", "Soda", "Energy Drink", "Chocolate", "Supplement", "Tea"]
+    let drinkTypes: [String] = ["Espresso", "Hot Coffee", "Cold Coffee", "Canned Coffee", "Soft Drink", "Energy Drink", "Energy Shot", "Chocolate", "Supplement", "Tea", "Iced Tea"]
     
     var drinkName: String?
     var drinkCaffeine: String?

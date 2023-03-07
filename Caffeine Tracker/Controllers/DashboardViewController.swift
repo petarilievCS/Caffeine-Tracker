@@ -33,6 +33,13 @@ class DashboardViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Add default drinks if first run
+        if !UserDefaults.standard.bool(forKey: "firstRun") {
+            dataBaseManager.addDefaultDrinks()
+        }
+        UserDefaults.standard.set(true, forKey: "firstRun")
+        
         loadConsumedDrinks()
         tableView.register(UINib(nibName: K.consumedDrinkCellIdentifier, bundle: nil), forCellReuseIdentifier: K.consumedDrinkCellIdentifier)
         tableView.delegate = self

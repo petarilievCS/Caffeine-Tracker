@@ -15,31 +15,113 @@ struct DataBaseManager {
     let declinePerHour: Double = 0.87
     
     var consumedDrinksArray: [ConsumedDrink] = []
+    var drinksArray: [Drink] = []
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    
+    // Adds default drinks to CoreData
+    mutating func addDefaultDrinks() {
+        var drinks: [DefaultDrink] = []
+        loadDrinks()
+        if let url = Bundle.main.url(forResource: "caffeine", withExtension: "json") {
+            do {
+                let data = try Data(contentsOf: url)
+                let decoder = JSONDecoder()
+                drinks = try decoder.decode([DefaultDrink].self, from: data)
+                for drink in drinks {
+                    let defaultDrink = Drink(context: self.context)
+                    defaultDrink.name = drink.drink
+                    defaultDrink.icon = getIcon(for: drink.type)
+                    defaultDrink.caffeine = Int64(drink.caffeine)
+                    defaultDrink.serving = Int64(drink.volume * 0.033814)
+                    defaultDrink.caffeineOz = Double(defaultDrink.caffeine) / Double(defaultDrink.serving)
+                    drinksArray.append(defaultDrink)
+                }
+
+                saveDrinks()
+            } catch {
+                print("error:\(error)")
+            }
+        }
+    }
+    
+    // Returns icon name for given drink type
+    func getIcon(for drink: String) -> String {
+        switch drink {
+        case "Coffee":
+            return "hot-coffee.png"
+        case "Bottle":
+            return "canned-coffee.png"
+        case "Coffee Can":
+            return "canned-coffee.png"
+        case "Esspresso":
+            return "espresso.png"
+        case "Ice":
+            return "cold-coffee.png"
+        case "Energy Drinks":
+            return "energy-drink.png"
+        case "Energy Shots":
+            return "energy-shot.png"
+        case "Tea":
+            return "tea.png"
+        case "Ice Tea":
+            return "iced-tea.png"
+        case "Soft Drinks":
+            return "soft-drink.png"
+        case "Water":
+            return "water.png"
+        default:
+            return ""
+        }
+    }
+    
+    // Loads caffeine drinks from CoreData
+    mutating func loadDrinks(with request: NSFetchRequest<Drink> = Drink.fetchRequest(), and predicate: NSPredicate? = nil) {
+        request.predicate = predicate
+        do {
+            drinksArray = try context.fetch(request)
+        } catch {
+            print("Error while loading data")
+        }
+    }
+    
+    // Saves given drinks to CoreData
+    func saveDrinks() {
+        do {
+            try context.save()
+        } catch {
+            print("Error saving: \(error)")
+        }
+    }
     
     // Returns amounts of caffeine for each drink type in the past week
     mutating func getDrinkTypeAmounts() -> [Double] {
         clearDrinks()
         loadConsumedDrinks()
-        var values: [Double] = Array(repeating: 0.0, count: 8)
+        var values: [Double] = Array(repeating: 0.0, count: 6)
         for consumedDrink in consumedDrinksArray {
             switch consumedDrink.icon {
-            case "coffee.png":
+            case "hot-coffee.png":
                 values[0] += Double(consumedDrink.initialAmount)
-            case "esspresso.png":
-                values[1] += Double(consumedDrink.initialAmount)
+            case "espresso.png":
+                values[0] += Double(consumedDrink.initialAmount)
+            case "cold-coffee.png":
+                values[0] += Double(consumedDrink.initialAmount)
+            case "canned-coffee.png":
+                values[0] += Double(consumedDrink.initialAmount)
             case "energy-drink.png":
+                values[1] += Double(consumedDrink.initialAmount)
+            case "energy-shot.png":
+                values[1] += Double(consumedDrink.initialAmount)
+            case "soft-drink.png":
                 values[2] += Double(consumedDrink.initialAmount)
-            case "soda.png":
+            case "tea.png":
+                values[3] += Double(consumedDrink.initialAmount)
+            case "iced-tea.png":
                 values[3] += Double(consumedDrink.initialAmount)
             case "supplement.png":
                 values[4] += Double(consumedDrink.initialAmount)
-            case "chocolate.png":
-                values[5] += Double(consumedDrink.initialAmount)
-            case "tea.png":
-                values[6] += Double(consumedDrink.initialAmount)
             default:
-                values[7] += Double(consumedDrink.initialAmount)
+                values[5] += Double(consumedDrink.initialAmount)
             }
         }
         return values

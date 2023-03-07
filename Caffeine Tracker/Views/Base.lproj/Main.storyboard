@@ -1165,10 +1165,10 @@
     </scenes>
     <color key="tintColor" name="Light Blue"/>
     <resources>
-        <image name="chart.bar.xaxis" catalog="system" width="32" height="32"/>
-        <image name="cup.and.saucer.fill" catalog="system" width="32" height="32"/>
-        <image name="gearshape.fill" catalog="system" width="32" height="32"/>
-        <image name="house.fill" catalog="system" width="32" height="32"/>
+        <image name="chart.bar.xaxis" catalog="system" width="128" height="99"/>
+        <image name="cup.and.saucer.fill" catalog="system" width="128" height="91"/>
+        <image name="gearshape.fill" catalog="system" width="128" height="123"/>
+        <image name="house.fill" catalog="system" width="128" height="104"/>
         <namedColor name="AccentColor">
             <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

@@ -21,8 +21,8 @@ class ChartViewController: UIViewController {
     @IBOutlet weak var mostCommonDrinkLabel: UILabel!
     @IBOutlet weak var totalDrinksLabel: UILabel!
     
-    let names: [String] = ["Coffee", "Esspresso", "Energy Drinks", "Sodas", "Supplements", "Chocolate", "Tea", "Other"]
-    let colors: [Color] = [Color(.systemBlue), Color(.systemRed), Color(.systemGreen), Color(.systemOrange), Color(.systemYellow), Color(.systemPurple), Color(.systemIndigo), Color(.systemCyan)]
+    let names: [String] = ["Coffee", "Energy Drinks", "Soft Drinks", "Tea", "Supplements", "Other"]
+    let colors: [Color] = [Color(.systemBlue), Color(.systemRed), Color(.systemGreen), Color(.systemOrange), Color(.systemYellow), Color(.systemPurple)]
     
     var databaseManager: DataBaseManager = DataBaseManager()
     var hostingController = UIHostingController(rootView: BarChart(chartData: []))

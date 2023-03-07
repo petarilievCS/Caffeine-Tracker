@@ -22,8 +22,8 @@
                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Esspresso" textAlignment="right" minimumFontSize="20" translatesAutoresizingMaskIntoConstraints="NO" id="Z0F-Sx-ual">
-                        <rect key="frame" x="215" y="9.6666666666666661" width="90" height="24.666666666666671"/>
+                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Espresso" textAlignment="right" minimumFontSize="20" translatesAutoresizingMaskIntoConstraints="NO" id="Z0F-Sx-ual">
+                        <rect key="frame" x="224.66666666666666" y="9.6666666666666661" width="80.333333333333343" height="24.666666666666671"/>
                         <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                         <textInputTraits key="textInputTraits" autocapitalizationType="words"/>

@@ -58,24 +58,10 @@ class CaffeineViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: K.caffeineCellIdentifier, for: indexPath) as! CaffeineCell
         let currentDrink = drinkArray[indexPath.row]
         
-        switch indexPath.row {
-        case 0:
-            cell.icon.image = UIImage(named: "coffee.png")
-        case 1:
-            cell.icon.image = UIImage(named: "can.png")
-        case 2:
-            cell.icon.image = UIImage(named: "coffee-cup.png")
-        case 3:
-            cell.icon.image = UIImage(named: "chocolate-bar.png")
-        case 4:
-            cell.icon.image = UIImage(named: "coke.png")
-        default:
-            cell.icon.image = UIImage(named: "drugs.png")
-        }
         
         cell.nameLabel.text = currentDrink.name
         cell.caffeineLabel.text = "\(String(currentDrink.caffeine)) MG"
-        cell.icon.image = UIImage(named: currentDrink.icon ?? "coffee.png") ?? UIImage(systemName: "coffee.png")
+        cell.icon.image = UIImage(named: currentDrink.icon!)
         return cell
     }
     
@@ -113,6 +99,9 @@ class CaffeineViewController: UITableViewController {
         } catch {
             print("Error while loading data")
         }
+        drinkArray = drinkArray.sorted { first, second in
+            return first.name!.capitalized < second.name!.capitalized
+        }
         tableView.reloadData()
     }
     
@@ -124,6 +113,7 @@ class CaffeineViewController: UITableViewController {
                     self.refreshControl?.endRefreshing()
                 }
     }
+    
 }
 
 extension CaffeineViewController: UISearchBarDelegate {
