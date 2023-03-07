@@ -8,4 +8,6 @@ in the bloodstream. The app is developed in Swift, and uses CoreData to store th
 
 # Screenshots
 
-<img src="https://user-images.githubusercontent.com/90746623/220435267-e1c686b8-94d8-44cf-aa2d-6164a23272c4.jpg" width="266" height="576"/><img src="https://user-images.githubusercontent.com/90746623/220435259-5b5872c3-f0c5-4389-8d98-16d5e503c6d4.jpg" width="266" height="576"/><img src="https://user-images.githubusercontent.com/90746623/220435265-aeed02cf-9792-4f06-907b-ee452c4e5c01.jpg" width="266" height="576"/>
+<img src="https://user-images.githubusercontent.com/90746623/221989375-6b3609f3-f53f-42ae-951d-9e5ba23b9209.jpeg" width="266" height="576"/><img src="https://user-images.githubusercontent.com/90746623/221989369-a9f2f088-3b85-44ad-9ddd-5e508b536c10.jpeg" width="266" height="576"/><img src="https://user-images.githubusercontent.com/90746623/221989374-b3cd8bc1-f128-4477-ad85-412651a710e6.jpeg" width="266" height="576"/>
+
+
