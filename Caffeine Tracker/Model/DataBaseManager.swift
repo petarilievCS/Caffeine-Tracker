@@ -36,7 +36,7 @@ struct DataBaseManager {
                     defaultDrink.caffeineOz = Double(defaultDrink.caffeine) / Double(defaultDrink.serving)
                     drinksArray.append(defaultDrink)
                 }
-
+                
                 saveDrinks()
             } catch {
                 print("error:\(error)")
@@ -210,7 +210,7 @@ struct DataBaseManager {
             
             let differenceInSeconds: Double = now.timeIntervalSince1970 - consumptionTime.timeIntervalSince1970
             let differenceInHours: Int = Int(differenceInSeconds) / secondsPerHour
-
+            
             // Update amount for each hour of difference
             if differenceInHours > 0 {
                 let newAmount: Int64 = Int64(Double(amount) * pow(declinePerHour, Double(differenceInHours)))
@@ -318,7 +318,37 @@ struct DataBaseManager {
         loadConsumedDrinks()
         self.context.delete(drink)
     }
-
+    
+    // Returns top 3 drinks over the past week
+    mutating func getTopDrinks() -> [(String, Int)] {
+        var topDrinks: [ConsumedDrink] = []
+        loadConsumedDrinks()
+        var counter: [String : Int] = [String : Int]()
+        
+        for consumedDrink in consumedDrinksArray {
+            if !(counter.keys.contains(consumedDrink.name!)) {
+                counter[consumedDrink.name!] = 9
+            }
+            counter[consumedDrink.name!]! += 1
+        }
+        
+        var drinks: [(String, Int)] = [(String, Int)]()
+        for drink in counter {
+            drinks.append(drink)
+        }
+        
+        // Sort drinks by number of records
+        drinks = drinks.sorted(by: { drink1, drink2 in
+            return drink1.1 < drink2.1
+            
+        })
+        
+        if drinks.count < 3 {
+            return drinks
+        }
+        drinks = drinks.dropLast(drinks.count - 3)
+        return drinks
+    }
     
 }
 
