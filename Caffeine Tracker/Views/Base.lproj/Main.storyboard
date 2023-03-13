@@ -13,30 +13,58 @@
         <!--Coffee Map-->
         <scene sceneID="iQK-H0-O20">
             <objects>
-                <viewController title="Coffee Map" id="wtr-zz-Guz" sceneMemberID="viewController">
+                <viewController title="Coffee Map" id="wtr-zz-Guz" customClass="MapViewController" customModule="Caffeine_Tracker" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="YKt-C5-DPy">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4rd-ZR-O38">
-                                <rect key="frame" x="10" y="165" width="373" height="594"/>
-                                <standardMapConfiguration key="preferredConfiguration"/>
-                            </mapView>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YZr-EJ-yxW">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j00-1p-X8u" userLabel="ContentView">
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="675"/>
+                                        <subviews>
+                                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rtr-vp-NzI">
+                                                <rect key="frame" x="5" y="5" width="383" height="570"/>
+                                                <standardMapConfiguration key="preferredConfiguration"/>
+                                            </mapView>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstItem="Rtr-vp-NzI" firstAttribute="leading" secondItem="j00-1p-X8u" secondAttribute="leading" constant="5" id="ErC-WP-xW6"/>
+                                            <constraint firstAttribute="bottom" secondItem="Rtr-vp-NzI" secondAttribute="bottom" constant="100" id="QQh-c4-uYW"/>
+                                            <constraint firstAttribute="height" constant="675" identifier="contentViewHeight" id="cNW-cN-6MK"/>
+                                            <constraint firstItem="Rtr-vp-NzI" firstAttribute="top" secondItem="j00-1p-X8u" secondAttribute="top" constant="5" id="qFq-EA-Jde"/>
+                                            <constraint firstAttribute="trailing" secondItem="Rtr-vp-NzI" secondAttribute="trailing" constant="5" id="yYU-k1-v7A"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="j00-1p-X8u" firstAttribute="top" secondItem="YZr-EJ-yxW" secondAttribute="top" id="0F0-uw-gaL"/>
+                                    <constraint firstAttribute="trailing" secondItem="j00-1p-X8u" secondAttribute="trailing" id="1iQ-Ip-EkO"/>
+                                    <constraint firstAttribute="bottom" secondItem="j00-1p-X8u" secondAttribute="bottom" id="DEb-a1-1iA"/>
+                                    <constraint firstItem="j00-1p-X8u" firstAttribute="leading" secondItem="YZr-EJ-yxW" secondAttribute="leading" id="N9I-Zq-E1C"/>
+                                    <constraint firstItem="j00-1p-X8u" firstAttribute="centerX" secondItem="YZr-EJ-yxW" secondAttribute="centerX" id="t31-im-ZPY"/>
+                                </constraints>
+                            </scrollView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="BiG-Wt-byy"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="4rd-ZR-O38" firstAttribute="top" secondItem="BiG-Wt-byy" secondAttribute="top" constant="10" id="KKe-gM-ifB"/>
-                            <constraint firstItem="BiG-Wt-byy" firstAttribute="bottom" secondItem="4rd-ZR-O38" secondAttribute="bottom" constant="10" id="Lck-ua-TNT"/>
-                            <constraint firstItem="4rd-ZR-O38" firstAttribute="leading" secondItem="BiG-Wt-byy" secondAttribute="leading" constant="10" id="XtQ-Le-67x"/>
-                            <constraint firstItem="BiG-Wt-byy" firstAttribute="trailing" secondItem="4rd-ZR-O38" secondAttribute="trailing" constant="10" id="s3T-ai-pbL"/>
+                            <constraint firstItem="YZr-EJ-yxW" firstAttribute="top" secondItem="YKt-C5-DPy" secondAttribute="top" id="9Zw-hG-rYn"/>
+                            <constraint firstItem="YZr-EJ-yxW" firstAttribute="trailing" secondItem="BiG-Wt-byy" secondAttribute="trailing" id="U83-51-Bsu"/>
+                            <constraint firstItem="YZr-EJ-yxW" firstAttribute="centerY" secondItem="YKt-C5-DPy" secondAttribute="centerY" id="Y70-XG-PNb"/>
+                            <constraint firstItem="YZr-EJ-yxW" firstAttribute="leading" secondItem="BiG-Wt-byy" secondAttribute="leading" id="tqk-fh-hrm"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="aMu-pT-0cf"/>
+                    <navigationItem key="navigationItem" title="Coffee Map" id="aMu-pT-0cf"/>
+                    <connections>
+                        <outlet property="mapView" destination="Rtr-vp-NzI" id="O3s-Yw-FeU"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QwE-p7-g7M" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2836" y="-1387"/>
+            <point key="canvasLocation" x="2835.8778625954196" y="-1387.323943661972"/>
         </scene>
         <!--Charts-->
         <scene sceneID="gDx-7U-2rM">
