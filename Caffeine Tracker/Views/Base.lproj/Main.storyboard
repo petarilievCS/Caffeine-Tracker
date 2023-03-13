@@ -3,12 +3,41 @@
     <device id="retina6_12" orientation="portrait" appearance="dark"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Map view configurations" minToolsVersion="14.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Coffee Map-->
+        <scene sceneID="iQK-H0-O20">
+            <objects>
+                <viewController title="Coffee Map" id="wtr-zz-Guz" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="YKt-C5-DPy">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4rd-ZR-O38">
+                                <rect key="frame" x="10" y="165" width="373" height="594"/>
+                                <standardMapConfiguration key="preferredConfiguration"/>
+                            </mapView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="BiG-Wt-byy"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="4rd-ZR-O38" firstAttribute="top" secondItem="BiG-Wt-byy" secondAttribute="top" constant="10" id="KKe-gM-ifB"/>
+                            <constraint firstItem="BiG-Wt-byy" firstAttribute="bottom" secondItem="4rd-ZR-O38" secondAttribute="bottom" constant="10" id="Lck-ua-TNT"/>
+                            <constraint firstItem="4rd-ZR-O38" firstAttribute="leading" secondItem="BiG-Wt-byy" secondAttribute="leading" constant="10" id="XtQ-Le-67x"/>
+                            <constraint firstItem="BiG-Wt-byy" firstAttribute="trailing" secondItem="4rd-ZR-O38" secondAttribute="trailing" constant="10" id="s3T-ai-pbL"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="aMu-pT-0cf"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QwE-p7-g7M" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2836" y="-1387"/>
+        </scene>
         <!--Charts-->
         <scene sceneID="gDx-7U-2rM">
             <objects>
@@ -829,6 +858,7 @@
                         <segue destination="gS4-Hy-90X" kind="relationship" relationship="viewControllers" id="bUd-Fn-qih"/>
                         <segue destination="1he-H0-ZBb" kind="relationship" relationship="viewControllers" id="iTS-d1-Vws"/>
                         <segue destination="aqR-fh-e8f" kind="relationship" relationship="viewControllers" id="oKD-zm-nTF"/>
+                        <segue destination="iF9-CB-SdY" kind="relationship" relationship="viewControllers" id="lMy-QM-7FX"/>
                         <segue destination="JNh-Va-2Zd" kind="relationship" relationship="viewControllers" id="VAP-m7-YkQ"/>
                     </connections>
                 </tabBarController>
@@ -1186,6 +1216,25 @@
             </objects>
             <point key="canvasLocation" x="4056" y="-689"/>
         </scene>
+        <!--Map-->
+        <scene sceneID="PLc-mf-ckY">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="iF9-CB-SdY" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Map" image="map.fill" catalog="system" selectedImage="map.fill" id="aBi-yX-R8I"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="iqK-lx-Fbd">
+                        <rect key="frame" x="0.0" y="59" width="393" height="96"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="wtr-zz-Guz" kind="relationship" relationship="rootViewController" id="qWm-Rf-iue"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="epI-Ch-XFi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1911" y="-1387"/>
+        </scene>
     </scenes>
     <color key="tintColor" name="Light Blue"/>
     <resources>
@@ -1193,6 +1242,7 @@
         <image name="cup.and.saucer.fill" catalog="system" width="128" height="91"/>
         <image name="gearshape.fill" catalog="system" width="128" height="123"/>
         <image name="house.fill" catalog="system" width="128" height="104"/>
+        <image name="map.fill" catalog="system" width="128" height="110"/>
         <namedColor name="AccentColor">
             <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
