@@ -321,7 +321,6 @@ struct DataBaseManager {
     
     // Returns top 3 drinks over the past week
     mutating func getTopDrinks() -> [(String, Int)] {
-        var topDrinks: [ConsumedDrink] = []
         loadConsumedDrinks()
         var counter: [String : Int] = [String : Int]()
         
