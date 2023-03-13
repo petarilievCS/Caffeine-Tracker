@@ -20,6 +20,7 @@ class ChartViewController: UIViewController {
     @IBOutlet weak var totalntakeLabel: UILabel!
     @IBOutlet weak var mostCommonDrinkLabel: UILabel!
     @IBOutlet weak var totalDrinksLabel: UILabel!
+    @IBOutlet weak var tableView: UITableView!
     
     let names: [String] = ["Coffee", "Energy Drinks", "Soft Drinks", "Tea", "Supplements", "Other"]
     let colors: [Color] = [Color(.systemBlue), Color(.systemRed), Color(.systemGreen), Color(.systemOrange), Color(.systemYellow), Color(.systemPurple)]
@@ -27,9 +28,14 @@ class ChartViewController: UIViewController {
     var databaseManager: DataBaseManager = DataBaseManager()
     var hostingController = UIHostingController(rootView: BarChart(chartData: []))
     var pieChartHostingController = UIHostingController(rootView:  PieChartView(values: [1300, 500, 300], colors: [Color(UIColor(named: "Light Blue")!), Color(UIColor(named: "Green")!), Color(UIColor(named: "Red")!)], names: ["Coffee", "Energy Drink", "Soda"], totalAmount: 0.0, backgroundColor: Color(.systemGray6), widthFraction: 0.75, innerRadiusFraction: 0.6))
+    var topDrinks: [(ConsumedDrink, Int)] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        tableView.register(UINib(nibName: K.consumedDrinkCellIdentifier, bundle: nil), forCellReuseIdentifier: K.consumedDrinkCellIdentifier)
+        tableView.delegate = self
+        tableView.dataSource = self
         
         // UI Customization
         reportView.layer.cornerRadius = K.defaultCornerRadius
@@ -70,6 +76,10 @@ class ChartViewController: UIViewController {
         pieChartHostingController.rootView.totalAmount = totalAmount
         mostCommonDrinkLabel.text = names[maxIdx!]
         totalDrinksLabel.text = String(databaseManager.consumedDrinksArray.count)
+        
+        topDrinks = databaseManager.getTopDrinks()
+        tableView.reloadData()
+        
     }
     
     // Initializes PieChartView
@@ -351,4 +361,29 @@ extension Date {
     }
 }
 
+// MARK: - Table View methods
 
+extension ChartViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return topDrinks.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: K.consumedDrinkCellIdentifier, for: indexPath) as! ConsumedDrinkCell
+        let consumedDrink = topDrinks[indexPath.row]
+        cell.title.text = consumedDrink.0.name
+        cell.icon.image = UIImage(named: consumedDrink.0.icon!)
+        cell.detail.text = String(consumedDrink.1)
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 44.0
+    }
+    
+}

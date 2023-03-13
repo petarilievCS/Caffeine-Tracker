@@ -320,13 +320,13 @@ struct DataBaseManager {
     }
     
     // Returns top 3 drinks over the past week
-    mutating func getTopDrinks() -> [(String, Int)] {
+    mutating func getTopDrinks() -> [(ConsumedDrink, Int)] {
         loadConsumedDrinks()
         var counter: [String : Int] = [String : Int]()
         
         for consumedDrink in consumedDrinksArray {
             if !(counter.keys.contains(consumedDrink.name!)) {
-                counter[consumedDrink.name!] = 9
+                counter[consumedDrink.name!] = 0
             }
             counter[consumedDrink.name!]! += 1
         }
@@ -338,15 +338,30 @@ struct DataBaseManager {
         
         // Sort drinks by number of records
         drinks = drinks.sorted(by: { drink1, drink2 in
-            return drink1.1 < drink2.1
+            return drink1.1 > drink2.1
             
         })
         
         if drinks.count < 3 {
-            return drinks
+            return drinks.map { (name, count) in
+                return (getDrinkByName(name), count)
+            }
         }
         drinks = drinks.dropLast(drinks.count - 3)
-        return drinks
+        return drinks.map { (name, count) in
+            return (getDrinkByName(name), count)
+        }
+    }
+    
+    // Returns consumed drink object for given name
+    mutating func getDrinkByName(_ name: String) -> ConsumedDrink {
+        loadConsumedDrinks()
+        for consumedDrink in consumedDrinksArray {
+            if consumedDrink.name == name {
+                return consumedDrink
+            }
+        }
+        return consumedDrinksArray[0]
     }
     
 }

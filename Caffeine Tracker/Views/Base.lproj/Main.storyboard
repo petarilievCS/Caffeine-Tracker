@@ -18,10 +18,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="enS-jr-Dsg">
-                                <rect key="frame" x="0.0" y="155" width="393" height="697"/>
+                                <rect key="frame" x="0.0" y="103" width="393" height="749"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SzI-gB-v6p" userLabel="ContentView">
-                                        <rect key="frame" x="0.0" y="0.0" width="393" height="930"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="1070"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Weekly Report" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="atb-of-Ecu">
                                                 <rect key="frame" x="15" y="10.000000000000002" width="163" height="28.666666666666671"/>
@@ -93,8 +93,8 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="W9D-5q-sWt">
-                                                <rect key="frame" x="15" y="484" width="363" height="470"/>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W9D-5q-sWt">
+                                                <rect key="frame" x="15" y="467.33333333333337" width="363" height="605.00000000000011"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="49" translatesAutoresizingMaskIntoConstraints="NO" id="xl5-AV-j5n">
                                                         <rect key="frame" x="15" y="20" width="303.33333333333331" height="55"/>
@@ -138,17 +138,40 @@
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1C3-BO-RNV">
                                                         <rect key="frame" x="20" y="105" width="323" height="330"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="330" id="LDm-SQ-3Ry"/>
+                                                        </constraints>
                                                     </view>
+                                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="zCC-Fo-HXq">
+                                                        <rect key="frame" x="5" y="454.99999999999989" width="348" height="128"/>
+                                                        <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="128" id="bdE-wE-NRn"/>
+                                                        </constraints>
+                                                        <prototypes>
+                                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ConsumedDrinkCell" id="iB1-5K-hQd" customClass="ConsumedDrinkCell" customModule="Caffeine_Tracker" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="50" width="348" height="43.666667938232422"/>
+                                                                <autoresizingMask key="autoresizingMask"/>
+                                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="iB1-5K-hQd" id="5gL-6Z-7fB">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="348" height="43.666667938232422"/>
+                                                                    <autoresizingMask key="autoresizingMask"/>
+                                                                </tableViewCellContentView>
+                                                            </tableViewCell>
+                                                        </prototypes>
+                                                    </tableView>
                                                 </subviews>
                                                 <color key="backgroundColor" systemColor="systemGray6Color"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="460" id="7gD-b7-TXy"/>
+                                                    <constraint firstAttribute="height" constant="605" id="7gD-b7-TXy"/>
                                                     <constraint firstItem="1C3-BO-RNV" firstAttribute="top" secondItem="xl5-AV-j5n" secondAttribute="bottom" constant="30" id="C2J-Vw-44m"/>
                                                     <constraint firstAttribute="trailing" secondItem="1C3-BO-RNV" secondAttribute="trailing" constant="20" id="Drz-Tk-mQK"/>
                                                     <constraint firstItem="xl5-AV-j5n" firstAttribute="leading" secondItem="W9D-5q-sWt" secondAttribute="leading" constant="15" id="FeN-af-dTb"/>
                                                     <constraint firstItem="1C3-BO-RNV" firstAttribute="leading" secondItem="W9D-5q-sWt" secondAttribute="leading" constant="20" id="HXh-g4-inf"/>
+                                                    <constraint firstItem="zCC-Fo-HXq" firstAttribute="leading" secondItem="W9D-5q-sWt" secondAttribute="leading" constant="5" id="LGP-Xu-UZY"/>
+                                                    <constraint firstAttribute="trailing" secondItem="zCC-Fo-HXq" secondAttribute="trailing" constant="10" id="LVA-XX-p6k"/>
                                                     <constraint firstItem="xl5-AV-j5n" firstAttribute="top" secondItem="W9D-5q-sWt" secondAttribute="top" constant="20" id="QcT-i6-CSw"/>
-                                                    <constraint firstAttribute="bottom" secondItem="1C3-BO-RNV" secondAttribute="bottom" constant="25" id="WzP-yc-jDX"/>
+                                                    <constraint firstItem="zCC-Fo-HXq" firstAttribute="top" secondItem="1C3-BO-RNV" secondAttribute="bottom" constant="20" id="eHB-gI-7r0"/>
+                                                    <constraint firstItem="zCC-Fo-HXq" firstAttribute="leading" secondItem="W9D-5q-sWt" secondAttribute="leading" constant="10" id="lHZ-4g-Idv"/>
                                                 </constraints>
                                             </view>
                                         </subviews>
@@ -161,7 +184,7 @@
                                             <constraint firstItem="atb-of-Ecu" firstAttribute="leading" secondItem="SzI-gB-v6p" secondAttribute="leading" constant="15" id="FTZ-YX-fs4"/>
                                             <constraint firstItem="W9D-5q-sWt" firstAttribute="top" secondItem="gIG-pT-VIv" secondAttribute="bottom" constant="10" id="HMv-7O-Ms3"/>
                                             <constraint firstItem="W9D-5q-sWt" firstAttribute="leading" secondItem="SzI-gB-v6p" secondAttribute="leading" constant="15" id="IZQ-iO-LH3"/>
-                                            <constraint firstAttribute="height" constant="930" id="e6e-wK-vnw"/>
+                                            <constraint firstAttribute="height" constant="1070" id="e6e-wK-vnw"/>
                                             <constraint firstAttribute="trailing" secondItem="pq7-f5-7r0" secondAttribute="trailing" constant="15" id="fz9-n4-SkY"/>
                                             <constraint firstItem="gIG-pT-VIv" firstAttribute="top" secondItem="pq7-f5-7r0" secondAttribute="bottom" constant="30" id="jR8-uX-zEz"/>
                                             <constraint firstItem="pq7-f5-7r0" firstAttribute="top" secondItem="atb-of-Ecu" secondAttribute="bottom" constant="10" id="r1l-OM-wP0"/>
@@ -195,6 +218,7 @@
                         <outlet property="mostCommonDrinkLabel" destination="U0S-QW-z6m" id="VpI-Du-mzA"/>
                         <outlet property="pieChartView" destination="1C3-BO-RNV" id="JQS-WD-BxW"/>
                         <outlet property="reportView" destination="pq7-f5-7r0" id="VXQ-9E-jQO"/>
+                        <outlet property="tableView" destination="zCC-Fo-HXq" id="eku-tg-I9V"/>
                         <outlet property="totalDrinksLabel" destination="YAM-yU-CDr" id="fyF-0V-H5D"/>
                         <outlet property="totalntakeLabel" destination="Rhj-Td-TbU" id="omy-Y1-NGT"/>
                     </connections>
