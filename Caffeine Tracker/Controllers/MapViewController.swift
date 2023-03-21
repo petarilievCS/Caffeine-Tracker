@@ -11,7 +11,8 @@ import CoreLocation
 import AVFoundation
 
 protocol HandleMapSearch {
-    func dropPinZoomIn(placemark:MKPlacemark)
+    func dropPinZoomIn(placemark: MKPlacemark)
+    func dropPin(placemark: MKPlacemark)
 }
 
 class MapViewController: UIViewController {
@@ -104,7 +105,6 @@ class MapViewController: UIViewController {
             for item in response.mapItems {
                 if let name = item.name,
                    let location = item.placemark.location {
-                    print("\(name): \(location.coordinate.latitude),\(location.coordinate.longitude)")
                     let annotation = MKPointAnnotation()
                     annotation.coordinate = location.coordinate
                     annotation.title = name
@@ -132,7 +132,8 @@ extension MapViewController: CLLocationManagerDelegate {
 // MARK: - Map Pin methods
 
 extension MapViewController: HandleMapSearch {
-    func dropPinZoomIn(placemark:MKPlacemark){
+    
+    func dropPinZoomIn(placemark: MKPlacemark){
         // cache the pin
         selectedPin = placemark
         // clear existing pins
@@ -144,6 +145,13 @@ extension MapViewController: HandleMapSearch {
         let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
         let region = MKCoordinateRegion(center: placemark.coordinate, span: span)
         mapView.setRegion(region, animated: true)
+    }
+    
+    func dropPin(placemark: MKPlacemark) {
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = placemark.coordinate
+        annotation.title = placemark.name
+        mapView.addAnnotation(annotation)
     }
 }
 
