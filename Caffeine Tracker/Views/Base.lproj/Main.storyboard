@@ -15,25 +15,64 @@
             <objects>
                 <viewController title="Coffee Map" id="wtr-zz-Guz" customClass="MapViewController" customModule="Caffeine_Tracker" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="YKt-C5-DPy">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="749"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Rtr-vp-NzI">
-                                <rect key="frame" x="5" y="108" width="383" height="656"/>
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="666"/>
                                 <standardMapConfiguration key="preferredConfiguration"/>
                             </mapView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="A5q-9j-QlV">
+                                <rect key="frame" x="338" y="10" width="45" height="95"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e4V-tP-SjS">
+                                        <rect key="frame" x="0.0" y="0.0" width="45" height="45"/>
+                                        <color key="backgroundColor" systemColor="secondarySystemGroupedBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="45" id="Dcd-QZ-7AZ"/>
+                                            <constraint firstAttribute="height" constant="45" id="vQg-Yw-lAw"/>
+                                        </constraints>
+                                        <color key="tintColor" systemColor="secondaryLabelColor"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" image="location" catalog="system" imagePadding="10">
+                                            <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage"/>
+                                        </buttonConfiguration>
+                                        <connections>
+                                            <action selector="locationButtonPressed:" destination="wtr-zz-Guz" eventType="touchUpInside" id="kPg-5L-khw"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dKq-bB-Kjs">
+                                        <rect key="frame" x="0.0" y="50" width="45" height="45"/>
+                                        <color key="backgroundColor" systemColor="secondarySystemGroupedBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="45" id="Erg-0Y-SA1"/>
+                                            <constraint firstAttribute="height" constant="45" id="VtO-Bc-oUt"/>
+                                        </constraints>
+                                        <color key="tintColor" systemColor="secondaryLabelColor"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" image="cup.and.saucer" catalog="system" imagePadding="10"/>
+                                        <connections>
+                                            <action selector="coffeeButtonPressed:" destination="wtr-zz-Guz" eventType="touchUpInside" id="4MC-Qd-pDV"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="BiG-Wt-byy"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="Rtr-vp-NzI" firstAttribute="leading" secondItem="BiG-Wt-byy" secondAttribute="leading" constant="5" id="5eD-zg-pM8"/>
-                            <constraint firstItem="Rtr-vp-NzI" firstAttribute="top" secondItem="BiG-Wt-byy" secondAttribute="top" constant="5" id="YyU-a9-58d"/>
-                            <constraint firstItem="BiG-Wt-byy" firstAttribute="bottom" secondItem="Rtr-vp-NzI" secondAttribute="bottom" constant="5" id="eUX-eh-akG"/>
-                            <constraint firstItem="BiG-Wt-byy" firstAttribute="trailing" secondItem="Rtr-vp-NzI" secondAttribute="trailing" constant="5" id="fjY-j8-nUg"/>
+                            <constraint firstItem="Rtr-vp-NzI" firstAttribute="leading" secondItem="BiG-Wt-byy" secondAttribute="leading" id="5eD-zg-pM8"/>
+                            <constraint firstItem="BiG-Wt-byy" firstAttribute="trailing" secondItem="A5q-9j-QlV" secondAttribute="trailing" constant="10" id="KMV-TL-z5D"/>
+                            <constraint firstItem="A5q-9j-QlV" firstAttribute="top" secondItem="BiG-Wt-byy" secondAttribute="top" constant="10" id="Xlq-Zd-xEh"/>
+                            <constraint firstItem="Rtr-vp-NzI" firstAttribute="top" secondItem="BiG-Wt-byy" secondAttribute="top" id="YyU-a9-58d"/>
+                            <constraint firstItem="BiG-Wt-byy" firstAttribute="bottom" secondItem="Rtr-vp-NzI" secondAttribute="bottom" id="eUX-eh-akG"/>
+                            <constraint firstItem="BiG-Wt-byy" firstAttribute="trailing" secondItem="Rtr-vp-NzI" secondAttribute="trailing" id="fjY-j8-nUg"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="aMu-pT-0cf"/>
                     <connections>
+                        <outlet property="coffeeButton" destination="dKq-bB-Kjs" id="rHy-m6-RZH"/>
+                        <outlet property="locationButton" destination="e4V-tP-SjS" id="z3T-YM-hp1"/>
                         <outlet property="mapView" destination="Rtr-vp-NzI" id="O3s-Yw-FeU"/>
                     </connections>
                 </viewController>
@@ -51,21 +90,21 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="LocationCell" textLabel="zAN-tv-QrR" detailTextLabel="lLn-Xp-dxJ" style="IBUITableViewCellStyleSubtitle" id="lfQ-VJ-ueh">
-                                <rect key="frame" x="0.0" y="50" width="393" height="43.666667938232422"/>
+                                <rect key="frame" x="0.0" y="50" width="393" height="67.666664123535156"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="lfQ-VJ-ueh" id="4bm-Gf-0y1">
-                                    <rect key="frame" x="0.0" y="0.0" width="393" height="43.666667938232422"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="393" height="67.666664123535156"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="zAN-tv-QrR">
-                                            <rect key="frame" x="20" y="2" width="41" height="26.333333333333332"/>
+                                            <rect key="frame" x="20" y="13.999999999999998" width="41" height="26.333333333333332"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="lLn-Xp-dxJ">
-                                            <rect key="frame" x="19.999999999999996" y="28.333333333333332" width="43.666666666666664" height="14.333333333333334"/>
+                                            <rect key="frame" x="19.999999999999996" y="40.333333333333329" width="43.666666666666664" height="14.333333333333334"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="0.0"/>
                                             <nil key="textColor"/>
@@ -73,6 +112,7 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -1269,9 +1309,11 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="iF9-CB-SdY" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Map" image="map.fill" catalog="system" selectedImage="map.fill" id="aBi-yX-R8I"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="iqK-lx-Fbd">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="iqK-lx-Fbd">
                         <rect key="frame" x="0.0" y="59" width="393" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="barTintColor" systemColor="systemBackgroundColor"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -1286,9 +1328,11 @@
     <color key="tintColor" name="Light Blue"/>
     <resources>
         <image name="chart.bar.xaxis" catalog="system" width="128" height="99"/>
+        <image name="cup.and.saucer" catalog="system" width="128" height="91"/>
         <image name="cup.and.saucer.fill" catalog="system" width="128" height="91"/>
         <image name="gearshape.fill" catalog="system" width="128" height="123"/>
         <image name="house.fill" catalog="system" width="128" height="104"/>
+        <image name="location" catalog="system" width="128" height="121"/>
         <image name="map.fill" catalog="system" width="128" height="110"/>
         <namedColor name="AccentColor">
             <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
