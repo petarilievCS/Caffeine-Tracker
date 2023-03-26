@@ -21,6 +21,7 @@ class ChartViewController: UIViewController {
     @IBOutlet weak var mostCommonDrinkLabel: UILabel!
     @IBOutlet weak var totalDrinksLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var timePeriodControl: UISegmentedControl!
     
     let names: [String] = ["Coffee", "Energy Drinks", "Soft Drinks", "Tea", "Supplements", "Other"]
     let colors: [Color] = [Color(.systemBlue), Color(.systemRed), Color(.systemGreen), Color(.systemOrange), Color(.systemYellow), Color(.systemPurple)]
@@ -54,6 +55,11 @@ class ChartViewController: UIViewController {
         hostingController.didMove(toParent: self)
         hostingController.view.backgroundColor = .systemGray6
         hostingController.view.frame = chartView.bounds
+        
+        // Customize segmented control
+        let font = UIFont.systemFont(ofSize: 17)
+        timePeriodControl.setTitleTextAttributes([NSAttributedString.Key.font: font], for: .normal)
+        print(timePeriodControl.frame.size.height)
         
         // Add SwiftUI Chart (pie chart)
         initializePieChart()

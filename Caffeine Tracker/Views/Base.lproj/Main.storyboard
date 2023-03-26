@@ -125,7 +125,7 @@
             </objects>
             <point key="canvasLocation" x="4056" y="-1387"/>
         </scene>
-        <!--Charts-->
+        <!--Chart View Controller-->
         <scene sceneID="gDx-7U-2rM">
             <objects>
                 <viewController id="Qra-JW-hlt" customClass="ChartViewController" customModule="Caffeine_Tracker" customModuleProvider="target" sceneMemberID="viewController">
@@ -134,7 +134,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="enS-jr-Dsg">
-                                <rect key="frame" x="0.0" y="155" width="393" height="697"/>
+                                <rect key="frame" x="0.0" y="103" width="393" height="749"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SzI-gB-v6p" userLabel="ContentView">
                                         <rect key="frame" x="0.0" y="0.0" width="393" height="1070"/>
@@ -188,7 +188,7 @@
                                                         </subviews>
                                                     </stackView>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hPi-y1-Rol">
-                                                        <rect key="frame" x="20" y="100.00000000000003" width="323" height="224.99999999999997"/>
+                                                        <rect key="frame" x="20" y="100" width="323" height="225"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     </view>
                                                 </subviews>
@@ -326,7 +326,18 @@
                             <constraint firstItem="enS-jr-Dsg" firstAttribute="leading" secondItem="Xe1-gh-vAp" secondAttribute="leading" id="oMP-Qn-RTX"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Charts" id="uFo-nq-Hh4"/>
+                    <navigationItem key="navigationItem" id="uFo-nq-Hh4">
+                        <nil key="title"/>
+                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="eah-JO-OZw">
+                            <rect key="frame" x="131" y="5.6666666666666679" width="131" height="33"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <segments>
+                                <segment title="Week"/>
+                                <segment title="Month"/>
+                            </segments>
+                            <color key="selectedSegmentTintColor" name="AccentColor"/>
+                        </segmentedControl>
+                    </navigationItem>
                     <connections>
                         <outlet property="averageIntakeLabel" destination="2d2-5y-UEm" id="ZLZ-nW-v5P"/>
                         <outlet property="chartView" destination="hPi-y1-Rol" id="yq8-2D-wTA"/>
@@ -335,6 +346,7 @@
                         <outlet property="pieChartView" destination="1C3-BO-RNV" id="JQS-WD-BxW"/>
                         <outlet property="reportView" destination="pq7-f5-7r0" id="VXQ-9E-jQO"/>
                         <outlet property="tableView" destination="zCC-Fo-HXq" id="eku-tg-I9V"/>
+                        <outlet property="timePeriodControl" destination="eah-JO-OZw" id="p1f-YG-YIX"/>
                         <outlet property="totalDrinksLabel" destination="YAM-yU-CDr" id="fyF-0V-H5D"/>
                         <outlet property="totalntakeLabel" destination="Rhj-Td-TbU" id="omy-Y1-NGT"/>
                     </connections>
@@ -1118,8 +1130,8 @@
                         <color key="badgeColor" name="Light Blue"/>
                     </tabBarItem>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="U20-sD-se3">
-                        <rect key="frame" x="0.0" y="59" width="393" height="96"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="U20-sD-se3">
+                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
