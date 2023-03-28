@@ -10,6 +10,8 @@ import SwiftUI
 import Charts
 import SwiftPieChart
 
+
+
 class ChartViewController: UIViewController {
     
     @IBOutlet weak var reportView: UIView!
@@ -37,6 +39,7 @@ class ChartViewController: UIViewController {
         tableView.register(UINib(nibName: K.consumedDrinkCellIdentifier, bundle: nil), forCellReuseIdentifier: K.consumedDrinkCellIdentifier)
         tableView.delegate = self
         tableView.dataSource = self
+        timePeriodControl.addTarget(self, action: #selector(self.changePeriod), for: .valueChanged)
         
         // UI Customization
         reportView.layer.cornerRadius = K.defaultCornerRadius
@@ -88,9 +91,26 @@ class ChartViewController: UIViewController {
         
     }
     
+    // Reloads the chart view
+    func reloadChartView(for period: Period) {
+        var chartData: [ChartEntry] = []
+        
+        if period == .week {
+            for i in (0...6).reversed() {
+                chartData.append(.init(day: databaseManager.dayOfTheWeek(for: i), caffeineAmount: databaseManager.getAmountDaysAgo(i)))
+            }
+        } else {
+            let amounts: Array<Int> = databaseManager.getAmountsInLast(.month)
+            for i in 0..<amounts.count {
+                chartData.append(.init(day: String(i), caffeineAmount: amounts[i]))
+            }
+        }
+        
+        hostingController.rootView.chartData = chartData
+    }
+    
     // Initializes PieChartView
     func initializePieChart()  {
-        
         let values = databaseManager.getDrinkTypeAmounts()
         pieChartHostingController = UIHostingController(rootView:  PieChartView(values: values, colors: colors, names: names, totalAmount: databaseManager.getWeeklyTotal(), backgroundColor: Color(.systemGray6), widthFraction: 0.75, innerRadiusFraction: 0.65))
         addChild(pieChartHostingController)
@@ -390,6 +410,23 @@ extension ChartViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 44.0
+    }
+    
+}
+
+// MARK: - UISegmentedControl Methods
+
+extension ChartViewController {
+    
+    @objc func changePeriod() {
+        switch timePeriodControl.selectedSegmentIndex {
+        case 0:
+            reloadChartView(for: .week)
+        case 1:
+            reloadChartView(for: .month)
+        default:
+            print("Error: Invalid selector index")
+        }
     }
     
 }
