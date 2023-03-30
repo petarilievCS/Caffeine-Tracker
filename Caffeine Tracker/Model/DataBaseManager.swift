@@ -94,8 +94,8 @@ struct DataBaseManager {
     }
     
     // Returns amounts of caffeine for each drink type in the past week
-    mutating func getDrinkTypeAmounts() -> [Double] {
-        loadDrinksInLast(.week)
+    mutating func getDrinkTypeAmounts(in period: Period) -> [Double] {
+        loadDrinksInLast(period)
         var values: [Double] = Array(repeating: 0.0, count: 6)
         for consumedDrink in consumedDrinksArray {
             switch consumedDrink.icon {
@@ -158,13 +158,13 @@ struct DataBaseManager {
     }
     
     //  Returns average caffeine intake in the past 7 days
-    mutating func getWeekAverage() -> Double {
-        return Double(getWeeklyTotal() * 1000.0) / 7.0
+    mutating func getAverage(for period: Period) -> Double {
+        return Double(getTotal(for: period) * 1000.0) / 7.0
     }
     
     // Returns total amount of caffeine taken in the past 7 days
-    mutating func getWeeklyTotal() -> Double {
-        loadDrinksInLast(.week)
+    mutating func getTotal(for period: Period) -> Double {
+        loadDrinksInLast(period)
         var totalAmount: Double = 0.0
         for consumedDrink in consumedDrinksArray {
             totalAmount += Double(consumedDrink.initialAmount)
@@ -317,8 +317,8 @@ struct DataBaseManager {
     }
     
     // Returns top 3 drinks over the past week
-    mutating func getTopDrinks() -> [(ConsumedDrink, Int)] {
-        loadConsumedDrinks()
+    mutating func getTopDrinks(for period: Period) -> [(ConsumedDrink, Int)] {
+        loadDrinksInLast(period)
         var counter: [String : Int] = [String : Int]()
         
         for consumedDrink in consumedDrinksArray {
@@ -394,7 +394,7 @@ struct DataBaseManager {
             periodLength = 29
         }
         
-        var amounts: Array<Int> = Array(repeating: 0, count: periodLength)
+        var amounts: Array<Int> = Array(repeating: 0, count: periodLength + 1)
         var days: [Date] = []
         for i in 0...periodLength {
             let iDaysAgo = Calendar.current.date(byAdding: .day, value: -i, to: .now)
@@ -408,6 +408,15 @@ struct DataBaseManager {
             }
         }
         return amounts
+    }
+    
+    // Returns the day of the month x days ago
+    func getDayLabel(daysAgo: Int) -> String {
+        let date = Calendar.current.date(byAdding: .day, value: -(29 - daysAgo), to: .now)
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMM d"
+        let day = formatter.string(from: date!)
+        return day
     }
 }
 
