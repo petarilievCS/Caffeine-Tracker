@@ -10,6 +10,8 @@ import SwiftUI
 import Charts
 import SwiftPieChart
 
+
+
 class ChartViewController: UIViewController {
     
     @IBOutlet weak var reportView: UIView!
@@ -21,6 +23,7 @@ class ChartViewController: UIViewController {
     @IBOutlet weak var mostCommonDrinkLabel: UILabel!
     @IBOutlet weak var totalDrinksLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var timePeriodControl: UISegmentedControl!
     
     let names: [String] = ["Coffee", "Energy Drinks", "Soft Drinks", "Tea", "Supplements", "Other"]
     let colors: [Color] = [Color(.systemBlue), Color(.systemRed), Color(.systemGreen), Color(.systemOrange), Color(.systemYellow), Color(.systemPurple)]
@@ -36,6 +39,7 @@ class ChartViewController: UIViewController {
         tableView.register(UINib(nibName: K.consumedDrinkCellIdentifier, bundle: nil), forCellReuseIdentifier: K.consumedDrinkCellIdentifier)
         tableView.delegate = self
         tableView.dataSource = self
+        timePeriodControl.addTarget(self, action: #selector(self.changePeriod), for: .valueChanged)
         
         // UI Customization
         reportView.layer.cornerRadius = K.defaultCornerRadius
@@ -55,38 +59,63 @@ class ChartViewController: UIViewController {
         hostingController.view.backgroundColor = .systemGray6
         hostingController.view.frame = chartView.bounds
         
+        // Customize segmented control
+        let font = UIFont.systemFont(ofSize: 17)
+        timePeriodControl.setTitleTextAttributes([NSAttributedString.Key.font: font], for: .normal)
+        
         // Add SwiftUI Chart (pie chart)
         initializePieChart()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        averageIntakeLabel.text = String(format: "%d mg", Int(databaseManager.getWeekAverage()))
-        totalntakeLabel.text = String(format: "%.2f g", databaseManager.getWeeklyTotal())
-        
+        changePeriod()
+    }
+    
+    // Reloads the chart view
+    func reloadChartView(for period: Period) {
         var chartData: [ChartEntry] = []
-        for i in (0...6).reversed() {
-            chartData.append(.init(day: databaseManager.dayOfTheWeek(for: i), caffeineAmount: databaseManager.getAmountDaysAgo(i)))
+        
+        if period == .week {
+            for i in (0...6).reversed() {
+                chartData.append(.init(day: databaseManager.dayOfTheWeek(for: i), caffeineAmount: databaseManager.getAmountDaysAgo(i)))
+            }
+        } else {
+            let amounts: Array<Int> = databaseManager.getAmountsInLast(.month)
+            for i in 0..<amounts.count {
+                let date: Date = Calendar.current.date(byAdding: .day, value: -(29 - i), to: .now)!
+                let formatter = DateFormatter()
+                formatter.dateFormat = "d"
+                let day = formatter.string(from: date)
+                chartData.insert(.init(day: String(day), caffeineAmount: amounts[i]), at: 0)
+            }
         }
         hostingController.rootView.chartData = chartData
-        
-        let values = databaseManager.getDrinkTypeAmounts()
+    }
+    
+    // Reloads the average and total amounts in the chart view
+    func reloadAmounts(for period: Period) {
+        averageIntakeLabel.text = String(format: "%d mg", Int(databaseManager.getAverage(for: period)))
+        totalntakeLabel.text = String(format: "%.2f g", databaseManager.getTotal(for: period))
+    }
+    
+    // Reloads the pie chart {
+    func reloadPieChart(for period: Period) {
+        let values = databaseManager.getDrinkTypeAmounts(in: period)
         let maxIdx = values.firstIndex(of: values.max()!)
-        let totalAmount = databaseManager.getWeeklyTotal()
+        let totalAmount = databaseManager.getTotal(for: period)
         pieChartHostingController.rootView.values = values
         pieChartHostingController.rootView.totalAmount = totalAmount
         mostCommonDrinkLabel.text = names[maxIdx!]
         totalDrinksLabel.text = String(databaseManager.consumedDrinksArray.count)
         
-        topDrinks = databaseManager.getTopDrinks()
+        topDrinks = databaseManager.getTopDrinks(for: period)
         tableView.reloadData()
-        
     }
     
     // Initializes PieChartView
     func initializePieChart()  {
-        
-        let values = databaseManager.getDrinkTypeAmounts()
-        pieChartHostingController = UIHostingController(rootView:  PieChartView(values: values, colors: colors, names: names, totalAmount: databaseManager.getWeeklyTotal(), backgroundColor: Color(.systemGray6), widthFraction: 0.75, innerRadiusFraction: 0.65))
+        let values = databaseManager.getDrinkTypeAmounts(in: .week)
+        pieChartHostingController = UIHostingController(rootView:  PieChartView(values: values, colors: colors, names: names, totalAmount: databaseManager.getTotal(for: .week), backgroundColor: Color(.systemGray6), widthFraction: 0.75, innerRadiusFraction: 0.65))
         addChild(pieChartHostingController)
         pieChartView.addSubview(pieChartHostingController.view)
         pieChartHostingController.didMove(toParent: self)
@@ -114,8 +143,15 @@ class ChartViewController: UIViewController {
                 }
             }
             .chartXAxis {
-                AxisMarks(values: chartData.map { $0.day }) { day in
-                    AxisValueLabel()
+                switch chartData.count {
+                case 7:
+                    AxisMarks(values: chartData.map { $0.day }) { day in
+                        AxisValueLabel()
+                    }
+                default:
+                    AxisMarks(values: chartData.map { $0.day }) { day in
+                        day.index % 7 == 2 ? AxisValueLabel(databaseManager.getDayLabel(daysAgo: day.index)) : nil
+                    }
                 }
             }
         }
@@ -171,7 +207,7 @@ class ChartViewController: UIViewController {
             .aspectRatio(1, contentMode: .fit)
         }
     }
-
+    
     struct PieSliceData {
         var startAngle: Angle
         var endAngle: Angle
@@ -273,7 +309,6 @@ class ChartViewController: UIViewController {
                                 .foregroundColor(Color(UIColor.label))
                         }
                     }
-                    // PieChartRows(colors: self.colors, names: self.names, values: self.values.map { String($0) }, percents: self.values.map { String(format: "%.0f%%", $0 * 100 / self.values.reduce(0, +)) })
                 }
                 .background(self.backgroundColor)
                 .foregroundColor(Color.white)
@@ -300,7 +335,7 @@ class ChartViewController: UIViewController {
                                 .font(.system(size: 17.0))
                                 .foregroundColor(Color(UIColor.secondaryLabel))
                             Spacer()
-
+                            
                         }
                     }
                 }
@@ -314,7 +349,7 @@ class ChartViewController: UIViewController {
                                 .font(.system(size: 17.0))
                                 .foregroundColor(Color(UIColor.secondaryLabel))
                             Spacer()
-
+                            
                         }
                     }
                 }
@@ -322,14 +357,14 @@ class ChartViewController: UIViewController {
             
         }
     }
-
+    
 }
 
 extension Date {
     var startOfDay: Date {
         return Calendar.current.startOfDay(for: self)
     }
-
+    
     var endOfDay: Date {
         var components = DateComponents()
         components.day = 1
@@ -352,7 +387,7 @@ extension Date {
         let components = Calendar.current.dateComponents([.year, .month], from: startOfDay)
         return Calendar.current.date(from: components)!
     }
-
+    
     var endOfMonth: Date {
         var components = DateComponents()
         components.month = 1
@@ -384,6 +419,27 @@ extension ChartViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 44.0
+    }
+    
+}
+
+// MARK: - UISegmentedControl Methods
+
+extension ChartViewController {
+    
+    @objc func changePeriod() {
+        switch timePeriodControl.selectedSegmentIndex {
+        case 0:
+            reloadAmounts(for: .week)
+            reloadChartView(for: .week)
+            reloadPieChart(for: .week)
+        case 1:
+            reloadAmounts(for: .month)
+            reloadChartView(for: .month)
+            reloadPieChart(for: .month)
+        default:
+            print("Error: Invalid selector index")
+        }
     }
     
 }

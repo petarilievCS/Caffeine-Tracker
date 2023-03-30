@@ -94,9 +94,8 @@ struct DataBaseManager {
     }
     
     // Returns amounts of caffeine for each drink type in the past week
-    mutating func getDrinkTypeAmounts() -> [Double] {
-        clearDrinks()
-        loadConsumedDrinks()
+    mutating func getDrinkTypeAmounts(in period: Period) -> [Double] {
+        loadDrinksInLast(period)
         var values: [Double] = Array(repeating: 0.0, count: 6)
         for consumedDrink in consumedDrinksArray {
             switch consumedDrink.icon {
@@ -159,14 +158,13 @@ struct DataBaseManager {
     }
     
     //  Returns average caffeine intake in the past 7 days
-    mutating func getWeekAverage() -> Double {
-        return Double(getWeeklyTotal() * 1000.0) / 7.0
+    mutating func getAverage(for period: Period) -> Double {
+        return Double(getTotal(for: period) * 1000.0) / 7.0
     }
     
     // Returns total amount of caffeine taken in the past 7 days
-    mutating func getWeeklyTotal() -> Double {
-        clearDrinks()
-        loadConsumedDrinks()
+    mutating func getTotal(for period: Period) -> Double {
+        loadDrinksInLast(period)
         var totalAmount: Double = 0.0
         for consumedDrink in consumedDrinksArray {
             totalAmount += Double(consumedDrink.initialAmount)
@@ -251,18 +249,6 @@ struct DataBaseManager {
         return result
     }
     
-    // Removes all drinks in the array that have been added more than a week ago
-    mutating func clearDrinks() {
-        loadConsumedDrinks()
-        
-        for consumedDrink in consumedDrinksArray {
-            if !isDateInPastWeek(consumedDrink.timeConsumed!) {
-                context.delete(consumedDrink)
-                let idx = consumedDrinksArray.firstIndex(of: consumedDrink)!
-                consumedDrinksArray.remove(at: idx)
-            }
-        }
-    }
     
     // Returns true if date is within past 7 days, false otherwise
     func isDateInPastWeek(_ date: Date) -> Bool {
@@ -304,6 +290,17 @@ struct DataBaseManager {
         }
     }
     
+    // Load all consumed drinks matching predicate
+    mutating func loadConsumedDrinks(with predicate: NSCompoundPredicate) {
+        do {
+            let request = NSFetchRequest<ConsumedDrink>(entityName: "ConsumedDrink")
+            request.predicate = predicate
+            consumedDrinksArray = try context.fetch(request)
+        } catch {
+            print("Error while loading data")
+        }
+    }
+    
     // Save current context
     mutating func saveConsumedDrinks() {
         do {
@@ -320,8 +317,8 @@ struct DataBaseManager {
     }
     
     // Returns top 3 drinks over the past week
-    mutating func getTopDrinks() -> [(ConsumedDrink, Int)] {
-        loadConsumedDrinks()
+    mutating func getTopDrinks(for period: Period) -> [(ConsumedDrink, Int)] {
+        loadDrinksInLast(period)
         var counter: [String : Int] = [String : Int]()
         
         for consumedDrink in consumedDrinksArray {
@@ -364,6 +361,63 @@ struct DataBaseManager {
         return consumedDrinksArray[0]
     }
     
+    // Returns drinks for the past month
+    mutating func loadDrinksInLast(_ period: Period) {
+        
+        var periodComponent: Calendar.Component
+        var periodValue = 0
+        switch period {
+        case .month:
+            periodComponent = .month
+            periodValue = -1
+        case .week:
+            periodComponent = .day
+            periodValue = -7
+        }
+        
+        let fromDate = Calendar.current.startOfDay(for: Calendar.current.date(byAdding: periodComponent, value: periodValue, to: .now)!)
+        let toPredicate = NSPredicate(format: "%@ >= %K", Date.now as NSDate, #keyPath(ConsumedDrink.timeConsumed))
+        let fromPredicate = NSPredicate(format: "%@ <= %K", fromDate as NSDate, #keyPath(ConsumedDrink.timeConsumed))
+        let compoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [toPredicate, fromPredicate])
+        loadConsumedDrinks(with: compoundPredicate)
+    }
+    
+    // Returns an array of size 30, where each entry is the caffeine amount consumed i days ago
+    mutating func getAmountsInLast(_ period: Period) -> Array<Int> {
+        loadDrinksInLast(period)
+        var periodLength = 0
+        
+        switch period {
+        case .week:
+            periodLength = 6
+        case .month:
+            periodLength = 29
+        }
+        
+        var amounts: Array<Int> = Array(repeating: 0, count: periodLength + 1)
+        var days: [Date] = []
+        for i in 0...periodLength {
+            let iDaysAgo = Calendar.current.date(byAdding: .day, value: -i, to: .now)
+            days.append(iDaysAgo!)
+        }
+        for consumedDrink in consumedDrinksArray {
+            for i in 0..<days.count {
+                if Calendar.current.isDate(consumedDrink.timeConsumed!, inSameDayAs: days[i]) {
+                    amounts[i] += Int(consumedDrink.initialAmount)
+                }
+            }
+        }
+        return amounts
+    }
+    
+    // Returns the day of the month x days ago
+    func getDayLabel(daysAgo: Int) -> String {
+        let date = Calendar.current.date(byAdding: .day, value: -(29 - daysAgo), to: .now)
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMM d"
+        let day = formatter.string(from: date!)
+        return day
+    }
 }
 
 // Entry in chart
