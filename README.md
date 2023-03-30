@@ -10,3 +10,4 @@ in the bloodstream. The app is developed in Swift, and uses CoreData to store th
 
 <img src="https://user-images.githubusercontent.com/90746623/221989375-6b3609f3-f53f-42ae-951d-9e5ba23b9209.jpeg" width="266" height="576"/><img src="https://user-images.githubusercontent.com/90746623/226739668-66e21391-2685-4f23-85af-72c1c494ab3f.png" width="266" height="576"/><img src="https://user-images.githubusercontent.com/90746623/221989374-b3cd8bc1-f128-4477-ad85-412651a710e6.jpeg" width="266" height="576"/>
 
+ <img/> <img src="https://user-images.githubusercontent.com/90746623/228725451-01519510-d12a-4a97-9682-8370992b6413.gif" width="266" height="576"/>!
