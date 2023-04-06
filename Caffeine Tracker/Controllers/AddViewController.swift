@@ -19,6 +19,7 @@ class AddViewController: UIViewController {
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var caffeineVC: CaffeineViewController? = nil
     let drinkTypes: [String] = ["Espresso", "Hot Coffee", "Cold Coffee", "Canned Coffee", "Soft Drink", "Energy Drink", "Energy Shot", "Chocolate", "Supplement", "Tea", "Iced Tea"]
+    var databaseManager = DataBaseManager()
     
     var drinkName: String?
     var drinkCaffeine: String?
@@ -45,6 +46,7 @@ class AddViewController: UIViewController {
         
         // Hide delete view if adding
         deleteView.isHidden = !editVC
+        
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -115,7 +117,7 @@ class AddViewController: UIViewController {
         // Present alert to ask user if they want to delete for sure
         let alert = UIAlertController(title: "", message: "Are you sure you want to remove the drink?", preferredStyle: .alert)
         let yesAction = UIAlertAction(title: "Yes", style: .default) { action in
-            self.loadDrinks()
+            self.drinkArray = self.databaseManager.getDrinks()
             self.context.delete(self.drinkArray[self.selectedIndex!])
             self.drinkArray.remove(at: self.selectedIndex!)
             self.saveDrinks()
@@ -217,7 +219,7 @@ extension AddViewController: UITableViewDelegate, UITableViewDataSource {
         let iconCell = self.tableView.cellForRow(at: IndexPath(row: 1, section: 0)) as! IconCell
         if indexPath.row == 1 {
             let alert = UIAlertController(title: "Select Drink Type", message: "\n\n\n\n\n", preferredStyle: .alert)
-            alert.isModalInPopover = true
+            alert.isModalInPresentation = true
             let pickerView = UIPickerView(frame: CGRect(x: 5, y: 20, width: 250, height: 140))
             alert.view.addSubview(pickerView)
             pickerView.delegate = self

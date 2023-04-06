@@ -261,10 +261,11 @@ class ChartViewController: UIViewController {
             GeometryReader { geometry in
                 VStack{
                     ZStack{
-                        ForEach(0..<self.values.count){ i in
+                        ForEach(0..<self.values.count, id: \.self) { i in
                             PieSliceView(pieSliceData: self.slices[i])
                                 .scaleEffect(self.activeIndex == i ? 1.05 : 1)
-                                .animation(Animation.spring())
+                                .animation(Animation.spring(), value: self.activeIndex == i ? 1.05 : 1)
+                      
                         }
                         .frame(width: geometry.size.width, height: geometry.size.width)
                         .gesture(
@@ -326,7 +327,7 @@ class ChartViewController: UIViewController {
             Spacer()
             HStack {
                 VStack{
-                    ForEach(0..<(self.values.count / 2)) { i in
+                    ForEach(0..<(self.values.count / 2), id: \.self) { i in
                         HStack {
                             RoundedRectangle(cornerRadius: 5.0)
                                 .fill(self.colors[i])
@@ -340,7 +341,7 @@ class ChartViewController: UIViewController {
                     }
                 }
                 VStack{
-                    ForEach((self.values.count / 2)..<self.values.count) { i in
+                    ForEach((self.values.count / 2)..<self.values.count, id: \.self) { i in
                         HStack {
                             RoundedRectangle(cornerRadius: 5.0)
                                 .fill(self.colors[i])

@@ -14,6 +14,7 @@ class CaffeineViewController: UITableViewController {
     
     var drinkArray = [Drink]()
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    let databaseManager = DataBaseManager()
 
     override func viewDidLoad() {
         super.viewDidLoad()
