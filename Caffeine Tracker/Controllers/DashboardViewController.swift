@@ -276,6 +276,6 @@ extension DashboardViewController: UNUserNotificationCenterDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter,
                                 willPresent notification: UNNotification,
                                 withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-         completionHandler([.sound, .alert])
+        completionHandler([.sound, .list, .banner])
     }
 }

@@ -98,7 +98,7 @@ extension EditViewController: UITableViewDelegate, UITableViewDataSource {
         // Drink type selection
         if indexPath.row == 1 {
             let alert = UIAlertController(title: "Select Drink Type", message: "\n\n\n\n\n", preferredStyle: .alert)
-            alert.isModalInPopover = true
+            alert.isModalInPresentation = true
             let pickerView = UIPickerView(frame: CGRect(x: 5, y: 20, width: 250, height: 140))
             alert.view.addSubview(pickerView)
             pickerView.delegate = self

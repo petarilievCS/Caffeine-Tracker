@@ -82,6 +82,24 @@ struct DataBaseManager {
         } catch {
             print("Error while loading data")
         }
+        drinksArray = drinksArray.sorted { first, second in
+            return first.name!.capitalized < second.name!.capitalized
+        }
+    }
+    
+    // Returns caffeine drinks from CoreData
+    mutating func getDrinks(with request: NSFetchRequest<Drink> = Drink.fetchRequest(), and predicate: NSPredicate? = nil) -> [Drink] {
+        var returnArray: [Drink] = []
+        request.predicate = predicate
+        do {
+            returnArray = try context.fetch(request)
+        } catch {
+            print("Error while loading data")
+        }
+        returnArray = returnArray.sorted { first, second in
+            return first.name!.capitalized < second.name!.capitalized
+        }
+        return returnArray
     }
     
     // Saves given drinks to CoreData
