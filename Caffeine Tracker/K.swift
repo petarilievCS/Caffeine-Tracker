@@ -9,6 +9,16 @@ import Foundation
 
 struct K {
     
+    struct UI {
+        static let settingCellHeight: CGFloat = 55.0
+    }
+    
+    struct ID {
+        static let switchCell = "SettingsCell"
+        static let settingCell = "RegularSettingsCell"
+        static let detailSettingCell = "VersionSettingsCell"
+    }
+    
     // Identifiers
     static let caffeineCellIdentifier = "CaffeineCell"
     static let addDrinkCellIdentifier = "AddDrinkCell"
@@ -20,9 +30,6 @@ struct K {
     static let dashboardToDrinksSegue = "dashboardToDrinks"
     static let consumedDrinkCellIdentifier = "ConsumedDrinkCell"
     static let aboveLimitNotifiicationIdentifier = "aboveLimitNotification"
-    static let settingsCellIdentifier = "SettingsCell"
-    static let regularSettingsCellIdentifier = "RegularSettingsCell"
-    static let versionSettingsCellIdentifier = "VersionSettingsCell"
     static let dashboardToDrinkSegueIdentifier = "dashboardToDrink"
     static let drinkTypePopoverSegueIdentifier = "drinkTypePopoverSegue"
     static let drinkTypePopoverIdentifier = "DrinkTypePopover"

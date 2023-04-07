@@ -15,12 +15,21 @@ class SettingsViewController: UIViewController {
     let appStoreReviewUrlString = "https://itunes.apple.com/app/id1665493398?action=write-review"
     let email = "petariliev2002@gmail.com"
     
+    var settings: [Setting] = [
+        Setting(title: "Notifications", image: UIImage(named: "Notifications.png")!),
+        Setting(title: "Caffeine Limit", image: UIImage(named: "CaffeineLimit.png")!),
+        Setting(title: "App Store", image: UIImage(named: "AppStore.png")!),
+        Setting(title:  "Review", image: UIImage(named: "Favorite.png")!),
+        Setting(title: "Email", image: UIImage(named: "Mail.png")!),
+        Setting(title: "Share", image:  UIImage(named: "Share.png")!),
+    ]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.register(UINib(nibName: K.settingsCellIdentifier, bundle: .main), forCellReuseIdentifier: K.settingsCellIdentifier)
-        tableView.register(UINib(nibName: K.regularSettingsCellIdentifier, bundle: .main), forCellReuseIdentifier: K.regularSettingsCellIdentifier)
+        tableView.register(UINib(nibName: K.ID.switchCell, bundle: .main), forCellReuseIdentifier: K.ID.switchCell)
+        tableView.register(UINib(nibName: K.ID.settingCell, bundle: .main), forCellReuseIdentifier: K.ID.settingCell)
         
         // Customize UI
         tableView.layer.cornerRadius = 15.0
@@ -36,11 +45,11 @@ class SettingsViewController: UIViewController {
 extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 7
+        return settings.count + 1 // +1 for version cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 55.0
+        return K.UI.settingCellHeight
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -81,43 +90,27 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
             activityViewController.popoverPresentationController?.sourceView = self.view
             self.present(activityViewController, animated: true, completion: nil)
         }
-        
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.row == 0 {
-            let switchCell = tableView.dequeueReusableCell(withIdentifier: K.settingsCellIdentifier, for: indexPath) as! SettingsCell
+        
+        switch indexPath.row {
+        case 0: // Notification cell
+            let switchCell = tableView.dequeueReusableCell(withIdentifier: K.ID.switchCell, for: indexPath) as! SwitchCell
             switchCell.title.text = "Notifications"
             return switchCell
-        } else if indexPath.row == 1 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: K.regularSettingsCellIdentifier, for: indexPath) as! RegularSettingsCell
-            cell.title.text = "Caffeine Limit"
-            cell.icon.image = UIImage(named: "CaffeineLimit.png")!
-            return cell
-        } else if indexPath.row == 2 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: K.regularSettingsCellIdentifier, for: indexPath) as! RegularSettingsCell
-            cell.title.text = "App Store"
-            cell.icon.image = UIImage(named: "AppStore.png")!
-            return cell
-        } else if indexPath.row == 3 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: K.regularSettingsCellIdentifier, for: indexPath) as! RegularSettingsCell
-            cell.title.text = "Review"
-            cell.icon.image = UIImage(named: "Favorite.png")!
-            return cell
-        } else if indexPath.row == 4 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: K.regularSettingsCellIdentifier, for: indexPath) as! RegularSettingsCell
-            cell.title.text = "Email"
-            cell.icon.image = UIImage(named: "Mail.png")!
-            return cell
-        } else if indexPath.row == 5 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: K.regularSettingsCellIdentifier, for: indexPath) as! RegularSettingsCell
-            cell.title.text = "Share"
-            cell.icon.image = UIImage(named: "Share.png")!
-            return cell
-        } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: K.versionSettingsCellIdentifier, for: indexPath)
+        case settings.count: // Version cell
+            let versionCell = tableView.dequeueReusableCell(withIdentifier: K.ID.detailSettingCell, for: indexPath)
+            if let appVersion = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String {
+                versionCell.detailTextLabel!.text = appVersion
+            }
+            return versionCell
+        default:
+            let cell = tableView.dequeueReusableCell(withIdentifier: K.ID.settingCell, for: indexPath) as! SettingCell
+            cell.title.text = settings[indexPath.row].title
+            cell.icon.image = settings[indexPath.row].image
             return cell
         }
     }

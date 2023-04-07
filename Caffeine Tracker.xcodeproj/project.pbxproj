@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		E604881929896A3700B25167 /* ChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E604881829896A3700B25167 /* ChartViewController.swift */; };
 		E604881B298B42F800B25167 /* DataBaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E604881A298B42F800B25167 /* DataBaseManager.swift */; };
+		E605227A29E0B95500DDC492 /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = E605227929E0B95500DDC492 /* Setting.swift */; };
 		E60A5A0E29D340A700F70145 /* Period.swift in Sources */ = {isa = PBXBuildFile; fileRef = E60A5A0D29D340A700F70145 /* Period.swift */; };
 		E611E986296C0BFA00592296 /* MetabolismCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E611E985296C0BFA00592296 /* MetabolismCalculator.swift */; };
 		E611E989296C1F3E00592296 /* SwipeCellKit in Frameworks */ = {isa = PBXBuildFile; productRef = E611E988296C1F3E00592296 /* SwipeCellKit */; };
@@ -18,9 +19,9 @@
 		E679DCAD2966E794005CBB6C /* EFCountingLabel in Frameworks */ = {isa = PBXBuildFile; productRef = E679DCAC2966E794005CBB6C /* EFCountingLabel */; };
 		E679DCB329688B3D005CBB6C /* MKRingProgressView in Frameworks */ = {isa = PBXBuildFile; productRef = E679DCB229688B3D005CBB6C /* MKRingProgressView */; };
 		E6907DC4299AABDD00AE005B /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6907DC3299AABDD00AE005B /* SettingsViewController.swift */; };
-		E6907DC7299AB11D00AE005B /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6907DC5299AB11D00AE005B /* SettingsCell.swift */; };
+		E6907DC7299AB11D00AE005B /* SwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6907DC5299AB11D00AE005B /* SwitchCell.swift */; };
 		E6907DC8299AB11D00AE005B /* SettingsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6907DC6299AB11D00AE005B /* SettingsCell.xib */; };
-		E6907DCB299AE12800AE005B /* RegularSettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6907DC9299AE12800AE005B /* RegularSettingsCell.swift */; };
+		E6907DCB299AE12800AE005B /* SettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6907DC9299AE12800AE005B /* SettingCell.swift */; };
 		E6907DCC299AE12800AE005B /* RegularSettingsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6907DCA299AE12800AE005B /* RegularSettingsCell.xib */; };
 		E6996C5B295E0A5E00E35FC1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6996C5A295E0A5E00E35FC1 /* AppDelegate.swift */; };
 		E6996C5D295E0A5E00E35FC1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6996C5C295E0A5E00E35FC1 /* SceneDelegate.swift */; };
@@ -56,14 +57,15 @@
 /* Begin PBXFileReference section */
 		E604881829896A3700B25167 /* ChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewController.swift; sourceTree = "<group>"; };
 		E604881A298B42F800B25167 /* DataBaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseManager.swift; sourceTree = "<group>"; };
+		E605227929E0B95500DDC492 /* Setting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Setting.swift; sourceTree = "<group>"; };
 		E60A5A0D29D340A700F70145 /* Period.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Period.swift; sourceTree = "<group>"; };
 		E611E985296C0BFA00592296 /* MetabolismCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetabolismCalculator.swift; sourceTree = "<group>"; };
 		E611E98E296ED16300592296 /* ConsumedDrinkCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsumedDrinkCell.swift; sourceTree = "<group>"; };
 		E611E98F296ED16300592296 /* ConsumedDrinkCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConsumedDrinkCell.xib; sourceTree = "<group>"; };
 		E6907DC3299AABDD00AE005B /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
-		E6907DC5299AB11D00AE005B /* SettingsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCell.swift; sourceTree = "<group>"; };
+		E6907DC5299AB11D00AE005B /* SwitchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchCell.swift; sourceTree = "<group>"; };
 		E6907DC6299AB11D00AE005B /* SettingsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsCell.xib; sourceTree = "<group>"; };
-		E6907DC9299AE12800AE005B /* RegularSettingsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegularSettingsCell.swift; sourceTree = "<group>"; };
+		E6907DC9299AE12800AE005B /* SettingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCell.swift; sourceTree = "<group>"; };
 		E6907DCA299AE12800AE005B /* RegularSettingsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RegularSettingsCell.xib; sourceTree = "<group>"; };
 		E6996C57295E0A5E00E35FC1 /* Caffeine Tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Caffeine Tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6996C5A295E0A5E00E35FC1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -177,9 +179,9 @@
 				E69E0284296309CA00F4C142 /* NumberCell.xib */,
 				E611E98E296ED16300592296 /* ConsumedDrinkCell.swift */,
 				E611E98F296ED16300592296 /* ConsumedDrinkCell.xib */,
-				E6907DC5299AB11D00AE005B /* SettingsCell.swift */,
+				E6907DC5299AB11D00AE005B /* SwitchCell.swift */,
 				E6907DC6299AB11D00AE005B /* SettingsCell.xib */,
-				E6907DC9299AE12800AE005B /* RegularSettingsCell.swift */,
+				E6907DC9299AE12800AE005B /* SettingCell.swift */,
 				E6907DCA299AE12800AE005B /* RegularSettingsCell.xib */,
 				E6BA790129AD2780004FB910 /* DateCell.swift */,
 				E6BA790229AD2780004FB910 /* DateCell.xib */,
@@ -196,6 +198,7 @@
 				E6BB92CB29B7B7C9005D07F6 /* caffeine.json */,
 				E6BB92CD29B7B871005D07F6 /* Drink.swift */,
 				E60A5A0D29D340A700F70145 /* Period.swift */,
+				E605227929E0B95500DDC492 /* Setting.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -319,9 +322,10 @@
 				E69FA8582965B2D40025EEBA /* AdjustViewController.swift in Sources */,
 				E6996C75295E0B3E00E35FC1 /* K.swift in Sources */,
 				E69E02812963058900F4C142 /* IconCell.swift in Sources */,
-				E6907DC7299AB11D00AE005B /* SettingsCell.swift in Sources */,
+				E6907DC7299AB11D00AE005B /* SwitchCell.swift in Sources */,
+				E605227A29E0B95500DDC492 /* Setting.swift in Sources */,
 				E611E986296C0BFA00592296 /* MetabolismCalculator.swift in Sources */,
-				E6907DCB299AE12800AE005B /* RegularSettingsCell.swift in Sources */,
+				E6907DCB299AE12800AE005B /* SettingCell.swift in Sources */,
 				E6996C65295E0A5E00E35FC1 /* Caffeine_Tracker.xcdatamodeld in Sources */,
 				E6996C5B295E0A5E00E35FC1 /* AppDelegate.swift in Sources */,
 				E60A5A0E29D340A700F70145 /* Period.swift in Sources */,
