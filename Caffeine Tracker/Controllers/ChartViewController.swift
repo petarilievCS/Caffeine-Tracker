@@ -411,7 +411,7 @@ extension ChartViewController: UITableViewDelegate, UITableViewDataSource {
         let consumedDrink = topDrinks[indexPath.row]
         cell.title.text = consumedDrink.0.name
         cell.icon.image = UIImage(named: consumedDrink.0.icon!)
-        cell.detail.text = String(consumedDrink.1)
+        cell.detail.text = String(consumedDrink.1) + (orderByAmount ? " mg" : "")
         return cell
     }
     
