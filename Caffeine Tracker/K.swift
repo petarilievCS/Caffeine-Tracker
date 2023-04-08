@@ -19,6 +19,17 @@ struct K {
         static let detailSettingCell = "VersionSettingsCell"
     }
     
+    struct defaults {
+        static let order: String = "orderByCaffeine"
+        static let dailyAmount = "dailyAmount"
+        static let metablosimAmount = "metabolismAmount"
+        static let numberOfDrinks = "numberOfDrinks"
+        static let lastRefreshed = "lastRefreshed"
+        static let amountNotificationSent = "amountNotificationSent"
+        static let notificationPermission = "notificationPermission"
+        static let dailyLimit = "dailyLimit"
+    }
+    
     // Identifiers
     static let caffeineCellIdentifier = "CaffeineCell"
     static let addDrinkCellIdentifier = "AddDrinkCell"
@@ -35,15 +46,6 @@ struct K {
     static let drinkTypePopoverIdentifier = "DrinkTypePopover"
     static let dateCellIdentifier = "DateCell"
     static let locationCellIdentifier = "LocationCell"
-    
-    // UserDefaults names
-    static let dailyAmount = "dailyAmount"
-    static let metablosimAmount = "metabolismAmount"
-    static let numberOfDrinks = "numberOfDrinks"
-    static let lastRefreshed = "lastRefreshed"
-    static let amountNotificationSent = "amountNotificationSent"
-    static let notificationPermission = "notificationPermission"
-    static let dailyLimit = "dailyLimit"
     
     // UI constants
     static let defaultCornerRadius = 15.0

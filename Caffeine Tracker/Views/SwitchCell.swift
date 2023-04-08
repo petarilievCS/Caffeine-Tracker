@@ -16,7 +16,7 @@ class SwitchCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        notificationSwitch.isOn = UserDefaults.standard.bool(forKey: K.notificationPermission)
+        notificationSwitch.isOn = UserDefaults.standard.bool(forKey: K.defaults.notificationPermission)
         notificationSwitch.addTarget(self, action: #selector(switchChanged), for: UIControl.Event.valueChanged)
         
     }
@@ -30,9 +30,9 @@ class SwitchCell: UITableViewCell {
     @objc func switchChanged(mySwitch: UISwitch) {
         let value = mySwitch.isOn
         if value {
-            UserDefaults.standard.set(true, forKey: K.notificationPermission)
+            UserDefaults.standard.set(true, forKey: K.defaults.notificationPermission)
         } else {
-            UserDefaults.standard.set(false, forKey: K.notificationPermission)
+            UserDefaults.standard.set(false, forKey: K.defaults.notificationPermission)
         }
     }
     
