@@ -61,7 +61,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
             
             let actionOK = UIAlertAction(title: "OK", style: .default) { action in
                 let newLimit = Int(alert.textFields![0].text!)
-                UserDefaults.standard.set(newLimit, forKey: K.dailyLimit)
+                UserDefaults.standard.set(newLimit, forKey: K.defaults.dailyLimit)
             }
             let actionCancel = UIAlertAction(title: "Cancel", style: .cancel)
             alert.addAction(actionOK)

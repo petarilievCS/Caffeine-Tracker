@@ -115,7 +115,7 @@ class DashboardViewController: UIViewController {
     func setupRingProgressView() {
         
         let currentDailyAmount = metabolismCalculator.calculateTotalAmount()
-        let dailyLimit = UserDefaults.standard.integer(forKey: K.dailyLimit)
+        let dailyLimit = UserDefaults.standard.integer(forKey: K.defaults.dailyLimit)
         ringProgressView.startColor = currentDailyAmount > dailyLimit ? UIColor(named: "Red")! : UIColor(named: "Green")!
         ringProgressView.endColor = currentDailyAmount > dailyLimit ? UIColor(named: "Red")! : UIColor(named: "Green")!
         ringProgressView.ringWidth = 25
@@ -126,7 +126,7 @@ class DashboardViewController: UIViewController {
     // Gets the current percentage of the allowed daily caffeine amount that the user has logged in
     func getProgress() -> Double {
         let consumedCaffeine = metabolismCalculator.calculateTotalAmount()
-        return Double(consumedCaffeine) / Double(UserDefaults.standard.integer(forKey: K.dailyLimit))
+        return Double(consumedCaffeine) / Double(UserDefaults.standard.integer(forKey: K.defaults.dailyLimit))
     }
     
     // Updates the ring progress view
@@ -143,10 +143,10 @@ class DashboardViewController: UIViewController {
         let dailyAmount = metabolismCalculator.calculateTotalAmount()
         
         
-        dailyAmountLabel.text = "\(dailyAmount)/\(UserDefaults.standard.integer(forKey: K.dailyLimit)) mg"
+        dailyAmountLabel.text = "\(dailyAmount)/\(UserDefaults.standard.integer(forKey: K.defaults.dailyLimit)) mg"
         
         // Send notification if caffeine intake is too high and notification hasn't been sent already today
-        if dailyAmount > UserDefaults.standard.integer(forKey: K.dailyLimit) && UserDefaults.standard.bool(forKey: K.notificationPermission) && !UserDefaults.standard.bool(forKey: K.amountNotificationSent) {
+        if dailyAmount > UserDefaults.standard.integer(forKey: K.defaults.dailyLimit) && UserDefaults.standard.bool(forKey: K.defaults.notificationPermission) && !UserDefaults.standard.bool(forKey: K.defaults.amountNotificationSent) {
             // Notification content
             let notificationConent: UNMutableNotificationContent = UNMutableNotificationContent()
             notificationConent.title = "Caffeine Up"
@@ -158,13 +158,13 @@ class DashboardViewController: UIViewController {
             let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponent, repeats: false)
             
             UNUserNotificationCenter.current().add(UNNotificationRequest(identifier: K.aboveLimitNotifiicationIdentifier, content: notificationConent, trigger: trigger))
-            UserDefaults.standard.set(true, forKey: K.amountNotificationSent)
+            UserDefaults.standard.set(true, forKey: K.defaults.amountNotificationSent)
         }
         
         drinkNumberLabel.text = String(metabolismCalculator.getNumberOfDrinks())
         metabolismAmountLabel.text = "\(metabolismCalculator.calculateMetabolismAmount()) mg"
         // Change color if caffeine consumpton too high
-        if dailyAmount > UserDefaults.standard.integer(forKey: K.dailyLimit) {
+        if dailyAmount > UserDefaults.standard.integer(forKey: K.defaults.dailyLimit) {
             dailyAmountLabel.textColor = UIColor(named: "Red")
             // TODO: Change color
         } else {

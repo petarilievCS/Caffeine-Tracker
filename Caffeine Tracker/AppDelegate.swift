@@ -16,8 +16,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let defaults = UserDefaults.standard
         // Check if daily limit hasn't been set
-        if defaults.integer(forKey: K.dailyLimit) == 0 {
-            defaults.set(400, forKey: K.dailyLimit)
+        if defaults.integer(forKey: K.defaults.dailyLimit) == 0 {
+            defaults.set(400, forKey: K.defaults.dailyLimit)
         }
         
         // Request authorization for notifications
@@ -28,8 +28,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     if error != nil {
                         print("Notifications disabled")
                     }
-                    if granted && defaults.bool(forKey: K.notificationPermission) {
-                        defaults.set(true, forKey: K.notificationPermission)
+                    if granted && defaults.bool(forKey: K.defaults.notificationPermission) {
+                        defaults.set(true, forKey: K.defaults.notificationPermission)
                     }
                 }
             }
@@ -37,7 +37,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Randomly give permission to send notification again
         if Int.random(in: 0...20) == 15 {
-            defaults.set(false, forKey: K.amountNotificationSent)
+            defaults.set(false, forKey: K.defaults.amountNotificationSent)
         }
         
         return true

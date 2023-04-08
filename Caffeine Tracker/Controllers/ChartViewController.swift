@@ -14,6 +14,7 @@ import SwiftPieChart
 
 class ChartViewController: UIViewController {
     
+    // MARK: - @IBOutlets
     @IBOutlet weak var reportView: UIView!
     @IBOutlet weak var commonDrinksView: UIView!
     @IBOutlet weak var chartView: UIView!
@@ -24,15 +25,38 @@ class ChartViewController: UIViewController {
     @IBOutlet weak var totalDrinksLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var timePeriodControl: UISegmentedControl!
+    @IBOutlet weak var drinkOrderButton: UIButton!
     
-    let names: [String] = ["Coffee", "Energy Drinks", "Soft Drinks", "Tea", "Supplements", "Other"]
-    let colors: [Color] = [Color(.systemBlue), Color(.systemRed), Color(.systemGreen), Color(.systemOrange), Color(.systemYellow), Color(.systemPurple)]
+    private let names: [String] = ["Coffee", "Energy Drinks", "Soft Drinks", "Tea", "Supplements", "Other"]
+    private let colors: [Color] = [Color(.systemBlue), Color(.systemRed), Color(.systemGreen), Color(.systemOrange), Color(.systemYellow), Color(.systemPurple)]
+    private var pieChartHostingController = UIHostingController(rootView:  PieChartView(values: [1300, 500, 300], colors: [Color(UIColor(named: "Light Blue")!), Color(UIColor(named: "Green")!), Color(UIColor(named: "Red")!)], names: ["Coffee", "Energy Drink", "Soda"], totalAmount: 0.0, backgroundColor: Color(.systemGray6), widthFraction: 0.75, innerRadiusFraction: 0.6))
+    private var topDrinks: [(ConsumedDrink, Int)] = []
     
-    var databaseManager: DataBaseManager = DataBaseManager()
-    var hostingController = UIHostingController(rootView: BarChart(chartData: []))
-    var pieChartHostingController = UIHostingController(rootView:  PieChartView(values: [1300, 500, 300], colors: [Color(UIColor(named: "Light Blue")!), Color(UIColor(named: "Green")!), Color(UIColor(named: "Red")!)], names: ["Coffee", "Energy Drink", "Soda"], totalAmount: 0.0, backgroundColor: Color(.systemGray6), widthFraction: 0.75, innerRadiusFraction: 0.6))
-    var topDrinks: [(ConsumedDrink, Int)] = []
+    private var databaseManager: DataBaseManager = DataBaseManager()
+    private var hostingController = UIHostingController(rootView: BarChart(chartData: []))
+    private var defaults = UserDefaults.standard
     
+    // MARK: - Drink Order Menu Variables
+    private var orderByAmount: Bool {
+        return defaults.bool(forKey: K.defaults.order)
+    }
+    private var menu: UIMenu {
+        return UIMenu(title: "Order By", children: [firstElement, secondElement])
+    }
+    private var firstElement: UIAction {
+        return UIAction(title: "Frequency", attributes: [], state: orderByAmount ? .off : .on) { action in
+            self.defaults.set(false, forKey: K.defaults.order)
+            self.refreshMenu()
+        }
+    }
+    private var secondElement: UIAction {
+        return UIAction(title: "Caffeine Amount", attributes: [], state: orderByAmount ? .on : .off) { action in
+            self.defaults.set(true, forKey: K.defaults.order)
+            self.refreshMenu()
+        }
+    }
+    
+    // MARK: - View Lifecycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -70,6 +94,12 @@ class ChartViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         changePeriod()
     }
+    
+    // MARK: - @IBActions
+    @IBAction func orderButtonPressed(_ sender: UIButton) {
+        drinkOrderButton.menu = menu
+    }
+    
     
     // Reloads the chart view
     func reloadChartView(for period: Period) {
@@ -131,7 +161,7 @@ class ChartViewController: UIViewController {
         
         var body: some View {
             Chart {
-                RuleMark(y: .value("Limit", UserDefaults.standard.integer(forKey: K.dailyLimit)))
+                RuleMark(y: .value("Limit", UserDefaults.standard.integer(forKey: K.defaults.dailyLimit)))
                     .foregroundStyle(Color.red)
                     .lineStyle(StrokeStyle(lineWidth: 1, dash: [5]))
                 
@@ -425,7 +455,6 @@ extension ChartViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 // MARK: - UISegmentedControl Methods
-
 extension ChartViewController {
     
     @objc func changePeriod() {
@@ -443,4 +472,13 @@ extension ChartViewController {
         }
     }
     
+}
+
+// MARK: - UI Helper methods
+extension ChartViewController {
+    func refreshMenu() {
+        firstElement.state = orderByAmount ? .off : .on
+        secondElement.state = orderByAmount ? .on : .off
+        drinkOrderButton.menu = menu
+    }
 }
