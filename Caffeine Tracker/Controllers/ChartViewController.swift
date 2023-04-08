@@ -36,6 +36,15 @@ class ChartViewController: UIViewController {
     private var hostingController = UIHostingController(rootView: BarChart(chartData: []))
     private var defaults = UserDefaults.standard
     
+    private var currentPeriod: Period {
+        switch timePeriodControl.selectedSegmentIndex {
+        case 0:
+            return .week
+        default:
+            return .month
+        }
+    }
+    
     // MARK: - Drink Order Menu Variables
     private var orderByAmount: Bool {
         return defaults.bool(forKey: K.defaults.order)
@@ -138,7 +147,12 @@ class ChartViewController: UIViewController {
         mostCommonDrinkLabel.text = names[maxIdx!]
         totalDrinksLabel.text = String(databaseManager.consumedDrinksArray.count)
         
-        topDrinks = databaseManager.getTopDrinks(for: period)
+        reloadTopDrinks(for: period)
+    }
+    
+    // Realoads top drink table
+    func reloadTopDrinks(for period: Period) {
+        topDrinks = databaseManager.getTopDrinks(for: period, orderByAmount)
         tableView.reloadData()
     }
     
@@ -295,7 +309,7 @@ class ChartViewController: UIViewController {
                             PieSliceView(pieSliceData: self.slices[i])
                                 .scaleEffect(self.activeIndex == i ? 1.05 : 1)
                                 .animation(Animation.spring(), value: self.activeIndex == i ? 1.05 : 1)
-                      
+                            
                         }
                         .frame(width: geometry.size.width, height: geometry.size.width)
                         .gesture(
@@ -346,49 +360,6 @@ class ChartViewController: UIViewController {
             }
         }
     }
-    
-    struct PieChartRows: View {
-        var colors: [Color]
-        var names: [String]
-        var values: [String]
-        var percents: [String]
-        
-        var body: some View {
-            Spacer()
-            HStack {
-                VStack{
-                    ForEach(0..<(self.values.count / 2), id: \.self) { i in
-                        HStack {
-                            RoundedRectangle(cornerRadius: 5.0)
-                                .fill(self.colors[i])
-                                .frame(width: 20, height: 20)
-                            Text(self.names[i])
-                                .font(.system(size: 17.0))
-                                .foregroundColor(Color(UIColor.secondaryLabel))
-                            Spacer()
-                            
-                        }
-                    }
-                }
-                VStack{
-                    ForEach((self.values.count / 2)..<self.values.count, id: \.self) { i in
-                        HStack {
-                            RoundedRectangle(cornerRadius: 5.0)
-                                .fill(self.colors[i])
-                                .frame(width: 20, height: 20)
-                            Text(self.names[i])
-                                .font(.system(size: 17.0))
-                                .foregroundColor(Color(UIColor.secondaryLabel))
-                            Spacer()
-                            
-                        }
-                    }
-                }
-            }
-            
-        }
-    }
-    
 }
 
 extension Date {
@@ -458,18 +429,9 @@ extension ChartViewController: UITableViewDelegate, UITableViewDataSource {
 extension ChartViewController {
     
     @objc func changePeriod() {
-        switch timePeriodControl.selectedSegmentIndex {
-        case 0:
-            reloadAmounts(for: .week)
-            reloadChartView(for: .week)
-            reloadPieChart(for: .week)
-        case 1:
-            reloadAmounts(for: .month)
-            reloadChartView(for: .month)
-            reloadPieChart(for: .month)
-        default:
-            print("Error: Invalid selector index")
-        }
+        reloadAmounts(for: currentPeriod)
+        reloadChartView(for: currentPeriod)
+        reloadPieChart(for: currentPeriod)
     }
     
 }
@@ -480,5 +442,6 @@ extension ChartViewController {
         firstElement.state = orderByAmount ? .off : .on
         secondElement.state = orderByAmount ? .on : .off
         drinkOrderButton.menu = menu
+        reloadTopDrinks(for: currentPeriod)
     }
 }

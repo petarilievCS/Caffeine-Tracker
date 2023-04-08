@@ -335,7 +335,7 @@ struct DataBaseManager {
     }
     
     // Returns top 3 drinks over the past week
-    mutating func getTopDrinks(for period: Period) -> [(ConsumedDrink, Int)] {
+    mutating func getTopDrinks(for period: Period, _ orderByAmount: Bool) -> [(ConsumedDrink, Int)] {
         loadDrinksInLast(period)
         var counter: [String : Int] = [String : Int]()
         
@@ -343,7 +343,7 @@ struct DataBaseManager {
             if !(counter.keys.contains(consumedDrink.name!)) {
                 counter[consumedDrink.name!] = 0
             }
-            counter[consumedDrink.name!]! += 1
+            counter[consumedDrink.name!]! += orderByAmount ? Int(consumedDrink.initialAmount) : 1
         }
         
         var drinks: [(String, Int)] = [(String, Int)]()
