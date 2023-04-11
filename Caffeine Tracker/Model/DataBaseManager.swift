@@ -335,7 +335,7 @@ struct DataBaseManager {
     }
     
     // Returns top 3 drinks over the past week
-    mutating func getTopDrinks(for period: Period, _ orderByAmount: Bool) -> [(ConsumedDrink, Int)] {
+    mutating func getTopDrinks(_ number: Int, for period: Period, _ orderByAmount: Bool) -> [(ConsumedDrink, Int)] {
         loadDrinksInLast(period)
         var counter: [String : Int] = [String : Int]()
         
@@ -357,12 +357,16 @@ struct DataBaseManager {
             
         })
         
-        if drinks.count < 3 {
+        drinks = drinks.sorted(by: { drink1, drink2 in
+            return drink1.0.capitalized < drink2.0.capitalized
+        })
+        
+        if drinks.count < number {
             return drinks.map { (name, count) in
                 return (getDrinkByName(name), count)
             }
         }
-        drinks = drinks.dropLast(drinks.count - 3)
+        drinks = drinks.dropLast(drinks.count - number)
         return drinks.map { (name, count) in
             return (getDrinkByName(name), count)
         }
@@ -438,7 +442,7 @@ struct DataBaseManager {
     
     // Returns the Drink objects for the 5 most frequently consumed drinks in the past month
     mutating func getFrequentlyConsumedDrinks() -> [Drink] {
-        let topDrinks: [(ConsumedDrink, Int)] = getTopDrinks(for: .month, false)
+        let topDrinks: [(ConsumedDrink, Int)] = getTopDrinks(5, for: .month, false)
         var result: [Drink] = []
         for drink in topDrinks {
             if let parent = drink.0.parent {

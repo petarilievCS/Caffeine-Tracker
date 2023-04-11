@@ -152,7 +152,7 @@ class ChartViewController: UIViewController {
     
     // Realoads top drink table
     func reloadTopDrinks(for period: Period) {
-        topDrinks = databaseManager.getTopDrinks(for: period, orderByAmount)
+        topDrinks = databaseManager.getTopDrinks(3, for: period, orderByAmount)
         tableView.reloadData()
     }
     

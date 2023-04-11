@@ -125,6 +125,9 @@ class CaffeineViewController: UITableViewController {
         drinkArray = drinkArray.sorted { first, second in
             return first.name!.capitalized < second.name!.capitalized
         }
+        frequentlyConsumedDrinkArray = frequentlyConsumedDrinkArray.sorted(by: { first, second in
+            return first.name!.capitalized < second.name!.capitalized
+        })
         tableView.reloadData()
     }
     
