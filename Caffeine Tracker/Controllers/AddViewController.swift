@@ -54,12 +54,8 @@ class AddViewController: UIViewController {
     }
     
     @IBAction func doneClicked(_ sender: UIBarButtonItem) {
-        
-        // TODO: Fix user input errors
         let nameCell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! DrinkNameCell
         let name = nameCell.textField.text!
-        
-        // TODO: Add support for icons
         let caffeineCell = tableView.cellForRow(at: IndexPath(row: 2, section: 0)) as! NumberCell
         let servingCell = tableView.cellForRow(at: IndexPath(row: 3, section: 0)) as! NumberCell
         let caffeineAmount = caffeineCell.textField.text!

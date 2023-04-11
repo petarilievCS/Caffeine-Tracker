@@ -13,8 +13,9 @@ class CaffeineViewController: UITableViewController {
     @IBOutlet weak var searchBar: UISearchBar!
     
     var drinkArray = [Drink]()
+    var frequentlyConsumedDrinkArray = [Drink]()
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    let databaseManager = DataBaseManager()
+    var databaseManager = DataBaseManager()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,28 +39,43 @@ class CaffeineViewController: UITableViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        print("Frequently Consumed Drinks: \(frequentlyConsumedDrinkArray.count)")
         loadDrinks()
     }
     
     // MARK: - TableView methods
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        // Add section when frequently consumed drinks are available
+        return frequentlyConsumedDrinkArray.count > 0 ? 2 : 1
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 0 && tableView.numberOfSections == 2 {
+            return "Frequently Consumed"
+        }
+        return "Drinks"
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if section == 0 && tableView.numberOfSections == 2 {
+            return frequentlyConsumedDrinkArray.count
+        }
         return drinkArray.count
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 70.0
+        return K.UI.drinkCellHeight
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: K.caffeineCellIdentifier, for: indexPath) as! CaffeineCell
-        let currentDrink = drinkArray[indexPath.row]
-        
-        
+        var currentDrink = Drink()
+        if indexPath.section == 0 && tableView.numberOfSections == 2 {
+            currentDrink = frequentlyConsumedDrinkArray[indexPath.row]
+        } else {
+            currentDrink = drinkArray[indexPath.row]
+        }
         cell.nameLabel.text = currentDrink.name
         cell.caffeineLabel.text = "\(String(currentDrink.caffeine)) MG"
         cell.icon.image = UIImage(named: currentDrink.icon!)
@@ -80,7 +96,12 @@ class CaffeineViewController: UITableViewController {
             
             if let selectedIndex = tableView.indexPathForSelectedRow {
                 destinationVC.navigationItem.title = "Edit Drink"
-                let selectedDrink = drinkArray[selectedIndex.row]
+                var selectedDrink = Drink()
+                if selectedIndex.section == 0 && tableView.numberOfSections == 2 {
+                    selectedDrink = frequentlyConsumedDrinkArray[selectedIndex.row]
+                } else {
+                    selectedDrink = drinkArray[selectedIndex.row]
+                }
                 destinationVC.drinkName = selectedDrink.name
                 destinationVC.drinkCaffeine = String(selectedDrink.caffeine)
                 destinationVC.drinkServing = String(selectedDrink.serving)
@@ -97,6 +118,7 @@ class CaffeineViewController: UITableViewController {
         request.predicate = predicate
         do {
             drinkArray = try context.fetch(request)
+            frequentlyConsumedDrinkArray = databaseManager.getFrequentlyConsumedDrinks()
         } catch {
             print("Error while loading data")
         }

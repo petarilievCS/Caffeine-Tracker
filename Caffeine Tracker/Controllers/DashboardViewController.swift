@@ -113,7 +113,6 @@ class DashboardViewController: UIViewController {
     
     // Creates ring progress view
     func setupRingProgressView() {
-        
         let currentDailyAmount = metabolismCalculator.calculateTotalAmount()
         let dailyLimit = UserDefaults.standard.integer(forKey: K.defaults.dailyLimit)
         ringProgressView.startColor = currentDailyAmount > dailyLimit ? UIColor(named: "Red")! : UIColor(named: "Green")!

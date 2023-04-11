@@ -11,6 +11,7 @@ struct K {
     
     struct UI {
         static let settingCellHeight: CGFloat = 55.0
+        static let drinkCellHeight: CGFloat = 70.0
     }
     
     struct ID {
@@ -28,6 +29,10 @@ struct K {
         static let amountNotificationSent = "amountNotificationSent"
         static let notificationPermission = "notificationPermission"
         static let dailyLimit = "dailyLimit"
+    }
+    
+    struct constants {
+        static let numberOfFrequentlyConsumedDrinks: Int = 3
     }
     
     // Identifiers

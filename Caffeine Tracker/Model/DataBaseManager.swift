@@ -381,7 +381,6 @@ struct DataBaseManager {
     
     // Returns drinks for the past month
     mutating func loadDrinksInLast(_ period: Period) {
-        
         var periodComponent: Calendar.Component
         var periodValue = 0
         switch period {
@@ -435,6 +434,18 @@ struct DataBaseManager {
         formatter.dateFormat = "MMM d"
         let day = formatter.string(from: date!)
         return day
+    }
+    
+    // Returns the Drink objects for the 5 most frequently consumed drinks in the past month
+    mutating func getFrequentlyConsumedDrinks() -> [Drink] {
+        let topDrinks: [(ConsumedDrink, Int)] = getTopDrinks(for: .month, false)
+        var result: [Drink] = []
+        for drink in topDrinks {
+            if let parent = drink.0.parent {
+                result.append(parent)
+            }
+        }
+        return result
     }
 }
 

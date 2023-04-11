@@ -255,6 +255,7 @@ class AdjustViewController: UIViewController {
     func addConsumedDrink(with caffeineAmount: Int) {
         loadConsumedDrinks()
         let consumedDrink = ConsumedDrink(context: self.context)
+        consumedDrink.parent = currentDrink
         consumedDrink.name = currentDrink!.name
         consumedDrink.icon = currentDrink!.icon
         consumedDrink.caffeine = Int64(caffeineAmount)
