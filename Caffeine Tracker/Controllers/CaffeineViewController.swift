@@ -105,7 +105,7 @@ class CaffeineViewController: UITableViewController {
                 destinationVC.drinkName = selectedDrink.name
                 destinationVC.drinkCaffeine = String(selectedDrink.caffeine)
                 destinationVC.drinkServing = String(selectedDrink.serving)
-                destinationVC.selectedIndex = tableView.indexPathForSelectedRow?.row
+                destinationVC.selectedDrink = selectedDrink
             } else {
                 destinationVC.navigationItem.title = "Add Drink"
             }

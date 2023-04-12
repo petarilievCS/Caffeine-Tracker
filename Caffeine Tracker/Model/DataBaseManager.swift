@@ -353,11 +353,12 @@ struct DataBaseManager {
         
         // Sort drinks by number of records
         drinks = drinks.sorted(by: { drink1, drink2 in
-            return drink1.1 > drink2.1
-            
-        })
-        
-        drinks = drinks.sorted(by: { drink1, drink2 in
+            if drink1.1 > drink2.1 {
+                return true
+            }
+            if drink2.1 > drink1.1 {
+                return false
+            }
             return drink1.0.capitalized < drink2.0.capitalized
         })
         

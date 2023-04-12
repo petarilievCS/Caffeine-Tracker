@@ -24,7 +24,9 @@ class AddViewController: UIViewController {
     var drinkName: String?
     var drinkCaffeine: String?
     var drinkServing: String?
-    var selectedIndex: Int?
+    var selectedIndex: IndexPath?
+    var frequentlyConsumedDrink: Bool = false
+    var selectedDrink: Drink?
     var editVC: Bool {
         return navigationItem.title == "Edit Drink"
     }
@@ -74,11 +76,11 @@ class AddViewController: UIViewController {
                 newDrink.caffeineOz = calculateCaffeinePerOz(newDrink.caffeine, newDrink.serving)
                 drinkArray.append(newDrink)
             } else {
-                drinkArray[selectedIndex!].name = name
-                drinkArray[selectedIndex!].icon = formatImageName(iconCell.iconLabel.text!)
-                drinkArray[selectedIndex!].caffeine = Int64(caffeineAmount)!
-                drinkArray[selectedIndex!].serving = Int64(servingAmount)!
-                drinkArray[selectedIndex!].caffeineOz = calculateCaffeinePerOz(Int64(caffeineAmount)!, Int64(servingAmount)!)
+                selectedDrink!.name = name
+                selectedDrink!.icon = formatImageName(iconCell.iconLabel.text!)
+                selectedDrink!.caffeine = Int64(caffeineAmount)!
+                selectedDrink!.serving = Int64(servingAmount)!
+                selectedDrink!.caffeineOz = calculateCaffeinePerOz(Int64(caffeineAmount)!, Int64(servingAmount)!)
             }
             
             saveDrinks()
@@ -114,8 +116,15 @@ class AddViewController: UIViewController {
         let alert = UIAlertController(title: "", message: "Are you sure you want to remove the drink?", preferredStyle: .alert)
         let yesAction = UIAlertAction(title: "Yes", style: .default) { action in
             self.drinkArray = self.databaseManager.getDrinks()
-            self.context.delete(self.drinkArray[self.selectedIndex!])
-            self.drinkArray.remove(at: self.selectedIndex!)
+            self.context.delete(self.selectedDrink!)
+            self.drinkArray.remove(at: self.drinkArray.firstIndex(of: self.selectedDrink!)!)
+//            if self.selectedIndex!.section == 0 && self.frequentlyConsumedDrink {
+//                self.context.delete(self.selectedDrink!)
+//                self.drinkArray.remove(at: self.drinkArray.firstIndex(of: self.selectedDrink!)!)
+//            } else {
+//                self.context.delete(self.drinkArray[self.selectedIndex!.row])
+//                self.drinkArray.remove(at: self.selectedIndex!.row)
+//            }
             self.saveDrinks()
             self.dismiss(animated: true, completion: nil)
         }
@@ -180,7 +189,7 @@ extension AddViewController: UITableViewDelegate, UITableViewDataSource {
         case 1:
             let iconCell = tableView.dequeueReusableCell(withIdentifier: K.iconCellIdentifier, for: indexPath) as! IconCell
             if editVC {
-                iconCell.iconLabel.text = formatIconName(drinkArray[selectedIndex!].icon!)
+                iconCell.iconLabel.text = formatIconName(selectedDrink!.icon!)
             }
             return iconCell
         case 2:
