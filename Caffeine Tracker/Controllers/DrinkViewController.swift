@@ -23,18 +23,20 @@ class DrinkViewController: CaffeineViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // Deselct all rows
-        for index in 0..<tableView.numberOfRows(inSection: 0) {
-            tableView.cellForRow(at: IndexPath(row: index, section: 0))?.accessoryType = .disclosureIndicator
-        }
+        deselectRows()
         tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
         tableView.cellForRow(at: indexPath)?.accessoryView?.backgroundColor = .systemBackground
         performSegue(withIdentifier: K.drinksToAmountSegue, sender: self)
     }
     
     func deselectRows() {
-        for i in 0...drinkArray.count {
-            tableView.cellForRow(at: IndexPath(row: i, section: 0))?.accessoryType = .disclosureIndicator
+        for index in 0..<tableView.numberOfRows(inSection: 0) {
+            tableView.cellForRow(at: IndexPath(row: index, section: 0))?.accessoryType = .disclosureIndicator
+        }
+        if tableView.numberOfSections > 1 {
+            for index in 0..<tableView.numberOfRows(inSection: 1) {
+                tableView.cellForRow(at: IndexPath(row: index, section: 1))?.accessoryType = .disclosureIndicator
+            }
         }
     }
 
@@ -50,9 +52,18 @@ class DrinkViewController: CaffeineViewController {
         let destinationVC = segue.destination as! AdjustViewController
         destinationVC.drinksVC = self
         destinationVC.modalPresentationStyle = .overCurrentContext
-        let selectedDrink = drinkArray[tableView.indexPathForSelectedRow!.row]
-        destinationVC.currentAmount = selectedDrink.serving
-        destinationVC.currentDrink = drinkArray[tableView.indexPathForSelectedRow!.row]
+        
+        var selectedDrink: Drink? = nil
+        if tableView.numberOfSections == 2 && tableView.indexPathForSelectedRow?.section == 0 {
+            selectedDrink = frequentlyConsumedDrinkArray[tableView.indexPathForSelectedRow!.row]
+        } else {
+            selectedDrink = drinkArray[tableView.indexPathForSelectedRow!.row]
+        }
+        destinationVC.currentAmount = selectedDrink!.serving
+        destinationVC.currentDrink = selectedDrink
+        
+        
+        
     }
 }
 
