@@ -105,7 +105,7 @@ class AddViewController: UIViewController {
     @IBAction func removeClicked(_ sender: UIButton) {
         
         // Change color
-        deleteView.backgroundColor = .systemGray4
+        deleteView.backgroundColor = .secondarySystemBackground
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: {
             UIView.animate(withDuration: 0.1) {
                 self.deleteView.backgroundColor =  .systemBackground

@@ -683,7 +683,6 @@
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="taP-Ji-jjl">
                                                         <rect key="frame" x="5" y="6" width="353" height="38"/>
-                                                        <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
                                                         <color key="tintColor" name="Red"/>
                                                         <buttonConfiguration key="configuration" style="plain" title="Remove Drink">
                                                             <fontDescription key="titleFontDescription" type="system" pointSize="20"/>
@@ -693,7 +692,7 @@
                                                         </connections>
                                                     </button>
                                                 </subviews>
-                                                <color key="backgroundColor" systemColor="secondarySystemGroupedBackgroundColor"/>
+                                                <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstItem="taP-Ji-jjl" firstAttribute="centerY" secondItem="90q-cz-9za" secondAttribute="centerY" id="6o9-7X-0v9"/>
                                                     <constraint firstAttribute="height" constant="50" id="Ha0-IF-MD0"/>
@@ -1254,7 +1253,7 @@
                                                         </connections>
                                                     </button>
                                                 </subviews>
-                                                <color key="backgroundColor" systemColor="secondarySystemGroupedBackgroundColor"/>
+                                                <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="7J6-zx-7XA"/>
                                                     <constraint firstItem="dEQ-6X-CX1" firstAttribute="leading" secondItem="0Lw-eX-UOx" secondAttribute="leading" constant="5" id="Szq-BA-FMq"/>
