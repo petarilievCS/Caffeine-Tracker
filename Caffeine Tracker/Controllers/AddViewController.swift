@@ -118,13 +118,6 @@ class AddViewController: UIViewController {
             self.drinkArray = self.databaseManager.getDrinks()
             self.context.delete(self.selectedDrink!)
             self.drinkArray.remove(at: self.drinkArray.firstIndex(of: self.selectedDrink!)!)
-//            if self.selectedIndex!.section == 0 && self.frequentlyConsumedDrink {
-//                self.context.delete(self.selectedDrink!)
-//                self.drinkArray.remove(at: self.drinkArray.firstIndex(of: self.selectedDrink!)!)
-//            } else {
-//                self.context.delete(self.drinkArray[self.selectedIndex!.row])
-//                self.drinkArray.remove(at: self.selectedIndex!.row)
-//            }
             self.saveDrinks()
             self.dismiss(animated: true, completion: nil)
         }
