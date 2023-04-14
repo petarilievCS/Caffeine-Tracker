@@ -15,21 +15,17 @@ class AddViewController: UIViewController {
     @IBOutlet weak var deleteView: UIView!
     @IBOutlet weak var deleteButton: UIButton!
     
+    var delegate: AddViewControllerDelegate? = nil
+    var editDrink: Bool = false
+    
     var drinkArray = [Drink]()
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    var caffeineVC: CaffeineViewController? = nil
     let drinkTypes: [String] = ["Espresso", "Hot Coffee", "Cold Coffee", "Canned Coffee", "Soft Drink", "Energy Drink", "Energy Shot", "Chocolate", "Supplement", "Tea", "Iced Tea"]
     var databaseManager = DataBaseManager()
-    
-    var drinkName: String?
-    var drinkCaffeine: String?
-    var drinkServing: String?
     var selectedIndex: IndexPath?
     var frequentlyConsumedDrink: Bool = false
     var selectedDrink: Drink?
-    var editVC: Bool {
-        return navigationItem.title == "Edit Drink"
-    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,12 +43,16 @@ class AddViewController: UIViewController {
         deleteButton.contentHorizontalAlignment = .left
         
         // Hide delete view if adding
-        deleteView.isHidden = !editVC
+        deleteView.isHidden = !editDrink
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        navigationItem.title = editDrink ? "Edit Drink" : "Add Drink"
+    }
+    
     override func viewDidDisappear(_ animated: Bool) {
-        caffeineVC?.viewDidAppear(true)
+        delegate?.drinkChanged()
     }
     
     @IBAction func doneClicked(_ sender: UIBarButtonItem) {
@@ -67,7 +67,7 @@ class AddViewController: UIViewController {
         if (!name.isEmpty && !caffeineAmount.isEmpty && !servingAmount.isEmpty) {
             
             loadDrinks()
-            if !editVC {
+            if !editDrink {
                 let newDrink = Drink(context: self.context)
                 newDrink.name = name
                 newDrink.icon = formatImageName(iconCell.iconLabel.text!)
@@ -175,28 +175,28 @@ extension AddViewController: UITableViewDelegate, UITableViewDataSource {
         switch indexPath.row {
         case 0:
             let nameCell = tableView.dequeueReusableCell(withIdentifier: K.drinkNameCellIdentifier, for: indexPath) as! DrinkNameCell
-            if editVC {
-                nameCell.textField.text = drinkName
+            if editDrink {
+                nameCell.textField.text = selectedDrink?.name
             }
             return nameCell
         case 1:
             let iconCell = tableView.dequeueReusableCell(withIdentifier: K.iconCellIdentifier, for: indexPath) as! IconCell
-            if editVC {
+            if editDrink {
                 iconCell.iconLabel.text = formatIconName(selectedDrink!.icon!)
             }
             return iconCell
         case 2:
             let caffeineCell = tableView.dequeueReusableCell(withIdentifier: K.numberCellIdentifier, for: indexPath) as! NumberCell
-            if editVC {
-                caffeineCell.textField.text = drinkCaffeine
+            if editDrink {
+                caffeineCell.textField.text = String(selectedDrink!.caffeine)
             }
             return caffeineCell
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: K.numberCellIdentifier, for: indexPath) as! NumberCell
             cell.titleLabel.text = "Serving Size (fl oz)"
             cell.textField.placeholder = "4"
-            if editVC {
-                cell.textField.text = drinkServing
+            if editDrink {
+                cell.textField.text = String(selectedDrink!.serving)
             }
             return cell
         }
@@ -254,4 +254,8 @@ extension AddViewController: UIPickerViewDelegate, UIPickerViewDataSource {
         return 200.0
     }
     
+}
+
+protocol AddViewControllerDelegate {
+    func drinkChanged()
 }

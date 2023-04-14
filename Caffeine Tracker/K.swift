@@ -19,7 +19,9 @@ struct K {
         struct segues {
             static let dashboardToDrinks = "dashboardToDrinks"
             static let dashboardToRecord = "dashboardToDrink"
+            static let drinksToAdd = "drinksToAdd"
         }
+        static let caffeineCell = "CaffeineCell"
         static let switchCell = "SettingsCell"
         static let settingCell = "RegularSettingsCell"
         static let detailSettingCell = "VersionSettingsCell"
@@ -46,12 +48,11 @@ struct K {
     }
     
     // Identifiers
-    static let caffeineCellIdentifier = "CaffeineCell"
+    
     static let addDrinkCellIdentifier = "AddDrinkCell"
     static let drinkNameCellIdentifier = "DrinkNameCell"
     static let iconCellIdentifier = "IconCell"
     static let numberCellIdentifier = "NumberCell"
-    static let drinksToAddSegue = "drinksToAdd"
     static let drinksToAmountSegue = "drinksToAmount"
     static let consumedDrinkCellIdentifier = "ConsumedDrinkCell"
     static let aboveLimitNotifiicationIdentifier = "aboveLimitNotification"

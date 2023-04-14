@@ -330,9 +330,10 @@ struct DataBaseManager {
     }
     
     // Removes given drink
-    mutating func removeDrink(_ drink: ConsumedDrink) {
-        loadConsumedDrinks()
-        self.context.delete(drink)
+    mutating func removeDrink(_ consumedDrink: ConsumedDrink) {
+//        loadConsumedDrinks()
+        self.context.delete(consumedDrink)
+        saveConsumedDrinks()
     }
     
     // Returns top 3 drinks over the past week
@@ -451,8 +452,17 @@ struct DataBaseManager {
                 result.append(parent)
             }
         }
-        return result
+        return result.sorted(by: { first, second in
+            return first.name!.capitalized < second.name!.capitalized
+        })
     }
+    
+    // Returns all consumed drinks
+    mutating func getAllConsumedDrinks() -> [ConsumedDrink] {
+        loadConsumedDrinks()
+        return consumedDrinksArray
+    }
+    
 }
 
 // Entry in chart

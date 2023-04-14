@@ -26,10 +26,9 @@ class DashboardViewController: UIViewController {
     @IBOutlet weak var drinksLabel: UILabel!
     @IBOutlet weak var contentView: UIView!
     
-    
     private let ringProgressView = RingProgressView(frame: CGRect(x: 0, y: 0, width: 110, height: 110))
     private var consumedDrinksArray = [ConsumedDrink]()
-    private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    // private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     private var metabolismCalculator = MetabolismCalculator()
     private var dataBaseManager = DataBaseManager()
     
@@ -82,23 +81,25 @@ class DashboardViewController: UIViewController {
             destinationVC.delegate = self
         }
     }
-}
-
-// MARK: - CoreData methods
-extension DashboardViewController {
-    func saveConsumedDrinks() {
-        do {
-            try self.context.save()
-        } catch {
-            print("Error while saving context")
-        }
-    }
     
     func loadConsumedDrinks() {
         consumedDrinksArray = dataBaseManager.getTodayDrinks()
         tableView.reloadData()
     }
 }
+
+// MARK: - CoreData methods
+//extension DashboardViewController {
+//    func saveConsumedDrinks() {
+//        do {
+//            try self.context.save()
+//        } catch {
+//            print("Error while saving context")
+//        }
+//    }
+//
+
+//}
 
 // MARK: - Table View methods
 extension DashboardViewController: UITableViewDelegate, UITableViewDataSource {
@@ -141,10 +142,10 @@ extension DashboardViewController: SwipeTableViewCellDelegate {
     }
     
     func removeDrink(at indexPath: IndexPath) {
-        self.loadConsumedDrinks()
-        self.context.delete(self.consumedDrinksArray[indexPath.row])
+        loadConsumedDrinks()
+        dataBaseManager.removeDrink(consumedDrinksArray[indexPath.row])
         self.consumedDrinksArray.remove(at: indexPath.row)
-        self.saveConsumedDrinks()
+        // self.saveConsumedDrinks()
         recordChanged()
     }
     

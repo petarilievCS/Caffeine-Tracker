@@ -151,8 +151,8 @@
 			isa = PBXGroup;
 			children = (
 				E6996C5E295E0A5E00E35FC1 /* DashboardViewController.swift */,
-				E6996C76295E0BA700E35FC1 /* AddViewController.swift */,
 				E6996C78295E0BE600E35FC1 /* CaffeineViewController.swift */,
+				E6996C76295E0BA700E35FC1 /* AddViewController.swift */,
 				E69FA855296575C90025EEBA /* DrinkViewController.swift */,
 				E69FA8572965B2D40025EEBA /* AdjustViewController.swift */,
 				E604881829896A3700B25167 /* ChartViewController.swift */,
