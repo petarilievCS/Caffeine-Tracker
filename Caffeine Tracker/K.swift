@@ -44,6 +44,20 @@ struct K {
         static let numberOfFrequentlyConsumedDrinks: Int = 3
     }
     
+    struct icons {
+        static let hotCoffe = "hot-coffee.png"
+        static let espresso = "espresso.png"
+        static let coldCoffe = "cold-coffee.png"
+        static let cannedCoffe = "canned-coffee.png"
+        static let energyDrink = "energy-drink.png"
+        static let energyShot = "energy-shot.png"
+        static let softDrink = "soft-drink.png"
+        static let tea = "tea.png"
+        static let icedTea = "iced-tea.png"
+        static let supplement = "supplement.png"
+        static let water = "water.png"
+    }
+    
     // Identifiers
     static let addDrinkCellIdentifier = "AddDrinkCell"
     static let drinkNameCellIdentifier = "DrinkNameCell"

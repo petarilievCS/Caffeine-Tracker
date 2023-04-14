@@ -10,12 +10,34 @@ import UIKit
 import Foundation
 
 struct DataBaseManager {
+    private let secondsPerHour: Int = 3600
+    private let declinePerHour: Double = 0.87
+    private var consumedDrinksArray: [ConsumedDrink] = []
+    private var drinksArray: [Drink] = []
+    private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+}
+
+// MARK: - Drink methods
+extension DataBaseManager {
+    // Returns Drinks from CoreData
+    mutating func getDrinks(with request: NSFetchRequest<Drink> = Drink.fetchRequest(), and predicate: NSPredicate? = nil) -> [Drink] {
+        loadDrinks(with: request, and: predicate)
+        return drinksArray
+    }
     
-    let secondsPerHour: Int = 3600
-    let declinePerHour: Double = 0.87
-    var consumedDrinksArray: [ConsumedDrink] = []
-    var drinksArray: [Drink] = []
-    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    // Returns the Drink objects for the 5 most frequently consumed drinks in the past month
+    mutating func getFrequentlyConsumedDrinks() -> [Drink] {
+        let topDrinks: [(ConsumedDrink, Int)] = getTopDrinks(5, for: .month, false)
+        var result: [Drink] = []
+        for drink in topDrinks {
+            if let parent = drink.0.parent {
+                result.append(parent)
+            }
+        }
+        return result.sorted(by: { first, second in
+            return first.name!.capitalized < second.name!.capitalized
+        })
+    }
     
     // Adds default drinks to CoreData
     mutating func addDefaultDrinks() {
@@ -35,112 +57,40 @@ struct DataBaseManager {
                     defaultDrink.caffeineOz = Double(defaultDrink.caffeine) / Double(defaultDrink.serving)
                     drinksArray.append(defaultDrink)
                 }
-                
                 saveDrinks()
             } catch {
                 print("error:\(error)")
             }
         }
     }
-    
-    // Returns icon name for given drink type
-    func getIcon(for drink: String) -> String {
-        switch drink {
-        case "Coffee":
-            return "hot-coffee.png"
-        case "Bottle":
-            return "canned-coffee.png"
-        case "Coffee Can":
-            return "canned-coffee.png"
-        case "Esspresso":
-            return "espresso.png"
-        case "Ice":
-            return "cold-coffee.png"
-        case "Energy Drinks":
-            return "energy-drink.png"
-        case "Energy Shots":
-            return "energy-shot.png"
-        case "Tea":
-            return "tea.png"
-        case "Ice Tea":
-            return "iced-tea.png"
-        case "Soft Drinks":
-            return "soft-drink.png"
-        case "Water":
-            return "water.png"
-        default:
-            return ""
+}
+
+// MARK: - ConsumedDrink methods
+extension DataBaseManager {
+    // Returns drinks for the past month/week
+    mutating func loadDrinksInLast(_ period: Period) {
+        var periodComponent: Calendar.Component
+        var periodValue = 0
+        switch period {
+        case .month:
+            periodComponent = .month
+            periodValue = -1
+        case .week:
+            periodComponent = .day
+            periodValue = -7
         }
+        
+        let fromDate = Calendar.current.startOfDay(for: Calendar.current.date(byAdding: periodComponent, value: periodValue, to: .now)!)
+        let toPredicate = NSPredicate(format: "%@ >= %K", Date.now as NSDate, #keyPath(ConsumedDrink.timeConsumed))
+        let fromPredicate = NSPredicate(format: "%@ <= %K", fromDate as NSDate, #keyPath(ConsumedDrink.timeConsumed))
+        let compoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [toPredicate, fromPredicate])
+        loadConsumedDrinks(with: compoundPredicate)
     }
     
-    // Loads caffeine drinks from CoreData
-    mutating func loadDrinks(with request: NSFetchRequest<Drink> = Drink.fetchRequest(), and predicate: NSPredicate? = nil) {
-        request.predicate = predicate
-        do {
-            drinksArray = try context.fetch(request)
-        } catch {
-            print("Error while loading data")
-        }
-        drinksArray = drinksArray.sorted { first, second in
-            return first.name!.capitalized < second.name!.capitalized
-        }
-    }
-    
-    // Returns caffeine drinks from CoreData
-    mutating func getDrinks(with request: NSFetchRequest<Drink> = Drink.fetchRequest(), and predicate: NSPredicate? = nil) -> [Drink] {
-        var returnArray: [Drink] = []
-        request.predicate = predicate
-        do {
-            returnArray = try context.fetch(request)
-        } catch {
-            print("Error while loading data")
-        }
-        returnArray = returnArray.sorted { first, second in
-            return first.name!.capitalized < second.name!.capitalized
-        }
-        return returnArray
-    }
-    
-    // Saves given drinks to CoreData
-    func saveDrinks() {
-        do {
-            try context.save()
-        } catch {
-            print("Error saving: \(error)")
-        }
-    }
-    
-    // Returns amounts of caffeine for each drink type in the past week
-    mutating func getDrinkTypeAmounts(in period: Period) -> [Double] {
+    // Returns drinks for the past month/week
+    mutating func getDrinksInLast(_ period: Period) -> [ConsumedDrink] {
         loadDrinksInLast(period)
-        var values: [Double] = Array(repeating: 0.0, count: 6)
-        for consumedDrink in consumedDrinksArray {
-            switch consumedDrink.icon {
-            case "hot-coffee.png":
-                values[0] += Double(consumedDrink.initialAmount)
-            case "espresso.png":
-                values[0] += Double(consumedDrink.initialAmount)
-            case "cold-coffee.png":
-                values[0] += Double(consumedDrink.initialAmount)
-            case "canned-coffee.png":
-                values[0] += Double(consumedDrink.initialAmount)
-            case "energy-drink.png":
-                values[1] += Double(consumedDrink.initialAmount)
-            case "energy-shot.png":
-                values[1] += Double(consumedDrink.initialAmount)
-            case "soft-drink.png":
-                values[2] += Double(consumedDrink.initialAmount)
-            case "tea.png":
-                values[3] += Double(consumedDrink.initialAmount)
-            case "iced-tea.png":
-                values[3] += Double(consumedDrink.initialAmount)
-            case "supplement.png":
-                values[4] += Double(consumedDrink.initialAmount)
-            default:
-                values[5] += Double(consumedDrink.initialAmount)
-            }
-        }
-        return values
+        return consumedDrinksArray
     }
     
     // Updates given record with given properties
@@ -267,74 +217,6 @@ struct DataBaseManager {
         return result
     }
     
-    
-    // Returns true if date is within past 7 days, false otherwise
-    func isDateInPastWeek(_ date: Date) -> Bool {
-        let current: Date = .now
-        let calendar: Calendar = Calendar.current
-        
-        if calendar.isDateInToday(date) || calendar.isDateInYesterday(date) {
-            return true
-        }
-        
-        for i in 2...6 {
-            let iDaysAgo: Date = calendar.date(byAdding: .day, value: -i, to: current)!
-            if calendar.isDate(date, inSameDayAs: iDaysAgo) {
-                return true
-            }
-        }
-        return false
-    }
-    
-    // Returns the day of the week for x days ago
-    func dayOfTheWeek(for x: Int) -> String {
-        let today: Date = .now
-        let calendar: Calendar = Calendar.current
-        let dateToReturn: Date = calendar.date(byAdding: .day, value: -x, to: today)!
-        let formatter = DateFormatter()
-        let weekdayName = formatter.weekdaySymbols[calendar.component(.weekday, from: dateToReturn) - 1]
-        let symbol = weekdayName.dropLast(weekdayName.count - 3)
-        return String(symbol)
-    }
-    
-    // MARK: - CoreData methods
-    
-    // Load all consumed drinks
-    mutating func loadConsumedDrinks() {
-        do {
-            consumedDrinksArray = try context.fetch(ConsumedDrink.fetchRequest())
-        } catch {
-            print("Error while loading data")
-        }
-    }
-    
-    // Load all consumed drinks matching predicate
-    mutating func loadConsumedDrinks(with predicate: NSCompoundPredicate) {
-        do {
-            let request = NSFetchRequest<ConsumedDrink>(entityName: "ConsumedDrink")
-            request.predicate = predicate
-            consumedDrinksArray = try context.fetch(request)
-        } catch {
-            print("Error while loading data")
-        }
-    }
-    
-    // Save current context
-    mutating func saveConsumedDrinks() {
-        do {
-            try self.context.save()
-        } catch {
-            print("Error while saving context")
-        }
-    }
-    
-    // Removes given drink
-    mutating func removeDrink(_ consumedDrink: ConsumedDrink) {
-//        loadConsumedDrinks()
-        self.context.delete(consumedDrink)
-        saveConsumedDrinks()
-    }
-    
     // Returns top 3 drinks over the past week
     mutating func getTopDrinks(_ number: Int, for period: Period, _ orderByAmount: Bool) -> [(ConsumedDrink, Int)] {
         loadDrinksInLast(period)
@@ -374,6 +256,70 @@ struct DataBaseManager {
         }
     }
     
+    // Adds ConsumedDrink to CoreData
+    mutating func addConsumedDrink(with caffeineAmount: Int, and parent: Drink) {
+        loadConsumedDrinks()
+        var consumedDrink = ConsumedDrink(context: self.context)
+        consumedDrink.parent = parent
+        consumedDrink.name = parent.name
+        consumedDrink.icon = parent.icon
+        consumedDrink.caffeine = Int64(caffeineAmount)
+        consumedDrink.initialAmount = Int64(caffeineAmount)
+        consumedDrink.timeConsumed = Date.now
+        consumedDrinksArray.append(consumedDrink)
+        saveConsumedDrinks()
+    }
+    
+}
+
+// MARK: - CoreData methods
+extension DataBaseManager {
+    // Loads caffeine drinks from CoreData
+    mutating func loadDrinks(with request: NSFetchRequest<Drink> = Drink.fetchRequest(), and predicate: NSPredicate? = nil) {
+        request.predicate = predicate
+        do {
+            drinksArray = try context.fetch(request)
+        } catch {
+            print("Error while loading data")
+        }
+        drinksArray = drinksArray.sorted { first, second in
+            return first.name!.capitalized < second.name!.capitalized
+        }
+    }
+
+    // Saves given drinks to CoreData
+    func saveDrinks() {
+        do {
+            try context.save()
+        } catch {
+            print("Error saving: \(error)")
+        }
+    }
+    
+    // Load all consumed drinks
+    mutating func loadConsumedDrinks(with predicate: NSCompoundPredicate = NSCompoundPredicate()) {
+        do {
+            consumedDrinksArray = try context.fetch(ConsumedDrink.fetchRequest())
+        } catch {
+            print("Error while loading data")
+        }
+    }
+    
+    // Save current context
+    mutating func saveConsumedDrinks() {
+        do {
+            try self.context.save()
+        } catch {
+            print("Error while saving context")
+        }
+    }
+    
+    // Removes given drink
+    mutating func removeDrink(_ consumedDrink: ConsumedDrink) {
+        self.context.delete(consumedDrink)
+        saveConsumedDrinks()
+    }
+    
     // Returns consumed drink object for given name
     mutating func getDrinkByName(_ name: String) -> ConsumedDrink {
         loadConsumedDrinks()
@@ -383,26 +329,6 @@ struct DataBaseManager {
             }
         }
         return consumedDrinksArray[0]
-    }
-    
-    // Returns drinks for the past month
-    mutating func loadDrinksInLast(_ period: Period) {
-        var periodComponent: Calendar.Component
-        var periodValue = 0
-        switch period {
-        case .month:
-            periodComponent = .month
-            periodValue = -1
-        case .week:
-            periodComponent = .day
-            periodValue = -7
-        }
-        
-        let fromDate = Calendar.current.startOfDay(for: Calendar.current.date(byAdding: periodComponent, value: periodValue, to: .now)!)
-        let toPredicate = NSPredicate(format: "%@ >= %K", Date.now as NSDate, #keyPath(ConsumedDrink.timeConsumed))
-        let fromPredicate = NSPredicate(format: "%@ <= %K", fromDate as NSDate, #keyPath(ConsumedDrink.timeConsumed))
-        let compoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [toPredicate, fromPredicate])
-        loadConsumedDrinks(with: compoundPredicate)
     }
     
     // Returns an array of size 30, where each entry is the caffeine amount consumed i days ago
@@ -432,6 +358,101 @@ struct DataBaseManager {
         }
         return amounts
     }
+}
+
+// MARK: - Helper methods
+extension DataBaseManager {
+    // Returns icon name for given drink type
+    func getIcon(for drink: String) -> String {
+        switch drink {
+        case "Coffee":
+            return K.icons.hotCoffe
+        case "Bottle":
+            return K.icons.cannedCoffe
+        case "Coffee Can":
+            return K.icons.cannedCoffe
+        case "Esspresso":
+            return K.icons.espresso
+        case "Ice":
+            return K.icons.coldCoffe
+        case "Energy Drinks":
+            return K.icons.energyDrink
+        case "Energy Shots":
+            return K.icons.energyShot
+        case "Tea":
+            return K.icons.tea
+        case "Ice Tea":
+            return K.icons.icedTea
+        case "Soft Drinks":
+            return K.icons.softDrink
+        case "Water":
+            return K.icons.water
+        default:
+            return ""
+        }
+    }
+    
+    // Returns amounts of caffeine for each drink type in the past week
+    mutating func getDrinkTypeAmounts(in period: Period) -> [Double] {
+        loadDrinksInLast(period)
+        var values: [Double] = Array(repeating: 0.0, count: 6)
+        for consumedDrink in consumedDrinksArray {
+            switch consumedDrink.icon {
+            case K.icons.hotCoffe:
+                values[0] += Double(consumedDrink.initialAmount)
+            case K.icons.espresso:
+                values[0] += Double(consumedDrink.initialAmount)
+            case K.icons.coldCoffe:
+                values[0] += Double(consumedDrink.initialAmount)
+            case K.icons.cannedCoffe:
+                values[0] += Double(consumedDrink.initialAmount)
+            case K.icons.energyDrink:
+                values[1] += Double(consumedDrink.initialAmount)
+            case K.icons.energyShot:
+                values[1] += Double(consumedDrink.initialAmount)
+            case K.icons.softDrink:
+                values[2] += Double(consumedDrink.initialAmount)
+            case K.icons.tea:
+                values[3] += Double(consumedDrink.initialAmount)
+            case K.icons.icedTea:
+                values[3] += Double(consumedDrink.initialAmount)
+            case K.icons.supplement:
+                values[4] += Double(consumedDrink.initialAmount)
+            default:
+                values[5] += Double(consumedDrink.initialAmount)
+            }
+        }
+        return values
+    }
+    
+    // Returns true if date is within past 7 days, false otherwise
+    func isDateInPastWeek(_ date: Date) -> Bool {
+        let current: Date = .now
+        let calendar: Calendar = Calendar.current
+        
+        if calendar.isDateInToday(date) || calendar.isDateInYesterday(date) {
+            return true
+        }
+        
+        for i in 2...6 {
+            let iDaysAgo: Date = calendar.date(byAdding: .day, value: -i, to: current)!
+            if calendar.isDate(date, inSameDayAs: iDaysAgo) {
+                return true
+            }
+        }
+        return false
+    }
+    
+    // Returns the day of the week for x days ago
+    func dayOfTheWeek(for x: Int) -> String {
+        let today: Date = .now
+        let calendar: Calendar = Calendar.current
+        let dateToReturn: Date = calendar.date(byAdding: .day, value: -x, to: today)!
+        let formatter = DateFormatter()
+        let weekdayName = formatter.weekdaySymbols[calendar.component(.weekday, from: dateToReturn) - 1]
+        let symbol = weekdayName.dropLast(weekdayName.count - 3)
+        return String(symbol)
+    }
     
     // Returns the day of the month x days ago
     func getDayLabel(daysAgo: Int) -> String {
@@ -441,27 +462,6 @@ struct DataBaseManager {
         let day = formatter.string(from: date!)
         return day
     }
-    
-    // Returns the Drink objects for the 5 most frequently consumed drinks in the past month
-    mutating func getFrequentlyConsumedDrinks() -> [Drink] {
-        let topDrinks: [(ConsumedDrink, Int)] = getTopDrinks(5, for: .month, false)
-        var result: [Drink] = []
-        for drink in topDrinks {
-            if let parent = drink.0.parent {
-                result.append(parent)
-            }
-        }
-        return result.sorted(by: { first, second in
-            return first.name!.capitalized < second.name!.capitalized
-        })
-    }
-    
-    // Returns all consumed drinks
-    mutating func getAllConsumedDrinks() -> [ConsumedDrink] {
-        loadConsumedDrinks()
-        return consumedDrinksArray
-    }
-    
 }
 
 // Entry in chart

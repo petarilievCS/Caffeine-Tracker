@@ -21,9 +21,9 @@ class AdjustViewController: UIViewController {
     
     var delegate: AdjustViewControllerDelegate? = nil
     var selectedDrink: Drink? = nil
-    
-    private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+
     private var consumedDrinksArray = [ConsumedDrink]()
+    private var db = DataBaseManager()
     private var currentAmount: Int64 = 0
     
     // Constants
@@ -222,7 +222,6 @@ class AdjustViewController: UIViewController {
     }
     
     // MARK: - @IBActions
-    
     @IBAction func plusButtonPressed(_ sender: UIButton) {
         if currentAmount < 99 {
             currentAmount += 1
@@ -241,28 +240,11 @@ class AdjustViewController: UIViewController {
     
     // Log drink as consumed (update number of drinks, daily amount and amount in metabolism)
     @IBAction func addDrinkButtonPressed(_ sender: UIButton) {
-        let amountToAdd = Int(caffeineLabel.text!)!
-        addConsumedDrink(with: amountToAdd)
+        db.addConsumedDrink(with: Int(caffeineLabel.text!)!, and: selectedDrink!)
         self.animateDismissView()
-        
-        // Play vibration
         UIImpactFeedbackGenerator(style: .medium).impactOccurred()
     }
-    
-    // Adds consumed drink to CoreData database
-    func addConsumedDrink(with caffeineAmount: Int) {
-        loadConsumedDrinks()
-        let consumedDrink = ConsumedDrink(context: self.context)
-        consumedDrink.parent = selectedDrink
-        consumedDrink.name = selectedDrink!.name
-        consumedDrink.icon = selectedDrink!.icon
-        consumedDrink.caffeine = Int64(caffeineAmount)
-        consumedDrink.initialAmount = Int64(caffeineAmount)
-        consumedDrink.timeConsumed = Date.now
-        consumedDrinksArray.append(consumedDrink)
-        saveConsumedDrinks()
-    }
-    
+
     func updateAmount() {
         amountLabel.text = "\(currentAmount) fl oz"
     }
@@ -271,25 +253,6 @@ class AdjustViewController: UIViewController {
         let newCaffeine = CGFloat(Double(currentAmount) * selectedDrink!.caffeineOz)
         caffeineLabel.countFrom(CGFloat(Int(caffeineLabel.text!)!), to: newCaffeine, withDuration: 0.25)
     }
-    
-    // MARK: - Core Data methods
-    
-    func saveConsumedDrinks() {
-        do {
-            try self.context.save()
-        } catch {
-            print("Error while saving context")
-        }
-    }
-    
-    func loadConsumedDrinks() {
-        do {
-            consumedDrinksArray = try context.fetch(ConsumedDrink.fetchRequest())
-        } catch {
-            print("Error while loading data")
-        }
-    }
-    
 }
 
 protocol AdjustViewControllerDelegate {

@@ -145,8 +145,7 @@ class ChartViewController: UIViewController {
         pieChartHostingController.rootView.values = values
         pieChartHostingController.rootView.totalAmount = totalAmount
         mostCommonDrinkLabel.text = names[maxIdx!]
-        totalDrinksLabel.text = String(databaseManager.consumedDrinksArray.count)
-        
+        totalDrinksLabel.text = String(databaseManager.getDrinksInLast(period).count)
         reloadTopDrinks(for: period)
     }
     
