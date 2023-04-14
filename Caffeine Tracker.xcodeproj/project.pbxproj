@@ -39,7 +39,7 @@
 		E69E02822963058900F4C142 /* IconCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E69E02802963058900F4C142 /* IconCell.xib */; };
 		E69E0285296309CA00F4C142 /* NumberCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E69E0283296309CA00F4C142 /* NumberCell.swift */; };
 		E69E0286296309CA00F4C142 /* NumberCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E69E0284296309CA00F4C142 /* NumberCell.xib */; };
-		E69FA856296575C90025EEBA /* DrinkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E69FA855296575C90025EEBA /* DrinkViewController.swift */; };
+		E69FA856296575C90025EEBA /* ConsumeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E69FA855296575C90025EEBA /* ConsumeViewController.swift */; };
 		E69FA8582965B2D40025EEBA /* AdjustViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E69FA8572965B2D40025EEBA /* AdjustViewController.swift */; };
 		E6B08A4F29A9061D00A95032 /* SwiftPieChart in Frameworks */ = {isa = PBXBuildFile; productRef = E6B08A4E29A9061D00A95032 /* SwiftPieChart */; };
 		E6B08A5129A92D1200A95032 /* EditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B08A5029A92D1200A95032 /* EditViewController.swift */; };
@@ -85,7 +85,7 @@
 		E69E02802963058900F4C142 /* IconCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IconCell.xib; sourceTree = "<group>"; };
 		E69E0283296309CA00F4C142 /* NumberCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberCell.swift; sourceTree = "<group>"; };
 		E69E0284296309CA00F4C142 /* NumberCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NumberCell.xib; sourceTree = "<group>"; };
-		E69FA855296575C90025EEBA /* DrinkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkViewController.swift; sourceTree = "<group>"; };
+		E69FA855296575C90025EEBA /* ConsumeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsumeViewController.swift; sourceTree = "<group>"; };
 		E69FA8572965B2D40025EEBA /* AdjustViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdjustViewController.swift; sourceTree = "<group>"; };
 		E6B08A5029A92D1200A95032 /* EditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditViewController.swift; sourceTree = "<group>"; };
 		E6B7DA85295F5185008F8CD1 /* CaffeineCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaffeineCell.swift; sourceTree = "<group>"; };
@@ -152,9 +152,9 @@
 			children = (
 				E6996C5E295E0A5E00E35FC1 /* DashboardViewController.swift */,
 				E6996C78295E0BE600E35FC1 /* CaffeineViewController.swift */,
-				E6996C76295E0BA700E35FC1 /* AddViewController.swift */,
-				E69FA855296575C90025EEBA /* DrinkViewController.swift */,
+				E69FA855296575C90025EEBA /* ConsumeViewController.swift */,
 				E69FA8572965B2D40025EEBA /* AdjustViewController.swift */,
+				E6996C76295E0BA700E35FC1 /* AddViewController.swift */,
 				E604881829896A3700B25167 /* ChartViewController.swift */,
 				E6907DC3299AABDD00AE005B /* SettingsViewController.swift */,
 				E6B08A5029A92D1200A95032 /* EditViewController.swift */,
@@ -309,7 +309,7 @@
 				E6996C77295E0BA700E35FC1 /* AddViewController.swift in Sources */,
 				E611E990296ED16300592296 /* ConsumedDrinkCell.swift in Sources */,
 				E6B7DA87295F5185008F8CD1 /* CaffeineCell.swift in Sources */,
-				E69FA856296575C90025EEBA /* DrinkViewController.swift in Sources */,
+				E69FA856296575C90025EEBA /* ConsumeViewController.swift in Sources */,
 				E604881929896A3700B25167 /* ChartViewController.swift in Sources */,
 				E604881B298B42F800B25167 /* DataBaseManager.swift in Sources */,
 				E6996C5F295E0A5E00E35FC1 /* DashboardViewController.swift in Sources */,

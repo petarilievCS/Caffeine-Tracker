@@ -8,11 +8,11 @@
 import Foundation
 
 struct K {
-    
     struct UI {
         static let settingCellHeight: CGFloat = 55.0
         static let consumedDrinkCellHeight: CGFloat = 44.0
         static let drinkCellHeight: CGFloat = 70.0
+        static let cornerRadius = 15.0
     }
     
     struct ID {
@@ -20,6 +20,7 @@ struct K {
             static let dashboardToDrinks = "dashboardToDrinks"
             static let dashboardToRecord = "dashboardToDrink"
             static let drinksToAdd = "drinksToAdd"
+            static let drinksToAdjust = "drinksToAmount"
         }
         static let caffeineCell = "CaffeineCell"
         static let switchCell = "SettingsCell"
@@ -43,24 +44,15 @@ struct K {
         static let numberOfFrequentlyConsumedDrinks: Int = 3
     }
     
-    struct segues {
-        
-    }
-    
     // Identifiers
-    
     static let addDrinkCellIdentifier = "AddDrinkCell"
     static let drinkNameCellIdentifier = "DrinkNameCell"
     static let iconCellIdentifier = "IconCell"
     static let numberCellIdentifier = "NumberCell"
-    static let drinksToAmountSegue = "drinksToAmount"
     static let consumedDrinkCellIdentifier = "ConsumedDrinkCell"
     static let aboveLimitNotifiicationIdentifier = "aboveLimitNotification"
     static let drinkTypePopoverSegueIdentifier = "drinkTypePopoverSegue"
     static let drinkTypePopoverIdentifier = "DrinkTypePopover"
     static let dateCellIdentifier = "DateCell"
     static let locationCellIdentifier = "LocationCell"
-    
-    // UI constants
-    static let defaultCornerRadius = 15.0
 }

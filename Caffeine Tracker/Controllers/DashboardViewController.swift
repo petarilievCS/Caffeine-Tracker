@@ -28,9 +28,8 @@ class DashboardViewController: UIViewController {
     
     private let ringProgressView = RingProgressView(frame: CGRect(x: 0, y: 0, width: 110, height: 110))
     private var consumedDrinksArray = [ConsumedDrink]()
-    // private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     private var metabolismCalculator = MetabolismCalculator()
-    private var dataBaseManager = DataBaseManager()
+    private var db = DataBaseManager()
     
     // MARK: - View Lifecycle methods
     override func viewDidLoad() {
@@ -38,7 +37,7 @@ class DashboardViewController: UIViewController {
         
         // Add default drinks if first run
         if !UserDefaults.standard.bool(forKey: K.defaults.firstRun) {
-            dataBaseManager.addDefaultDrinks()
+            db.addDefaultDrinks()
         }
         UserDefaults.standard.set(true, forKey: K.defaults.firstRun)
         
@@ -52,10 +51,10 @@ class DashboardViewController: UIViewController {
         scrollView.showsVerticalScrollIndicator = false
         tabBarController?.navigationController?.navigationBar.prefersLargeTitles = true
         tabBarController?.navigationController?.navigationBar.isTranslucent = true
-        dailyIntakeView.layer.cornerRadius = K.defaultCornerRadius
-        currentAmountView.layer.cornerRadius = K.defaultCornerRadius
-        drinkButton.layer.cornerRadius = K.defaultCornerRadius
-        tableView.layer.cornerRadius = K.defaultCornerRadius
+        dailyIntakeView.layer.cornerRadius = K.UI.cornerRadius
+        currentAmountView.layer.cornerRadius = K.UI.cornerRadius
+        drinkButton.layer.cornerRadius = K.UI.cornerRadius
+        tableView.layer.cornerRadius = K.UI.cornerRadius
         setupRingProgressView()
     }
     
@@ -77,29 +76,16 @@ class DashboardViewController: UIViewController {
             destinationVC.delegate = self
         } else {
             let destinationNC = segue.destination as! UINavigationController
-            let destinationVC = destinationNC.topViewController as! DrinkViewController
+            let destinationVC = destinationNC.topViewController as! ConsumeViewController
             destinationVC.delegate = self
         }
     }
     
     func loadConsumedDrinks() {
-        consumedDrinksArray = dataBaseManager.getTodayDrinks()
+        consumedDrinksArray = db.getTodayDrinks()
         tableView.reloadData()
     }
 }
-
-// MARK: - CoreData methods
-//extension DashboardViewController {
-//    func saveConsumedDrinks() {
-//        do {
-//            try self.context.save()
-//        } catch {
-//            print("Error while saving context")
-//        }
-//    }
-//
-
-//}
 
 // MARK: - Table View methods
 extension DashboardViewController: UITableViewDelegate, UITableViewDataSource {
@@ -143,9 +129,8 @@ extension DashboardViewController: SwipeTableViewCellDelegate {
     
     func removeDrink(at indexPath: IndexPath) {
         loadConsumedDrinks()
-        dataBaseManager.removeDrink(consumedDrinksArray[indexPath.row])
+        db.removeDrink(consumedDrinksArray[indexPath.row])
         self.consumedDrinksArray.remove(at: indexPath.row)
-        // self.saveConsumedDrinks()
         recordChanged()
     }
     

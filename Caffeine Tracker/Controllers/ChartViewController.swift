@@ -75,8 +75,8 @@ class ChartViewController: UIViewController {
         timePeriodControl.addTarget(self, action: #selector(self.changePeriod), for: .valueChanged)
         
         // UI Customization
-        reportView.layer.cornerRadius = K.defaultCornerRadius
-        commonDrinksView.layer.cornerRadius = K.defaultCornerRadius
+        reportView.layer.cornerRadius = K.UI.cornerRadius
+        commonDrinksView.layer.cornerRadius = K.UI.cornerRadius
         
         // Data source for chart
         var chartData: [ChartEntry] = []

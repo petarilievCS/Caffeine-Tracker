@@ -11,6 +11,7 @@ import EFCountingLabel
 
 class AdjustViewController: UIViewController {
 
+    // MARK: - IB Outlets
     @IBOutlet weak var minusButton: UIButton!
     @IBOutlet weak var plusButton: UIButton!
     @IBOutlet weak var amountLabel: UILabel!
@@ -18,18 +19,17 @@ class AdjustViewController: UIViewController {
     @IBOutlet weak var addDrinkButton: UIButton!
     @IBOutlet weak var caffeineLabel: EFCountingLabel!
     
-    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    var consumedDrinksArray = [ConsumedDrink]()
-    var drinksVC: DrinkViewController? = nil
+    var delegate: AdjustViewControllerDelegate? = nil
+    var selectedDrink: Drink? = nil
     
-    var currentAmount: Int64 = 16
-    var currentDrink: Drink? = nil
+    private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    private var consumedDrinksArray = [ConsumedDrink]()
+    private var currentAmount: Int64 = 0
     
     // Constants
     let defaultHeight: CGFloat = 300
     let dismissibleHeight: CGFloat = 200
     let maximumContainerHeight: CGFloat = 300
-    // keep updated with new height
     var currentContainerHeight: CGFloat = 300
     
     // Setup default container view
@@ -50,21 +50,22 @@ class AdjustViewController: UIViewController {
         return view
     }()
     
-    
-    // 3. Dynamic container constraint
+    // Dynamic container constraint
     var containerViewHeightConstraint: NSLayoutConstraint?
     var containerViewBottomConstraint: NSLayoutConstraint?
     
+    // MARK: - View Lifecycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
         setupConstraints()
         setupPanGesture()
+        currentAmount = selectedDrink!.serving
         
         // Customize label
         amountLabel.text = "\(currentAmount) fl oz"
-        caffeineLabel.text = "\(currentDrink!.caffeine)"
-        addDrinkButton.layer.cornerRadius = 15.0
+        caffeineLabel.text = "\(selectedDrink!.caffeine)"
+        addDrinkButton.layer.cornerRadius = K.UI.cornerRadius
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -74,7 +75,7 @@ class AdjustViewController: UIViewController {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        drinksVC!.deselectRows()
+        delegate?.finishedAdding()
     }
     
     func setupView() {
@@ -82,7 +83,7 @@ class AdjustViewController: UIViewController {
     }
     
     func setupConstraints() {
-        // 4. Add subviews
+        // Add subviews
         view.addSubview(dimmedView)
         setupStackView()
         containerView.addSubview(contentView)
@@ -93,7 +94,7 @@ class AdjustViewController: UIViewController {
         dimmedView.translatesAutoresizingMaskIntoConstraints = false
         containerView.translatesAutoresizingMaskIntoConstraints = false
         
-        // 5. Set static constraints
+        // Set static constraints
         NSLayoutConstraint.activate([
             // set dimmedView edges to superview
             dimmedView.topAnchor.constraint(equalTo: view.topAnchor),
@@ -105,9 +106,9 @@ class AdjustViewController: UIViewController {
             containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
         ])
         
-        // 6. Set container to default height
+        // Set container to default height
         containerViewHeightConstraint = containerView.heightAnchor.constraint(equalToConstant: defaultHeight)
-        // 7. Set bottom constant to 0
+        // Set bottom constant to 0
         containerViewBottomConstraint = containerView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: defaultHeight)
         // Activate constraints
         containerViewHeightConstraint?.isActive = true
@@ -189,9 +190,6 @@ class AdjustViewController: UIViewController {
                 view.layoutIfNeeded()
             }
         case .ended:
-            // This happens when user stop drag,
-            // so we will get the last height of container
-            // Condition 1: If new height is below min, dismiss controller
             if newHeight < dismissibleHeight {
                 self.animateDismissView()
             }
@@ -223,7 +221,7 @@ class AdjustViewController: UIViewController {
         currentContainerHeight = height
     }
     
-    // MARK: - Actions
+    // MARK: - @IBActions
     
     @IBAction func plusButtonPressed(_ sender: UIButton) {
         if currentAmount < 99 {
@@ -255,9 +253,9 @@ class AdjustViewController: UIViewController {
     func addConsumedDrink(with caffeineAmount: Int) {
         loadConsumedDrinks()
         let consumedDrink = ConsumedDrink(context: self.context)
-        consumedDrink.parent = currentDrink
-        consumedDrink.name = currentDrink!.name
-        consumedDrink.icon = currentDrink!.icon
+        consumedDrink.parent = selectedDrink
+        consumedDrink.name = selectedDrink!.name
+        consumedDrink.icon = selectedDrink!.icon
         consumedDrink.caffeine = Int64(caffeineAmount)
         consumedDrink.initialAmount = Int64(caffeineAmount)
         consumedDrink.timeConsumed = Date.now
@@ -270,7 +268,7 @@ class AdjustViewController: UIViewController {
     }
     
     func updateCaffeine() {
-        let newCaffeine = CGFloat(Double(currentAmount) * currentDrink!.caffeineOz)
+        let newCaffeine = CGFloat(Double(currentAmount) * selectedDrink!.caffeineOz)
         caffeineLabel.countFrom(CGFloat(Int(caffeineLabel.text!)!), to: newCaffeine, withDuration: 0.25)
     }
     
@@ -292,4 +290,8 @@ class AdjustViewController: UIViewController {
         }
     }
     
+}
+
+protocol AdjustViewControllerDelegate {
+    func finishedAdding()
 }

@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="V8e-DY-UPU">
     <device id="retina6_12" orientation="portrait" appearance="dark"/>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
         <capability name="Map view configurations" minToolsVersion="14.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
@@ -16,7 +15,7 @@
             <objects>
                 <viewController title="Coffee Map" id="wtr-zz-Guz" customClass="MapViewController" customModule="Caffeine_Tracker" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="YKt-C5-DPy">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="749"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Rtr-vp-NzI">
@@ -585,12 +584,12 @@
             </objects>
             <point key="canvasLocation" x="2837.4045801526718" y="-2.1126760563380285"/>
         </scene>
-        <!--Drink View Controller-->
+        <!--Consume View Controller-->
         <scene sceneID="cg5-5v-NXy">
             <objects>
-                <tableViewController id="0Al-ES-PXb" customClass="DrinkViewController" customModule="Caffeine_Tracker" sceneMemberID="viewController">
+                <tableViewController id="0Al-ES-PXb" customClass="ConsumeViewController" customModule="Caffeine_Tracker" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="rYJ-jO-a95">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <searchBar key="tableHeaderView" contentMode="redraw" id="X4E-bc-vWX">
@@ -635,7 +634,7 @@
             <objects>
                 <viewController title="Add Drink" id="XZt-mF-DiK" customClass="AddViewController" customModule="Caffeine_Tracker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="bHd-Ra-Oit">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ehZ-CI-Yb9">
@@ -1025,7 +1024,7 @@
             <objects>
                 <viewController id="AN5-qq-dST" customClass="AdjustViewController" customModule="Caffeine_Tracker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="pz3-Mt-VEb">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ANz-In-Pg8" userLabel="contentView">
@@ -1185,7 +1184,7 @@
             <objects>
                 <viewController title="Add Drink" id="T2k-39-hlo" customClass="EditViewController" customModule="Caffeine_Tracker" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5GG-FM-Vpm">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pk5-1d-FXW">

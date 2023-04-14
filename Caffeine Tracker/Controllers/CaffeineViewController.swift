@@ -1,5 +1,5 @@
 //
-//  AddViewController.swift
+//  DrinksViewController.swift
 //  Caffeine Tracker
 //
 //  Created by Petar Iliev on 29.12.22.
@@ -17,8 +17,7 @@ class CaffeineViewController: UITableViewController {
     
     var drinkArray = [Drink]()
     var frequentlyConsumedDrinkArray = [Drink]()
-    private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    private var databaseManager = DataBaseManager()
+    private var db = DataBaseManager()
 
     // MARK: - View Lifecycle methods
     override func viewDidLoad() {
@@ -56,15 +55,8 @@ class CaffeineViewController: UITableViewController {
 // MARK: - CoreData methods
 extension CaffeineViewController {
     func loadDrinks(with request: NSFetchRequest<Drink> = Drink.fetchRequest(), and predicate: NSPredicate? = nil) {
-        drinkArray = databaseManager.getDrinks(with: request, and: predicate)
-        frequentlyConsumedDrinkArray = databaseManager.getFrequentlyConsumedDrinks()
-        request.predicate = predicate
-        drinkArray = drinkArray.sorted { first, second in
-            return first.name!.capitalized < second.name!.capitalized
-        }
-        frequentlyConsumedDrinkArray = frequentlyConsumedDrinkArray.sorted(by: { first, second in
-            return first.name!.capitalized < second.name!.capitalized
-        })
+        drinkArray = db.getDrinks(with: request, and: predicate)
+        frequentlyConsumedDrinkArray = db.getFrequentlyConsumedDrinks()
         tableView.reloadData()
     }
     

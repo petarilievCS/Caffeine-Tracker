@@ -13,7 +13,6 @@ struct DataBaseManager {
     
     let secondsPerHour: Int = 3600
     let declinePerHour: Double = 0.87
-    
     var consumedDrinksArray: [ConsumedDrink] = []
     var drinksArray: [Drink] = []
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
