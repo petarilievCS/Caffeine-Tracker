@@ -12,6 +12,7 @@ class CaffeineViewController: UITableViewController {
     
     @IBOutlet weak var searchBar: UISearchBar!
     
+    var delegate: CaffeineViewControllerDelegate? = nil
     var drinkArray = [Drink]()
     var frequentlyConsumedDrinkArray = [Drink]()
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
@@ -168,4 +169,8 @@ extension CaffeineViewController: UISearchBarDelegate {
         }
     }
     
+}
+
+protocol CaffeineViewControllerDelegate {
+    func recordChanged()
 }

@@ -11,15 +11,19 @@ class DrinkViewController: CaffeineViewController {
     
     @IBOutlet weak var newSearchBar: UISearchBar!
     
-    var dashboardVC: DashboardViewController? = nil
+    private var addingDrink: Bool = false
     
     override func viewDidLoad() {
         self.searchBar = newSearchBar
         super.viewDidLoad()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        navigationItem.title = addingDrink ? "Add Drink" : "Caffeine Drinks"
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
-        dashboardVC?.viewDidAppear(true)
+        delegate?.recordChanged()
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -61,9 +65,6 @@ class DrinkViewController: CaffeineViewController {
         }
         destinationVC.currentAmount = selectedDrink!.serving
         destinationVC.currentDrink = selectedDrink
-        
-        
-        
     }
 }
 

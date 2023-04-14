@@ -11,10 +11,15 @@ struct K {
     
     struct UI {
         static let settingCellHeight: CGFloat = 55.0
+        static let consumedDrinkCellHeight: CGFloat = 44.0
         static let drinkCellHeight: CGFloat = 70.0
     }
     
     struct ID {
+        struct segues {
+            static let dashboardToDrinks = "dashboardToDrinks"
+            static let dashboardToRecord = "dashboardToDrink"
+        }
         static let switchCell = "SettingsCell"
         static let settingCell = "RegularSettingsCell"
         static let detailSettingCell = "VersionSettingsCell"
@@ -29,10 +34,15 @@ struct K {
         static let amountNotificationSent = "amountNotificationSent"
         static let notificationPermission = "notificationPermission"
         static let dailyLimit = "dailyLimit"
+        static let firstRun = "firstRun"
     }
     
     struct constants {
         static let numberOfFrequentlyConsumedDrinks: Int = 3
+    }
+    
+    struct segues {
+        
     }
     
     // Identifiers
@@ -43,10 +53,8 @@ struct K {
     static let numberCellIdentifier = "NumberCell"
     static let drinksToAddSegue = "drinksToAdd"
     static let drinksToAmountSegue = "drinksToAmount"
-    static let dashboardToDrinksSegue = "dashboardToDrinks"
     static let consumedDrinkCellIdentifier = "ConsumedDrinkCell"
     static let aboveLimitNotifiicationIdentifier = "aboveLimitNotification"
-    static let dashboardToDrinkSegueIdentifier = "dashboardToDrink"
     static let drinkTypePopoverSegueIdentifier = "drinkTypePopoverSegue"
     static let drinkTypePopoverIdentifier = "DrinkTypePopover"
     static let dateCellIdentifier = "DateCell"

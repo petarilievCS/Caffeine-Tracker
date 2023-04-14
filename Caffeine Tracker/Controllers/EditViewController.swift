@@ -13,11 +13,10 @@ class EditViewController: UIViewController  {
     @IBOutlet weak var deleteView: UIView!
     
     var selectedRecord: ConsumedDrink?
-    var selectedDrink: String?
-    let drinkTypes: [String] = ["Espresso", "Hot Coffee", "Cold Coffee", "Canned Coffee", "Soft Drink", "Energy Drink", "Energy Shot", "Chocolate", "Supplement", "Tea", "Iced Tea"]
-    var databaseManager: DataBaseManager = DataBaseManager()
-    var dashboardVC: DashboardViewController?
-    var indexPath: IndexPath?
+    private var selectedDrink: String?
+    private let drinkTypes: [String] = ["Espresso", "Hot Coffee", "Cold Coffee", "Canned Coffee", "Soft Drink", "Energy Drink", "Energy Shot", "Chocolate", "Supplement", "Tea", "Iced Tea"]
+    private var databaseManager: DataBaseManager = DataBaseManager()
+    let delegate: EditViewControllerDelegate? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,13 +38,12 @@ class EditViewController: UIViewController  {
     }
     
     @IBAction func doneButtonPressed(_ sender: UIBarButtonItem) {
-        // TODO: Update database
         let newName: String = ((tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! DrinkNameCell?)?.textField.text)!
         let newType: String = formatImageName((tableView.cellForRow(at: IndexPath(row: 1, section: 0)) as! IconCell).iconLabel.text!)
         let newAmount: Int64 = Int64((tableView.cellForRow(at: IndexPath(row: 2, section: 0)) as! NumberCell).textField.text!) ?? 0
         let newDate: Date = (tableView.cellForRow(at: IndexPath(row: 3, section: 0)) as! DateCell).datePicker.date
         databaseManager.updateRecord(selectedRecord!, name: newName, type: newType, amount: newAmount, time: newDate)
-        dashboardVC?.viewDidAppear(true)
+        delegate?.recordChanged()
         self.dismiss(animated: true)
     }
         
@@ -58,7 +56,7 @@ class EditViewController: UIViewController  {
     
     @IBAction func removeButtonPressed(_ sender: UIButton) {
         databaseManager.removeDrink(selectedRecord!)
-        dashboardVC?.viewDidAppear(true)
+        delegate?.recordChanged()
         self.dismiss(animated: true)
     }
 }
@@ -168,6 +166,8 @@ extension EditViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     
 }
 
-
+protocol EditViewControllerDelegate {
+    func recordChanged()
+}
 
 

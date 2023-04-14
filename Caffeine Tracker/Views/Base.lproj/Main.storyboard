@@ -567,7 +567,7 @@
                     <navigationItem key="navigationItem" title="Dashbaord" id="Ig9-FR-cAB"/>
                     <connections>
                         <outlet property="contentView" destination="npV-L6-oD2" id="5mL-Qh-c0h"/>
-                        <outlet property="currentAmluntView" destination="lHL-xC-6fN" id="TzI-cV-Vc3"/>
+                        <outlet property="currentAmountView" destination="lHL-xC-6fN" id="TzI-cV-Vc3"/>
                         <outlet property="dailyAmountLabel" destination="tKO-mi-372" id="PMG-EL-KwI"/>
                         <outlet property="dailyIntakeView" destination="J7h-BS-Rdo" id="ufb-gZ-cA8"/>
                         <outlet property="drinkButton" destination="U90-Vj-kMa" id="Ojo-bY-ctM"/>
