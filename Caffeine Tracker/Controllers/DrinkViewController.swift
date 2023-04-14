@@ -11,19 +11,17 @@ class DrinkViewController: CaffeineViewController {
     
     @IBOutlet weak var newSearchBar: UISearchBar!
     
-    private var addingDrink: Bool = false
-    
     override func viewDidLoad() {
         self.searchBar = newSearchBar
         super.viewDidLoad()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        navigationItem.title = addingDrink ? "Add Drink" : "Caffeine Drinks"
+        navigationItem.title = "Add Drink"
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        delegate?.recordChanged()
+        delegate?.drinkChanged()
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

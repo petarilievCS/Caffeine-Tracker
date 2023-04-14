@@ -79,8 +79,7 @@ class DashboardViewController: UIViewController {
         } else {
             let destinationNC = segue.destination as! UINavigationController
             let destinationVC = destinationNC.topViewController as! DrinkViewController
-            destinationVC.addingDrink = true
-            destinationNC.delegate = self
+            destinationVC.delegate = self
         }
     }
 }
@@ -182,47 +181,47 @@ extension DashboardViewController {
                 }
             }
         }
+    }
         
-        // Creates ring progress view
-        func setupRingProgressView() {
-            ringProgressView.ringWidth = 25
-            updateProgressView()
-            ringView.addSubview(ringProgressView)
+    // Creates ring progress view
+    func setupRingProgressView() {
+        ringProgressView.ringWidth = 25
+        updateProgressView()
+        ringView.addSubview(ringProgressView)
+    }
+    
+    
+    // Gets the current percentage of the allowed daily caffeine amount that the user has consumed
+    func getProgress() -> Double {
+        return Double(metabolismCalculator.calculateTotalAmount()) / Double(UserDefaults.standard.integer(forKey: K.defaults.dailyLimit))
+    }
+    
+    // Updates the ring progress view
+    func updateProgressView() {
+        UIView.animate(withDuration: 0.5) {
+            self.ringProgressView.progress = self.getProgress()
+            self.ringProgressView.startColor = self.getProgress() > 1.0 ? UIColor(named: "Red")! : UIColor(named: "Green")!
+            self.ringProgressView.endColor = self.getProgress() > 1.0 ? UIColor(named: "Red")! : UIColor(named: "Green")!
         }
+    }
         
-        
-        // Gets the current percentage of the allowed daily caffeine amount that the user has consumed
-        func getProgress() -> Double {
-            return metabolismCalculator.calculateTotalAmount() / Double(UserDefaults.standard.integer(forKey: K.defaults.dailyLimit))
+    // Updates the information on the dashboard when the caffeine log changes
+    func updateInfo() {
+        let dailyAmount = metabolismCalculator.calculateTotalAmount()
+        let dailyLimit = UserDefaults.standard.integer(forKey: K.defaults.dailyLimit)
+        dailyAmountLabel.text = "\(dailyAmount)/\(UserDefaults.standard.integer(forKey: K.defaults.dailyLimit)) mg"
+        drinkNumberLabel.text = String(metabolismCalculator.getNumberOfDrinks())
+        metabolismAmountLabel.text = "\(metabolismCalculator.calculateMetabolismAmount()) mg"
+        if dailyAmount > UserDefaults.standard.integer(forKey: K.defaults.dailyLimit) {
+            dailyAmountLabel.textColor = UIColor(named: "Red")
+        } else {
+            dailyAmountLabel.textColor = UIColor(named: "Green")
         }
-        
-        // Updates the ring progress view
-        func updateProgressView() {
-            UIView.animate(withDuration: 0.5) {
-                self.ringProgressView.progress = self.getProgress()
-                self.ringProgressView.startColor = self.getProgress() > 1.0 ? UIColor(named: "Red")! : UIColor(named: "Green")!
-                self.ringProgressView.endColor = self.getProgress() > 1.0 ? UIColor(named: "Red")! : UIColor(named: "Green")!
-            }
-        }
-        
-        // Updates the information on the dashboard when the caffeine log changes
-        func updateInfo() {
-            let dailyAmount = metabolismCalculator.calculateTotalAmount()
-            let dailyLimit = UserDefaults.standard.integer(forKey: K.defaults.dailyLimit)
-            dailyAmountLabel.text = "\(dailyAmount)/\(UserDefaults.standard.integer(forKey: K.defaults.dailyLimit)) mg"
-            drinkNumberLabel.text = String(metabolismCalculator.getNumberOfDrinks())
-            metabolismAmountLabel.text = "\(metabolismCalculator.calculateMetabolismAmount()) mg"
-            if dailyAmount > UserDefaults.standard.integer(forKey: K.defaults.dailyLimit) {
-                dailyAmountLabel.textColor = UIColor(named: "Red")
-            } else {
-                dailyAmountLabel.textColor = UIColor(named: "Green")
-            }
-            sendNotification()
-        }
+        sendNotification(dailyLimit, dailyAmount)
     }
     
     // Notifies user that their caffeine intake is too high if needed
-    func sendNotification() {
+    func sendNotification(_ dailyLimit: Int, _ dailyAmount: Int) {
         if dailyAmount > dailyLimit && UserDefaults.standard.bool(forKey: K.defaults.notificationPermission) && !UserDefaults.standard.bool(forKey: K.defaults.amountNotificationSent) {
                 let notificationConent: UNMutableNotificationContent = UNMutableNotificationContent()
                 notificationConent.title = "Caffeine Up"
@@ -241,6 +240,17 @@ extension DashboardViewController {
 // MARK: - EditViewControllerDelegate methods
 extension DashboardViewController: EditViewControllerDelegate {
     func recordChanged() {
+        self.updateInfo()
+        updateProgressView()
+        loadConsumedDrinks()
+        tableView.reloadData()
+        updateConstraints()
+    }
+}
+
+// MARK: - CaffeineViewControlelrDelegate methods
+extension DashboardViewController: CaffeineViewControllerDelegate {
+    func drinkChanged() {
         updateInfo()
         updateProgressView()
         loadConsumedDrinks()

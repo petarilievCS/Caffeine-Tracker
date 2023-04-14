@@ -172,5 +172,5 @@ extension CaffeineViewController: UISearchBarDelegate {
 }
 
 protocol CaffeineViewControllerDelegate {
-    func recordChanged()
+    func drinkChanged()
 }

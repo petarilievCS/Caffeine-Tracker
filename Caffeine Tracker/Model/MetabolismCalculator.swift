@@ -20,14 +20,12 @@ struct MetabolismCalculator {
     
     // Returns the amount of caffeine in the metabolism right now
     mutating func calculateMetabolismAmount() -> Int {
-        consumedDrinksArray = databaseManager.getTodayDrinks()
         databaseManager.updateMetabolismAmounts()
+        consumedDrinksArray = databaseManager.getTodayDrinks()
         var metabolismAmount = 0
-        
         for consumeDrink in consumedDrinksArray {
             metabolismAmount += Int(consumeDrink.caffeine)
         }
-        
         return metabolismAmount
     }
     

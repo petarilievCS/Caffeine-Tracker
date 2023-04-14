@@ -153,6 +153,7 @@ struct DataBaseManager {
                 consumedDrinksArray[i].icon = type
                 consumedDrinksArray[i].initialAmount = amount
                 consumedDrinksArray[i].timeConsumed = time
+                saveConsumedDrinks()
                 updateMetabolismAmounts()
                 break
             }
@@ -217,7 +218,6 @@ struct DataBaseManager {
     // Update amount of caffeine in metabolism
     mutating func updateMetabolismAmounts() {
         loadConsumedDrinks()
-        
         for i in 0..<consumedDrinksArray.count {
             let consumedDrink: ConsumedDrink = consumedDrinksArray[i]
             let amount: Int64 = consumedDrink.initialAmount
@@ -233,7 +233,8 @@ struct DataBaseManager {
                 if newAmount < Int64.max {
                     consumedDrink.caffeine = Int64(newAmount)
                 }
-                
+            } else {
+                consumedDrink.caffeine = Int64(amount)
             }
         }
         saveConsumedDrinks()

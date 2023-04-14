@@ -13,10 +13,12 @@ class EditViewController: UIViewController  {
     @IBOutlet weak var deleteView: UIView!
     
     var selectedRecord: ConsumedDrink?
+    var delegate: EditViewControllerDelegate? = nil
+    
     private var selectedDrink: String?
     private let drinkTypes: [String] = ["Espresso", "Hot Coffee", "Cold Coffee", "Canned Coffee", "Soft Drink", "Energy Drink", "Energy Shot", "Chocolate", "Supplement", "Tea", "Iced Tea"]
     private var databaseManager: DataBaseManager = DataBaseManager()
-    let delegate: EditViewControllerDelegate? = nil
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
