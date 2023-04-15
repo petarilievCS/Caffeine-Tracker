@@ -63,6 +63,37 @@ extension DataBaseManager {
             }
         }
     }
+    
+    // Adds Drink with given data to CoreData
+    mutating func addDrink(name: String, icon: String, caffeine: Int64, serving: Int64, caffeineOz: Double) {
+        loadDrinks()
+        let newDrink = Drink(context: self.context)
+        newDrink.name = name
+        newDrink.icon = icon
+        newDrink.caffeine = caffeine
+        newDrink.serving = serving
+        newDrink.caffeineOz = caffeineOz
+        drinksArray.append(newDrink)
+        saveDrinks()
+    }
+    
+    // Edits given Drink with given data
+    mutating func editDrink(_ drink: Drink, name: String? = nil, icon: String? = nil, caffeine: Int64? = nil, serving: Int64? = nil, caffeineOz: Double? = nil) {
+        drink.name = name
+        drink.icon = icon
+        drink.caffeine = caffeine ?? 0
+        drink.serving = serving ?? 0
+        drink.caffeineOz = caffeineOz ?? 0.0
+        saveDrinks()
+    }
+    
+    // Removes given Drink from CoreData
+    mutating func removeDrinnk(_ drink: Drink) {
+        loadDrinks()
+        context.delete(drink)
+        drinksArray.remove(at: drinksArray.firstIndex(of: drink)!)
+        saveDrinks()
+    }
 }
 
 // MARK: - ConsumedDrink methods
@@ -315,7 +346,7 @@ extension DataBaseManager {
     }
     
     // Removes given drink
-    mutating func removeDrink(_ consumedDrink: ConsumedDrink) {
+    mutating func removeConsumedDrink(_ consumedDrink: ConsumedDrink) {
         self.context.delete(consumedDrink)
         saveConsumedDrinks()
     }

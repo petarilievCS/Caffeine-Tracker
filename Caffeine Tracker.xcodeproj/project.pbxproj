@@ -31,7 +31,7 @@
 		E6996C67295E0A6100E35FC1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E6996C66295E0A6100E35FC1 /* Assets.xcassets */; };
 		E6996C6A295E0A6100E35FC1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E6996C68295E0A6100E35FC1 /* LaunchScreen.storyboard */; };
 		E6996C75295E0B3E00E35FC1 /* K.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6996C74295E0B3E00E35FC1 /* K.swift */; };
-		E6996C77295E0BA700E35FC1 /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6996C76295E0BA700E35FC1 /* AddViewController.swift */; };
+		E6996C77295E0BA700E35FC1 /* DrinkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6996C76295E0BA700E35FC1 /* DrinkViewController.swift */; };
 		E6996C79295E0BE600E35FC1 /* CaffeineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6996C78295E0BE600E35FC1 /* CaffeineViewController.swift */; };
 		E69E027D2962E05000F4C142 /* DrinkNameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E69E027B2962E05000F4C142 /* DrinkNameCell.swift */; };
 		E69E027E2962E05000F4C142 /* DrinkNameCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E69E027C2962E05000F4C142 /* DrinkNameCell.xib */; };
@@ -42,7 +42,7 @@
 		E69FA856296575C90025EEBA /* ConsumeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E69FA855296575C90025EEBA /* ConsumeViewController.swift */; };
 		E69FA8582965B2D40025EEBA /* AdjustViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E69FA8572965B2D40025EEBA /* AdjustViewController.swift */; };
 		E6B08A4F29A9061D00A95032 /* SwiftPieChart in Frameworks */ = {isa = PBXBuildFile; productRef = E6B08A4E29A9061D00A95032 /* SwiftPieChart */; };
-		E6B08A5129A92D1200A95032 /* EditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B08A5029A92D1200A95032 /* EditViewController.swift */; };
+		E6B08A5129A92D1200A95032 /* RecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B08A5029A92D1200A95032 /* RecordViewController.swift */; };
 		E6B7DA87295F5185008F8CD1 /* CaffeineCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B7DA85295F5185008F8CD1 /* CaffeineCell.swift */; };
 		E6B7DA88295F5185008F8CD1 /* CaffeineCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6B7DA86295F5185008F8CD1 /* CaffeineCell.xib */; };
 		E6BA790029ACFE8C004FB910 /* DrinkPopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6BA78FF29ACFE8C004FB910 /* DrinkPopoverViewController.swift */; };
@@ -50,6 +50,7 @@
 		E6BA790429AD2780004FB910 /* DateCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6BA790229AD2780004FB910 /* DateCell.xib */; };
 		E6BB92CC29B7B7C9005D07F6 /* caffeine.json in Resources */ = {isa = PBXBuildFile; fileRef = E6BB92CB29B7B7C9005D07F6 /* caffeine.json */; };
 		E6BB92CE29B7B871005D07F6 /* Drink.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6BB92CD29B7B871005D07F6 /* Drink.swift */; };
+		E6BEBC3C29EB02FD005ED265 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6BEBC3B29EB02FD005ED265 /* Utilities.swift */; };
 		E6D4AD2D29C0C5AD00B6D9A9 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D4AD2B29C0C5AD00B6D9A9 /* MapViewController.swift */; };
 		E6D4AD2E29C0C5AD00B6D9A9 /* LocationSearchTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D4AD2C29C0C5AD00B6D9A9 /* LocationSearchTable.swift */; };
 /* End PBXBuildFile section */
@@ -77,7 +78,7 @@
 		E6996C69295E0A6100E35FC1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E6996C6B295E0A6100E35FC1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E6996C74295E0B3E00E35FC1 /* K.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = K.swift; sourceTree = "<group>"; };
-		E6996C76295E0BA700E35FC1 /* AddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
+		E6996C76295E0BA700E35FC1 /* DrinkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkViewController.swift; sourceTree = "<group>"; };
 		E6996C78295E0BE600E35FC1 /* CaffeineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaffeineViewController.swift; sourceTree = "<group>"; };
 		E69E027B2962E05000F4C142 /* DrinkNameCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkNameCell.swift; sourceTree = "<group>"; };
 		E69E027C2962E05000F4C142 /* DrinkNameCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DrinkNameCell.xib; sourceTree = "<group>"; };
@@ -87,7 +88,7 @@
 		E69E0284296309CA00F4C142 /* NumberCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NumberCell.xib; sourceTree = "<group>"; };
 		E69FA855296575C90025EEBA /* ConsumeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsumeViewController.swift; sourceTree = "<group>"; };
 		E69FA8572965B2D40025EEBA /* AdjustViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdjustViewController.swift; sourceTree = "<group>"; };
-		E6B08A5029A92D1200A95032 /* EditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditViewController.swift; sourceTree = "<group>"; };
+		E6B08A5029A92D1200A95032 /* RecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewController.swift; sourceTree = "<group>"; };
 		E6B7DA85295F5185008F8CD1 /* CaffeineCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaffeineCell.swift; sourceTree = "<group>"; };
 		E6B7DA86295F5185008F8CD1 /* CaffeineCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CaffeineCell.xib; sourceTree = "<group>"; };
 		E6BA78FF29ACFE8C004FB910 /* DrinkPopoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkPopoverViewController.swift; sourceTree = "<group>"; };
@@ -95,6 +96,7 @@
 		E6BA790229AD2780004FB910 /* DateCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DateCell.xib; sourceTree = "<group>"; };
 		E6BB92CB29B7B7C9005D07F6 /* caffeine.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = caffeine.json; path = "Caffeine Tracker/Model/caffeine.json"; sourceTree = SOURCE_ROOT; };
 		E6BB92CD29B7B871005D07F6 /* Drink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Drink.swift; sourceTree = "<group>"; };
+		E6BEBC3B29EB02FD005ED265 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		E6D4AD2B29C0C5AD00B6D9A9 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		E6D4AD2C29C0C5AD00B6D9A9 /* LocationSearchTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationSearchTable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -143,6 +145,7 @@
 				E6996C68295E0A6100E35FC1 /* LaunchScreen.storyboard */,
 				E6996C6B295E0A6100E35FC1 /* Info.plist */,
 				E6996C74295E0B3E00E35FC1 /* K.swift */,
+				E6BEBC3B29EB02FD005ED265 /* Utilities.swift */,
 			);
 			path = "Caffeine Tracker";
 			sourceTree = "<group>";
@@ -154,10 +157,10 @@
 				E6996C78295E0BE600E35FC1 /* CaffeineViewController.swift */,
 				E69FA855296575C90025EEBA /* ConsumeViewController.swift */,
 				E69FA8572965B2D40025EEBA /* AdjustViewController.swift */,
-				E6996C76295E0BA700E35FC1 /* AddViewController.swift */,
+				E6996C76295E0BA700E35FC1 /* DrinkViewController.swift */,
+				E6B08A5029A92D1200A95032 /* RecordViewController.swift */,
 				E604881829896A3700B25167 /* ChartViewController.swift */,
 				E6907DC3299AABDD00AE005B /* SettingsViewController.swift */,
-				E6B08A5029A92D1200A95032 /* EditViewController.swift */,
 				E6D4AD2C29C0C5AD00B6D9A9 /* LocationSearchTable.swift */,
 				E6D4AD2B29C0C5AD00B6D9A9 /* MapViewController.swift */,
 				E6BA78FE29ACFE6F004FB910 /* Popovers */,
@@ -306,7 +309,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E69E0285296309CA00F4C142 /* NumberCell.swift in Sources */,
-				E6996C77295E0BA700E35FC1 /* AddViewController.swift in Sources */,
+				E6996C77295E0BA700E35FC1 /* DrinkViewController.swift in Sources */,
 				E611E990296ED16300592296 /* ConsumedDrinkCell.swift in Sources */,
 				E6B7DA87295F5185008F8CD1 /* CaffeineCell.swift in Sources */,
 				E69FA856296575C90025EEBA /* ConsumeViewController.swift in Sources */,
@@ -318,6 +321,7 @@
 				E6BA790029ACFE8C004FB910 /* DrinkPopoverViewController.swift in Sources */,
 				E69E027D2962E05000F4C142 /* DrinkNameCell.swift in Sources */,
 				E6996C79295E0BE600E35FC1 /* CaffeineViewController.swift in Sources */,
+				E6BEBC3C29EB02FD005ED265 /* Utilities.swift in Sources */,
 				E6D4AD2E29C0C5AD00B6D9A9 /* LocationSearchTable.swift in Sources */,
 				E69FA8582965B2D40025EEBA /* AdjustViewController.swift in Sources */,
 				E6996C75295E0B3E00E35FC1 /* K.swift in Sources */,
@@ -332,7 +336,7 @@
 				E6996C5D295E0A5E00E35FC1 /* SceneDelegate.swift in Sources */,
 				E6907DC4299AABDD00AE005B /* SettingsViewController.swift in Sources */,
 				E6BB92CE29B7B871005D07F6 /* Drink.swift in Sources */,
-				E6B08A5129A92D1200A95032 /* EditViewController.swift in Sources */,
+				E6B08A5129A92D1200A95032 /* RecordViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

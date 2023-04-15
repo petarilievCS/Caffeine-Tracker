@@ -42,7 +42,7 @@ class CaffeineViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == K.ID.segues.drinksToAdd {
             let navigationController = segue.destination as! UINavigationController
-            let destinationVC = navigationController.viewControllers[0] as! AddViewController
+            let destinationVC = navigationController.viewControllers[0] as! DrinkViewController
             destinationVC.delegate = self
             if let selectedIndex = tableView.indexPathForSelectedRow {
                 destinationVC.editDrink = true

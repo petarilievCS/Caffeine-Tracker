@@ -71,7 +71,7 @@ class DashboardViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == K.ID.segues.dashboardToRecord {
             let destinationNC = segue.destination as! UINavigationController
-            let destinationVC = destinationNC.topViewController as! EditViewController
+            let destinationVC = destinationNC.topViewController as! RecordViewController
             destinationVC.selectedRecord = consumedDrinksArray[tableView.indexPathForSelectedRow!.row]
             destinationVC.delegate = self
         } else {
@@ -129,7 +129,7 @@ extension DashboardViewController: SwipeTableViewCellDelegate {
     
     func removeDrink(at indexPath: IndexPath) {
         loadConsumedDrinks()
-        db.removeDrink(consumedDrinksArray[indexPath.row])
+        db.removeConsumedDrink(consumedDrinksArray[indexPath.row])
         self.consumedDrinksArray.remove(at: indexPath.row)
         recordChanged()
     }

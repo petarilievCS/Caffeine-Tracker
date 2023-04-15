@@ -22,6 +22,11 @@ struct K {
             static let drinksToAdd = "drinksToAdd"
             static let drinksToAdjust = "drinksToAmount"
         }
+        static let nameCell = "DrinkNameCell"
+        static let iconCell =  "IconCell"
+        static let numberCell = "NumberCell"
+        static let dateCell = "DateCell"
+        
         static let caffeineCell = "CaffeineCell"
         static let switchCell = "SettingsCell"
         static let settingCell = "RegularSettingsCell"
@@ -58,15 +63,16 @@ struct K {
         static let water = "water.png"
     }
     
+    struct data {
+        static let drinkTypes: [String] = ["Espresso", "Hot Coffee", "Cold Coffee", "Canned Coffee", "Soft Drink", "Energy Drink", "Energy Shot", "Chocolate", "Supplement", "Tea", "Iced Tea", "Water"]
+    }
+    
     // Identifiers
     static let addDrinkCellIdentifier = "AddDrinkCell"
-    static let drinkNameCellIdentifier = "DrinkNameCell"
-    static let iconCellIdentifier = "IconCell"
-    static let numberCellIdentifier = "NumberCell"
     static let consumedDrinkCellIdentifier = "ConsumedDrinkCell"
     static let aboveLimitNotifiicationIdentifier = "aboveLimitNotification"
     static let drinkTypePopoverSegueIdentifier = "drinkTypePopoverSegue"
     static let drinkTypePopoverIdentifier = "DrinkTypePopover"
-    static let dateCellIdentifier = "DateCell"
+    
     static let locationCellIdentifier = "LocationCell"
 }

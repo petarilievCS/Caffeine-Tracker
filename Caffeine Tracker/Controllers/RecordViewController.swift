@@ -7,7 +7,7 @@
 
 import UIKit
 
-class EditViewController: UIViewController  {
+class RecordViewController: UIViewController  {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var deleteView: UIView!
@@ -23,10 +23,10 @@ class EditViewController: UIViewController  {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        tableView.register(UINib(nibName: K.drinkNameCellIdentifier, bundle: nil), forCellReuseIdentifier: K.drinkNameCellIdentifier)
-        tableView.register(UINib(nibName: K.iconCellIdentifier, bundle: nil), forCellReuseIdentifier: K.iconCellIdentifier)
-        tableView.register(UINib(nibName: K.numberCellIdentifier, bundle: nil), forCellReuseIdentifier: K.numberCellIdentifier)
-        tableView.register(UINib(nibName: K.dateCellIdentifier, bundle: nil), forCellReuseIdentifier: K.dateCellIdentifier)
+        tableView.register(UINib(nibName: K.ID.nameCell, bundle: nil), forCellReuseIdentifier: K.ID.nameCell)
+        tableView.register(UINib(nibName: K.ID.iconCell, bundle: nil), forCellReuseIdentifier: K.ID.iconCell)
+        tableView.register(UINib(nibName: K.ID.numberCell, bundle: nil), forCellReuseIdentifier: K.ID.numberCell)
+        tableView.register(UINib(nibName: K.ID.dateCell, bundle: nil), forCellReuseIdentifier: K.ID.dateCell)
         tableView.dataSource = self
         tableView.delegate = self
         
@@ -41,30 +41,23 @@ class EditViewController: UIViewController  {
     
     @IBAction func doneButtonPressed(_ sender: UIBarButtonItem) {
         let newName: String = ((tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! DrinkNameCell?)?.textField.text)!
-        let newType: String = formatImageName((tableView.cellForRow(at: IndexPath(row: 1, section: 0)) as! IconCell).iconLabel.text!)
+        let newType: String = Utilities.formatImageName((tableView.cellForRow(at: IndexPath(row: 1, section: 0)) as! IconCell).iconLabel.text!)
         let newAmount: Int64 = Int64((tableView.cellForRow(at: IndexPath(row: 2, section: 0)) as! NumberCell).textField.text!) ?? 0
         let newDate: Date = (tableView.cellForRow(at: IndexPath(row: 3, section: 0)) as! DateCell).datePicker.date
         databaseManager.updateRecord(selectedRecord!, name: newName, type: newType, amount: newAmount, time: newDate)
         delegate?.recordChanged()
         self.dismiss(animated: true)
     }
-        
-    // Formats the given input string as an image name
-    func formatImageName(_ imageName: String) -> String {
-        var lowerCaseName = imageName.lowercased()
-        lowerCaseName.replace(" ", with: "-")
-        return lowerCaseName + ".png"
-    }
     
     @IBAction func removeButtonPressed(_ sender: UIButton) {
-        databaseManager.removeDrink(selectedRecord!)
+        databaseManager.removeConsumedDrink(selectedRecord!)
         delegate?.recordChanged()
         self.dismiss(animated: true)
     }
 }
 
 // MARK: - UITableView methods
-extension EditViewController: UITableViewDelegate, UITableViewDataSource {
+extension RecordViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 4
@@ -73,19 +66,19 @@ extension EditViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if indexPath.row == 0 {
-            let nameCell = tableView.dequeueReusableCell(withIdentifier: K.drinkNameCellIdentifier, for: indexPath) as! DrinkNameCell
+            let nameCell = tableView.dequeueReusableCell(withIdentifier: K.ID.nameCell, for: indexPath) as! DrinkNameCell
             nameCell.textField.text = selectedRecord!.name
             return nameCell
         } else if indexPath.row == 1 {
-            let iconCell = tableView.dequeueReusableCell(withIdentifier: K.iconCellIdentifier, for: indexPath) as! IconCell
-            iconCell.iconLabel.text = formatIconName((selectedRecord?.icon)!)
+            let iconCell = tableView.dequeueReusableCell(withIdentifier: K.ID.iconCell, for: indexPath) as! IconCell
+            iconCell.iconLabel.text = Utilities.formatIconName((selectedRecord?.icon)!)
             return iconCell
         } else if indexPath.row == 2 {
-            let caffeineCell = tableView.dequeueReusableCell(withIdentifier: K.numberCellIdentifier, for: indexPath) as! NumberCell
+            let caffeineCell = tableView.dequeueReusableCell(withIdentifier: K.ID.numberCell, for: indexPath) as! NumberCell
             caffeineCell.textField.text = String(selectedRecord!.initialAmount)
             return caffeineCell
         } else  {
-            let dateCell = tableView.dequeueReusableCell(withIdentifier: K.dateCellIdentifier, for: indexPath) as! DateCell
+            let dateCell = tableView.dequeueReusableCell(withIdentifier: K.ID.dateCell, for: indexPath) as! DateCell
             dateCell.datePicker.date = (selectedRecord?.timeConsumed!)!
             return dateCell
         }
@@ -115,22 +108,12 @@ extension EditViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
     
-    // Returns drink type from icon name
-    func formatIconName(_ iconName: String) -> String {
-        var formattedName = iconName
-        for _ in 0...3 {
-            formattedName.removeLast()
-        }
-        formattedName.replace("-", with: " ")
-        return formattedName.capitalized
-    }
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     }
 }
 
 // MARK: - UIPickerView methods
-extension EditViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+extension RecordViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1

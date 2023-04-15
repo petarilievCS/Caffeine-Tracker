@@ -632,7 +632,7 @@
         <!--Add Drink-->
         <scene sceneID="q13-Fr-NAp">
             <objects>
-                <viewController title="Add Drink" id="XZt-mF-DiK" customClass="AddViewController" customModule="Caffeine_Tracker" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Add Drink" id="XZt-mF-DiK" customClass="DrinkViewController" customModule="Caffeine_Tracker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="bHd-Ra-Oit">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1182,7 +1182,7 @@
         <!--Add Drink-->
         <scene sceneID="nze-19-xCP">
             <objects>
-                <viewController title="Add Drink" id="T2k-39-hlo" customClass="EditViewController" customModule="Caffeine_Tracker" sceneMemberID="viewController">
+                <viewController title="Add Drink" id="T2k-39-hlo" customClass="RecordViewController" customModule="Caffeine_Tracker" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5GG-FM-Vpm">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
