@@ -32,6 +32,8 @@ struct K {
         static let switchCell = "SettingsCell"
         static let settingCell = "RegularSettingsCell"
         static let detailSettingCell = "VersionSettingsCell"
+        
+        static let notification = "aboveLimitNotification"
     }
     
     struct defaults {
@@ -67,12 +69,4 @@ struct K {
     struct data {
         static let drinkTypes: [String] = ["Espresso", "Hot Coffee", "Cold Coffee", "Canned Coffee", "Soft Drink", "Energy Drink", "Energy Shot", "Chocolate", "Supplement", "Tea", "Iced Tea", "Water"]
     }
-    
-    // Identifiers
-    static let addDrinkCellIdentifier = "AddDrinkCell"
-    static let aboveLimitNotifiicationIdentifier = "aboveLimitNotification"
-    static let drinkTypePopoverSegueIdentifier = "drinkTypePopoverSegue"
-    static let drinkTypePopoverIdentifier = "DrinkTypePopover"
-    
-    static let locationCellIdentifier = "LocationCell"
 }

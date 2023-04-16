@@ -217,7 +217,7 @@ extension DashboardViewController {
                 let fiveMinutesLater = Calendar.current.date(byAdding: .minute, value: 15, to: .now)
                 let dateComponent = Calendar.current.dateComponents([.year,.month,.day,.hour,.minute,.second], from: fiveMinutesLater!)
                 let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponent, repeats: false)
-                UNUserNotificationCenter.current().add(UNNotificationRequest(identifier: K.aboveLimitNotifiicationIdentifier, content: notificationConent, trigger: trigger))
+            UNUserNotificationCenter.current().add(UNNotificationRequest(identifier: K.ID.notification, content: notificationConent, trigger: trigger))
                 UserDefaults.standard.set(true, forKey: K.defaults.amountNotificationSent)
         }
     }

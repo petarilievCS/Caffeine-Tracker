@@ -45,7 +45,6 @@
 		E6B08A5129A92D1200A95032 /* RecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B08A5029A92D1200A95032 /* RecordViewController.swift */; };
 		E6B7DA87295F5185008F8CD1 /* CaffeineCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B7DA85295F5185008F8CD1 /* CaffeineCell.swift */; };
 		E6B7DA88295F5185008F8CD1 /* CaffeineCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6B7DA86295F5185008F8CD1 /* CaffeineCell.xib */; };
-		E6BA790029ACFE8C004FB910 /* DrinkPopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6BA78FF29ACFE8C004FB910 /* DrinkPopoverViewController.swift */; };
 		E6BA790329AD2780004FB910 /* DateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6BA790129AD2780004FB910 /* DateCell.swift */; };
 		E6BA790429AD2780004FB910 /* DateCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6BA790229AD2780004FB910 /* DateCell.xib */; };
 		E6BB92CC29B7B7C9005D07F6 /* caffeine.json in Resources */ = {isa = PBXBuildFile; fileRef = E6BB92CB29B7B7C9005D07F6 /* caffeine.json */; };
@@ -91,7 +90,6 @@
 		E6B08A5029A92D1200A95032 /* RecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewController.swift; sourceTree = "<group>"; };
 		E6B7DA85295F5185008F8CD1 /* CaffeineCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaffeineCell.swift; sourceTree = "<group>"; };
 		E6B7DA86295F5185008F8CD1 /* CaffeineCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CaffeineCell.xib; sourceTree = "<group>"; };
-		E6BA78FF29ACFE8C004FB910 /* DrinkPopoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkPopoverViewController.swift; sourceTree = "<group>"; };
 		E6BA790129AD2780004FB910 /* DateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateCell.swift; sourceTree = "<group>"; };
 		E6BA790229AD2780004FB910 /* DateCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DateCell.xib; sourceTree = "<group>"; };
 		E6BB92CB29B7B7C9005D07F6 /* caffeine.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = caffeine.json; path = "Caffeine Tracker/Model/caffeine.json"; sourceTree = SOURCE_ROOT; };
@@ -163,7 +161,6 @@
 				E6907DC3299AABDD00AE005B /* SettingsViewController.swift */,
 				E6D4AD2C29C0C5AD00B6D9A9 /* LocationSearchTable.swift */,
 				E6D4AD2B29C0C5AD00B6D9A9 /* MapViewController.swift */,
-				E6BA78FE29ACFE6F004FB910 /* Popovers */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -204,14 +201,6 @@
 				E605227929E0B95500DDC492 /* Setting.swift */,
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		E6BA78FE29ACFE6F004FB910 /* Popovers */ = {
-			isa = PBXGroup;
-			children = (
-				E6BA78FF29ACFE8C004FB910 /* DrinkPopoverViewController.swift */,
-			);
-			name = Popovers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -318,7 +307,6 @@
 				E6996C5F295E0A5E00E35FC1 /* DashboardViewController.swift in Sources */,
 				E6D4AD2D29C0C5AD00B6D9A9 /* MapViewController.swift in Sources */,
 				E6BA790329AD2780004FB910 /* DateCell.swift in Sources */,
-				E6BA790029ACFE8C004FB910 /* DrinkPopoverViewController.swift in Sources */,
 				E69E027D2962E05000F4C142 /* DrinkNameCell.swift in Sources */,
 				E6996C79295E0BE600E35FC1 /* CaffeineViewController.swift in Sources */,
 				E6BEBC3C29EB02FD005ED265 /* Utilities.swift in Sources */,
