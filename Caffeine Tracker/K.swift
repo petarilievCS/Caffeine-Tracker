@@ -27,6 +27,7 @@ struct K {
         static let numberCell = "NumberCell"
         static let dateCell = "DateCell"
         
+        static let consumedDrinkCell = "ConsumedDrinkCell"
         static let caffeineCell = "CaffeineCell"
         static let switchCell = "SettingsCell"
         static let settingCell = "RegularSettingsCell"
@@ -69,7 +70,6 @@ struct K {
     
     // Identifiers
     static let addDrinkCellIdentifier = "AddDrinkCell"
-    static let consumedDrinkCellIdentifier = "ConsumedDrinkCell"
     static let aboveLimitNotifiicationIdentifier = "aboveLimitNotification"
     static let drinkTypePopoverSegueIdentifier = "drinkTypePopoverSegue"
     static let drinkTypePopoverIdentifier = "DrinkTypePopover"

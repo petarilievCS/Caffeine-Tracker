@@ -11,7 +11,6 @@ import Charts
 import SwiftPieChart
 
 
-
 class ChartViewController: UIViewController {
     
     // MARK: - @IBOutlets
@@ -29,10 +28,9 @@ class ChartViewController: UIViewController {
     
     private let names: [String] = ["Coffee", "Energy Drinks", "Soft Drinks", "Tea", "Supplements", "Other"]
     private let colors: [Color] = [Color(.systemBlue), Color(.systemRed), Color(.systemGreen), Color(.systemOrange), Color(.systemYellow), Color(.systemPurple)]
-    private var pieChartHostingController = UIHostingController(rootView:  PieChartView(values: [1300, 500, 300], colors: [Color(UIColor(named: "Light Blue")!), Color(UIColor(named: "Green")!), Color(UIColor(named: "Red")!)], names: ["Coffee", "Energy Drink", "Soda"], totalAmount: 0.0, backgroundColor: Color(.systemGray6), widthFraction: 0.75, innerRadiusFraction: 0.6))
+    private var pieChartHostingController: UIHostingController<ChartViewController.PieChartView>? = nil
     private var topDrinks: [(ConsumedDrink, Int)] = []
-    
-    private var databaseManager: DataBaseManager = DataBaseManager()
+    private var db: DataBaseManager = DataBaseManager()
     private var hostingController = UIHostingController(rootView: BarChart(chartData: []))
     private var defaults = UserDefaults.standard
     
@@ -69,7 +67,7 @@ class ChartViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.register(UINib(nibName: K.consumedDrinkCellIdentifier, bundle: nil), forCellReuseIdentifier: K.consumedDrinkCellIdentifier)
+        tableView.register(UINib(nibName: K.ID.consumedDrinkCell, bundle: nil), forCellReuseIdentifier:  K.ID.consumedDrinkCell)
         tableView.delegate = self
         tableView.dataSource = self
         timePeriodControl.addTarget(self, action: #selector(self.changePeriod), for: .valueChanged)
@@ -81,7 +79,7 @@ class ChartViewController: UIViewController {
         // Data source for chart
         var chartData: [ChartEntry] = []
         for i in (0...6).reversed() {
-            chartData.append(.init(day: databaseManager.dayOfTheWeek(for: i), caffeineAmount: databaseManager.getAmountDaysAgo(i)))
+            chartData.append(.init(day: db.dayOfTheWeek(for: i), caffeineAmount: db.getAmountDaysAgo(i)))
         }
         
         // Add SwiftUI Chart
@@ -109,69 +107,10 @@ class ChartViewController: UIViewController {
         drinkOrderButton.menu = menu
     }
     
-    
-    // Reloads the chart view
-    func reloadChartView(for period: Period) {
-        var chartData: [ChartEntry] = []
-        
-        if period == .week {
-            for i in (0...6).reversed() {
-                chartData.append(.init(day: databaseManager.dayOfTheWeek(for: i), caffeineAmount: databaseManager.getAmountDaysAgo(i)))
-            }
-        } else {
-            let amounts: Array<Int> = databaseManager.getAmountsInLast(.month)
-            for i in 0..<amounts.count {
-                let date: Date = Calendar.current.date(byAdding: .day, value: -(29 - i), to: .now)!
-                let formatter = DateFormatter()
-                formatter.dateFormat = "d"
-                let day = formatter.string(from: date)
-                chartData.insert(.init(day: String(day), caffeineAmount: amounts[i]), at: 0)
-            }
-        }
-        hostingController.rootView.chartData = chartData
-    }
-    
-    // Reloads the average and total amounts in the chart view
-    func reloadAmounts(for period: Period) {
-        averageIntakeLabel.text = String(format: "%d mg", Int(databaseManager.getAverage(for: period)))
-        totalntakeLabel.text = String(format: "%.2f g", databaseManager.getTotal(for: period))
-    }
-    
-    // Reloads the pie chart {
-    func reloadPieChart(for period: Period) {
-        let values = databaseManager.getDrinkTypeAmounts(in: period)
-        let maxIdx = values.firstIndex(of: values.max()!)
-        let totalAmount = databaseManager.getTotal(for: period)
-        pieChartHostingController.rootView.values = values
-        pieChartHostingController.rootView.totalAmount = totalAmount
-        mostCommonDrinkLabel.text = names[maxIdx!]
-        totalDrinksLabel.text = String(databaseManager.getDrinksInLast(period).count)
-        reloadTopDrinks(for: period)
-    }
-    
-    // Realoads top drink table
-    func reloadTopDrinks(for period: Period) {
-        topDrinks = databaseManager.getTopDrinks(3, for: period, orderByAmount)
-        tableView.reloadData()
-    }
-    
-    // Initializes PieChartView
-    func initializePieChart()  {
-        let values = databaseManager.getDrinkTypeAmounts(in: .week)
-        pieChartHostingController = UIHostingController(rootView:  PieChartView(values: values, colors: colors, names: names, totalAmount: databaseManager.getTotal(for: .week), backgroundColor: Color(.systemGray6), widthFraction: 0.75, innerRadiusFraction: 0.65))
-        addChild(pieChartHostingController)
-        pieChartView.addSubview(pieChartHostingController.view)
-        pieChartHostingController.didMove(toParent: self)
-        pieChartHostingController.view.backgroundColor = .systemGray6
-        pieChartHostingController.view.frame = pieChartView.bounds
-    }
-    
-    // Chart view
+    // MARK: - SwiftUI Views
     struct BarChart: View {
-        
-        let databaseManager: DataBaseManager = DataBaseManager()
+        let db: DataBaseManager = DataBaseManager()
         var chartData: [ChartEntry]
-        
         var body: some View {
             Chart {
                 RuleMark(y: .value("Limit", UserDefaults.standard.integer(forKey: K.defaults.dailyLimit)))
@@ -193,12 +132,11 @@ class ChartViewController: UIViewController {
                     }
                 default:
                     AxisMarks(values: chartData.map { $0.day }) { day in
-                        day.index % 7 == 2 ? AxisValueLabel(databaseManager.getDayLabel(daysAgo: day.index)) : nil
+                        day.index % 7 == 2 ? AxisValueLabel(db.getDayLabel(daysAgo: day.index)) : nil
                     }
                 }
             }
         }
-        
         func findChartAmount(for day: String) -> Int {
             for i in 0..<chartData.count {
                 if chartData[i].day == day {
@@ -208,15 +146,12 @@ class ChartViewController: UIViewController {
             return 0
         }
     }
-    
-    // Pie chart view
+
     struct PieSliceView: View {
         var pieSliceData: PieSliceData
-        
         var midRadians: Double {
             return Double.pi / 2.0 - (pieSliceData.startAngle + pieSliceData.endAngle).radians / 2.0
         }
-        
         var body: some View {
             GeometryReader { geometry in
                 ZStack {
@@ -361,44 +296,7 @@ class ChartViewController: UIViewController {
     }
 }
 
-extension Date {
-    var startOfDay: Date {
-        return Calendar.current.startOfDay(for: self)
-    }
-    
-    var endOfDay: Date {
-        var components = DateComponents()
-        components.day = 1
-        components.second = -1
-        return Calendar.current.date(byAdding: components, to: startOfDay)!
-    }
-    
-    var startOfWeek: Date {
-        Calendar.current.dateComponents([.calendar, .yearForWeekOfYear, .weekOfYear], from: self).date!
-    }
-    
-    var endOfWeek: Date {
-        var components = DateComponents()
-        components.weekOfYear = 1
-        components.second = -1
-        return Calendar.current.date(byAdding: components, to: startOfWeek)!
-    }
-    
-    var startOfMonth: Date {
-        let components = Calendar.current.dateComponents([.year, .month], from: startOfDay)
-        return Calendar.current.date(from: components)!
-    }
-    
-    var endOfMonth: Date {
-        var components = DateComponents()
-        components.month = 1
-        components.second = -1
-        return Calendar.current.date(byAdding: components, to: startOfMonth)!
-    }
-}
-
-// MARK: - Table View methods
-
+// MARK: - UITableView methods
 extension ChartViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -406,7 +304,7 @@ extension ChartViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: K.consumedDrinkCellIdentifier, for: indexPath) as! ConsumedDrinkCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: K.ID.consumedDrinkCell, for: indexPath) as! ConsumedDrinkCell
         let consumedDrink = topDrinks[indexPath.row]
         cell.title.text = consumedDrink.0.name
         cell.icon.image = UIImage(named: consumedDrink.0.icon!)
@@ -419,14 +317,13 @@ extension ChartViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 44.0
+        return K.UI.consumedDrinkCellHeight
     }
     
 }
 
 // MARK: - UISegmentedControl Methods
 extension ChartViewController {
-    
     @objc func changePeriod() {
         reloadAmounts(for: currentPeriod)
         reloadChartView(for: currentPeriod)
@@ -437,6 +334,62 @@ extension ChartViewController {
 
 // MARK: - UI Helper methods
 extension ChartViewController {
+    // Reloads the chart view
+    func reloadChartView(for period: Period) {
+        var chartData: [ChartEntry] = []
+        if period == .week {
+            for i in (0...6).reversed() {
+                chartData.append(.init(day: db.dayOfTheWeek(for: i), caffeineAmount: db.getAmountDaysAgo(i)))
+            }
+        } else {
+            let amounts: Array<Int> = db.getAmountsInLast(.month)
+            for i in 0..<amounts.count {
+                let date: Date = Calendar.current.date(byAdding: .day, value: -(29 - i), to: .now)!
+                let formatter = DateFormatter()
+                formatter.dateFormat = "d"
+                let day = formatter.string(from: date)
+                chartData.insert(.init(day: String(day), caffeineAmount: amounts[i]), at: 0)
+            }
+        }
+        hostingController.rootView.chartData = chartData
+    }
+    
+    // Reloads the average and total amounts in the chart view
+    func reloadAmounts(for period: Period) {
+        averageIntakeLabel.text = String(format: "%d mg", Int(db.getAverage(for: period)))
+        totalntakeLabel.text = String(format: "%.2f g", db.getTotal(for: period))
+    }
+    
+    // Reloads the pie chart {
+    func reloadPieChart(for period: Period) {
+        let values = db.getDrinkTypeAmounts(in: period)
+        let maxIdx = values.firstIndex(of: values.max()!)
+        let totalAmount = db.getTotal(for: period)
+        pieChartHostingController!.rootView.values = values
+        pieChartHostingController!.rootView.totalAmount = totalAmount
+        mostCommonDrinkLabel.text = names[maxIdx!]
+        totalDrinksLabel.text = String(db.getDrinksInLast(period).count)
+        reloadTopDrinks(for: period)
+    }
+    
+    // Realoads top drink table
+    func reloadTopDrinks(for period: Period) {
+        topDrinks = db.getTopDrinks(3, for: period, orderByAmount)
+        tableView.reloadData()
+    }
+    
+    // Initializes PieChartView
+    func initializePieChart()  {
+        let values = db.getDrinkTypeAmounts(in: .week)
+        pieChartHostingController = UIHostingController(rootView:  PieChartView(values: values, colors: colors, names: names, totalAmount: db.getTotal(for: .week), backgroundColor: Color(.systemGray6), widthFraction: 0.75, innerRadiusFraction: 0.65))
+        addChild(pieChartHostingController!)
+        pieChartView.addSubview(pieChartHostingController!.view)
+        pieChartHostingController!.didMove(toParent: self)
+        pieChartHostingController!.view.backgroundColor = .systemGray6
+        pieChartHostingController!.view.frame = pieChartView.bounds
+    }
+    
+    // Refreshed order selection menu
     func refreshMenu() {
         firstElement.state = orderByAmount ? .off : .on
         secondElement.state = orderByAmount ? .on : .off

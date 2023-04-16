@@ -42,7 +42,7 @@ class DashboardViewController: UIViewController {
         UserDefaults.standard.set(true, forKey: K.defaults.firstRun)
         
         loadConsumedDrinks()
-        tableView.register(UINib(nibName: K.consumedDrinkCellIdentifier, bundle: nil), forCellReuseIdentifier: K.consumedDrinkCellIdentifier)
+        tableView.register(UINib(nibName:  K.ID.consumedDrinkCell, bundle: nil), forCellReuseIdentifier:  K.ID.consumedDrinkCell)
         tableView.delegate = self
         tableView.dataSource = self
         UNUserNotificationCenter.current().delegate = self
@@ -94,7 +94,7 @@ extension DashboardViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: K.consumedDrinkCellIdentifier, for: indexPath) as! ConsumedDrinkCell
+        let cell = tableView.dequeueReusableCell(withIdentifier:  K.ID.consumedDrinkCell, for: indexPath) as! ConsumedDrinkCell
         cell.delegate = self
         let consumedDrink = consumedDrinksArray[indexPath.row]
         cell.title.text = consumedDrink.name
@@ -129,7 +129,7 @@ extension DashboardViewController: SwipeTableViewCellDelegate {
     
     func removeDrink(at indexPath: IndexPath) {
         loadConsumedDrinks()
-        db.removeConsumedDrink(consumedDrinksArray[indexPath.row])
+        db.removeRecord(consumedDrinksArray[indexPath.row])
         self.consumedDrinksArray.remove(at: indexPath.row)
         recordChanged()
     }

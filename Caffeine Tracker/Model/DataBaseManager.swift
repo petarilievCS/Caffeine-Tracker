@@ -346,7 +346,7 @@ extension DataBaseManager {
     }
     
     // Removes given drink
-    mutating func removeConsumedDrink(_ consumedDrink: ConsumedDrink) {
+    mutating func removeRecord(_ consumedDrink: ConsumedDrink) {
         self.context.delete(consumedDrink)
         saveConsumedDrinks()
     }
