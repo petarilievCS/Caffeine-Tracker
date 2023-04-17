@@ -169,22 +169,9 @@
 			isa = PBXGroup;
 			children = (
 				E6996C60295E0A5E00E35FC1 /* Main.storyboard */,
-				E6B7DA85295F5185008F8CD1 /* CaffeineCell.swift */,
-				E6B7DA86295F5185008F8CD1 /* CaffeineCell.xib */,
-				E69E027B2962E05000F4C142 /* DrinkNameCell.swift */,
-				E69E027C2962E05000F4C142 /* DrinkNameCell.xib */,
-				E69E027F2963058900F4C142 /* IconCell.swift */,
-				E69E02802963058900F4C142 /* IconCell.xib */,
-				E69E0283296309CA00F4C142 /* NumberCell.swift */,
-				E69E0284296309CA00F4C142 /* NumberCell.xib */,
-				E611E98E296ED16300592296 /* ConsumedDrinkCell.swift */,
-				E611E98F296ED16300592296 /* ConsumedDrinkCell.xib */,
-				E6907DC5299AB11D00AE005B /* SwitchCell.swift */,
-				E6907DC6299AB11D00AE005B /* SettingsCell.xib */,
-				E6907DC9299AE12800AE005B /* SettingCell.swift */,
-				E6907DCA299AE12800AE005B /* RegularSettingsCell.xib */,
-				E6BA790129AD2780004FB910 /* DateCell.swift */,
-				E6BA790229AD2780004FB910 /* DateCell.xib */,
+				E6C673E429ED854400A99487 /* Cells */,
+				E6C673E629ED858000A99487 /* Record */,
+				E6C673E529ED856A00A99487 /* Settings */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -196,11 +183,56 @@
 				E611E985296C0BFA00592296 /* MetabolismCalculator.swift */,
 				E604881A298B42F800B25167 /* DataBaseManager.swift */,
 				E6BB92CB29B7B7C9005D07F6 /* caffeine.json */,
+				E6C673E329ED850E00A99487 /* Objects */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		E6C673E329ED850E00A99487 /* Objects */ = {
+			isa = PBXGroup;
+			children = (
 				E6BB92CD29B7B871005D07F6 /* Drink.swift */,
 				E60A5A0D29D340A700F70145 /* Period.swift */,
 				E605227929E0B95500DDC492 /* Setting.swift */,
 			);
-			path = Model;
+			path = Objects;
+			sourceTree = "<group>";
+		};
+		E6C673E429ED854400A99487 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				E6B7DA85295F5185008F8CD1 /* CaffeineCell.swift */,
+				E6B7DA86295F5185008F8CD1 /* CaffeineCell.xib */,
+				E611E98E296ED16300592296 /* ConsumedDrinkCell.swift */,
+				E611E98F296ED16300592296 /* ConsumedDrinkCell.xib */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		E6C673E529ED856A00A99487 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				E6907DC5299AB11D00AE005B /* SwitchCell.swift */,
+				E6907DC6299AB11D00AE005B /* SettingsCell.xib */,
+				E6907DC9299AE12800AE005B /* SettingCell.swift */,
+				E6907DCA299AE12800AE005B /* RegularSettingsCell.xib */,
+				E6BA790129AD2780004FB910 /* DateCell.swift */,
+				E6BA790229AD2780004FB910 /* DateCell.xib */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		E6C673E629ED858000A99487 /* Record */ = {
+			isa = PBXGroup;
+			children = (
+				E69E027B2962E05000F4C142 /* DrinkNameCell.swift */,
+				E69E027C2962E05000F4C142 /* DrinkNameCell.xib */,
+				E69E027F2963058900F4C142 /* IconCell.swift */,
+				E69E02802963058900F4C142 /* IconCell.xib */,
+				E69E0284296309CA00F4C142 /* NumberCell.xib */,
+				E69E0283296309CA00F4C142 /* NumberCell.swift */,
+			);
+			path = Record;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

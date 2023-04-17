@@ -8,20 +8,20 @@
 import UIKit
 
 class RecordViewController: UIViewController  {
-
+    
     // MARK: - @IBOutlets
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var deleteView: UIView!
     
     var selectedRecord: ConsumedDrink?
     var delegate: EditViewControllerDelegate? = nil
-
+    
     private var db: DataBaseManager = DataBaseManager()
     
     // MARK: - View Lifecycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         tableView.register(UINib(nibName: K.ID.nameCell, bundle: nil), forCellReuseIdentifier: K.ID.nameCell)
         tableView.register(UINib(nibName: K.ID.iconCell, bundle: nil), forCellReuseIdentifier: K.ID.iconCell)
         tableView.register(UINib(nibName: K.ID.numberCell, bundle: nil), forCellReuseIdentifier: K.ID.numberCell)
@@ -123,20 +123,20 @@ extension RecordViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     }
     
     func createPickerView() {
-           let pickerView = UIPickerView()
-           pickerView.delegate = self
+        let pickerView = UIPickerView()
+        pickerView.delegate = self
     }
     
     func dismissPickerView() {
-       let toolBar = UIToolbar()
-       toolBar.sizeToFit()
-       let button = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(self.action))
-       toolBar.setItems([button], animated: true)
-       toolBar.isUserInteractionEnabled = true
+        let toolBar = UIToolbar()
+        toolBar.sizeToFit()
+        let button = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(self.action))
+        toolBar.setItems([button], animated: true)
+        toolBar.isUserInteractionEnabled = true
     }
     
     @objc func action() {
-          view.endEditing(true)
+        view.endEditing(true)
     }
     
 }

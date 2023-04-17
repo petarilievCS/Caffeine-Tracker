@@ -75,7 +75,7 @@ class DrinkViewController: UIViewController {
             shake(tableView)
         }
     }
-
+    
     @IBAction func cancelClicked(_ sender: UIBarButtonItem) {
         dismiss(animated: true, completion: nil)
     }
@@ -193,7 +193,7 @@ extension DrinkViewController {
         animation.toValue = NSValue(cgPoint: CGPoint(x: viewToShake.center.x + 10, y: viewToShake.center.y))
         viewToShake.layer.add(animation, forKey: "position")
     }
- 
+    
     // Calculates how much caffeine per oz a drink contains
     func calculateCaffeinePerOz(_ caffeineAmount: Int64, _ servingSize: Int64) -> Double {
         return Double(caffeineAmount) / Double(servingSize)

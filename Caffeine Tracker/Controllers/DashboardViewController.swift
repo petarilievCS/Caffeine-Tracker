@@ -168,7 +168,7 @@ extension DashboardViewController {
             }
         }
     }
-        
+    
     // Creates ring progress view
     func setupRingProgressView() {
         ringProgressView.ringWidth = 25
@@ -190,7 +190,7 @@ extension DashboardViewController {
             self.ringProgressView.endColor = self.getProgress() > 1.0 ? UIColor(named: "Red")! : UIColor(named: "Green")!
         }
     }
-        
+    
     // Updates the information on the dashboard when the caffeine log changes
     func updateInfo() {
         let dailyAmount = metabolismCalculator.calculateTotalAmount()
@@ -209,16 +209,16 @@ extension DashboardViewController {
     // Notifies user that their caffeine intake is too high if needed
     func sendNotification(_ dailyLimit: Int, _ dailyAmount: Int) {
         if dailyAmount > dailyLimit && UserDefaults.standard.bool(forKey: K.defaults.notificationPermission) && !UserDefaults.standard.bool(forKey: K.defaults.amountNotificationSent) {
-                let notificationConent: UNMutableNotificationContent = UNMutableNotificationContent()
-                notificationConent.title = "Caffeine Up"
-                notificationConent.body = "You have consumed more caffeine than your daily limit today!"
-                
-                // Notification trigger
-                let fiveMinutesLater = Calendar.current.date(byAdding: .minute, value: 15, to: .now)
-                let dateComponent = Calendar.current.dateComponents([.year,.month,.day,.hour,.minute,.second], from: fiveMinutesLater!)
-                let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponent, repeats: false)
+            let notificationConent: UNMutableNotificationContent = UNMutableNotificationContent()
+            notificationConent.title = "Caffeine Up"
+            notificationConent.body = "You have consumed more caffeine than your daily limit today!"
+            
+            // Notification trigger
+            let fiveMinutesLater = Calendar.current.date(byAdding: .minute, value: 15, to: .now)
+            let dateComponent = Calendar.current.dateComponents([.year,.month,.day,.hour,.minute,.second], from: fiveMinutesLater!)
+            let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponent, repeats: false)
             UNUserNotificationCenter.current().add(UNNotificationRequest(identifier: K.ID.notification, content: notificationConent, trigger: trigger))
-                UserDefaults.standard.set(true, forKey: K.defaults.amountNotificationSent)
+            UserDefaults.standard.set(true, forKey: K.defaults.amountNotificationSent)
         }
     }
 }

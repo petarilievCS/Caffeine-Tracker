@@ -10,7 +10,7 @@ import TinyConstraints
 import EFCountingLabel
 
 class AdjustViewController: UIViewController {
-
+    
     // MARK: - IB Outlets
     @IBOutlet weak var minusButton: UIButton!
     @IBOutlet weak var plusButton: UIButton!
@@ -21,7 +21,7 @@ class AdjustViewController: UIViewController {
     
     var delegate: AdjustViewControllerDelegate? = nil
     var selectedDrink: Drink? = nil
-
+    
     private var consumedDrinksArray = [ConsumedDrink]()
     private var db = DataBaseManager()
     private var currentAmount: Int64 = 0
@@ -244,7 +244,7 @@ class AdjustViewController: UIViewController {
         self.animateDismissView()
         UIImpactFeedbackGenerator(style: .medium).impactOccurred()
     }
-
+    
     func updateAmount() {
         amountLabel.text = "\(currentAmount) fl oz"
     }

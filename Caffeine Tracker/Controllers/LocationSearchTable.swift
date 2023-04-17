@@ -9,16 +9,13 @@ import UIKit
 import MapKit
 
 class LocationSearchTable: UITableViewController {
-
-    var matchingItems:[MKMapItem] = []
+    private var matchingItems:[MKMapItem] = []
     var mapView: MKMapView? = nil
-    var handleMapSearchDelegate: HandleMapSearch? = nil
-    var localSearch: MKLocalSearch? = nil
-    var lastEdited: Date? = nil
+    var delegate: HandleMapSearch? = nil
+    private var searchCompleter = MKLocalSearchCompleter()
+    private var searchResults = [MKLocalSearchCompletion]()
     
-    var searchCompleter = MKLocalSearchCompleter()
-    var searchResults = [MKLocalSearchCompletion]()
-    
+    // MARK: - View Lifecycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
         searchCompleter.delegate = self
@@ -26,13 +23,24 @@ class LocationSearchTable: UITableViewController {
         tableView.insetsContentViewsToSafeArea = true
         tableView.contentInsetAdjustmentBehavior = .automatic
     }
-    
-    func parseAddress(selectedItem: MKPlacemark) -> String {
+}
 
+// MARK: - Location Search methods
+
+extension LocationSearchTable : UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let mapView = mapView,
+              let searchBarText = searchController.searchBar.text else { return }
+        searchCompleter.region = mapView.region
+        searchCompleter.queryFragment = searchBarText
+        
+    }
+    
+    // Parses MKPlacemark address into more readable format
+    func parseAddress(selectedItem: MKPlacemark) -> String {
         let firstSpace = (selectedItem.subThoroughfare != nil && selectedItem.thoroughfare != nil) ? " " : ""
         let comma = (selectedItem.subThoroughfare != nil || selectedItem.thoroughfare != nil) ? ", " : ""
         let secondSpace = selectedItem.locality != nil ? " " : ""
-        
         // Regular location
         var addressLine = String(
             format:"%@%@%@%@%@%@%@",
@@ -44,7 +52,6 @@ class LocationSearchTable: UITableViewController {
             secondSpace,
             selectedItem.administrativeArea == selectedItem.locality ? "" : (selectedItem.administrativeArea ?? "")
         )
-        
         // City
         if selectedItem.locality == selectedItem.name {
             if selectedItem.country == "United States" || selectedItem.country == "Canada" {
@@ -55,22 +62,6 @@ class LocationSearchTable: UITableViewController {
         }
         
         return addressLine
-    }
-
-}
-
-// MARK: - Location Search methods
-
-extension LocationSearchTable : UISearchResultsUpdating {
-    
-    func updateSearchResults(for searchController: UISearchController) {
-        
-        guard let mapView = mapView,
-              let searchBarText = searchController.searchBar.text else { return }
-        
-        searchCompleter.region = mapView.region
-        searchCompleter.queryFragment = searchBarText
-        
     }
 }
 
@@ -94,11 +85,11 @@ extension LocationSearchTable {
         let search = MKLocalSearch(request: searchRequest)
         search.start { (response, error) in
             if error == nil {
-                self.handleMapSearchDelegate?.dropPinZoomIn(placemark: (response?.mapItems[0].placemark)!)
+                self.delegate?.dropPinZoomIn(placemark: (response?.mapItems[0].placemark)!)
                 if let safeResponse = response {
                     for item in safeResponse.mapItems {
                         print("Response")
-                        self.handleMapSearchDelegate?.dropPin(placemark: item.placemark)
+                        self.delegate?.dropPin(placemark: item.placemark)
                     }
                 }
             }
@@ -109,7 +100,6 @@ extension LocationSearchTable {
 
 // MARK: - Search Completer methods
 extension LocationSearchTable: MKLocalSearchCompleterDelegate {
-
     func completerDidUpdateResults(_ completer: MKLocalSearchCompleter) {
         searchResults = completer.results
         for result in searchResults {
@@ -117,6 +107,6 @@ extension LocationSearchTable: MKLocalSearchCompleterDelegate {
         }
         tableView.reloadData()
     }
-
+    
     private func completer(completer: MKLocalSearchCompleter, didFailWithError error: NSError) {}
 }

@@ -17,13 +17,14 @@ protocol HandleMapSearch {
 
 class MapViewController: UIViewController {
     
+    // MARK: - @IBOutlets
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var locationButton: UIButton!
     @IBOutlet weak var coffeeButton: UIButton!
     
     private let locationManager = CLLocationManager()
-    var resultSearchController: UISearchController? = nil
-    var selectedPin: MKPlacemark? = nil
+    private var resultSearchController: UISearchController? = nil
+    private var selectedPin: MKPlacemark? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,6 +34,7 @@ class MapViewController: UIViewController {
         locationManager.requestWhenInUseAuthorization()
         locationManager.requestLocation()
         
+        // Map customization
         customizeButton(locationButton)
         customizeButton(coffeeButton)
         mapView.showsCompass = false
@@ -43,7 +45,7 @@ class MapViewController: UIViewController {
         resultSearchController = UISearchController(searchResultsController: locationSearchTable)
         resultSearchController?.searchResultsUpdater = locationSearchTable
         locationSearchTable.mapView = mapView
-        locationSearchTable.handleMapSearchDelegate = self
+        locationSearchTable.delegate = self
         
         // Configure search bar
         let searchBar = resultSearchController!.searchBar
@@ -59,19 +61,10 @@ class MapViewController: UIViewController {
         resultSearchController?.navigationItem.titleView?.backgroundColor = .systemBackground
         definesPresentationContext = true
         
-        mapView.layer.cornerRadius = 15.0
+        mapView.layer.cornerRadius = K.UI.cornerRadius
     }
     
-    func customizeButton(_ button: UIButton) {
-        button.layer.cornerRadius = 10
-        button.configuration?.preferredSymbolConfigurationForImage = UIImage.SymbolConfiguration(pointSize: 15.0)
-        button.layer.shadowColor = UIColor.black.cgColor
-        button.layer.shadowOffset = CGSize(width: 2.0, height: 2.0)
-        button.layer.shadowOpacity = 0.5
-        button.layer.shadowRadius = 5.0
-    }
-    
-    // MARK: - IBActions
+    // MARK: - @IBActions
     @IBAction func locationButtonPressed(_ sender: UIButton) {
         UIImpactFeedbackGenerator(style: .soft).impactOccurred()
         self.locationButton.setImage(UIImage(systemName: "location.fill"), for: .normal)
@@ -89,19 +82,16 @@ class MapViewController: UIViewController {
     @IBAction func coffeeButtonPressed(_ sender: UIButton) {
         UIImpactFeedbackGenerator(style: .soft).impactOccurred()
         coffeeButton.setImage(UIImage(systemName: "cup.and.saucer.fill"), for: .normal)
-        
         let request = MKLocalSearch.Request()
         let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
         request.region = MKCoordinateRegion(center: mapView.centerCoordinate, span: span)
         request.naturalLanguageQuery = "coffee shop"
-        
         mapView.removeAnnotations(mapView.annotations)
         let search = MKLocalSearch(request: request)
         search.start { (response, error) in
             guard let response = response else {
                 fatalError("Error: \(String(describing: error))")
             }
-            
             for item in response.mapItems {
                 if let name = item.name,
                    let location = item.placemark.location {
@@ -118,25 +108,17 @@ class MapViewController: UIViewController {
     }
 }
 
-
 // MARK: - LocationManager Delegate methods
 extension MapViewController: CLLocationManagerDelegate {
-    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {}
     
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print(error)
-    }
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {}
 }
 
 // MARK: - Map Pin methods
-
 extension MapViewController: HandleMapSearch {
-    
     func dropPinZoomIn(placemark: MKPlacemark){
-        // cache the pin
         selectedPin = placemark
-        // clear existing pins
         mapView.removeAnnotations(mapView.annotations)
         let annotation = MKPointAnnotation()
         annotation.coordinate = placemark.coordinate
@@ -180,5 +162,17 @@ extension MapViewController : MKMapViewDelegate {
             let launchOptions = [MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving]
             mapItem.openInMaps(launchOptions: launchOptions)
         }
+    }
+}
+
+// MARK: - UI Helper methods
+extension MapViewController {
+    func customizeButton(_ button: UIButton) {
+        button.layer.cornerRadius = 10
+        button.configuration?.preferredSymbolConfigurationForImage = UIImage.SymbolConfiguration(pointSize: 15.0)
+        button.layer.shadowColor = UIColor.black.cgColor
+        button.layer.shadowOffset = CGSize(width: 2.0, height: 2.0)
+        button.layer.shadowOpacity = 0.5
+        button.layer.shadowRadius = 5.0
     }
 }

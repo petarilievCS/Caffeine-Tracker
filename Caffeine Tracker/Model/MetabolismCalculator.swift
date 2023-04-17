@@ -8,20 +8,19 @@
 import UIKit
 
 struct MetabolismCalculator {
-    
-    var consumedDrinksArray = [ConsumedDrink]()
-    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    let dateFormatter = DateFormatter()
-    var databaseManager = DataBaseManager()
+    private var consumedDrinksArray = [ConsumedDrink]()
+    private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    private let dateFormatter = DateFormatter()
+    private var db = DataBaseManager()
     
     // Amount of caffeine left after 1 hour of consumption (5 hour half-life)
-    let oneHourDecline = 0.87
-    let secondsInHour = 3600
+    private let oneHourDecline = 0.87
+    private let secondsInHour = 3600
     
     // Returns the amount of caffeine in the metabolism right now
     mutating func calculateMetabolismAmount() -> Int {
-        databaseManager.updateMetabolismAmounts()
-        consumedDrinksArray = databaseManager.getTodayDrinks()
+        db.updateMetabolismAmounts()
+        consumedDrinksArray = db.getTodayDrinks()
         var metabolismAmount = 0
         for consumeDrink in consumedDrinksArray {
             metabolismAmount += Int(consumeDrink.caffeine)
@@ -31,9 +30,8 @@ struct MetabolismCalculator {
     
     // Returns total amount consumed in a day
     mutating func calculateTotalAmount() -> Int {
-        consumedDrinksArray = databaseManager.getTodayDrinks()
+        consumedDrinksArray = db.getTodayDrinks()
         var totalAmount = 0
-        
         for consumedDrink in consumedDrinksArray {
             totalAmount += Int(consumedDrink.initialAmount)
         }
@@ -42,6 +40,6 @@ struct MetabolismCalculator {
     
     // Returns total amount of drinks consumed today
     mutating func getNumberOfDrinks() -> Int {
-        return databaseManager.getTodayDrinks().count
+        return db.getTodayDrinks().count
     }
 }

@@ -18,14 +18,14 @@ class CaffeineViewController: UITableViewController {
     var drinkArray = [Drink]()
     var frequentlyConsumedDrinkArray = [Drink]()
     private var db = DataBaseManager()
-
+    
     // MARK: - View Lifecycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.register(UINib(nibName: K.ID.caffeineCell, bundle: nil), forCellReuseIdentifier: K.ID.caffeineCell)
         searchBar.delegate = self
-
+        
         // Customize navigation bar
         tabBarController?.navigationController?.navigationBar.prefersLargeTitles = true
         tabBarController?.navigationController?.navigationBar.isTranslucent = true
@@ -38,7 +38,7 @@ class CaffeineViewController: UITableViewController {
     override func viewDidAppear(_ animated: Bool) {
         loadDrinks()
     }
-   
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == K.ID.segues.drinksToAdd {
             let navigationController = segue.destination as! UINavigationController
